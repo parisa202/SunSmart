@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>User Update Form</title>
+  </head>
+  <body>
+    <h1>User Update Form</h1>
+
+    <form class="" action="#" method="post">
+      {% csrf_token %}
+      {{form.as_table}}
+      <input type="submit" value="Save">
+    </form>
+
+    <p>Change your password: <a href="{% url 'accountApp:password-change' user_id=TheUser.pk full_name=TheUser.slug %}">Change Password</a></p>
+
+  </body>
+</html>
