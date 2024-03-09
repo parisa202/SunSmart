@@ -81,3 +81,5 @@ class CoreUser(AbstractUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+
+

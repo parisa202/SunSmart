@@ -4,14 +4,15 @@ from django.urls import path, re_path
 from . import views
 from importlib import import_module
 from django.urls import include, path
-from allauth.socialaccount import providers
-from allauth import app_settings
+
 
 
 # app_name = 'UserAthentication'
 
 
 urlpatterns = [
+    path('signup/', views.SignUpView.as_view(), name='signup'),
+    # path('login/', views.login, name='login'),
 
 ]
 

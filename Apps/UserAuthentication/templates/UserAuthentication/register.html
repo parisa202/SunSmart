@@ -1,0 +1,12 @@
+{% extends "CoreApp/base.html" %}
+
+{% block body_block %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock body_block %}
