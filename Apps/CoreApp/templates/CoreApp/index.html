@@ -1,60 +1,356 @@
 {% extends "CoreApp/base.html" %}
 {% load static %}
 
+{% block title_block %}
+<title>Home Page</title>
+{% endblock title_block %}
 
 
-{% block body_block %}
 
-<!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
+{% block main_content %}
+
+<!-- Section 1 Slider Section -->
+<div class="intro-section">
+    <div class="intro-section-slider">
+        <div class="container">
+            <div class="intro-slider-container slider-container-ratio mb-0">
+                <div class="intro-slider owl-carousel owl-simple owl-light" data-toggle="owl" 
+                    data-owl-options='{
+                        "nav": false, 
+                        "dots": true,
+                        "responsive": {
+                            "1200": {
+                                "nav": true,
+                                "dots": false
+                            }
+                        }
+                    }'>
+                    <div class="intro-slide">
+                        <figure class="slide-image">
+                            <picture>
+                                <source media="(max-width: 480px)" srcset="{% static "assets/images/banners/banner1.jpg" %}">
+                                <img src="{% static "assets/images/banners/banner1.jpg" %}" alt="Image Desc">
+                            </picture>
+                        </figure><!-- End .slide-image -->
+
+                        <div class="intro-content">
+                            <h3 class="intro-subtitle">New Collection</h3><!-- End .h3 intro-subtitle -->
+                            <h1 class="intro-title text-white">Women’s <br>Sportswear & Joggers</h1><!-- End .intro-title -->
+
+                            <div class="intro-text text-white">2019</div><!-- End .intro-text -->
+
+                            <a href="category.html" class="btn btn-primary">
+                                <span>DISCOVER NOW</span>
+                            </a>
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+
+                    <div class="intro-slide">
+                        <figure class="slide-image">
+                            <picture>
+                                <source media="(max-width: 480px)" srcset="{% static "assets/images/demos/demo-9/slider/slide-2-480w.jpg" %}">
+                                <img src="{% static "assets/images/demos/demo-9/slider/slide-2.jpg" %}" alt="Image Desc">
+                            </picture>
+                        </figure><!-- End .slide-image -->
+
+                        <div class="intro-content">
+                            <h3 class="intro-subtitle">New Collection</h3><!-- End .h3 intro-subtitle -->
+                            <h1 class="intro-title text-white">Men’s <br>Coats & Jackets</h1><!-- End .intro-title -->
+
+                            <a href="category.html" class="btn btn-primary">
+                                <span>DISCOVER NOW</span>
+                            </a>
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+
+                    <div class="intro-slide">
+                        <figure class="slide-image">
+                            <picture>
+                                <source media="(max-width: 480px)" srcset="{% static "assets/images/demos/demo-9/slider/slide-3-480w.jpg" %}">
+                                <img src="{% static "assets/images/demos/demo-9/slider/slide-3.jpg" %}" alt="Image Desc">
+                            </picture>
+                        </figure><!-- End .slide-image -->
+
+                        <div class="intro-content">
+                            <h3 class="intro-subtitle">Deals and Promotions</h3><!-- End .h3 intro-subtitle -->
+                            <h1 class="intro-title text-white">Sneakers & Athletic Shoes</h1><!-- End .intro-title -->
+
+                            <div class="intro-text text-white">from $9.99</div><!-- End .intro-text -->
+
+                            <a href="category.html" class="btn btn-primary">
+                                <span>SHOP NOW</span>
+                            </a>
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+                </div><!-- End .intro-slider owl-carousel owl-simple -->
+                        
+                <span class="slider-loader"></span><!-- End .slider-loader -->
+            </div><!-- End .intro-slider-container -->
+        </div><!-- End .container -->
+    </div><!-- End .intro-section-slider -->
+
+    <div class="icon-boxes-container pt-0 pb-0">
+        <div class="container">
+            <div class="owl-carousel owl-simple" data-toggle="owl" 
+                data-owl-options='{
+                    "nav": false, 
+                    "dots": false,
+                    "margin": 30,
+                    "loop": false,
+                    "autoplay": true,
+                    "autoplayTimeout": 8000,
+                    "responsive": {
+                        "0": {
+                            "items":1
+                        },
+                        "480": {
+                            "items":2
+                        },
+                        "992": {
+                            "items":3
+                        },
+                        "1200": {
+                            "items":4
+                        }
+                    }
+                }'>
+                    <div class="icon-box icon-box-side">
+                        <span class="icon-box-icon">
+                            <i class="icon-rocket"></i>
+                        </span>
+
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
+                            <p>Orders $50 or more</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+                
+                    <div class="icon-box icon-box-side">
+                        <span class="icon-box-icon">
+                            <i class="icon-rotate-left"></i>
+                        </span>
+
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
+                            <p>Within 30 days</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+
+                    <div class="icon-box icon-box-side">
+                        <span class="icon-box-icon">
+                            <i class="icon-info-circle"></i>
+                        </span>
+
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
+                            <p>When you sign up</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+
+                    <div class="icon-box icon-box-side">
+                        <span class="icon-box-icon">
+                            <i class="icon-life-ring"></i>
+                        </span>
+
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
+                            <p>24/7 amazing services</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+            </div><!-- End .owl-carousel -->
+        </div><!-- End .container -->
+    </div><!-- End .icon-boxes-container -->
+</div><!-- End .intro-section -->
+<!-- End Section 1 Slider Section -->
+
+<!-- Section 2 action banners -->
+<div class="pt-3 pb-3">
+  <div class="container">
+      <div class="banner-group">
+          <div class="row">
+              <div class="col-sm-6 col-lg-4">
+                  <div class="banner banner-overlay banner-lg">
+                      <a href="#">
+                          <img src="{% static "assets/images/banners/US11.jpg" %}" alt="Banner">
+                      </a>
+
+                      <div class="banner-content banner-content-bottom">
+                          <h4 class="banner-subtitle text-white"><a href="#">Are you mindful of your child's daily plate count?</a></h4><!-- End .banner-subtitle -->
+                          <h3 class="banner-title text-white"><a href="#">Waterproof</a></h3><!-- End .banner-title -->
+                          <div class="banner-text text-white"><a href="#">from $19.00</a></div><!-- End .banner-text -->
+                          <a href="#" class="btn btn-outline-white banner-link">Discover Now</a>
+                      </div><!-- End .banner-content -->
+                  </div><!-- End .banner -->
+              </div><!-- End .col-lg-4 -->
+              <div class="col-sm-6 col-lg-4">
+                <div class="banner banner-overlay banner-lg">
+                    <a href="#">
+                        <img src="{% static "assets/images/banners/US12.png" %}" alt="Banner">
+                    </a>
+
+                    <div class="banner-content banner-content-bottom">
+                        <h4 class="banner-subtitle text-white"><a href="#">Nutrition Needs Based On Your Child’s Profile</a></h4><!-- End .banner-subtitle -->
+                        <h3 class="banner-title text-white"><a href="#">Waterproof</a></h3><!-- End .banner-title -->
+                        <div class="banner-text text-white"><a href="#">Record Daily Routine to build your Child’s Dietary Plan.</a></div><!-- End .banner-text -->
+                        <a href="{% url "CoreApp:US12" %}" class="btn btn-outline-white banner-link">Discover Now</a>
+                    </div><!-- End .banner-content -->
+                </div><!-- End .banner -->
+            </div><!-- End .col-lg-4 -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="banner banner-overlay banner-lg">
+                    <a href="#">
+                        <img src="{% static "assets/images/banners/US11.jpg" %}" alt="Banner">
+                    </a>
+
+                    <div class="banner-content banner-content-bottom">
+                        <h4 class="banner-subtitle text-white"><a href="#">Additive Awareness of Parents</a></h4><!-- End .banner-subtitle -->
+                        <h3 class="banner-title text-white"><a href="#">Waterproof</a></h3><!-- End .banner-title -->
+                        <div class="banner-text text-white"><a href="#">from $19.00</a></div><!-- End .banner-text -->
+                        <a href="{% url "CoreApp:US13" %}" class="btn btn-outline-white banner-link">Discover Now</a>
+                    </div><!-- End .banner-content -->
+                </div><!-- End .banner -->
+            </div><!-- End .col-lg-4 -->
+          </div><!-- End .row -->
+      </div><!-- End .banner-group -->
+
+      <div class="owl-carousel mt-4 mb-3 owl-simple" data-toggle="owl" 
+          data-owl-options='{
+              "nav": false, 
+              "dots": false,
+              "margin": 30,
+              "loop": false,
+              "responsive": {
+                  "0": {
+                      "items":2
+                  },
+                  "420": {
+                      "items":3
+                  },
+                  "600": {
+                      "items":4
+                  },
+                  "900": {
+                      "items":5
+                  },
+                  "1024": {
+                      "items":6
+                  }
+              }
+          }'>
+          <a href="#" class="brand">
+              <img src="assets/images/brands/1.png" alt="Brand Name">
+          </a>
+
+          <a href="#" class="brand">
+              <img src="assets/images/brands/2.png" alt="Brand Name">
+          </a>
+
+          <a href="#" class="brand">
+              <img src="assets/images/brands/3.png" alt="Brand Name">
+          </a>
+
+          <a href="#" class="brand">
+              <img src="assets/images/brands/4.png" alt="Brand Name">
+          </a>
+
+          <a href="#" class="brand">
+              <img src="assets/images/brands/5.png" alt="Brand Name">
+          </a>
+
+          <a href="#" class="brand">
+              <img src="assets/images/brands/6.png" alt="Brand Name">
+          </a>
+
+          <a href="#" class="brand">
+              <img src="assets/images/brands/7.png" alt="Brand Name">
+          </a>
+      </div><!-- End .owl-carousel -->
+  </div><!-- End .container -->
+</div><!-- End .bg-lighter -->
+<!-- End Section 2 action banners -->
+
+<!-- Section 3 Logos -->
+<div class="container">
+  <hr class="mt-3 mb-4">
+</div><!-- End .container -->
+<!-- End Section 3 Logos -->
 
 
-<div style="margin-top: 10px; margin-bottom: 10px;">
-  <a href="{% url "CoreApp:US11" %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">US11</a>
+
+<!-- Section 4 informative banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="banner banner-big">
+                <a href="#">
+                    <img src="{% static "assets/images/banners/banner-fullwidth.jpg" %}" alt="Banner">
+                </a>
+
+                <div class="banner-content">
+                    <h4 class="banner-subtitle text-primary">HOW TO AVOID OBESITY OR OVEWEIGHT AMONG CHILDREN?</h4>
+                    <!-- <h3 class="banner-title text-white">HOW TO AVOID OBESITY OR OVEWEIGHT AMONG CHILDREN?</h3>End .banner-title -->
+                    <p class="d-none d-lg-block">According to research conducted by Jebeile and others (2022), primary strategies for preventing overweight and obesity focus on family behaviours, including diet, physical activity, sedentary habits, and sleep quality. These approaches are supported by behaviour change techniques.
+
+                        Hence, it is crucial to prioritise improvements in easily modifiable factors to prevent overweight and obesity. Since family behaviours and habits are internal factors that play a significant role, it is important to note that external factors can also influence these behaviours.</p> 
+
+                    <a href="{% url "CoreApp:US11" %}" class="btn btn-primary btn-rounded"><span>Learn More!</span><i class="icon-long-arrow-right"></i></a>
+                </div><!-- End .banner-content -->
+            </div><!-- End .banner -->
+        </div><!-- End .col-12 -->
+    </div>
 </div>
+<!-- End Section 4 informative banner -->
 
-<div style="margin-bottom: 10px;">
-  <a href="{% url "CoreApp:US12" %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">US12</a>
+<!-- Section 5 small action banners -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-6 col-md-4">
+            <div class="banner banner-cat">
+                <a href="#">
+                    <img src="{% static "assets/images/banners/footerus11.jpg" %}" alt="Banner">
+                </a>
+
+                <div class="banner-content banner-content-overlay text-center">
+                    <h3 class="banner-title font-weight-normal">Nutrition Tracker</h3><!-- End .banner-title -->
+                    <h4 class="banner-subtitle">Track Your children's Diet</h4><!-- End .banner-subtitle -->
+                    <a href="{% url "CoreApp:US21" %}" class="banner-link">Explore More</a>
+                </div><!-- End .banner-content -->
+            </div><!-- End .banner -->
+        </div><!-- End .col-md-4 -->
+
+        <div class="col-sm-6 col-md-4">
+            <div class="banner banner-cat">
+                <a href="#">
+                    <img src="{% static "assets/images/banners/footerus11.jpg" %}" alt="Banner">
+                </a>
+
+                <div class="banner-content banner-content-overlay text-center">
+                    <h3 class="banner-title font-weight-normal">Nutrition Analysis Tool</h3><!-- End .banner-title -->
+                    <h4 class="banner-subtitle">Get insight into your children's diet</h4><!-- End .banner-subtitle -->
+                    <a href="{% url "CoreApp:US22" %}" class="banner-link">Explore More</a>
+                </div><!-- End .banner-content -->
+            </div><!-- End .banner -->
+        </div><!-- End .col-md-4 -->
+
+        <div class="col-sm-6 col-md-4">
+            <div class="banner banner-cat">
+                <a href="#">
+                    <img src="{% static "assets/images/banners/footerus11.jpg" %}" alt="Banner">
+                </a>
+
+                <div class="banner-content banner-content-overlay text-center">
+                    <h3 class="banner-title font-weight-normal">Set Reminders</h3><!-- End .banner-title -->
+                    <h4 class="banner-subtitle">Stay on Track</h4><!-- End .banner-subtitle -->
+                    <a href="{% url "CoreApp:US23" %}" class="banner-link">Set Now</a>
+                </div><!-- End .banner-content -->
+            </div><!-- End .banner -->
+        </div><!-- End .col-md-4 -->
+    </div><!-- End .row -->
 </div>
-
-<div style="margin-bottom: 10px;">
-  <a href="{% url "CoreApp:US13" %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">US13</a>
-</div>
-
-<div style="margin-bottom: 10px;">
-  <a href="{% url "CoreApp:US21" %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">US21</a>
-</div>
-
-<div style="margin-bottom: 10px;">
-  <a href="{% url "CoreApp:US22" %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">US22</a>
-</div>
-<div style="margin-bottom: 10px;">
-  <a href="{% url "CoreApp:US23" %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">US23</a>
-</div>
-
-<div style="margin-bottom: 10px;">
-  <a href="{% url "CoreApp:login" %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Login</a>
-</div>
+<!-- End Section 5 small action banners -->
 
 
 
 
-
-
-
-
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
-  <i class="fa fa-facebook-official w3-hover-opacity"></i>
-  <i class="fa fa-instagram w3-hover-opacity"></i>
-  <i class="fa fa-snapchat w3-hover-opacity"></i>
-  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-  <i class="fa fa-twitter w3-hover-opacity"></i>
-  <i class="fa fa-linkedin w3-hover-opacity"></i>
-  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
-
-
-
-{% endblock body_block %}
+{% endblock main_content %}
 

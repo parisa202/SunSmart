@@ -2,30 +2,18 @@
 {% load static %}
 
 {% block title_block %}
-    US 11
+   <title>US 11</title> 
 {% endblock title_block %}
 
-{% block extra_css %}
 
-<link rel="stylesheet" type="text/css" href="{% static "CoreApp/css/styles.css" %}">
+{% block main_content %}
 
-{% endblock extra_css %}
-
-{% block body_block %}
-    <div class="w3-content" style="max-width:2000px;margin-top:46px">
-       
-    </div>
-
-    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url "CoreApp:index" %}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">US11</li>
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
-
-
+    {% include "CoreApp/components/breadcrumb.html" %}
 
     <h1> Page US11</h1>
-{% endblock body_block %}
+    <p>{{json_data}}</p>
+
+    {% for data in all_data %}
+        <h2>{{data.age_group}}</h2>
+    {% endfor %}
+{% endblock main_content %}

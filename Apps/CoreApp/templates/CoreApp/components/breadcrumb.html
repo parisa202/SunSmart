@@ -1,0 +1,15 @@
+<div class="page-header text-center" style="background-color: rgba(121, 177, 121, 0.434);">
+    <div class="container">
+        <h1 class="page-title">{{main_title}}<span>{{sub_title}}</span></h1>
+    </div><!-- End .container -->
+</div>
+
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "CoreApp:index" %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{page_name}}</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->

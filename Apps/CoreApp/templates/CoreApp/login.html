@@ -4,28 +4,44 @@
 
 
 {% block title_block %}
-    US 11
+    <title>Login</title>
 {% endblock title_block %}
 
 {% block extra_css %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'CoreApp/css/styles.css' %}">
-<link rel="stylesheet" href="{% static 'CoreApp/css/bootstrap.min.css' %}">
+<style>
+    .alert.alert-dark {
+        font-size: xx-large;
+        text-align: center;
+    }
+
+    .nav-container {
+        display: flex;
+        align-items: center;
+    }
+    .nav-item {
+        margin-left: 20px;
+        margin-right: 20px;
+        text-decoration: none;
+        color: #333333;
+    }
+    .nav-item:last-child {
+        margin-right: 0;
+    }
+
+</style>
 
 {% endblock extra_css %}
 
 
-{% block body_block %}
+{% block main_content %}
 <div class="w3-content" style="max-width:2000px;margin-top:46px"></div>
 
-<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-    <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Login</li>
-        </ol>
-    </div><!-- End .container -->
-</nav><!-- End .breadcrumb-nav -->
+<div class="nav-container">
+    <li class="breadcrumb-item"><a href="{% url "CoreApp:index" %}">Home</a></li>
+    <span>&gt;</span>
+    <a href="#" class="nav-item">Login</a>
+</div>
 
 <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
     <div class="container">
@@ -132,4 +148,4 @@
     </div><!-- End .container -->
 </div><!-- End .login-page section-bg -->
 
-{% endblock body_block %}
+{% endblock main_content %}
