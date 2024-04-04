@@ -1,17 +1,84 @@
-{% extends "CoreApp/base.html" %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My HTML Template</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        .alert.alert-dark {
+            font-size: xx-large;
+            text-align: center;
+        }
 
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+        .nav-item {
+            margin-left: 20px;
+            margin-right: 20px;
+            text-decoration: none;
+            color: #333333;
+        }
+        .nav-item:last-child {
+            margin-right: 0;
+        }
 
-{% block title_block %}
-    US 11
-{% endblock title_block %}
-
-
-
-
-
-{% block body_block %}
-    <div class="w3-content" style="max-width:2000px;margin-top:46px">
-        <h1> Page US13</h1>
+        .container {
+            display: flex;
+            align-items: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-right: 20px;
+        }
+        h2 {
+            background-color: #f9e4e8;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert alert-dark" role="alert">
+        ADDITIVE AWARENESS
     </div>
-{% endblock body_block %}
+    
+    <hr>
+    
+    <div class="nav-container">
+        <a href="#" class="nav-item">HOME</a>
+        <span>&gt;</span>
+        <a href="#" class="nav-item">ADDITIVE AWARENESS</a>
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <img src="../static/img" alt="A little girl with her thumb up while eating">
+        <div>
+            <h2>Additive Awareness To Parents</h2>
+            <p>In accordance with research by Flodgren, et al., (2020), parents can enhance their understanding of overweight and obesity by considering primary and secondary categorizations. Primary factors typically stem from familial and direct influences on weight, while secondary factors are more influenced by external elements. This categorization aids parents in identifying areas where they can directly intervene within the family context and areas where they may need to address broader environmental or societal factors.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <h2>Primary & Secondary Behaviour</h2>
+            <p>The table outlines the different interventions, comparisons, and outcomes considered in strategies for preventing overweight and obesity. Interventions may involve various comparisons, such as no intervention, standard practice, enhanced practice, or other intervention/strategies. Primary outcomes include measures such as BMI/BMI z score, physical activity level, and dietary behaviour.</p>
+            <p>Secondary outcomes cover additional weight-related measures, sedentary behaviour, transport habits, health outcomes, quality of life, satisfaction, equity considerations, attitudes, intention to change, consumer behaviour, potential harms or unintended effects, and cost data. These outcomes provide a comprehensive overview of the effectiveness and implications of different prevention strategies for overweight and obesity.</p>
+        </div>
+        <img src="../static/img" alt="Description of the image">
+    </div>
+
+    <div class="container">
+        <img src="../static/img/image1" alt="Description of the image">
+        <div>
+            <h2>Avoid Negative Marketing </h2>
+            <p>The study by Russell,et al., (2020) sheds light on the political construction of public health nutrition problems, particularly focusing on junk-food marketing targeting children. This research emphasises the significant contribution of junk-food marketing to childhood obesity, which imposes substantial health and economic burdens. Despite its evident impact, political prioritisation for addressing junk-food marketing has been weak in many countries. Parents can use this information to heighten their awareness of the pervasive influence of junk-food marketing on children's health and well-being. By understanding the political dynamics surrounding this issue, parents can advocate for stronger regulations and initiatives to protect their children from harmful marketing practices</p>
+        </div>
+    </div>
+</body>
+</html>
