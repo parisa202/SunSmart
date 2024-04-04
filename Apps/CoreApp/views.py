@@ -48,3 +48,6 @@ class US23View(generic.TemplateView):
 
 class AboutUsView(generic.TemplateView):
     template_name = 'CoreApp/about-us.html'
+
+class LoginView(generic.TemplateView):
+    template_name = 'CoreApp/login.html'

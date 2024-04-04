@@ -2,6 +2,7 @@ from django.urls import path, re_path
 from django.contrib.auth.decorators import login_required
 from . import views
 
+
 app_name = 'CoreApp'
 
 
@@ -14,6 +15,7 @@ urlpatterns = [
     path('US22/', views.US22View.as_view(), name='US22'),
     path('US23/', views.US23View.as_view(), name='US23'),
     path('about-us/', views.AboutUsView.as_view(), name='about_us'),
+    path('login/', views.LoginView.as_view(), name='login'),
 
 ]
 
