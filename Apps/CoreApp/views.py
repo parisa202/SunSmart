@@ -89,6 +89,9 @@ class US11DashboardView(generic.TemplateView):
 class US12View(generic.TemplateView):
     template_name = 'CoreApp/us12.html'
 
+class US121View(generic.TemplateView):
+    template_name = 'CoreApp/us121.html'
+
 class US13View(generic.TemplateView):
     template_name = 'CoreApp/us13.html'
 

@@ -17,6 +17,7 @@ urlpatterns = [
     path('about-us/', views.AboutUsView.as_view(), name='about_us'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('dash/', views.US11DashboardView.as_view(), name='dash'),
+    path('US121/', views.US121View.as_view(), name='US121'),
 
 ]
 

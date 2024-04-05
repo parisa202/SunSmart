@@ -6,7 +6,7 @@
 
 
 {% block title_block %}
-    US 11
+
 {% endblock title_block %}
 
 
@@ -23,8 +23,6 @@
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Shop</a></li>
                 <li class="breadcrumb-item active" aria-current="page">My Account</li>
             </ol>
         </div><!-- End .container -->
@@ -66,7 +64,7 @@
                                         <div class="col-lg-4">
                                           <div class="card shadow-sm">
                                             <div class="card-header bg-transparent text-center">
-                                              <img class="profile_img" src="https://placeimg.com/640/480/arch/any" alt="">
+                                              <img src="{% static "assets/images/children/pexels-samad-ismayilov-1270076.jpg" %}" alt="">
                                               <h3>Ishmam Ahasan Samin</h3>
                                             </div>
                                             <!-- <div class="card-body">
@@ -140,12 +138,10 @@
                                             <div class="entry-body">
                                                 <div class="entry-meta">
                                                     <span class="entry-author">
-                                                        by <a href="#">John Doe</a>
+                                                        <a href="#">John Doe</a>
                                                     </span>
                                                     <span class="meta-separator">|</span>
-                                                    <a href="#">Nov 22, 2018</a>
-                                                    <span class="meta-separator">|</span>
-                                                    <a href="#">2 Comments</a>
+                                                    <a href="#">Nov 22, 2012</a>
                                                 </div><!-- End .entry-meta -->
             
                                                 <h2 class="entry-title">
@@ -168,7 +164,8 @@
                                     <div class="entry-item lifestyle col-sm-6 col-lg-4" style="position: absolute; left: 404.8px; top: 0px;">
                                         <article class="entry entry-grid text-center">
                                             <figure class="entry-media">
-                                                <a href="single.html">
+                                                <!-- <a href="{% url "CoreApp:US13" %}" class="btn btn-outline-white banner-link">Discover Now</a> -->
+                                                <a href="{% url "CoreApp:US13" %}">
                                                     <img src="{% static "assets/images/children/pexels-murry-lee-17889245.jpg" %}" alt="try">
                                                 </a>
                                             </figure><!-- End .entry-media -->
