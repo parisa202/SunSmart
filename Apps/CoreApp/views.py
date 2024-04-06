@@ -1,5 +1,5 @@
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.core.mail import send_mail
 from django.core.management.utils import get_random_secret_key
@@ -41,8 +41,10 @@ class HomeView(generic.TemplateView):
             
         return super().get_context_data(**kwargs)
 
+  
+  
+  
     
-
 class US11View(generic.TemplateView):
     template_name = 'CoreApp/us11.html'
     
@@ -93,9 +95,11 @@ class US11DashboardView(generic.TemplateView):
 
 class US12View(generic.TemplateView):
     template_name = 'CoreApp/us12.html'
+ 
     
 class US121View(generic.TemplateView):
     template_name = 'CoreApp/us121.html'
+
 
 class US13View(generic.TemplateView):
     template_name = 'CoreApp/us13.html'
@@ -117,9 +121,68 @@ class AboutUsView(generic.TemplateView):
     template_name = 'CoreApp/about_us.html'
 
 
-class LoginView(generic.TemplateView):
+class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
     
+    def post(self, request):
+        form_type = request.POST.get('form_type')
+
+        if form_type == 'signin':
+            # sign-in form data
+            email = request.POST.get('singin-email')
+            password = request.POST.get('singin-password')
+            
+            # send sign-in data to authentication API
+            api_url = 'http://3.25.234.118:8081/api/auth/login'
+            
+            data = {
+                'email': email,
+                'password': password
+            }
+            json_data = json.dumps(data)
+            headers = {'Content-Type': 'application/json'}
+            # response = requests.post(api_url, data=json_data, headers=headers)
+            
+            # handle response
+            # if response.status_code == 200:
+            #     # messages.success(self.request, 'Profile Updated Successfully')
+            #     return redirect('CoreApp:index')
+            # else: 
+            #     # messages.error(self.request, 'Something Wrong')
+            #     return super().get(request, *args, **kwargs)
+
+            
+        elif form_type == 'register':
+            # register form data
+            username = request.POST.get('register-username')
+            email = request.POST.get('register-email')
+            password = request.POST.get('register-password')
+            
+            # send register data to registration API
+            api_url = 'http://3.25.234.118:8081/api/users'
+            
+            data = {
+                'username': username,
+                'email': email,
+                'password': password
+            }
+            json_data = json.dumps(data)
+            headers = {'Content-Type': 'application/json'}
+            # response = requests.post(api_url, data=json_data, headers=headers)
+
+            # handle response
+            # if response.status_code == 200:
+            #     # messages.success(self.request, 'Profile Updated Successfully')
+            #     return redirect('CoreApp:index')
+            # else: 
+            #     # messages.error(self.request, 'Something Wrong')
+            #     return super().get(request, *args, **kwargs)
+
+        else:
+            # Invalid form type
+            return JsonResponse({'error': 'Invalid form type'}, status=400)
+
+
 class ComingView(generic.TemplateView):
     template_name = 'CoreApp/coming_soon.html'
 
@@ -163,3 +226,6 @@ class ImportDataView(generic.View):
     #             return HttpResponse(f"Model {model_name} not found.")
     #     except FileNotFoundError:
     #         return HttpResponse(f"File {file_name} not found.")
+    
+    
+    

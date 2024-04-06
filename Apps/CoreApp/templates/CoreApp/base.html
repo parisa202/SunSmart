@@ -67,14 +67,17 @@
                     <div class="header-center">
                         <!-- change Logo c -->
                         <a href="{% url "CoreApp:index" %}" class="logo">
-                            <img src="{% static "assets/images/jj-09.svg" %} alt="Molla Logo" width="82" height="20">
+                            <img src="{% static 'assets/images/jj-09.svg' %}" alt="Molla Logo" width="92" height="30">
+                            <img src="{% static 'assets/images/jj-10.svg' %}" alt="Molla Logo" width="82" height="20">
+                            <img src="{% static 'assets/images/jj-11.svg' %}" alt="Molla Logo" width="82" height="20">
+                            
                         </a>
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
-                        <a href="{% url "CoreApp:login" %}" class="wishlist-link">
+                        <a href="{% url 'CoreApp:login_or_register' %}" class="wishlist-link">
                             <i class="icon-user"></i>
-                            <span class="wishlist-txt">Login</span>
+                            <span class="wishlist-txt">Login/Register</span>
                         </a>
 
                         
@@ -259,7 +262,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-lg-6">
                             <div class="widget widget-about">
-                                <img src="assets/images/demos/demo-9/logo-footer.png" class="footer-logo" alt="Footer Logo" width="82" height="25">
+                                <img src="{% static 'assets/images/logo3.png' %}"  class="footer-logo" alt="Footer Logo" width="82" height="25">
                                 <p>Food For Health, Joy For Life. </p>
                                 
                                 <div class="widget-about-info">
