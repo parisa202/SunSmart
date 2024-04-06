@@ -6,14 +6,273 @@
 {% endblock title_block %}
 
 
+
+{% block extra_css %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+{% endblock extra_css %}
+
 {% block main_content %}
 
     {% include "CoreApp/components/breadcrumb.html" %}
+    <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+      <div class="container">
+        <div>
+            <h2>Primary & Secondary Behaviour</h2>
+            <p>The table outlines the different interventions, comparisons, and outcomes considered in strategies for preventing overweight and obesity. Interventions may involve various comparisons, such as no intervention, standard practice, enhanced practice, or other intervention/strategies. Primary outcomes include measures such as BMI/BMI z score, physical activity level, and dietary behaviour.</p>
+            <p>Secondary outcomes cover additional weight-related measures, sedentary behaviour, transport habits, health outcomes, quality of life, satisfaction, equity considerations, attitudes, intention to change, consumer behaviour, potential harms or unintended effects, and cost data. These outcomes provide a comprehensive overview of the effectiveness and implications of different prevention strategies for overweight and obesity.</p>
+        </div>
+        <img src="{% static 'CoreApp/img/US1.3_2.jpeg' %}" alt="" style="width: 260px; height: auto;">
+    </div>
+    </div>
 
-    <h1> Page US11</h1>
-    <p>{{json_data}}</p>
+    <div style="display: flex; justify-content: center; padding-bottom: 15px;">
+        
+ 
+        <div style="display: flex; background-color: rgba(194, 255, 243, 0.069); border: 4px groove rgba(0, 128, 0, 0.5); padding: 15px;">
+          <div class="sidebar">
+            <label for="genderSelect">Select Gender:</label>
+            <select id="genderSelect">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Person">All</option>
+            </select>
+            <!-- Legends for donut charts -->
+            <div class="legend" id="legend1"></div>
+            <div class="legend" id="legend4"></div>
+        </div>
+      
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <div style="flex-grow: 2; align-items: center;">
+            <canvas id="lineChart" width="600" height="200"></canvas>
+          </div>
+          <div id="maleTitle" style="display: flex; justify-content: space-around;font-weight: bold;">Prevalence of Overweight and Obesity Among Children</div>
+          <!-- First row of charts -->
+          <div style="display: flex;padding: 10px;">
+                <div>
+                    <div id="maleTitle" style="display: flex; justify-content: space-around;">Age: 2-3 years old</div>
+                    <canvas id="ageGroup1Chart" width="200" height="200"></canvas>
+                </div>
+                <div>
+                    <div id="femaleTitle" style="display: flex; justify-content: space-around;">Age: 4-8 years old</div>
+                    <canvas id="ageGroup2Chart" width="200" height="200"></canvas>
+                </div>
+                <div>
+                    <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 9-13 years old</div>
+                    <canvas id="ageGroup3Chart" width="200" height="200"></canvas>
+                </div>
+          </div>
+      
+          <div id="maleTitle" style="display: flex; justify-content: space-around; font-weight: bold;">Proportion of Energy gained from Discretionary Food Among Children</div>
 
-    {% for data in all_data %}
-        <h2>{{data.age_group}}</h2>
-    {% endfor %}
+                    <!-- Second row of charts -->
+          <div style="display: flex; padding: 10px;">
+                <div>
+                    <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 2-3 years old</div>
+                    <canvas id="ageGroup1ChartDisc" width="200" height="200"></canvas>
+                </div>
+                <div>
+                    <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 4-8 years old</div>
+                    <canvas id="ageGroup2ChartDisc" width="200" height="200"></canvas>
+                </div>
+                <div>
+                    <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 9-13 years old</div>
+                    <canvas id="ageGroup3ChartDisc" width="200" height="200"></canvas>
+                </div>
+          </div>
+          
+        </div>
+            <!-- Description Sidebar -->
+            <div class="description-sidebar">
+                <div class="description">
+                    <h3>Description 1</h3>
+                    <p>This is the description for the first chart.</p>
+                </div>
+                <div class="description">
+                    <h3>Description 2</h3>
+                    <p>This is the description for the second chart.</p>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    
+      <script>
+        const alljsonData = JSON.parse('{{json_data|escapejs}}');
+        const alljsonData_bmi = JSON.parse('{{json_data_bmi|escapejs}}');
+      
+        const jsonData_concern = alljsonData.map(item => item.fields);
+        const jsonData_bmi = alljsonData_bmi.map(item => item.fields);
+        console.log(jsonData_concern)
+      
+        function fetchAndCreateDonutChart(jsonData, dataType, gender, ageGroup, canvasId, legendId) {
+          let filteredData = [];
+      
+          if (dataType === 'overweight') {
+              filteredData = jsonData.filter(row => row.gender === gender && row.age_group === ageGroup && ['Prevalence of overweight', 'Prevalence of not_overweight'].includes(row.concern));
+          } else if (dataType === 'disc') {
+              filteredData = jsonData.filter(row => row.gender === gender && row.age_group === ageGroup && ['Discretionary Food', 'Non-discretionary Food'].includes(row.concern));
+          }
+      
+          const labels = filteredData.map(row => row.concern);
+          const chartData = filteredData.map(row => parseFloat(row.percentage));
+          const ctx = document.getElementById(canvasId).getContext('2d');
+      
+          if (window[canvasId + 'Chart']) {
+              window[canvasId + 'Chart'].destroy();
+          }
+      
+          const colors = (dataType === 'overweight') ? ['rgba(255, 0, 0, 0.5)', 'rgba(102, 205, 170, 0.3)'] : ['rgba(255, 165, 0, 0.5)', 'rgba(102, 205, 170, 0.3)'];
+      
+          window[canvasId + 'Chart'] = createDonutChart(ctx, labels, chartData, colors, 'Text Inside Donut');
+          updateLegend(labels, legendId, colors);
+      }
+      
+      
+        function updateCharts() {
+          const selectedGender = document.getElementById('genderSelect').value;
+          fetchAndCreateDonutChart(jsonData_concern,'overweight', selectedGender, '2_3', 'ageGroup1Chart', 'legend1');
+          fetchAndCreateDonutChart(jsonData_concern,'overweight', selectedGender, '4_8', 'ageGroup2Chart', 'legend2');
+          fetchAndCreateDonutChart(jsonData_concern,'overweight', selectedGender, '9_13', 'ageGroup3Chart', 'legend3');
+          fetchAndCreateDonutChart(jsonData_concern,'disc', selectedGender, '2_3', 'ageGroup1ChartDisc', 'legend4');
+          fetchAndCreateDonutChart(jsonData_concern,'disc', selectedGender, '4_8', 'ageGroup2ChartDisc', 'legend5');
+          fetchAndCreateDonutChart(jsonData_concern,'disc', selectedGender, '9_13', 'ageGroup3ChartDisc', 'legend6');
+          fetchAndCreateLineChart(selectedGender, 'BMI_PLUS1C', 'BMI_PLUS2C');
+        }
+      
+        //selection event listener
+        document.getElementById('genderSelect').addEventListener('change', updateCharts);
+      
+        //Creat one donut
+        function createDonutChart(ctx, labels, data, colors, text) {
+          return new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+              datasets: [{
+                data: data,
+                backgroundColor: colors
+              }]
+            },
+            options: {
+              responsive: false,
+              cutoutPercentage: 70,
+              elements: {
+                center: {
+                  text: text,
+                  color: '#FF6384',
+                  fontStyle: 'Arial',
+                  sidePadding: 20,
+                  minFontSize: 20,
+                  lineHeight: 25
+                }
+              }
+            }
+          });
+        }
+      
+      // Call the function for each gender group and default age group
+      fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '2_3', 'ageGroup1Chart', 'legend1');
+      fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '4_8', 'ageGroup2Chart', 'legend2');
+      fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '9_13', 'ageGroup3Chart', 'legend3');
+      fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '2_3', 'ageGroup1ChartDisc', 'legend4');
+      fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '4_8', 'ageGroup2ChartDisc', 'legend5');
+      fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '9_13', 'ageGroup3ChartDisc', 'legend6');
+      // Initial call to create line chart with default selections
+      fetchAndCreateLineChart('Male', 'BMI_PLUS1C', 'BMI_PLUS2C');
+      
+      
+      
+        ///<!-- Line chart -->
+        function fetchAndCreateLineChart(gender, bmiCode1, bmiCode2) {
+          const filteredData1 = jsonData_bmi.filter(row => row.gender === gender && row.bmi === bmiCode1);
+          const filteredData2 = jsonData_bmi.filter(row => row.gender === gender && row.bmi === bmiCode2);
+          
+          const labels = filteredData1.map(row => row.year);
+          const bmiData1 = filteredData1.map(row => row.crude_estimate);
+          const bmiData2 = filteredData2.map(row => row.crude_estimate);
+          const ctx = document.getElementById('lineChart').getContext('2d');
+      
+          if (window.lineChart instanceof Chart) {
+            window.lineChart.destroy();
+          }
+      
+          window.lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: bmiCode1,
+                  data: bmiData1,
+                  borderColor: '#FFD700',
+                  borderWidth: 2,
+                  backgroundColor: '#FFD700',
+                  yAxisID: 'y',
+                  fill: false,
+                  pointRadius: 0
+                },
+                {
+                  label: bmiCode2,
+                  data: bmiData2,
+                  borderColor: '#990000',
+                  borderWidth: 2,
+                  backgroundColor: '#990000',
+                  yAxisID: 'y',
+                  fill: false,
+                  pointRadius: 0
+                }
+              ]
+            },
+            options: {
+              responsive: false,
+              interaction: {
+                mode: 'index',
+                intersect: false,
+              },
+              stacked: false,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'BMI Trend among children between 5 and 9 years old'
+                }
+              },
+              scales: {
+                y: {
+                  type: 'linear',
+                  display: true,
+                  position: 'left',
+                }
+              }
+            }
+          });
+        }
+      
+        //<!-- Legends -->
+      
+        function updateLegend(labels, legendId, donutColors) {
+          const legendElement = document.getElementById(legendId);
+          if (legendElement) {
+              legendElement.innerHTML = ''; // Clear existing content before updating
+      
+              labels.forEach((label, index) => {
+                  const legendItem = document.createElement('div');
+                  const square = document.createElement('span');
+                  square.style.width = '10px';
+                  square.style.height = '10px';
+                  square.style.display = 'inline-block';
+                  square.style.backgroundColor = donutColors[index];
+                  square.style.marginRight = '5px';
+                  legendItem.appendChild(square);
+                  legendItem.appendChild(document.createTextNode(label));
+                  legendElement.appendChild(legendItem);
+              });
+          } else {
+              console.error(`Element with ID ${legendId} not found.`);
+          }
+      }
+      
+        
+      
+      </script>
+    
 {% endblock main_content %}

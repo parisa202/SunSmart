@@ -14,9 +14,12 @@ urlpatterns = [
     path('US21/', views.US21View.as_view(), name='US21'),
     path('US22/', views.US22View.as_view(), name='US22'),
     path('US23/', views.US23View.as_view(), name='US23'),
-    path('about-us/', views.AboutUsView.as_view(), name='about_us'),
+    path('about-us/', views.AboutUsView.as_view(), name='about'),
     path('login/', views.LoginView.as_view(), name='login'),
-    path('dash/', views.US11DashboardView.as_view(), name='dash'),
+    path('coming-soon/', views.ComingView.as_view(), name='coming'),
+    
+    # import data views
+    path('data/', views.ImportDataView.as_view(), name='import_data'),
 
 ]
 

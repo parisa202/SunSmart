@@ -121,38 +121,44 @@
 
 <script>
   const alljsonData = JSON.parse('{{json_data|escapejs}}');
+  const alljsonData_bmi = JSON.parse('{{json_data_bmi|escapejs}}');
+
   const jsonData_concern = alljsonData.map(item => item.fields);
-  
+  const jsonData_bmi = alljsonData_bmi.map(item => item.fields);
   console.log(jsonData_concern)
 
   function fetchAndCreateDonutChart(jsonData, dataType, gender, ageGroup, canvasId, legendId) {
-    
-    if(dataType === 'overweight'){
-      const filteredData = jsonData.filter(row => row.gender === gender && row.age_group === ageGroup && ['Prevalence of overweight', 'Prevalence of not_overweight'].includes(row.concern));
+    let filteredData = [];
 
+    if (dataType === 'overweight') {
+        filteredData = jsonData.filter(row => row.gender === gender && row.age_group === ageGroup && ['Prevalence of overweight', 'Prevalence of not_overweight'].includes(row.concern));
+    } else if (dataType === 'disc') {
+        filteredData = jsonData.filter(row => row.gender === gender && row.age_group === ageGroup && ['Discretionary Food', 'Non-discretionary Food'].includes(row.concern));
     }
+
     const labels = filteredData.map(row => row.concern);
     const chartData = filteredData.map(row => parseFloat(row.percentage));
     const ctx = document.getElementById(canvasId).getContext('2d');
 
     if (window[canvasId + 'Chart']) {
-      window[canvasId + 'Chart'].destroy();
+        window[canvasId + 'Chart'].destroy();
     }
 
     const colors = (dataType === 'overweight') ? ['rgba(255, 0, 0, 0.5)', 'rgba(102, 205, 170, 0.3)'] : ['rgba(255, 165, 0, 0.5)', 'rgba(102, 205, 170, 0.3)'];
 
     window[canvasId + 'Chart'] = createDonutChart(ctx, labels, chartData, colors, 'Text Inside Donut');
     updateLegend(labels, legendId, colors);
-  }
+}
+
 
   function updateCharts() {
     const selectedGender = document.getElementById('genderSelect').value;
-    fetchAndCreateDonutChart('overweight', selectedGender, '2_3', 'ageGroup1Chart', 'legend1');
-    fetchAndCreateDonutChart('overweight', selectedGender, '4_8', 'ageGroup2Chart', 'legend2');
-    fetchAndCreateDonutChart('overweight', selectedGender, '9_13', 'ageGroup3Chart', 'legend3');
-    fetchAndCreateDonutChart('disc', selectedGender, '2_3', 'ageGroup1ChartDisc', 'legend4');
-    fetchAndCreateDonutChart('disc', selectedGender, '4_8', 'ageGroup2ChartDisc', 'legend5');
-    fetchAndCreateDonutChart('disc', selectedGender, '9_13', 'ageGroup3ChartDisc', 'legend6');
+    fetchAndCreateDonutChart(jsonData_concern,'overweight', selectedGender, '2_3', 'ageGroup1Chart', 'legend1');
+    fetchAndCreateDonutChart(jsonData_concern,'overweight', selectedGender, '4_8', 'ageGroup2Chart', 'legend2');
+    fetchAndCreateDonutChart(jsonData_concern,'overweight', selectedGender, '9_13', 'ageGroup3Chart', 'legend3');
+    fetchAndCreateDonutChart(jsonData_concern,'disc', selectedGender, '2_3', 'ageGroup1ChartDisc', 'legend4');
+    fetchAndCreateDonutChart(jsonData_concern,'disc', selectedGender, '4_8', 'ageGroup2ChartDisc', 'legend5');
+    fetchAndCreateDonutChart(jsonData_concern,'disc', selectedGender, '9_13', 'ageGroup3ChartDisc', 'legend6');
     fetchAndCreateLineChart(selectedGender, 'BMI_PLUS1C', 'BMI_PLUS2C');
   }
 
@@ -168,9 +174,6 @@
           data: data,
           backgroundColor: colors
         }]
-      },
-      animation: {
-        animateRotate: false
       },
       options: {
         responsive: false,
@@ -189,16 +192,26 @@
     });
   }
 
+// Call the function for each gender group and default age group
+fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '2_3', 'ageGroup1Chart', 'legend1');
+fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '4_8', 'ageGroup2Chart', 'legend2');
+fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '9_13', 'ageGroup3Chart', 'legend3');
+fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '2_3', 'ageGroup1ChartDisc', 'legend4');
+fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '4_8', 'ageGroup2ChartDisc', 'legend5');
+fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '9_13', 'ageGroup3ChartDisc', 'legend6');
+// Initial call to create line chart with default selections
+fetchAndCreateLineChart('Male', 'BMI_PLUS1C', 'BMI_PLUS2C');
+
+
+
   ///<!-- Line chart -->
   function fetchAndCreateLineChart(gender, bmiCode1, bmiCode2) {
-    const filteredData1 = jsonData.filter(row => row.gender === gender && row.bmi_code === bmiCode1);
-    const filteredData2 = jsonData.filter(row => row.gender === gender && row.bmi_code === bmiCode2);
+    const filteredData1 = jsonData_bmi.filter(row => row.gender === gender && row.bmi === bmiCode1);
+    const filteredData2 = jsonData_bmi.filter(row => row.gender === gender && row.bmi === bmiCode2);
+    
     const labels = filteredData1.map(row => row.year);
-    const reversedLabels = labels.slice().reverse();
     const bmiData1 = filteredData1.map(row => row.crude_estimate);
     const bmiData2 = filteredData2.map(row => row.crude_estimate);
-    const reversedBmiData1 = bmiData1.slice().reverse();
-    const reversedBmiData2 = bmiData2.slice().reverse();
     const ctx = document.getElementById('lineChart').getContext('2d');
 
     if (window.lineChart instanceof Chart) {
@@ -208,25 +221,27 @@
     window.lineChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: reversedLabels,
+        labels: labels,
         datasets: [
           {
             label: bmiCode1,
-            data: reversedBmiData1,
+            data: bmiData1,
             borderColor: '#FFD700',
             borderWidth: 2,
             backgroundColor: '#FFD700',
             yAxisID: 'y',
-            fill: false
+            fill: false,
+            pointRadius: 0
           },
           {
             label: bmiCode2,
-            data: reversedBmiData2,
+            data: bmiData2,
             borderColor: '#990000',
             borderWidth: 2,
             backgroundColor: '#990000',
             yAxisID: 'y',
-            fill: false
+            fill: false,
+            pointRadius: 0
           }
         ]
       },
@@ -258,31 +273,27 @@
 
   function updateLegend(labels, legendId, donutColors) {
     const legendElement = document.getElementById(legendId);
-    legendElement.innerHTML = '';
+    if (legendElement) {
+        legendElement.innerHTML = ''; // Clear existing content before updating
 
-    labels.forEach((label, index) => {
-      const legendItem = document.createElement('div');
-      const square = document.createElement('span');
-      square.style.width = '10px';
-      square.style.height = '10px';
-      square.style.display = 'inline-block';
-      square.style.backgroundColor = donutColors[index];
-      square.style.marginRight = '5px';
-      legendItem.appendChild(square);
-      legendItem.appendChild(document.createTextNode(label));
-      legendElement.appendChild(legendItem);
-    });
-  }
+        labels.forEach((label, index) => {
+            const legendItem = document.createElement('div');
+            const square = document.createElement('span');
+            square.style.width = '10px';
+            square.style.height = '10px';
+            square.style.display = 'inline-block';
+            square.style.backgroundColor = donutColors[index];
+            square.style.marginRight = '5px';
+            legendItem.appendChild(square);
+            legendItem.appendChild(document.createTextNode(label));
+            legendElement.appendChild(legendItem);
+        });
+    } else {
+        console.error(`Element with ID ${legendId} not found.`);
+    }
+}
 
-  // Call the function for each gender group and default age group
-  fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '2_3', 'ageGroup1Chart', 'legend1');
-  fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '4_8', 'ageGroup2Chart', 'legend2');
-  fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '9_13', 'ageGroup3Chart', 'legend3');
-  fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '2_3', 'ageGroup1ChartDisc', 'legend4');
-  fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '4_8', 'ageGroup2ChartDisc', 'legend5');
-  fetchAndCreateDonutChart(jsonData_concern,'disc', 'Male', '9_13', 'ageGroup3ChartDisc', 'legend6');
-  // Initial call to create line chart with default selections
-  fetchAndCreateLineChart('Male', 'BMI_PLUS1C', 'BMI_PLUS2C');
+  
 
 </script>
 </body>
