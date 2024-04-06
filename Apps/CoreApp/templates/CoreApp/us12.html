@@ -124,13 +124,13 @@
                                 <div id="portfolio" class="service px-4 bg-white py-5">
                                     <div class="titie-row row mb-3">
                                        <h2 class="fw-bolder">My children</h2>
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum sit nibh amet egestas tellus.</p>
+                                       
                                    </div>
                                    <div class="entry-container max-col-3" data-layout="fitRows" style="position: relative; height: 2509.75px;">
                                     <div class="entry-item lifestyle shopping col-sm-6 col-lg-4" style="position: absolute; left: 0px; top: 0px;">
                                         <article class="entry entry-grid text-center">
                                             <figure class="entry-media">
-                                                <a href="single.html">
+                                                <a href="{% url "CoreApp:US121" %}">
                                                     <img src="{% static "assets/images/children/pexels-janko-ferlic-695954.jpg" %}" alt="try">
                                                 </a>
                                             </figure><!-- End .entry-media -->
@@ -160,12 +160,12 @@
                                             </div><!-- End .entry-body -->
                                         </article><!-- End .entry -->
                                     </div><!-- End .entry-item -->
-            
+
                                     <div class="entry-item lifestyle col-sm-6 col-lg-4" style="position: absolute; left: 404.8px; top: 0px;">
                                         <article class="entry entry-grid text-center">
                                             <figure class="entry-media">
                                                 <!-- <a href="{% url "CoreApp:US13" %}" class="btn btn-outline-white banner-link">Discover Now</a> -->
-                                                <a href="{% url "CoreApp:US13" %}">
+                                                <a href="{% url "CoreApp:US121" %}">
                                                     <img src="{% static "assets/images/children/pexels-murry-lee-17889245.jpg" %}" alt="try">
                                                 </a>
                                             </figure><!-- End .entry-media -->
@@ -188,30 +188,71 @@
                                                 </div><!-- End .entry-cats -->
             
                                                 <div class="entry-content">
-                                                    <p>Morbi purus libero, faucibus commodo quis, gravida id, est. Vestibulumvolutpat, lacus a ultrices sagittis, mi neque euismod dui ...</p>
+                                                    
                                                     <a href="single.html" class="read-more">Continue Reading</a>
                                                 </div><!-- End .entry-content -->
                                             </div><!-- End .entry-body -->
                                         </article><!-- End .entry -->
                                     </div><!-- End .entry-item -->
-            
-                                                </div><!-- End .entry-content -->
-                                            </div><!-- End .entry-body -->
-                                        </article><!-- End .entry -->
-                                    </div><!-- End .entry-item -->
                                 </div>
-
-                                          </div>
-                                       </div>
-                                   </div>
-                               </div>
-                                <!-- <p>No order has been made yet.</p>
-                                <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a> -->
+                                </div>
                             </div><!-- .End .tab-pane -->
 
+
                             <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
-                                <p>No downloads available yet.</p>
-                                <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+
+                                <div class="col-lg-6" style="margin: 0 auto; max-width: 600px;">
+                                    <div class="titie-row row mb-3">
+                                        <h2 class="fw-bolder">Input your food</h2>
+                                        
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade active show" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+                                                <div class="student-profile py-4">
+                                                    <div class="container">
+                                                      <div class="row">
+                                                        <div class="col-lg-4">
+
+                                                        <form action="#" class="contact-form mb-3">
+
+                                                    
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="header-dropdown">
+                                                                        <a href="#">Usd</a>
+                                                                        <div class="header-menu">
+                                                                            <ul>
+                                                                                <li><a href="#">Eur</a></li>
+                                                                                <li><a href="#">Usd</a></li>
+                                                                            </ul>
+                                                                        </div><!-- End .header-menu -->
+                                                                    </div>
+                                                                </div><!-- End .col-sm-6 -->
+                                                                <div class="col-sm-6">
+                                                                    <label for="csubject" class="sr-only">Weight</label>
+                                                                    <input type="text" class="form-control" id="csubject" placeholder="Weight *">
+                                                                </div><!-- End .col-sm-6 -->
+                                                            </div><!-- End .row -->
+                                                            
+                                                    
+
+
+                                                    
+                                                            <div class="col-lg-6" style="margin: 0 auto; max-width: 600px;">
+                                                                <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                                                                    <span>SUBMIT</span>
+                                                                    <i class="icon-long-arrow-right"></i>
+                                                                </button>
+                                                                </div>
+                                                                <div class="form-control" id="cmessage">Name of food here.</div>
+                                                    
+                                                        </form><!-- End .contact-form -->
+
+
+
+
+                                
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
