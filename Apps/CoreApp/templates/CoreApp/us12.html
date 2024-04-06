@@ -1,9 +1,12 @@
 {% extends "CoreApp/base.html" %}
+<!DOCTYPE html>
 {% load static %}
+<html lang="en">
+
 
 
 {% block title_block %}
-    US 11
+
 {% endblock title_block %}
 
 
@@ -11,7 +14,280 @@
 
 
 {% block main_content %}
-    <div class="w3-content" style="max-width:2000px;margin-top:46px">
-        <h1> Page US12</h1>
-    </div>
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">My Account</h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">My Account</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="dashboard">
+            <div class="container">
+                <div class="row">
+                    <aside class="col-md-4 col-lg-3">
+                        <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">My Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">My Children</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">My Tracking</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">My Recipes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Sign Out</a>
+                            </li>
+                        </ul>
+                    </aside><!-- End .col-lg-3 -->
+
+                    <div class="col-md-8 col-lg-9">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+                                <div class="student-profile py-4">
+                                    <div class="container">
+                                      <div class="row">
+                                        <div class="col-lg-4">
+                                          <div class="card shadow-sm">
+                                            <div class="card-header bg-transparent text-center">
+                                              <img src="{% static "assets/images/children/pexels-samad-ismayilov-1270076.jpg" %}" alt="">
+                                              <h3>Ishmam Ahasan Samin</h3>
+                                            </div>
+                                            <!-- <div class="card-body">
+                                              <p class="mb-0"><strong class="pr-1">Student ID:</strong>321000001</p>
+                                              <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
+                                              <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+                                            </div> -->
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                          <div class="card shadow-sm">
+                                            <div class="card-header bg-transparent border-0">
+                                              <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+                                            </div>
+                                            <div class="card-body pt-0">
+                                              <table class="table table-bordered">
+                                                <tr>
+                                                  <th width="30%">Age</th>
+                                                  <td width="2%">:</td>
+                                                  <td>30</td>
+                                                </tr>
+                                                <tr>
+                                                  <th width="30%">No of Children	</th>
+                                                  <td width="2%">:</td>
+                                                  <td>2</td>
+                                                </tr>
+                                                <tr>
+                                                  <th width="30%">Gender</th>
+                                                  <td width="2%">:</td>
+                                                  <td>Male</td>
+                                                </tr>
+                                                <tr>
+                                                  <th width="30%">Email</th>
+                                                  <td width="2%">:</td>
+                                                  <td>Ishmam.a.s@gmail.com</td>
+                                                </tr>
+                                                <tr>
+                                                  <th width="30%">Phone</th>
+                                                  <td width="2%">:</td>
+                                                  <td>0487512875</td>
+                                                </tr>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                
+                                <!-- <p>Hello <span class="font-weight-normal text-dark">User</span> (not <span class="font-weight-normal text-dark">User</span>? <a href="#">Log out</a>) 
+                                <br>
+                                From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p> -->
+                            </div><!-- .End .tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+                                <div id="portfolio" class="service px-4 bg-white py-5">
+                                    <div class="titie-row row mb-3">
+                                       <h2 class="fw-bolder">My children</h2>
+                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum sit nibh amet egestas tellus.</p>
+                                   </div>
+                                   <div class="entry-container max-col-3" data-layout="fitRows" style="position: relative; height: 2509.75px;">
+                                    <div class="entry-item lifestyle shopping col-sm-6 col-lg-4" style="position: absolute; left: 0px; top: 0px;">
+                                        <article class="entry entry-grid text-center">
+                                            <figure class="entry-media">
+                                                <a href="single.html">
+                                                    <img src="{% static "assets/images/children/pexels-janko-ferlic-695954.jpg" %}" alt="try">
+                                                </a>
+                                            </figure><!-- End .entry-media -->
+            
+                                            <div class="entry-body">
+                                                <div class="entry-meta">
+                                                    <span class="entry-author">
+                                                        <a href="#">John Doe</a>
+                                                    </span>
+                                                    <span class="meta-separator">|</span>
+                                                    <a href="#">Nov 22, 2012</a>
+                                                </div><!-- End .entry-meta -->
+            
+                                                <h2 class="entry-title">
+                                                    <a href="single.html">Cras ornare tristique elit.</a>
+                                                </h2><!-- End .entry-title -->
+            
+                                                <div class="entry-cats">
+                                                    in <a href="#">Lifestyle</a>,
+                                                    <a href="#">Shopping</a>
+                                                </div><!-- End .entry-cats -->
+            
+                                                <div class="entry-content">
+                                                    <p>Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Suspendisse potenti. Sed egestas vulputate ...</p>
+                                                    <a href="single.html" class="read-more">Continue Reading</a>
+                                                </div><!-- End .entry-content -->
+                                            </div><!-- End .entry-body -->
+                                        </article><!-- End .entry -->
+                                    </div><!-- End .entry-item -->
+            
+                                    <div class="entry-item lifestyle col-sm-6 col-lg-4" style="position: absolute; left: 404.8px; top: 0px;">
+                                        <article class="entry entry-grid text-center">
+                                            <figure class="entry-media">
+                                                <!-- <a href="{% url "CoreApp:US13" %}" class="btn btn-outline-white banner-link">Discover Now</a> -->
+                                                <a href="{% url "CoreApp:US13" %}">
+                                                    <img src="{% static "assets/images/children/pexels-murry-lee-17889245.jpg" %}" alt="try">
+                                                </a>
+                                            </figure><!-- End .entry-media -->
+            
+                                            <div class="entry-body">
+                                                <div class="entry-meta">
+                                                    <span class="entry-author">
+                                                        <a href="#">John Doe</a>
+                                                    </span>
+                                                    <span class="meta-separator">|</span>
+                                                    <a href="#">Nov 21, 2014</a>
+                                                </div><!-- End .entry-meta -->
+            
+                                                <h2 class="entry-title">
+                                                    <a href="single.html">Vivamus vestibulum ntulla necante.</a>
+                                                </h2><!-- End .entry-title -->
+            
+                                                <div class="entry-cats">
+                                                    in <a href="#">Lifestyle</a>
+                                                </div><!-- End .entry-cats -->
+            
+                                                <div class="entry-content">
+                                                    <p>Morbi purus libero, faucibus commodo quis, gravida id, est. Vestibulumvolutpat, lacus a ultrices sagittis, mi neque euismod dui ...</p>
+                                                    <a href="single.html" class="read-more">Continue Reading</a>
+                                                </div><!-- End .entry-content -->
+                                            </div><!-- End .entry-body -->
+                                        </article><!-- End .entry -->
+                                    </div><!-- End .entry-item -->
+            
+                                                </div><!-- End .entry-content -->
+                                            </div><!-- End .entry-body -->
+                                        </article><!-- End .entry -->
+                                    </div><!-- End .entry-item -->
+                                </div>
+
+                                          </div>
+                                       </div>
+                                   </div>
+                               </div>
+                                <!-- <p>No order has been made yet.</p>
+                                <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a> -->
+                            </div><!-- .End .tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
+                                <p>No downloads available yet.</p>
+                                <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+                            </div><!-- .End .tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+                                <p>The following addresses will be used on the checkout page by default.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card card-dashboard">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
+
+                                                <p>User Name<br>
+                                                User Company<br>
+                                                John str<br>
+                                                New York, NY 10001<br>
+                                                1-234-987-6543<br>
+                                                yourmail@mail.com<br>
+                                                <a href="#">Edit <i class="icon-edit"></i></a></p>
+                                            </div><!-- End .card-body -->
+                                        </div><!-- End .card-dashboard -->
+                                    </div><!-- End .col-lg-6 -->
+
+                                    <div class="col-lg-6">
+                                        <div class="card card-dashboard">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
+
+                                                <p>You have not set up this type of address yet.<br>
+                                                <a href="#">Edit <i class="icon-edit"></i></a></p>
+                                            </div><!-- End .card-body -->
+                                        </div><!-- End .card-dashboard -->
+                                    </div><!-- End .col-lg-6 -->
+                                </div><!-- End .row -->
+                            </div><!-- .End .tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+                                <form action="#">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>First Name *</label>
+                                            <input type="text" class="form-control" required="">
+                                        </div><!-- End .col-sm-6 -->
+
+                                        <div class="col-sm-6">
+                                            <label>Last Name *</label>
+                                            <input type="text" class="form-control" required="">
+                                        </div><!-- End .col-sm-6 -->
+                                    </div><!-- End .row -->
+
+                                    <label>Display Name *</label>
+                                    <input type="text" class="form-control" required="">
+                                    <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
+
+                                    <label>Email address *</label>
+                                    <input type="email" class="form-control" required="">
+
+                                    <label>Current password (leave blank to leave unchanged)</label>
+                                    <input type="password" class="form-control">
+
+                                    <label>New password (leave blank to leave unchanged)</label>
+                                    <input type="password" class="form-control">
+
+                                    <label>Confirm new password</label>
+                                    <input type="password" class="form-control mb-2">
+
+                                    <button type="submit" class="btn btn-outline-primary-2">
+                                        <span>SAVE CHANGES</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+                                </form>
+                            </div><!-- .End .tab-pane -->
+                        </div>
+                    </div><!-- End .col-lg-9 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .dashboard -->
+    </div><!-- End .page-content -->
+</main>
 {% endblock main_content %}
