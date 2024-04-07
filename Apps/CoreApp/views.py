@@ -6,6 +6,7 @@ from django.core.management.utils import get_random_secret_key
 from .models import *
 from django.apps import apps
 import os
+from .utils import api_request
 import pandas as pd
 from django.core import serializers
 import json
@@ -41,9 +42,6 @@ class HomeView(generic.TemplateView):
             
         return super().get_context_data(**kwargs)
 
-  
-  
-  
     
 class US11View(generic.TemplateView):
     template_name = 'CoreApp/us11.html'
@@ -134,14 +132,12 @@ class Login_RegisterView(generic.TemplateView):
             
             # send sign-in data to authentication API
             api_url = 'http://3.25.234.118:8081/api/auth/login'
-            
             data = {
                 'email': email,
                 'password': password
             }
-            json_data = json.dumps(data)
-            headers = {'Content-Type': 'application/json'}
-            # response = requests.post(api_url, data=json_data, headers=headers)
+            
+            # response = api_request(api_url, parameters=data, 'POST')
             
             # handle response
             # if response.status_code == 200:
@@ -166,9 +162,8 @@ class Login_RegisterView(generic.TemplateView):
                 'email': email,
                 'password': password
             }
-            json_data = json.dumps(data)
-            headers = {'Content-Type': 'application/json'}
-            # response = requests.post(api_url, data=json_data, headers=headers)
+            
+            # response = api_request(api_url, parameters=data, 'POST')
 
             # handle response
             # if response.status_code == 200:
