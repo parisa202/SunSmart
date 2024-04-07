@@ -12,6 +12,7 @@ venv
 staticfiles
 /static
 /General Docs
+/Joyenv
 .env
 .vs
 db.sqlite3
