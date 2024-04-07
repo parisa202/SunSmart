@@ -14,6 +14,7 @@ urlpatterns = [
     path('US21/', views.US21View.as_view(), name='US21'),
     path('US22/', views.US22View.as_view(), name='US22'),
     path('US23/', views.US23View.as_view(), name='US23'),
+    path('guest/', views.GuestTrackerView.as_view(), name='guest_tracker'),
     path('about-us/', views.AboutUsView.as_view(), name='about'),
     path('login/', views.Login_RegisterView.as_view(), name='login_or_register'),
     path('dash/', views.US11DashboardView.as_view(), name='dash'),
@@ -22,5 +23,6 @@ urlpatterns = [
     
     # import data views
     path('data/', views.ImportDataView.as_view(), name='import_data'),
+    # /data/?file_name=pb_who_bmi.csv&model_name=PB_WHO_BMI
 ]
 

@@ -18,12 +18,15 @@
     <meta name="author" content="Tech Ninjas">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/images/icons/apple-touch-icon.png" %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static "assets/images/icons/favicon-32x32.png" %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/favicon-16x16.png" %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/images/jj-10.svg" %}">
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="{% static "assets/images/icons/favicon-32x32.png" %}"> -->
+    <link rel="icon" type="image/svg" sizes="32x32" href="{% static "assets/images/jj-10.svg" %}">
+
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/favicon-16x16.png" %}"> -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/jj-10.svg" %}">
     <link rel="manifest" href="{% static "assets/images/icons/site.html" %}">
     <link rel="mask-icon" href="{% static "assets/images/icons/safari-pinned-tab.svg" %}" color="#666666">
-    <link rel="shortcut icon" href="{% static "assets/images/icons/favicon.ico" %}">
+    <link rel="shortcut icon" href="{% static "assets/images/jj icon.ico" %}">
     <meta name="apple-mobile-web-app-title" content="JuniorJoy">
     <meta name="application-name" content="JuniorJoy">
     <meta name="msapplication-TileColor" content="#cc9966">
@@ -639,6 +642,8 @@
     <!-- Main JS File -->
     <script src="{% static "assets/js/main.js" %}"></script>
     <script src="{% static "assets/js/demos/demo-9.js" %}"></script>
+
+    {% block more_script %}{% endblock more_script %}
 </body>
 
 

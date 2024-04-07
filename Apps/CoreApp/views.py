@@ -1,6 +1,7 @@
 from typing import Any
+from django.http.request import HttpRequest as HttpRequest
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import generic
 from django.core.mail import send_mail
 from django.core.management.utils import get_random_secret_key
@@ -11,6 +12,8 @@ from .utils import api_request
 import pandas as pd
 from django.core import serializers
 import json
+import requests
+
 
 class HomeView(generic.TemplateView):
     template_name = 'CoreApp/index.html'
@@ -119,6 +122,60 @@ class US23View(generic.TemplateView):
 class AboutUsView(generic.TemplateView):
     template_name = 'CoreApp/about_us.html'
 
+class GuestTrackerView(generic.TemplateView):
+    template_name = 'CoreApp/Guest_Tracker.html'
+    recipes = None
+    
+    def setup(self, request, *args, **kwargs):
+        file_address = os.path.join('Data Sources', 'recipes.json')
+        with open(file_address, 'r') as f:
+            # JSON to dictionary
+            self.recipes = json.load(f)
+            
+        return super().setup(request, *args, **kwargs)
+    
+    def post(self, request):
+        selected_recipe = request.POST.get('selected_recipe')
+                        
+        # if the post requst comes from AJAX call
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':       
+            # find the recipe if recipes
+            for r in self.recipes:
+                if r.get('recipe_name') == selected_recipe:
+                    recipe = r
+                    break
+                else:
+                    recipe = {'status': 'not found'}
+                    
+            # send sign-in data to authentication API
+            api_url = 'https://juniorjoy.site/api/api/calcucalories'
+            data = {
+                "query": recipe['recipe_ingredients'],
+                "intake": "1",
+                "serving": recipe['recipe_servings']
+            }
+            
+            # data = {
+            #         "query":"3 tb Butter or margarineine",
+            #         "intake" : 2,
+            #         "serving" : 6
+            #         }
+
+            response = requests.get(api_url, params=data)
+            headers = {
+                        "Content-Type": "application/json"
+                    }
+
+            response = requests.get(api_url, headers=headers, json=data)
+                
+            print(response.json(), response.json())    
+                
+            return JsonResponse(recipe)
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        
+        return {'recipes': self.recipes}  
+
 
 class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
@@ -127,6 +184,43 @@ class Login_RegisterView(generic.TemplateView):
         form_type = request.POST.get('form_type')
 
         if form_type == 'signin':
+            # Get the input value
+            input_value = request.POST.get('signin-input')
+
+            # Check if input is an email
+            if re.match(self.EMAIL_REGEX, input_value):
+                # send email sign-in data to email authentication API
+                api_url = 'http://email-auth-api-url'
+                data = {
+                    'email': input_value,
+                    'password': request.POST.get('signin-password')
+                }
+            # Check if input is a phone number
+            elif re.match(self.PHONE_REGEX, input_value):
+                # send phone sign-in data to phone authentication API
+                api_url = 'http://phone-auth-api-url'
+                data = {
+                    'phone': input_value,
+                    'password': request.POST.get('signin-password')
+                }
+            else:
+                # Handle invalid input (neither email nor phone number)
+                return HttpResponse('Invalid input')          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             # sign-in form data
             email = request.POST.get('singin-email')
             password = request.POST.get('singin-password')
