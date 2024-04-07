@@ -1,5 +1,6 @@
 from typing import Any
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.views import generic
 from django.core.mail import send_mail
 from django.core.management.utils import get_random_secret_key
@@ -183,44 +184,43 @@ class ComingView(generic.TemplateView):
 
 
 class ImportDataView(generic.View):
-     template_name = ''
-    # def get(self, request, *args, **kwargs):
-    #     file_name = kwargs['file_name']
-    #     model_name = kwargs['model_name']
+    def get(self, request, *args, **kwargs):
+        file_name = request.GET.get('file_name')
+        model_name = request.GET.get('model_name')
         
-    #     # grab the model class using its name
-    #     model_class =  apps.get_model('CoreApp', model_name)
+        # grab the model class using its name
+        model_class =  apps.get_model('CoreApp', model_name)
         
-    #     # Files are stored in a folder named 'Data Sources' within your Django project directory
-    #     file_address = os.path.join('Data Sources', file_name)
+        # Files are stored in a folder named 'Data Sources' within your Django project directory
+        file_address = os.path.join('Data Sources', file_name)
         
-    #     try:
-    #         df = pd.read_csv(file_address)
-    #         if model_class:
-    #             for index, row in df.iterrows():
+        try:
+            df = pd.read_csv(file_address)
+            if model_class:
+                for index, row in df.iterrows():
                     
-    #                 # model PB_WHO_BMI
-    #                 if model_name == 'PB_WHO_BMI':
-    #                     model_class.objects.create(
-    #                         bmi=row['bmi_code'],
-    #                         gender=row['gender'],
-    #                         year=row['year'],
-    #                         crude_estimate=row['crude_estimate']
-    #                     )
+                    # model PB_WHO_BMI
+                    if model_name == 'PB_WHO_BMI':
+                        model_class.objects.create(
+                            bmi=row['bmi_code'],
+                            gender=row['gender'],
+                            year=row['year'],
+                            crude_estimate=row['crude_estimate']
+                        )
                         
-    #                 else: # model PB_AU_CONCERN
-    #                     model_class.objects.create(
-    #                         concern=row['concern'], 
-    #                         gender=row['gender'],
-    #                         age_group=row['age_group'],
-    #                         percentage=row['percentage']
-    #                     )
+                    else: # model PB_AU_CONCERN
+                        model_class.objects.create(
+                            concern=row['concern'], 
+                            gender=row['gender'],
+                            age_group=row['age_group'],
+                            percentage=row['percentage']
+                        )
                     
-    #             return HttpResponse(f"Data {file_name} has been stored in the {model_name} table.")
-    #         else:
-    #             return HttpResponse(f"Model {model_name} not found.")
-    #     except FileNotFoundError:
-    #         return HttpResponse(f"File {file_name} not found.")
+                return HttpResponse(f"Data {file_name} has been stored in the {model_name} table.")
+            else:
+                return HttpResponse(f"Model {model_name} not found.")
+        except FileNotFoundError:
+            return HttpResponse(f"File {file_name} not found.")
     
     
     
