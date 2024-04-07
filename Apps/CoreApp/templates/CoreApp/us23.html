@@ -56,7 +56,7 @@
     /* Style for buttons */
     .save_button {
         padding: 10px 20px;
-        margin-right: 5px;
+        margin-right: 15px;
         border-radius: 5px;
         background-color: #007bff;
         color: #fff;
@@ -83,6 +83,52 @@
     .cancel_button:hover {
         background-color: #b30009;
     }
+
+    #timer-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+    #timer {
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        margin-right: 35px;
+        border: 2px solid #333; /* Adding border with 2px width and solid style */
+        padding: 5px;
+        border-radius: 2%;
+    }
+    #btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #startBtn {
+        padding: 10px 20px;
+        margin-right: 10px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    #startBtn:hover {
+        background-color: #0056b3;
+    }
+    #stopBtn {
+        padding: 10px 20px;
+        margin-right: 5px;
+        border-radius: 5px;
+        background-color: #ff0019;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    #stopBtn:hover {
+        background-color: #b30009;
+    }
 </style>
 {% endblock extra_css %}
 
@@ -105,16 +151,8 @@
 <hr>
 <div class="w3-content" style="max-width:2000px;margin-top:45px"></div>
 
-<form id="reminderForm" style="margin-bottom: 10px; text-align: center;">
-    <label for="reminderDate">Date:</label>
-    <input type="date" id="reminderDate" name="reminderDate" style="margin-right: 15px;">
-    
-    <label for="reminderTime">Time:</label>
-    <input type="time" id="reminderTime" name="reminderTime" style="margin-right: 15px;">
-    
-    <button type="button" class="save_button" onclick="saveReminder()" style="margin-right: 5px;">Save</button>
-    <button type="button" class="cancel_button" onclick="cancelReminder()">Cancel</button>
-</form>
+<h1 style="text-align: center;">Set Exact Date and Time</h1>
+<div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
 
 <form id="reminderForm" style="margin-bottom: 10px; text-align: center;">
     <label for="reminderDate">Date:</label>
@@ -137,8 +175,30 @@
     <button type="button" class="save_button" onclick="saveReminder()" style="margin-right: 5px;">Save</button>
     <button type="button" class="cancel_button" onclick="cancelReminder()">Cancel</button>
 </form>
-
 <div class="w3-content" style="max-width:2000px;margin-top:45px"></div>
+
+<h1 style="text-align: center;">Set a 2-hour Timer</h1>
+<div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+
+
+<div id="timer-container">
+    <div id="timer">02:00:00</div>
+    <div id="btn-container">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+    </div>
+</div>
+<div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+
+<div id="timer-container">
+    <div id="timer">02:00:00</div>
+    <div id="btn-container">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+    </div>
+</div>
+<div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
+
 
 <script>
     function saveReminder() {
@@ -176,5 +236,49 @@
         // Reset the form or perform any other necessary actions
         document.getElementById("reminderForm").reset();
     }
+
+
+    var timerInterval;
+    function startTimer(duration, display) {
+        var timer = duration, hours, minutes, seconds;
+        timerInterval = setInterval(function () {
+            hours = Math.floor((timer / 3600) % 24);
+            minutes = Math.floor((timer / 60) % 60);
+            seconds = Math.floor(timer % 60);
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var twoHours = 2 * 60 * 60;
+        var display = document.querySelector('#timer');
+        var startBtn = document.querySelector('#startBtn');
+        var stopBtn = document.querySelector('#stopBtn');
+        var isTimerRunning = false; // Define isTimerRunning here
+
+        startBtn.addEventListener('click', function() {
+            if (!isTimerRunning) { // Check if the timer is not running
+                startTimer(twoHours, display);
+                isTimerRunning = true;
+            }
+        });
+
+        stopBtn.addEventListener('click', function() {
+            if (isTimerRunning) { // Check if the timer is running
+                clearInterval(timerInterval);
+                display.textContent = '02:00:00';
+                isTimerRunning = false;
+            }
+        });
+    };
 </script>
 {% endblock main_content %}
