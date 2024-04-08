@@ -125,6 +125,9 @@ class AboutUsView(generic.TemplateView):
 class GuestTrackerView(generic.TemplateView):
     template_name = 'CoreApp/Guest_Tracker.html'
     recipes = None
+    headers = {
+                "Content-Type": "application/json"
+                }
     
     def setup(self, request, *args, **kwargs):
         file_address = os.path.join('Data Sources', 'recipes.json')
@@ -136,62 +139,48 @@ class GuestTrackerView(generic.TemplateView):
     
     def post(self, request):
         selected_recipe = request.POST.get('selected_recipe')
+        recipe_intake = request.POST.get('recipe_intake')
                         
-        # if the post requst comes from AJAX call
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':       
-            # find the recipe if recipes
-            for r in self.recipes:
-                if r.get('recipe_name') == selected_recipe:
-                    recipe = r
-                    break
-                else:
-                    recipe = {'status': 'not found'}
-                    
-            # send sign-in data to authentication API
-            api_url = 'https://juniorjoy.site/api/api/calcucalories'
-            data = {
-                "query": recipe['recipe_ingredients'],
-                "intake": "1",
-                "serving": recipe['recipe_servings']
-            }
-            
-            # data = {
-            #         "query":"3 tb Butter or margarineine",
-            #         "intake" : 2,
-            #         "serving" : 6
-            #         }
-
-            response = requests.get(api_url, params=data)
-            headers = {
-                        "Content-Type": "application/json"
-                    }
-
-            response = requests.get(api_url, headers=headers, json=data)
-            
-            if response.status_code == 200:
-                # Append the calorie information to the recipe
-                recipe['nutrient_info'] = response.json()
-                print(recipe['nutrient_info']) 
-                
-                response_data = response.json()
-
-                recipe['calories_intake'] = response_data['calories_intake']
-                recipe['serving_size_g_intake'] = response_data['serving_size_g_intake']
-                recipe['fat_total_g_intake'] = response_data['fat_total_g_intake']
-                recipe['fat_saturated_g_intake'] = response_data['fat_saturated_g_intake']
-                # recipe['protein_g_intake'] = response_data['protein_g_intake']
-                # recipe['sodium_mg_intake'] = response_data['sodium_mg_intake']
-                # recipe['potassium_mg_intake'] = response_data['potassium_mg_intake']
-                # recipe['cholesterol_mg_intake'] = response_data['cholesterol_mg_intake']
-                recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
-                # recipe['fiber_g_intake'] = response_data['fiber_g_intake']
-                recipe['sugar_g_intake'] = response_data['sugar_g_intake']
-
+        # find the recipe in recipes
+        for r in self.recipes:
+            if r.get('recipe_name') == selected_recipe:
+                recipe = r
+                break
             else:
-                # Handle API error
-                recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
+                recipe = {'status': 'not found'}
                 
-            return JsonResponse(recipe)
+        # send sign-in data to authentication API
+        api_url = 'https://juniorjoy.site/api/api/calcucalories'
+        data = {
+            "query": recipe['recipe_ingredients'],
+            "intake": recipe_intake,
+            "serving": recipe['recipe_servings']
+        }
+                    
+        response = requests.get(api_url, headers=self.headers, json=data)
+        
+        if response.status_code == 200:
+            # Append the calorie information to the recipe
+            recipe['nutrient_info'] = response.json()            
+            response_data = response.json()
+
+            recipe['calories_intake'] = response_data['calories_intake']
+            recipe['serving_size_g_intake'] = response_data['serving_size_g_intake']
+            recipe['fat_total_g_intake'] = response_data['fat_total_g_intake']
+            recipe['fat_saturated_g_intake'] = response_data['fat_saturated_g_intake']
+            # recipe['protein_g_intake'] = response_data['protein_g_intake']
+            # recipe['sodium_mg_intake'] = response_data['sodium_mg_intake']
+            # recipe['potassium_mg_intake'] = response_data['potassium_mg_intake']
+            # recipe['cholesterol_mg_intake'] = response_data['cholesterol_mg_intake']
+            recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
+            # recipe['fiber_g_intake'] = response_data['fiber_g_intake']
+            recipe['sugar_g_intake'] = response_data['sugar_g_intake']
+
+        else:
+            # Handle API error
+            recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
+                
+        return JsonResponse(recipe)
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         

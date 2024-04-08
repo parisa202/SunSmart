@@ -15,42 +15,33 @@
 <div class="page-content">
     <div class="checkout">
         <div class="container">
-            <form id="foodForm" method="POST"> {% csrf_token %}
                 <div class="row">
                     <div class="col-lg-8">
                         <h2 class="checkout-title">Recipe Content</h2><!-- End .checkout-title -->
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label>Recipe Name</label>
-                                    <div class="select-custom">
-                                        <select name="selected_recipe" id="recipe" class="form-control">
-                                            <option value="nan" selected="selected">Select a recipe</option>
-                                            {% for r in recipes %}
-                                            <option value="{{r.recipe_name}}">{{r.recipe_name}}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div><!-- End .select-custom -->
-                                </div><!-- End .col-sm-6 -->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Recipe Name</label>
+                                <div class="select-custom">
+                                    <select name="selected_recipe" id="recipe" class="form-control">
+                                        <option value="nan" selected="selected">Select a recipe</option>
+                                        {% for r in recipes %}
+                                        <option value="{{r.recipe_name}}">{{r.recipe_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div><!-- End .select-custom -->
+                            </div><!-- End .col-sm-6 -->
 
-                                <div class="col-sm-6">
-                                    <label>Portion</label>
-                                    <input type="text" name="portion_size" class="form-control" required="">
-                                </div><!-- End .col-sm-6 -->
-                            </div>
-                            <div class="row mt-5">
-                                <div class="summary" style="min-width: -webkit-fill-available;">
-                                    <h3 class="summary-title">Recipe Description</h3>
-                                    <p id="recipe_description" style="padding-bottom: 1.7rem"></p>
-                                </div><!-- End .summary -->
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-lg-6" style="margin: 0 auto; max-width: 600px; text-align: center;">
-                                    <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
-                                        <span>SUBMIT</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </button>
-                                </div>        
-                            </div>
+                            <div class="col-sm-6">
+                                <label>Portion</label>
+                                <input type="text" id="intake" name="recipe_intake" class="form-control" required="" value="1">
+                            </div><!-- End .col-sm-6 -->
+                        </div>
+                        <div class="row mt-5">
+                            <div class="summary" style="min-width: -webkit-fill-available;">
+                                <h3 class="summary-title">Recipe Description</h3>
+                                <p id="recipe_description" style="padding-bottom: 1.7rem"></p>
+                            </div><!-- End .summary -->
+                        </div>
                     </div>
                     <aside class="col-lg-4">
                         <div class="summary">
@@ -60,32 +51,32 @@
                             <table class="table table-summary mt-3">
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>Total</th>
+                                        <th>Nutrition</th>
+                                        <th>Amount</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <tr>
-                                        <td>denimdress</td>
-                                        <td>80%</td>
+                                        <td>Calories:</td>
+                                        <td></td>
                                     </tr>
 
                                     <tr>
-                                        <td>Blue utility pinafore denimdress</td>
-                                        <td>$76,00</td>
+                                        <td>Total Fat:</td>
+                                        <td></td>
                                     </tr>
-                                    <tr class="summary-subtotal">
-                                        <td>Subtotal:</td>
-                                        <td>$160.00</td>
+                                    <tr>
+                                        <td>Saturated Fat:</td>
+                                        <td></td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
-                                        <td>Shipping:</td>
-                                        <td>Free shipping</td>
+                                        <td>Carbohydrates:</td>
+                                        <td></td>
                                     </tr>
-                                    <tr class="summary-total">
+                                    <tr>
                                         <td>Total:</td>
-                                        <td>$160.00</td>
+                                        <td></td>
                                     </tr><!-- End .summary-total -->
                                 </tbody>
                             </table><!-- End .table table-summary -->
@@ -93,7 +84,6 @@
                         </div><!-- End .summary -->
                     </aside><!-- End .col-lg-3 -->
                 </div><!-- End .row -->
-            </form>
         </div><!-- End .container -->
     </div><!-- End .checkout -->
 </div>
@@ -105,18 +95,27 @@
 {% block more_script %}
 <script>
     $(document).ready(function () {
-        $('#recipe').on('change', function () {
-            var recipeChoice = $(this).val(); // Get selected value
+        $('#recipe, #intake').on('input', function (e) {
+            var recipeChoice = $('#recipe').val(); // Get selected value
+            var recipeIntake = $('#intake').val(); // Get selected value
+
+            if (recipeChoice === 'nan') {
+                return; // Do nothing and exit the function
+            };
+            
             
             // AJAX call
             $.ajax({
                 type: "POST",
                 url: "{% url 'CoreApp:guest_tracker' %}", 
                 data: {'selected_recipe': recipeChoice,
+                        'recipe_intake': recipeIntake,
                         'csrfmiddlewaretoken': '{{csrf_token}}'
                         },
+                dataType: 'json',
                 success: function (response) {
                     // Update with the received JSON data
+                    //console.log(response);
                     if(response.status == 'not found'){
                         $('#recipe_description').empty();
                     } else {
@@ -125,11 +124,9 @@
                         '<tr><td>Calories:</td><td>' + response.calories_intake+ '</td></tr>'+
                         '<tr><td>Total Fat:</td><td>' + response.fat_total_g_intake+ '</td></tr>'+
                         '<tr><td>Saturated Fat:</td><td>' + response.fat_saturated_g_intake+ '</td></tr>'+
-                        '<tr><td>Carbohydrates:</td><td>' + response.carbohydrates_total_g_intake+ '</td></tr>'
-                        
-                        //'<tr><td>' + response.name + '</td><td>$' + response.price + '</td></tr>' +
-                       // '<tr class="summary-subtotal"><td>Subtotal:</td><td>$' + response.price + '</td></tr>' 
-                        
+                        '<tr><td>Carbohydrates:</td><td>' + response.carbohydrates_total_g_intake+ '</td></tr>'+
+                        '<tr><td>Protein: </td><td>' + response.protein_g_intake+ '</td></tr>'+
+                        '<tr><td>Fiber:</td><td>' + response.fiber_g_intake+ '</td></tr>'
                     );
                     }
                 },

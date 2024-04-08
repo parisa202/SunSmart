@@ -1,12 +1,4 @@
-[{
-    "recipe_name": "Peanut Butter and Jelly Sandwich",
-    "recipe_ingredients": "1/3 c Fleischmanns light taste margarine; softened|1/4 c Creamy peanut butter|3/4 c Light brown sugar; packed|1/4 c Egg Beaters 99% egg substitute; thawed|1 ts Vanilla extract|1 3/4 c Flour|1/2 ts Baking soda|1/2 c Grape jelly",
-    "recipe_servings":"28",
-    "recipe_instructions":"NOTES: 1. Strawberry jam can be substituted. 2. The margarine is a reduced-calorie margarine. 3. Of course, you can eliminate the jelly & eat the cookies plain. Per Sandwich: 2.3 g fat, 0 mg cholesterol, 67 mg sodium /COOKIES",
-    "recipe_intake": 1.5,
-    "active": true,
-    "user_id": null
-  },
+[
   {
       "recipe_name": "Horn and Hardart's Baked Macaroni And Cheese",
       "recipe_ingredients": "1/4 lb Elbow macaroni|1 1/2 tb Butter|1 1/2 tb Flour|1/2 ts Salt|1 ds White pepper|1 ds Red pepper|1 1/2 c Milk|2 tb Light cream|1 c Cheddar cheese; shredded|1/4 c Canned tomatoes; diced|1/2 ts Sugar",

@@ -12,7 +12,7 @@ def api_request(url, parameters=None, request_type='POST'):
     headers = {'Content-Type': 'application/json'}
             
     if request_type == 'GET':
-        response = requests.get(url, params=json_data, headers=headers)
+        response = requests.get(url, json=json_data, headers=headers)
     elif request_type == 'POST':
         response = requests.post(url, params=json_data, headers=headers)
     # Add more request types as needed
