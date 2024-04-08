@@ -62,8 +62,8 @@ class US11View(generic.TemplateView):
         serialized_data_bmi = serializers.serialize('json', all_data_bmi)
     
         
-        new_context = {'main_title': 'Checkout',
-                       'sub_title': 'Shop',
+        new_context = {'main_title': 'Obesity and Overweight among Children',
+                    #    'sub_title': 'Obesity and Overweight among Children',
                        'page_name': 'US11',
                        'json_data': serialized_data,
                        'json_data_bmi': serialized_data_bmi}
@@ -183,15 +183,13 @@ class GuestTrackerView(generic.TemplateView):
                 # recipe['sodium_mg_intake'] = response_data['sodium_mg_intake']
                 # recipe['potassium_mg_intake'] = response_data['potassium_mg_intake']
                 # recipe['cholesterol_mg_intake'] = response_data['cholesterol_mg_intake']
-                # recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
+                recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
                 # recipe['fiber_g_intake'] = response_data['fiber_g_intake']
                 recipe['sugar_g_intake'] = response_data['sugar_g_intake']
 
             else:
                 # Handle API error
                 recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
-                
-              
                 
             return JsonResponse(recipe)
     
