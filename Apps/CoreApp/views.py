@@ -167,8 +167,31 @@ class GuestTrackerView(generic.TemplateView):
                     }
 
             response = requests.get(api_url, headers=headers, json=data)
+            
+            if response.status_code == 200:
+                # Append the calorie information to the recipe
+                recipe['nutrient_info'] = response.json()
+                print(recipe['nutrient_info']) 
                 
-            print(response.json(), response.json())    
+                response_data = response.json()
+
+                recipe['calories_intake'] = response_data['calories_intake']
+                recipe['serving_size_g_intake'] = response_data['serving_size_g_intake']
+                recipe['fat_total_g_intake'] = response_data['fat_total_g_intake']
+                recipe['fat_saturated_g_intake'] = response_data['fat_saturated_g_intake']
+                # recipe['protein_g_intake'] = response_data['protein_g_intake']
+                # recipe['sodium_mg_intake'] = response_data['sodium_mg_intake']
+                # recipe['potassium_mg_intake'] = response_data['potassium_mg_intake']
+                # recipe['cholesterol_mg_intake'] = response_data['cholesterol_mg_intake']
+                # recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
+                # recipe['fiber_g_intake'] = response_data['fiber_g_intake']
+                recipe['sugar_g_intake'] = response_data['sugar_g_intake']
+
+            else:
+                # Handle API error
+                recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
+                
+              
                 
             return JsonResponse(recipe)
     
@@ -176,7 +199,7 @@ class GuestTrackerView(generic.TemplateView):
         
         return {'recipes': self.recipes}  
 
-
+#not complete
 class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
     

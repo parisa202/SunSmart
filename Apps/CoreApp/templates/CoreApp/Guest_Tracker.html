@@ -3,7 +3,7 @@
 
 
 {% block title_block %}
-    US 11
+    
 {% endblock title_block %}
 
 
@@ -72,7 +72,7 @@
                                     </tr>
 
                                     <tr>
-                                        <td><a href="#">Blue utility pinafore denimdress</a></td>
+                                        <td>Blue utility pinafore denimdress</td>
                                         <td>$76,00</td>
                                     </tr>
                                     <tr class="summary-subtotal">
@@ -122,9 +122,14 @@
                     } else {
                     $('#recipe_description').text(response.recipe_instructions);
                     $('.table-summary tbody').empty().append(
-                        '<tr><td>' + response.name + '</td><td>$' + response.price + '</td></tr>' +
-                        '<tr class="summary-subtotal"><td>Subtotal:</td><td>$' + response.price + '</td></tr>' +
-                        '<tr><td>Portion Size:</td><td>' + response.portion_size + '</td></tr>'
+                        '<tr><td>Calories:</td><td>' + response.calories_intake+ '</td></tr>'+
+                        '<tr><td>Total Fat:</td><td>' + response.fat_total_g_intake+ '</td></tr>'+
+                        '<tr><td>Saturated Fat:</td><td>' + response.fat_saturated_g_intake+ '</td></tr>'+
+                        '<tr><td>Carbohydrates:</td><td>' + response.carbohydrates_total_g_intake+ '</td></tr>'
+                        
+                        //'<tr><td>' + response.name + '</td><td>$' + response.price + '</td></tr>' +
+                       // '<tr class="summary-subtotal"><td>Subtotal:</td><td>$' + response.price + '</td></tr>' 
+                        
                     );
                     }
                 },

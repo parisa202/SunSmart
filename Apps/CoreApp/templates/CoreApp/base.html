@@ -18,15 +18,16 @@
     <meta name="author" content="Tech Ninjas">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/images/jj-10.svg" %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/images/icons/logo 180.ico" %}">
+
     <!-- <link rel="icon" type="image/png" sizes="32x32" href="{% static "assets/images/icons/favicon-32x32.png" %}"> -->
-    <link rel="icon" type="image/svg" sizes="32x32" href="{% static "assets/images/jj-10.svg" %}">
+    <link rel="icon" type="image/svg" sizes="32x32" href="{% static "assets/images/icons/fav_32.ico" %}">
 
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/favicon-16x16.png" %}"> -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/jj-10.svg" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/fav_16.ico" %}">
     <link rel="manifest" href="{% static "assets/images/icons/site.html" %}">
     <link rel="mask-icon" href="{% static "assets/images/icons/safari-pinned-tab.svg" %}" color="#666666">
-    <link rel="shortcut icon" href="{% static "assets/images/jj icon.ico" %}">
+    <link rel="shortcut icon" href="{% static "assets/images/fav_32.ico" %}">
     <meta name="apple-mobile-web-app-title" content="JuniorJoy">
     <meta name="application-name" content="JuniorJoy">
     <meta name="msapplication-TileColor" content="#cc9966">
@@ -70,10 +71,9 @@
                     <div class="header-center">
                         <!-- change Logo c -->
                         <a href="{% url "CoreApp:index" %}" class="logo">
-                            <img src="{% static 'assets/images/jj-09.svg' %}" alt="Molla Logo" width="92" height="30">
-                            <img src="{% static 'assets/images/jj-10.svg' %}" alt="Molla Logo" width="82" height="20">
-                            <img src="{% static 'assets/images/jj-11.svg' %}" alt="Molla Logo" width="82" height="20">
-                            
+                            <img src="{% static 'assets/images/JuiorJoyLogo.png' %}" alt="Molla Logo" width="92" height="30">
+                            <!-- <img src="{% static 'assets/images/JuiorJoyLogo.png' %}" alt="Molla Logo" width="82" height="20">
+                            <img src="{% static 'assets/images/jj-11.svg' %}" alt="Molla Logo" width="82" height="20"> -->
                         </a>
                     </div><!-- End .header-left -->
 
@@ -103,17 +103,17 @@
                                             <div class="demo-list">
                                                 <div class="demo-item">
                                                     <a href="index-1.html">
-                                                        <span class="demo-bg" style="background-image: url(assets/images/menu/demos/1.jpg);"></span>
-                                                        <span class="demo-title">01 - furniture store</span>
+                                                        <!-- <span class="demo-bg" style="background-image: url(assets/images/menu/demos/1.jpg);"></span>
+                                                        <span class="demo-title">01 - furniture store</span> -->
                                                     </a>
                                                 </div><!-- End .demo-item -->
 
-                                                <div class="demo-item">
+                                                <!-- <div class="demo-item">
                                                     <a href="index-2.html">
                                                         <span class="demo-bg" style="background-image: url(assets/images/menu/demos/2.jpg);"></span>
                                                         <span class="demo-title">02 - furniture store</span>
                                                     </a>
-                                                </div><!-- End .demo-item -->
+                                                </div>End .demo-item
 
                                               
 
@@ -167,7 +167,7 @@
                                             <div class="col-md-4">
                                                 <div class="banner banner-overlay">
                                                     <a href="category.html" class="banner banner-menu">
-                                                        <img src="assets/images/menu/banner-1.jpg" alt="Banner">
+                                                        <!-- <img src="assets/images/menu/banner-1.jpg" alt="Banner"> -->
 
                                                         <div class="banner-content banner-content-top">
                                                             <div class="banner-title text-white">Last <br>Chance<br><span><strong>Sale</strong></span></div><!-- End .banner-title -->
@@ -202,7 +202,7 @@
                                             <div class="col-md-6">
                                                 <div class="banner banner-overlay">
                                                     <a href="category.html">
-                                                        <img src="assets/images/menu/banner-2.jpg" alt="Banner">
+                                                        <!-- <img src="assets/images/menu/banner-2.jpg" alt="Banner"> -->
 
                                                         <div class="banner-content banner-content-bottom">
                                                             <div class="banner-title text-white">New Trends<br><span><strong>spring 2019</strong></span></div><!-- End .banner-title -->
@@ -218,12 +218,9 @@
 
                                     <ul>
                                         <li>
-                                            <a href="about.html" class="sf-with-ul">About</a>
+                                            <a href="{% url "CoreApp:about" %}">About us</a>
 
-                                            <ul>
-                                                <li><a href="about.html">About 01</a></li>
-                                                <li><a href="about-2.html">About 02</a></li>
-                                            </ul>
+                            
                                         </li>
                                         <li>
                                             <a href="contact.html" class="sf-with-ul">Contact</a>
@@ -236,7 +233,7 @@
                                         <li><a href="login.html">Login</a></li>
                                         <li><a href="faq.html">FAQs</a></li>
                                         <li><a href="404.html">Error 404</a></li>
-                                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                                        <li><a href="{% url "CoreApp:coming" %}">Coming soon</a></li>
                                     </ul>
                                 </li>
                                 
