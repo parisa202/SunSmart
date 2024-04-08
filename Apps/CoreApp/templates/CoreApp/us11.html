@@ -20,17 +20,23 @@
         <div>
             <h3>Implications of overweight among children</h3>
             According to research conducted by Jebeile and colleagues (2022), primary strategies for preventing overweight and obesity focus on family behaviours, including diet, physical activity, sedentary habits, and sleep quality. These approaches are supported by behaviour change techniques.
-            Hence, it is crucial to prioritise improvements in easily modifiable factors to prevent overweight and obesity. Since family behaviours and habits are internal factors that play a significant role, it is important to note that external factors can also influence these behaviours..</p>
+            Hence, it is crucial to prioritise improvements in easily modifiable factors to prevent overweight and obesity. Since family behaviours and habits are internal factors that play a significant role, it is important to note that external factors can also influence these behaviours.</p>
         </div>
         <!-- <img src="{% static 'CoreApp/img/US1.3_2.jpeg' %}" alt="" style="width: 260px; height: auto;"> -->
-    </div>
+        <div class="intro-title text-primary">
+          <h4>Rising Trend of Overweight and Obesity </h4>
+          <p>The line graph, derived from WHO data, illustrates a concerning trend: the crude estimate of overweight and obesity prevalence is on the rise in Australia. This is particularly alarming given that approximately one-fourth of children in Australia are overweight, and similarly, one-fourth of children obtain energy from discretionary foods. Discretionary foods refer to items that provide energy but 
+          offer little to no nutritional value, such as sugary snacks, processed foods, and sugary beverages.</div>
+
+    
+      </div>
     </div>
 
-    <div style="display: flex; justify-content: center; padding-bottom: 15px;">
-        
- 
-        <div style="display: flex; background-color: rgba(194, 255, 243, 0.069); border: 4px groove rgba(0, 128, 0, 0.5); padding: 15px;">
+    <div style="display: flex; justify-content: center; padding-bottom: 15px; width: 100%; max-width: 800px; margin: 0 auto;">
+      <div style="background-color: rgba(194, 255, 243, 0.069); border: 4px groove rgba(0, 128, 0, 0.5); padding: 15px; width: 100%;">
           <div class="sidebar">
+           
+
             <label for="genderSelect">Select Gender:</label>
             <select id="genderSelect">
               <option value="Male">Male</option>
@@ -83,16 +89,17 @@
           
         </div>
             <!-- Description Sidebar -->
-            <div class="description-sidebar">
+            <!-- <div class="description-sidebar">
                 <div class="description">
-                    <h3>Description 1</h3>
-                    <p>This is the description for the first chart.</p>
+                    <h3>Overweight Trend</h3>
+                    <p>
+                      The line graph, derived from WHO data, illustrates a concerning trend: the crude estimate of overweight and obesity prevalence is on the rise in Australia. </p>
                 </div>
                 <div class="description">
                     <h3>Description 2</h3>
                     <p>This is the description for the second chart.</p>
                 </div>
-            </div>
+            </div> -->
         </div>
        
     </div>
@@ -202,7 +209,7 @@
               labels: labels,
               datasets: [
                 {
-                  label: bmiCode1,
+                  label: 'Overweight',
                   data: bmiData1,
                   borderColor: '#FFD700',
                   borderWidth: 2,
@@ -212,7 +219,7 @@
                   pointRadius: 0
                 },
                 {
-                  label: bmiCode2,
+                  label: 'Obesity',
                   data: bmiData2,
                   borderColor: '#990000',
                   borderWidth: 2,
@@ -233,7 +240,7 @@
               plugins: {
                 title: {
                   display: true,
-                  text: 'BMI Trend among children between 5 and 9 years old'
+                  text: 'BMI Trend among children between 5 and 9 years old in Australia'
                 }
               },
               scales: {
