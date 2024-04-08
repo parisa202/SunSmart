@@ -12,12 +12,22 @@
 
 {% block main_content %}
 
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "CoreApp:index" %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nutrition Analysis</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
 <div class="page-content">
     <div class="checkout">
         <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h2 class="checkout-title">Recipe Content</h2><!-- End .checkout-title -->
+                        <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
+                        <p>Choose a recipe from the menu and indicate the portion consumed to access its nutritional values. If your child has eaten half of one standard serving, input 0.5 as the portion.</p><!-- End .checkout-title -->
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>Recipe Name</label>

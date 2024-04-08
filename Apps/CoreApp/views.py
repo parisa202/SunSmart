@@ -64,7 +64,7 @@ class US11View(generic.TemplateView):
         
         new_context = {'main_title': 'Obesity and Overweight among Children',
                     #    'sub_title': 'Obesity and Overweight among Children',
-                       'page_name': 'US11',
+                       'page_name': 'Obesity and Overweight',
                        'json_data': serialized_data,
                        'json_data_bmi': serialized_data_bmi}
         
@@ -105,7 +105,18 @@ class US121View(generic.TemplateView):
 
 class US13View(generic.TemplateView):
     template_name = 'CoreApp/us13.html'
-
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)
+        
+        
+    
+        
+        new_context = {'main_title': 'ADDITIVE AWARENESS',
+                       'sub_title': '',
+                       'page_name': 'ADDITIVE AWARENESS'
+                       }
+        
+        return new_context
 
 class US21View(generic.TemplateView):
     template_name = 'CoreApp/us21.html'
@@ -168,12 +179,12 @@ class GuestTrackerView(generic.TemplateView):
             recipe['serving_size_g_intake'] = response_data['serving_size_g_intake']
             recipe['fat_total_g_intake'] = response_data['fat_total_g_intake']
             recipe['fat_saturated_g_intake'] = response_data['fat_saturated_g_intake']
-            # recipe['protein_g_intake'] = response_data['protein_g_intake']
+            recipe['protein_g_intake'] = response_data['protein_g_intake']
             # recipe['sodium_mg_intake'] = response_data['sodium_mg_intake']
             # recipe['potassium_mg_intake'] = response_data['potassium_mg_intake']
             # recipe['cholesterol_mg_intake'] = response_data['cholesterol_mg_intake']
             recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
-            # recipe['fiber_g_intake'] = response_data['fiber_g_intake']
+            recipe['fiber_g_intake'] = response_data['fiber_g_intake']
             recipe['sugar_g_intake'] = response_data['sugar_g_intake']
 
         else:
