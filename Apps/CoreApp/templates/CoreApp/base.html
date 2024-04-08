@@ -18,12 +18,8 @@
     <meta name="author" content="Tech Ninjas">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/images/icons/logo 180.ico" %}">
-
-    <!-- <link rel="icon" type="image/png" sizes="32x32" href="{% static "assets/images/icons/favicon-32x32.png" %}"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/images/icons/logo_180.ico" %}">
     <link rel="icon" type="image/svg" sizes="32x32" href="{% static "assets/images/icons/fav_32.ico" %}">
-
-    <!-- <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/favicon-16x16.png" %}"> -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/fav_16.ico" %}">
     <link rel="manifest" href="{% static "assets/images/icons/site.html" %}">
     <link rel="mask-icon" href="{% static "assets/images/icons/safari-pinned-tab.svg" %}" color="#666666">
@@ -85,7 +81,14 @@
                             <ul class="menu sf-arrows">
                                 <li class="megamenu-container active">
                                     <a href="{% url "CoreApp:index" %}" class="sf-with-ul">Home</a>
-
+                                    <ul>
+                                        <li>
+                                            <a href="{% url "CoreApp:guest_tracker" %}">Nutrition Analysis</a>
+                                            <a href="{% url "CoreApp:US13" %}">Additive Awareness</a>
+                                            <a href="{% url "CoreApp:US11" %}">Trend of Overweight in Australia</a>
+                                        </li>
+                                        
+                                    </ul>
                                    
                                 </li>
                                 <li>
