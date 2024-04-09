@@ -113,7 +113,7 @@ class US13View(generic.TemplateView):
         
         new_context = {'main_title': 'Understanding Food Additives: Uses, Reactions, and Safety',
                        'sub_title': '',
-                       'page_name': 'ADDITIVE AWARENESS'
+                       'page_name': 'Understanding Food Additives'
                        }
         
         return new_context
