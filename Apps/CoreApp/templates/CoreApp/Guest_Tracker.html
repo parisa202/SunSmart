@@ -55,8 +55,8 @@
                     </div>
                     <aside class="col-lg-4">
                         <div class="summary">
-                            <h3 class="summary-title">Food Description</h3>
-                            <p id="food_description" style="border-bottom: .1rem solid #ebebeb; padding-bottom: 1.7rem">Blue utility pinafore denimdressBlue utility pinafore denimdressBlue utility pinafore denimdressBlue utility pinafore denimdress</p>
+                            <h3 class="summary-title">Nutrition Analysis</h3>
+                            <p id="food_description" style="border-bottom: .1rem solid #ebebeb; padding-bottom: 1.7rem"></p>
 
                             <table class="table table-summary mt-3">
                                 <thead>
@@ -131,12 +131,12 @@
                     } else {
                     $('#recipe_description').text(response.recipe_instructions);
                     $('.table-summary tbody').empty().append(
-                        '<tr><td>Calories:</td><td>' + response.calories_intake+ '</td></tr>'+
-                        '<tr><td>Total Fat:</td><td>' + response.fat_total_g_intake+ '</td></tr>'+
-                        '<tr><td>Saturated Fat:</td><td>' + response.fat_saturated_g_intake+ '</td></tr>'+
-                        '<tr><td>Carbohydrates:</td><td>' + response.carbohydrates_total_g_intake+ '</td></tr>'+
-                        '<tr><td>Protein: </td><td>' + response.protein_g_intake+ '</td></tr>'+
-                        '<tr><td>Fiber:</td><td>' + response.fiber_g_intake+ '</td></tr>'
+                        '<tr><td>Calories:</td><td>' + response.calories_intake+ 'Kcal'+
+                        '<tr><td>Total Fat:</td><td>' + response.fat_total_g_intake+ 'g'+
+                        '<tr><td>Saturated Fat:</td><td>' + response.fat_saturated_g_intake+ 'g'+
+                        '<tr><td>Carbohydrates:</td><td>' + response.carbohydrates_total_g_intake+ 'g'+
+                        '<tr><td>Protein: </td><td>' + response.protein_g_intake+ 'g'+
+                        '<tr><td>Fiber:</td><td>' + response.fiber_g_intake+ 'g'
                     );
                     }
                 },
