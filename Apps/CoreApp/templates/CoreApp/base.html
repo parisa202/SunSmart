@@ -80,22 +80,20 @@
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li class="megamenu-container active">
+                                    <!-- home menue -->
                                     <a href="{% url "CoreApp:index" %}" class="sf-with-ul">Home</a>
                                     <ul>
                                         <li>
-                                            <a href="{% url "CoreApp:guest_tracker" %}">Nutrition Analysis</a>
-                                            <a href="{% url "CoreApp:US13" %}">Additive Awareness</a>
-                                            <a href="{% url "CoreApp:US11" %}">Trend of Overweight in Australia</a>
+                                            <a href="{% url "CoreApp:US11" %}">Trend of Overweight in Australia</a>                                    
                                         </li>
-                                        
-                                    </ul>
-                                   
-                                </li>
-                                <li>
-                                    <a href="{% url "CoreApp:about" %}">About us</a>   
-                                </li>
-                                <li>
-                                    <a href="{% url "CoreApp:coming" %}">FAQs</a>
+                                        <li>
+                                            <a href="{% url "CoreApp:US13" %}">Understanding Food Additives</a> 
+                                        </li>
+                                        <li>
+                                            <a href="{% url "CoreApp:guest_tracker" %}">Recipe Nutrition Analyzer</a>
+                                        </li>   
+                                  </ul>
+                                   <!-- End .home menue -->
                                 </li>
                                 <li>
                                     <a href="#" class="sf-with-ul">More</a>

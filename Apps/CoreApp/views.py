@@ -104,14 +104,14 @@ class US121View(generic.TemplateView):
 
 
 class US13View(generic.TemplateView):
-    template_name = 'CoreApp/us13.html'
+    template_name = 'CoreApp/additive.html'
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         super().get_context_data(**kwargs)
         
         
     
         
-        new_context = {'main_title': 'ADDITIVE AWARENESS',
+        new_context = {'main_title': 'Understanding Food Additives: Uses, Reactions, and Safety',
                        'sub_title': '',
                        'page_name': 'ADDITIVE AWARENESS'
                        }
@@ -134,7 +134,7 @@ class AboutUsView(generic.TemplateView):
     template_name = 'CoreApp/about_us.html'
 
 class GuestTrackerView(generic.TemplateView):
-    template_name = 'CoreApp/Guest_Tracker.html'
+    template_name = 'CoreApp/Nutrition_Analysis.html'
     recipes = None
     headers = {
                 "Content-Type": "application/json"
