@@ -66,7 +66,7 @@
                     <div class="header-right" style="display: none;">
                         <a href="{% url 'CoreApp:login_or_register' %}" class="wishlist-link">
                             <i class="icon-user"></i>
-                            <span class="wishlist-txt">Sign Up/ Login</span>
+                            <span class="wishlist-txt">Sign Up/Login</span>
                         </a>
 
                         
@@ -79,25 +79,22 @@
                     <div class="header-left">
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
-                                <li class="megamenu-container active">
+                                <li><a href="{% url "CoreApp:index" %}">Home</a></li>
                                     <!-- home menue -->
-                                    <a href="{% url "CoreApp:index" %}" class="sf-with-ul">Home</a>
-                                    <ul>
-                                        <li>
-                                            <a href="{% url "CoreApp:US11" %}">Trend of Overweight in Australia</a>                                    
-                                        </li>
-                                        <li>
-                                            <a href="{% url "CoreApp:US13" %}">Understanding Food Additives</a> 
-                                        </li>
-                                        <li>
-                                            <a href="{% url "CoreApp:US21" %}">Australian Nutrition Guideline</a> 
-                                        </li>
-                                        <li>
-                                            <a href="{% url "CoreApp:guest_tracker" %}">Recipe Nutrition Analyzer</a>
-                                        </li>   
-                                  </ul>
+                                    
+
                                    <!-- End .home menue -->
+                                
+                                <li><a href="{% url "CoreApp:US11" %}">Obesity Trend</a></li>
+                                <li>
+                                    <a href="{% url "CoreApp:US13" %}">Food Additives</a> 
                                 </li>
+                                <li>
+                                    <a href="{% url "CoreApp:US21" %}">Nutrition Guideline</a> 
+                                </li>
+                                <li>
+                                    <a href="{% url "CoreApp:guest_tracker" %}">Nutrition Analyzer</a>
+                                </li>  
                                 <li>
                                     <a href="#" class="sf-with-ul">More</a>
 
