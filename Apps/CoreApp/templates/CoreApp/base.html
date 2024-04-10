@@ -90,6 +90,9 @@
                                             <a href="{% url "CoreApp:US13" %}">Understanding Food Additives</a> 
                                         </li>
                                         <li>
+                                            <a href="{% url "CoreApp:US21" %}">Australian Nutrition Guideline</a> 
+                                        </li>
+                                        <li>
                                             <a href="{% url "CoreApp:guest_tracker" %}">Recipe Nutrition Analyzer</a>
                                         </li>   
                                   </ul>
@@ -229,11 +232,19 @@
                         <a href=href="{% url "CoreApp:index" %}" >Home</a>
 
                         <ul>
-                            <a href="{% url "CoreApp:guest_tracker" %}">Nutrition Analysis</a>
-                            <a href="{% url "CoreApp:US13" %}">Additive Awareness</a>
-                            <a href="{% url "CoreApp:US11" %}">Trend of Overweight in Australia</a>
-                            
-                        </ul>
+                            <li>
+                                <a href="{% url "CoreApp:US11" %}">Trend of Overweight in Australia</a>                                    
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:US13" %}">Understanding Food Additives</a> 
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:US21" %}">Australian Nutrition Guideline</a> 
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:guest_tracker" %}">Recipe Nutrition Analyzer</a>
+                            </li>   
+                      </ul>
                     </li>
                     <li>
                         <a href="{% url "CoreApp:about" %}">About us</a> 

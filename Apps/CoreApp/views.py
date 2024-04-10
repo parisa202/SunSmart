@@ -118,10 +118,36 @@ class US13View(generic.TemplateView):
         
         return new_context
 
+#nutrition-guideline
 class US21View(generic.TemplateView):
-    template_name = 'CoreApp/us21.html'
+    template_name = 'CoreApp/nutrition-guideline.html'
+    data = ""
     
+    #read json guideline
+    def setup(self, request, *args, **kwargs):
+        file_address = os.path.join('Data Sources', 'guideline.json')
+        with open(file_address, 'r') as f:
+            # JSON to dictionary
+            self.data = json.load(f)
+            
+        return super().setup(request, *args, **kwargs)
     
+    #search age
+    def post(self, request):
+        selected_age_range = request.POST.get('selected_age_range')  
+        print(selected_age_range) 
+        # find the recipe in recipes
+        for r in self.data:
+            if r.get('age_range') == selected_age_range:
+                age_range = r
+                print(age_range)
+                break
+            else:
+                age_range = {'status': 'not found'}
+                
+        return JsonResponse(age_range)            
+              
+                
 class US22View(generic.TemplateView):
     template_name = 'CoreApp/us22.html'
 

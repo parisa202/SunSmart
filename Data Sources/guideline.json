@@ -1,0 +1,35 @@
+[
+{
+"age_range": "Ages 2 to 4",
+"daily_guidelines": {
+"calories": "1,000 to 1,400, depending on growth and activity level",
+"protein": "2 to 4 ounces",
+"fruits": "1 to 1.5 cups",
+"vegetables": "1 to 1.5 cups",
+"grains": "3 to 5 ounces",
+"dairy": "2 to 2.5 cups"
+}
+},
+{
+"age_range": "Ages 5 to 8",
+"daily_guidelines": {
+"calories": "1,200 to 1,800, depending on growth and activity level",
+"protein": "3 to 5 ounces",
+"fruits": "1 to 1.5 cups",
+"vegetables": "1.5 to 2.5 cups",
+"grains": "4 to 6 ounces",
+"dairy": "2.5 cups"
+}
+},
+{
+"age_range": "Ages 9 to 13",
+"daily_guidelines": {
+"calories": "1,400 to 2,200, depending on growth and activity level",
+"protein": "4 to 6 ounces",
+"fruits": "1.5 to 2 cups",
+"vegetables": "1.5 to 3 cups",
+"grains": "5 to 7 ounces",
+"dairy": "3 cups"
+}
+}
+]
