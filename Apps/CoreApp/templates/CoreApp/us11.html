@@ -15,29 +15,34 @@
 {% block main_content %}
 
     {% include "CoreApp/components/breadcrumb.html" %}
-    <div style="display: flex; justify-content: center; padding-bottom: 10px;">
-      <div class="container">
-        <div>
-            <h3>Implications of overweight among children</h3>
-            According to research conducted by Jebeile and colleagues (2022), primary strategies for preventing overweight and obesity focus on family behaviours, including diet, physical activity, sedentary habits, and sleep quality. These approaches are supported by behaviour change techniques.
-            Hence, it is crucial to prioritise improvements in easily modifiable factors to prevent overweight and obesity. Since family behaviours and habits are internal factors that play a significant role, it is important to note that external factors can also influence these behaviours.</p>
+
+
+    <div class="entry-content editor-content">
+      <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+        <div class="container col-10">
+          <div>
+              <h3>Implications of overweight among children</h3>
+              According to research conducted by Jebeile and colleagues (2022), primary strategies for preventing overweight and obesity focus on family behaviours, including diet, physical activity, sedentary habits, and sleep quality. These approaches are supported by behaviour change techniques.
+              Hence, it is crucial to prioritise improvements in easily modifiable factors to prevent overweight and obesity. Since family behaviours and habits are internal factors that play a significant role, it is important to note that external factors can also influence these behaviours.</p>
+          </div>
+          <!-- <img src="{% static 'CoreApp/img/US1.3_2.jpeg' %}" alt="" style="width: 260px; height: auto;"> -->
+          <div class="entry-content editor-content">
+            <h3>Rising Trend of Overweight and Obesity </h3>
+            <p>The line graph, derived from WHO data, illustrates a concerning trend: the crude estimate of overweight and obesity prevalence is on the rise in Australia. This is particularly alarming given that approximately one-fourth of children in Australia are overweight, and similarly, one-fourth of children obtain energy from discretionary foods. Discretionary foods refer to items that provide energy but 
+            offer little to no nutritional value, such as sugary snacks, processed foods, and sugary beverages.
+          </div>
+
+      
         </div>
-        <!-- <img src="{% static 'CoreApp/img/US1.3_2.jpeg' %}" alt="" style="width: 260px; height: auto;"> -->
-        <div class="intro-title text-primary">
-          <h4>Rising Trend of Overweight and Obesity </h4>
-          <p>The line graph, derived from WHO data, illustrates a concerning trend: the crude estimate of overweight and obesity prevalence is on the rise in Australia. This is particularly alarming given that approximately one-fourth of children in Australia are overweight, and similarly, one-fourth of children obtain energy from discretionary foods. Discretionary foods refer to items that provide energy but 
-          offer little to no nutritional value, such as sugary snacks, processed foods, and sugary beverages.</div>
-
-    
       </div>
-    </div>
 
-    <div style="display: flex; justify-content: center; padding-bottom: 15px; width: 100%; max-width: 800px; margin: 0 auto;">
-      <div style="background-color: rgba(194, 255, 243, 0.069); border: 4px groove rgba(0, 128, 0, 0.5); padding: 15px; width: 100%;">
-          <div class="sidebar">
-           
+    <div class="container cta-content">
 
-            <label for="genderSelect">Select Gender:</label>
+      <div class="row cta-border cta-content col-11" >
+        <!-- side bar -->
+        <div class="col-lg-3 pt-7 mb-5">
+                        
+          <label for="genderSelect">Select Gender:</label>
             <select id="genderSelect">
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -47,14 +52,16 @@
             <div class="legend" id="legend1"></div>
             <div class="legend" id="legend4"></div>
         </div>
-      
-        <div style="display: flex; flex-direction: column; align-items: center;">
+
+
+        <div class="col-lg-9">
           <div style="flex-grow: 2; align-items: center;">
             <canvas id="lineChart" width="600" height="200"></canvas>
           </div>
-          <div id="maleTitle" style="display: flex; justify-content: space-around;font-weight: bold;">Prevalence of Overweight and Obesity Among Children</div>
+            <div id="maleTitle" style="display: flex; justify-content: space-around;font-weight: bold;">Prevalence of Overweight and Obesity Among Children         
+          </div>
           <!-- First row of charts -->
-          <div style="display: flex;padding: 10px;">
+          <div style="display: flex; padding: 10px;">
                 <div>
                     <div id="maleTitle" style="display: flex; justify-content: space-around;">Age: 2-3 years old</div>
                     <canvas id="ageGroup1Chart" width="200" height="200"></canvas>
@@ -71,38 +78,29 @@
       
           <div id="maleTitle" style="display: flex; justify-content: space-around; font-weight: bold;">Proportion of Energy gained from Discretionary Food Among Children</div>
 
-                    <!-- Second row of charts -->
+          <!-- Second row of charts -->
           <div style="display: flex; padding: 10px;">
-                <div>
-                    <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 2-3 years old</div>
-                    <canvas id="ageGroup1ChartDisc" width="200" height="200"></canvas>
-                </div>
-                <div>
-                    <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 4-8 years old</div>
-                    <canvas id="ageGroup2ChartDisc" width="200" height="200"></canvas>
-                </div>
-                <div>
-                    <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 9-13 years old</div>
-                    <canvas id="ageGroup3ChartDisc" width="200" height="200"></canvas>
-                </div>
+              <div>
+                  <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 2-3 years old</div>
+                  <canvas id="ageGroup1ChartDisc" width="200" height="200"></canvas>
+              </div>
+              <div>
+                  <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 4-8 years old</div>
+                  <canvas id="ageGroup2ChartDisc" width="200" height="200"></canvas>
+              </div>
+              <div>
+                  <div id="personsTitle" style="display: flex; justify-content: space-around;">Age: 9-13 years old</div>
+                  <canvas id="ageGroup3ChartDisc" width="200" height="200"></canvas>
+              </div>
           </div>
-          
-        </div>
-            <!-- Description Sidebar -->
-            <!-- <div class="description-sidebar">
-                <div class="description">
-                    <h3>Overweight Trend</h3>
-                    <p>
-                      The line graph, derived from WHO data, illustrates a concerning trend: the crude estimate of overweight and obesity prevalence is on the rise in Australia. </p>
-                </div>
-                <div class="description">
-                    <h3>Description 2</h3>
-                    <p>This is the description for the second chart.</p>
-                </div>
-            </div> -->
-        </div>
-       
+      </div>
+      
+
     </div>
+        
+  </div>
+   
+  </div>
     
       <script>
         const alljsonData = JSON.parse('{{json_data|escapejs}}');
@@ -114,10 +112,10 @@
       
         function fetchAndCreateDonutChart(jsonData, dataType, gender, ageGroup, canvasId, legendId) {
           let filteredData = [];
-      
+          
           if (dataType === 'overweight') {
               filteredData = jsonData.filter(row => row.gender === gender && row.age_group === ageGroup && ['Prevalence of overweight', 'Prevalence of not_overweight'].includes(row.concern));
-          } else if (dataType === 'disc') {
+            } else if (dataType === 'disc') {
               filteredData = jsonData.filter(row => row.gender === gender && row.age_group === ageGroup && ['Discretionary Food', 'Non-discretionary Food'].includes(row.concern));
           }
       
@@ -132,6 +130,7 @@
           const colors = (dataType === 'overweight') ? ['rgba(255, 0, 0, 0.5)', 'rgba(102, 205, 170, 0.3)'] : ['rgba(255, 165, 0, 0.5)', 'rgba(102, 205, 170, 0.3)'];
       
           window[canvasId + 'Chart'] = createDonutChart(ctx, labels, chartData, colors, 'Text Inside Donut');
+
           updateLegend(labels, legendId, colors);
       }
       
@@ -151,31 +150,40 @@
         document.getElementById('genderSelect').addEventListener('change', updateCharts);
       
         //Creat one donut
+
         function createDonutChart(ctx, labels, data, colors, text) {
           return new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-              datasets: [{
-                data: data,
-                backgroundColor: colors
-              }]
-            },
-            options: {
-              responsive: false,
-              cutoutPercentage: 70,
-              elements: {
-                center: {
-                  text: text,
-                  color: '#FF6384',
-                  fontStyle: 'Arial',
-                  sidePadding: 20,
-                  minFontSize: 20,
-                  lineHeight: 25
+              type: 'doughnut',
+              data: {
+                  labels: labels, 
+                  datasets: [{
+                      data: data,
+                      backgroundColor: colors,
+                      labels: ''
+                  }]
+              },
+              options: {
+                  responsive: false,
+                  cutoutPercentage: 70,
+                  elements: {
+                      center: {
+                          text: text,
+                          color: '#FF6384',
+                          fontStyle: 'Arial',
+                          sidePadding: 20,
+                          minFontSize: 20,
+                          lineHeight: 25
+                      }
+                  },
+                  plugins: {
+                  
+                  legend: {
+                    display: false
+                  }
                 }
               }
-            }
           });
-        }
+      }
       
       // Call the function for each gender group and default age group
       fetchAndCreateDonutChart(jsonData_concern,'overweight', 'Male', '2_3', 'ageGroup1Chart', 'legend1');
@@ -270,7 +278,9 @@
                   square.style.backgroundColor = donutColors[index];
                   square.style.marginRight = '5px';
                   legendItem.appendChild(square);
-                  legendItem.appendChild(document.createTextNode(label));
+                  legendItem.appendChild(document.createTextNode(label + ' (%)'));
+                  legendItem.style.fontSize = '11px';
+                  legendItem.style.paddingTop = '5px'; 
                   legendElement.appendChild(legendItem);
               });
           } else {
