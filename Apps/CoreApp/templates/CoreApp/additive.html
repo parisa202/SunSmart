@@ -193,4 +193,32 @@
   <img src="{% static 'assets/images/US1.3_Additives_Test.jpeg' %}" alt="" style="width: 260px; height: auto;">
 </div>
 <div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
+
+
+<!-- action call section -->
+  <div class="container" style ='justify-content: center'>
+  <div class="cta cta-separator mb-3 pb-3">
+    <div class="row">
+      <div class="col-lg-6">
+      <div class="cta-wrapper cta-text text-center">
+        <h3 class="cta-title">Struggling to balance your child's nutrition?</h3><!-- End .cta-title -->
+        <p class="cta-desc">Find clarity with our Daily Needs Guide! 🥦 Explore expert recommendations for a balanced diet tailored to your child's needs. Learn more about secrets to healthy living! </p><!-- End .cta-desc -->
+
+  <a  href="{% url "CoreApp:US21" %}" class="btn btn-primary btn-rounded"><span>Learn More</span><i class="icon-long-arrow-right"></i></a>
+      </div><!-- End .cta-wrapper -->
+      </div><!-- End .col-lg-6 -->
+
+      <div class="col-lg-6">
+      <div class="cta-wrapper text-center">
+        <h3 class="cta-title">Curious about what's on your plate? </h3><!-- End .cta-title -->
+        <p class="cta-desc">Get instant insights with our Nutrition Analyzer tool! 🍽️ Simply input your meal, and uncover valuable details about its nutritional value. Click now to make informed choices for a healthier tomorrow! </p><!-- End .cta-desc -->
+        <a href="{% url "CoreApp:guest_tracker" %}" class="btn btn-primary btn-rounded"><span>Nutrition Analyzer</span><i class="icon-long-arrow-right"></i></a>
+        
+      
+      </div><!-- End .cta-wrapper -->
+      </div><!-- End .col-lg-6 -->
+    </div><!-- End .row -->
+  </div>
+  </div>
+<!-- End action call section -->
 {% endblock main_content %}

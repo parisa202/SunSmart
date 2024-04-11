@@ -12,11 +12,18 @@
 
 {% block main_content %}
 
+<div class="container">
+    <div class="page-header" style=" background-color:#d2efd5; text-align: center;">
+        <div class="container">
+            <h1 class="page-title col-lg-10 mx-auto" style="font-size: 24px;text-align: center;">Nutrition Analyzer<span>{{sub_title}}</span></h1>
+        </div><!-- End .container -->
+</div>
+
 <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
     <div class="container">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url "CoreApp:index" %}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Nutrition Analysis</li>
+            <li class="breadcrumb-item active" aria-current="page">Nutrition Analyzer</li>
         </ol>
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
