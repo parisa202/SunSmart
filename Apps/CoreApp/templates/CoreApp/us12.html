@@ -17,13 +17,13 @@
 <main class="main">
     <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         <div class="container">
-            <h1 class="page-title">My Account</h1>
+            <h1 class="page-title">Profile</h1>
         </div><!-- End .container -->
     </div><!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                <li class="breadcrumb-item active" aria-current="page">Profile</li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
@@ -44,13 +44,19 @@
                                 <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">My Tracking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Nutrition Analysis</a>
+                                <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Nutrition Guideline</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Dashboard</a>
+                                <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Nutrition Analyzer</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-setting-link" data-toggle="tab" href="#tab-setting" role="tab" aria-controls="tab-setting" aria-selected="false">Settings</a>
+                                <a class="nav-link" id="tab-setting-link" data-toggle="tab" href="#tab-setting" role="tab" aria-controls="tab-setting" aria-selected="false">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-reminder-link" data-toggle="tab" href="#tab-reminder" role="tab" aria-controls="tab-reminder" aria-selected="false">Reminder</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-signout-link" data-toggle="tab" href="#tab-signout" role="tab" aria-controls="tab-signout" aria-selected="false">Sign out</a>
                             </li>
                         </ul>
                     </aside><!-- End .col-lg-3 -->
@@ -246,6 +252,60 @@
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+                                <div class="col-lg-8">
+                                    <div class="summary">
+                                        <h3 class="summary-title">Nutrition Guideline</h3>
+                                        
+    
+                                        <table class="table table-summary mt-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nutrition</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+    
+                                            <tbody>
+                                                <tr>
+                                                    <td>Calories:</td>
+                                                    <td></td>
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>Protein:</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dairy:</td>
+                                                    <td></td>
+                                                </tr><!-- End .summary-subtotal -->
+                                                <tr>
+                                                    <td>Grains:</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fruits:</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vegetables:</td>
+                                                    <td></td>
+                                                </tr>
+                                                <!-- End .summary-total -->
+    
+    
+                                            </tbody>
+                                        </table><!-- End .table table-summary -->
+    
+                                    </div><!-- End .summary -->
+                                </div>
+                            </div><!-- .End .tab-pane -->
+
+
+
+
+
+                            <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
                                 <div class="page-content">
                                     <div class="checkout">
                                         <div class="container">
@@ -373,18 +433,9 @@
                                 </div>  
                             </div><!-- .End .tab-pane -->
 
-                            <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
-                                <div class="soon-content-wrapper">
-                                    <img src="assets/images/logo-icon.png" alt="Logo" class="soon-logo mx-auto">
-                                    <h1 class="soon-title">Coming Soon</h1><!-- End .soon-title -->
-                                    <div class="coming-countdown countdown-separator is-countdown"><span class="countdown-row countdown-show4"><span class="countdown-section"><span class="countdown-amount">00</span><span class="countdown-period">Days</span></span><span class="countdown-section"><span class="countdown-amount">00</span><span class="countdown-period">Hours</span></span><span class="countdown-section"><span class="countdown-amount">00</span><span class="countdown-period">Minutes</span></span><span class="countdown-section"><span class="countdown-amount">00</span><span class="countdown-period">Seconds</span></span></span></div><!-- End .coming-countdown -->
-                                    <hr class="mt-2 mb-3 mt-md-3">
-                                    <p>We are currently working on an awesome new site. Stay tuned for more information.
-                                        Subscribe to our newsletter to stay updated on our progress.</p>
-                                    
-                                    
-                                </div>  
-                            </div><!-- .End .tab-pane -->
+                            
+
+
 
                             <div class="tab-pane fade" id="tab-setting" role="tabpanel" aria-labelledby="tab-setting-link">
                                 <div class="soon-content-wrapper">
@@ -397,6 +448,22 @@
                                     
                                     
                                 </div>  
+                            </div><!-- .End .tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-reminder" role="tabpanel" aria-labelledby="tab-reminder-link">
+
+
+
+
+
+
+                            </div><!-- .End .tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-signout" role="tabpanel" aria-labelledby="tab-signout-link">
+
+                                    
+                                    
+
                             </div><!-- .End .tab-pane -->
                         </div>
                     </div><!-- End .col-lg-9 -->
