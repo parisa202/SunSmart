@@ -44,7 +44,7 @@
                                 <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">My Tracking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">My Recipes</a>
+                                <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Nutrition Analysis</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Dashboard</a>
@@ -246,15 +246,130 @@
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
-                                <div class="soon-content-wrapper">
-                                    <img src="assets/images/logo-icon.png" alt="Logo" class="soon-logo mx-auto">
-                                    <h1 class="soon-title">Coming Soon</h1><!-- End .soon-title -->
-                                    <div class="coming-countdown countdown-separator is-countdown"><span class="countdown-row countdown-show4"><span class="countdown-section"><span class="countdown-amount">00</span><span class="countdown-period">Days</span></span><span class="countdown-section"><span class="countdown-amount">00</span><span class="countdown-period">Hours</span></span><span class="countdown-section"><span class="countdown-amount">00</span><span class="countdown-period">Minutes</span></span><span class="countdown-section"><span class="countdown-amount">00</span><span class="countdown-period">Seconds</span></span></span></div><!-- End .coming-countdown -->
-                                    <hr class="mt-2 mb-3 mt-md-3">
-                                    <p>We are currently working on an awesome new site. Stay tuned for more information.
-                                        Subscribe to our newsletter to stay updated on our progress.</p>
-                                    
-                                    
+                                <div class="page-content">
+                                    <div class="checkout">
+                                        <div class="container">
+                                                <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
+                                                        <p>Choose a recipe from the menu and indicate the portion consumed to access its nutritional values. If your child has eaten half of one standard serving, input 0.5 as the portion.</p><!-- End .checkout-title -->
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label>Recipe Name</label>
+                                                                <div class="select-custom">
+                                                                    <select name="selected_recipe" id="recipe" class="form-control">
+                                                                        <option value="nan" selected="selected">Select a recipe</option>
+                                                                        
+                                                                        <option value="Horn and Hardart's Baked Macaroni And Cheese">Horn and Hardart's Baked Macaroni And Cheese</option>
+                                                                        
+                                                                        <option value="Grandma Lee's Hoisin Chicken Pizza">Grandma Lee's Hoisin Chicken Pizza</option>
+                                                                        
+                                                                        <option value="Jenny's Creole Hamburgers">Jenny's Creole Hamburgers</option>
+                                                                        
+                                                                        <option value="Hooter's Hot Dogs">Hooter's Hot Dogs</option>
+                                                                        
+                                                                        <option value="Crunchy Chicken Nuggets">Crunchy Chicken Nuggets</option>
+                                                                        
+                                                                        <option value="Soto Banjar Indonesian Chicken Noodle Soup">Soto Banjar Indonesian Chicken Noodle Soup</option>
+                                                                        
+                                                                        <option value="Grilled Cheese Savory with Anchovies And Garlic">Grilled Cheese Savory with Anchovies And Garlic</option>
+                                                                        
+                                                                        <option value="Grandma's Spaghetti Gravy">Grandma's Spaghetti Gravy</option>
+                                                                        
+                                                                        <option value="Beef Tacos">Beef Tacos</option>
+                                                                        
+                                                                        <option value="Mike Douglas' Chicken Parmigiana">Mike Douglas' Chicken Parmigiana</option>
+                                                                        
+                                                                        <option value="Salmon Sushi">Salmon Sushi</option>
+                                                                        
+                                                                        <option value="Chiffonade of Lobster">Chiffonade of Lobster</option>
+                                                                        
+                                                                        <option value="Deviled Eggs on Toast with Caviar">Deviled Eggs on Toast with Caviar</option>
+                                                                        
+                                                                        <option value="Pine Nut-Almond Macaroons">Pine Nut-Almond Macaroons</option>
+                                                                        
+                                                                        <option value="Chestnut Icecream">Chestnut Icecream</option>
+                                                                        
+                                                                        <option value="Elegant Tuna Casserole">Elegant Tuna Casserole</option>
+                                                                        
+                                                                        <option value="Jerry Springer's Mashed Potato Meatloaf">Jerry Springer's Mashed Potato Meatloaf</option>
+                                                                        
+                                                                        <option value="Crockpot Sweet and Sour Pork">Crockpot Sweet and Sour Pork</option>
+                                                                        
+                                                                    </select>
+                                                                </div><!-- End .select-custom -->
+                                                            </div><!-- End .col-sm-6 -->
+
+
+                                
+                                                            <div class="col-sm-6">
+                                                                <label>Portion</label>
+                                                                <input type="text" id="intake" name="recipe_intake" class="form-control" required="" value="1">
+                                                            </div><!-- End .col-sm-6 -->
+                                                        </div>
+                                                        
+                                                        <div class="text-center">
+                                                            <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                                                                <span>SUBMIT</span>
+                                                                <i class="icon-long-arrow-right"></i>
+                                                            </button>
+                                                        </div>
+                                                        
+
+                                                        <div class="row mt-5">
+                                                            <div class="summary" style="min-width: -webkit-fill-available;">
+                                                                <h3 class="summary-title">Recipe Description</h3>
+                                                                <p id="recipe_description" style="padding-bottom: 1.7rem"></p>
+                                                            </div><!-- End .summary -->
+                                                        </div>
+                                                    </div>
+
+                                                </div><!-- End .row -->
+
+                                                
+                                                
+                                                <div class="col-lg-8">
+                                                    <div class="summary">
+                                                        <h3 class="summary-title">Nutrition Analysis</h3>
+                                                        <p id="food_description" style="border-bottom: .1rem solid #ebebeb; padding-bottom: 1.7rem"></p>
+                            
+                                                        <table class="table table-summary mt-3">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nutrition</th>
+                                                                    <th>Amount</th>
+                                                                </tr>
+                                                            </thead>
+                            
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Calories:</td>
+                                                                    <td></td>
+                                                                </tr>
+                            
+                                                                <tr>
+                                                                    <td>Total Fat:</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturated Fat:</td>
+                                                                    <td></td>
+                                                                </tr><!-- End .summary-subtotal -->
+                                                                <tr>
+                                                                    <td>Carbohydrates:</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Total:</td>
+                                                                    <td></td>
+                                                                </tr><!-- End .summary-total -->
+                                                            </tbody>
+                                                        </table><!-- End .table table-summary -->
+                            
+                                                    </div><!-- End .summary -->
+                                                </div><!-- End .col-lg-3 -->
+                                        </div><!-- End .container -->
+                                    </div><!-- End .checkout -->
                                 </div>  
                             </div><!-- .End .tab-pane -->
 
