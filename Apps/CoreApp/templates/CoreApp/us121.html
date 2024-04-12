@@ -22,65 +22,47 @@
     <div class="col-md-8 col-lg-9">
         <div class="tab-content">
             <div class="tab-pane fade active show" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                <div class="student-profile py-4">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-lg-4">
-                          <div class="card shadow-sm">
-                            <div class="card-header bg-transparent text-center">
-                              <img src="{% static "assets/images/children/pexels-murry-lee-17889245.jpg" %}" alt="">
-                            </div>
-                            <div class="card-body" style="margin: 0 auto; max-width: 600px;">
+                      
+
+
+
+                        <form action="#" class="contact-form mb-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="cname" class="sr-only">Name</label>
+                                    <input type="text" class="form-control" id="cname" placeholder="Name *" required="">
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-sm-6">
+                                    <label for="cemail" class="sr-only">Age</label>
+                                    <input type="email" class="form-control" id="cemail" placeholder="Age" required="">
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="cphone" class="sr-only">Height</label>
+                                    <input type="tel" class="form-control" id="cphone" placeholder="Height">
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-sm-6">
+                                    <label for="csubject" class="sr-only">Weight</label>
+                                    <input type="text" class="form-control" id="csubject" placeholder="Weight">
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
+
+                        
+                            <div class="text-center">
                                 <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
-                                    <span>UPLOAD PHOTO</span>
+                                    <span>SUBMIT</span>
                                     <i class="icon-long-arrow-right"></i>
                                 </button>
                             </div>
-                          </div>
+                            
+
+
+                        </form><!-- End .contact-form -->
                         </div>
-
-
-    <form action="#" class="contact-form mb-3">
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="cname" class="sr-only">Name</label>
-                <input type="text" class="form-control" id="cname" placeholder="Name *" required="">
-            </div><!-- End .col-sm-6 -->
-
-            <div class="col-sm-6">
-                <label for="cemail" class="sr-only">Age</label>
-                <input type="email" class="form-control" id="cemail" placeholder="Age *" required="">
-            </div><!-- End .col-sm-6 -->
-        </div><!-- End .row -->
-
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="cphone" class="sr-only">Height</label>
-                <input type="tel" class="form-control" id="cphone" placeholder="Height *">
-            </div><!-- End .col-sm-6 -->
-
-            <div class="col-sm-6">
-                <label for="csubject" class="sr-only">Weight</label>
-                <input type="text" class="form-control" id="csubject" placeholder="Weight *">
-            </div><!-- End .col-sm-6 -->
-        </div><!-- End .row -->
-
-        <label for="cmessage" class="sr-only">Message</label>
-        <textarea class="form-control" cols="30" rows="4" id="cmessage" required="" placeholder="Message"></textarea>
-
-        <div class="col-lg-6" style="margin: 0 auto; max-width: 600px;">
-            <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
-                <span>SUBMIT</span>
-                <i class="icon-long-arrow-right"></i>
-            </button>
-            </div>
-
-
-    </form><!-- End .contact-form -->
-</div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
     
 {% endblock main_content %}
