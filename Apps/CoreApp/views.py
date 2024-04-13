@@ -95,8 +95,19 @@ class US11DashboardView(generic.TemplateView):
         return new_context
 
 
-class US12View(generic.TemplateView):
-    template_name = 'CoreApp/us12.html'
+class ProfileView(generic.TemplateView):
+    template_name = 'CoreApp/profile.html'
+    recipes = None  
+    
+    def setup(self, request, *args, **kwargs):
+        file_address = os.path.join('Data Sources', 'recipes.json')
+        with open(file_address, 'r') as f:
+            # JSON to dictionary
+            self.recipes = json.load(f)
+        return super().setup(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        return {'recipes': self.recipes} 
  
     
 class US121View(generic.TemplateView):
@@ -158,6 +169,7 @@ class US23View(generic.TemplateView):
 
 class AboutUsView(generic.TemplateView):
     template_name = 'CoreApp/about_us.html'
+
 
 class GuestTrackerView(generic.TemplateView):
     template_name = 'CoreApp/Nutrition_Analysis.html'
@@ -223,6 +235,44 @@ class GuestTrackerView(generic.TemplateView):
         
         return {'recipes': self.recipes}  
 
+class MacronutrientsView(generic.TemplateView):
+    template_name = 'CoreApp/Macronutrients.html'
+    macro_info = None
+    
+    def setup(self, request, *args, **kwargs):
+        file_address = os.path.join('Data Sources', 'macro-info.json')
+        with open(file_address, 'r') as f:
+            # JSON to dictionary
+            self.macro_info = json.load(f)
+        return super().setup(request, *args, **kwargs)
+    
+    
+    def post(self, request):
+        selected_tag = request.POST.get('selected_tag')
+        
+        # find 
+        for r in self.macro_info['macronutrients']:
+            if r.get('name') == selected_tag:
+                info = r
+                break
+            else:
+                info = {'status': 'not found'}
+        return JsonResponse(info)
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)
+        tags = ['fashion', 'style', 'CARBOHYDRATES', 'PROTEIN', 'travel', 'shopping', 'hobbies']
+        new_context = {'main_title': 'Understanding Macronutrients for Children',
+                       'sub_title': '',
+                       'page_name': 'Understanding Macronutrients'
+                       }
+        
+        return new_context
+    
+
+
+
+
 #not complete
 class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
@@ -231,38 +281,28 @@ class Login_RegisterView(generic.TemplateView):
         form_type = request.POST.get('form_type')
 
         if form_type == 'signin':
-            # Get the input value
-            input_value = request.POST.get('signin-input')
+        #     # Get the input value
+        #     input_value = request.POST.get('signin-input')
 
-            # Check if input is an email
-            if re.match(self.EMAIL_REGEX, input_value):
-                # send email sign-in data to email authentication API
-                api_url = 'http://email-auth-api-url'
-                data = {
-                    'email': input_value,
-                    'password': request.POST.get('signin-password')
-                }
-            # Check if input is a phone number
-            elif re.match(self.PHONE_REGEX, input_value):
-                # send phone sign-in data to phone authentication API
-                api_url = 'http://phone-auth-api-url'
-                data = {
-                    'phone': input_value,
-                    'password': request.POST.get('signin-password')
-                }
-            else:
-                # Handle invalid input (neither email nor phone number)
-                return HttpResponse('Invalid input')          
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+        #     # Check if input is an email
+        #     if re.match(self.EMAIL_REGEX, input_value):
+        #         # send email sign-in data to email authentication API
+        #         api_url = 'http://email-auth-api-url'
+        #         data = {
+        #             'email': input_value,
+        #             'password': request.POST.get('signin-password')
+        #         }
+        #     # Check if input is a phone number
+        #     elif re.match(self.PHONE_REGEX, input_value):
+        #         # send phone sign-in data to phone authentication API
+        #         api_url = 'http://phone-auth-api-url'
+        #         data = {
+        #             'phone': input_value,
+        #             'password': request.POST.get('signin-password')
+        #         }
+        #     else:
+        #         # Handle invalid input (neither email nor phone number)
+        #         return HttpResponse('Invalid input')          
             
             
             

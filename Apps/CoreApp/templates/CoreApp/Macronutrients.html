@@ -1,0 +1,119 @@
+{% extends "CoreApp/base.html" %}
+{% load static %}
+
+{% block title_block %}
+  
+{% endblock title_block %}
+
+
+
+{% block extra_css %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock extra_css %}
+
+{% block main_content %}
+
+    {% include "CoreApp/components/breadcrumb.html" %}
+    <div class="entry-content editor-content" style ='justify-content: center'>
+      <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+        <div class="container col-10">
+          <div>
+              <h3>What is Macronutrient</h3>
+              According to research conducted by Jebeile and colleagues (2022), primary strategies for preventing overweight and obesity focus on family behaviours, including diet, physical activity, sedentary habits, and sleep quality. These approaches are supported by behaviour change techniques.
+              Hence, it is crucial to prioritise improvements in easily modifiable factors to prevent overweight and obesity. Since family behaviours and habits are internal factors that play a significant role, it is important to note that external factors can also influence these behaviours.</p>
+          </div>
+          <!-- <img src="{% static 'CoreApp/img/US1.3_2.jpeg' %}" alt="" style="width: 260px; height: auto;"> -->
+         
+        </div>
+      </div>
+
+<div class="container"><!-- container macro -->
+  <div class="row">
+
+    <aside class="col-lg-3">
+      <div class="sidebar">
+          <div class="widget">
+            <h3 class="widget-title">Macronutrients</h3><!-- End .widget-title -->
+            <div class="tagcloud" id="tagcloud">
+              <a name="Protein" >Protein</a>
+              <a name="Fat" >Fat</a>
+              <a name="Carbo" >Carbo</a>
+            </div>
+        </div>
+      </div><!-- End .sidebar -->
+    </aside><!-- End .col-lg-3 -->
+
+    <div class="col-lg-9">
+      <div class="entry-content editor-content">
+      </h3>Explore macronutrients </h3>
+      <p id="macro_description" style="padding-bottom: 1.7rem">1111</p>
+
+      <p>select macronutrient and see the explanation
+
+      </h3>Ways to include carbohydrates in your child’s diet</h3>
+    </div>
+
+    </div><!-- End .col-lg-9 -->
+  </div><!-- End row information --> 
+
+</div><!-- End container macro -->
+
+  <div class="container">
+ 
+    <hr class="mb-2">
+    <div class="cta bg-image pt-3 pb-3 mb-3" style="background-color:#d2efd5;background-position: center right;">
+        <div class="row justify-content-center">
+            <div class="col-sm-10 col-md-8 col-lg-8">
+                <div class="cta-text text-center">
+                    <h3 class="cta-title"> Concerned about your child's health? </h3><!-- End .cta-title -->
+                    <p class="cta-desc"><p>Discover the hidden dangers lurking in everyday foods! Our guide on common food additives reveals the truth behind artificial sweeteners, preservatives, and more. Arm yourself with knowledge to safeguard your family's well-being. 
+                    </p><!-- End .cta-desc -->
+            
+                    <a href="{% url "CoreApp:US13" %}" class="btn btn-primary btn-rounded"><span>Explore More</span><i class="icon-long-arrow-right"></i></a>
+                </div><!-- End .cta-text -->
+            </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
+        </div><!-- End .row -->
+    </div><!-- End .cta -->
+
+</div>
+</div>
+<script>
+  
+  $(document).ready(function () {
+    
+    //var tagcloud = 
+
+    $('#tagcloud a').on('click', function (e) {
+        var tagChoice = $(this).attr('name'); // Get selected value
+
+        if (tagChoice === 'nan') {
+            return; // Do nothing and exit the function
+        };
+        //console.log(tagChoice)
+        // AJAX call
+        $.ajax({
+            type: "POST",
+            url: "{% url 'CoreApp:macronutrients' %}", 
+            data: {'selected_tag': tagChoice,
+                    'csrfmiddlewaretoken': '{{csrf_token}}'
+                    },
+            dataType: 'json',
+            success: function (response) {
+                // Update with the received JSON data
+                console.log(response);
+                if(response.status == 'not found'){
+                    $('#macro_description').empty();
+                } else {
+                $('#macro_description').text(response.description);
+                }
+            },
+            error: function (request, status, error) {
+                console.log(request.status + ": " + request.responseText);
+            }
+            
+        });
+    });
+});
+
+</script>
+  {% endblock main_content %}

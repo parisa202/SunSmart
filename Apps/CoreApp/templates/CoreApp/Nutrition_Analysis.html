@@ -31,78 +31,9 @@
 <div class="page-content">
     <div class="checkout">
         <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
-                        <p>Choose a recipe from the menu and indicate the portion consumed to access its nutritional values. If your child has eaten half of one standard serving, input 0.5 as the portion.</p><!-- End .checkout-title -->
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label>Recipe Name</label>
-                                <div class="select-custom">
-                                    <select name="selected_recipe" id="recipe" class="form-control">
-                                        <option value="nan" selected="selected">Select a recipe</option>
-                                        {% for r in recipes %}
-                                        <option value="{{r.recipe_name}}">{{r.recipe_name}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div><!-- End .select-custom -->
-                            </div><!-- End .col-sm-6 -->
-
-                            <div class="col-sm-6">
-                                <label>Portion</label>
-                                <input type="text" id="intake" name="recipe_intake" class="form-control" required="" value="1">
-                            </div><!-- End .col-sm-6 -->
-                        </div>
-                        <div class="row mt-5">
-                            <div class="summary" style="min-width: -webkit-fill-available;">
-                                <h3 class="summary-title">Recipe Description</h3>
-                                <p id="recipe_description" style="padding-bottom: 1.7rem"></p>
-                            </div><!-- End .summary -->
-                        </div>
-                    </div>
-                    <aside class="col-lg-4">
-                        <div class="summary">
-                            <h3 class="summary-title">Nutrition Analysis</h3>
-                            <p id="food_description" style="border-bottom: .1rem solid #ebebeb; padding-bottom: 1.7rem"></p>
-
-                            <table class="table table-summary mt-3">
-                                <thead>
-                                    <tr>
-                                        <th>Nutrition</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>Calories:</td>
-                                        <td></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Total Fat:</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Saturated Fat:</td>
-                                        <td></td>
-                                    </tr><!-- End .summary-subtotal -->
-                                    <tr>
-                                        <td>Carbohydrates:</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total:</td>
-                                        <td></td>
-                                    </tr><!-- End .summary-total -->
-                                </tbody>
-                            </table><!-- End .table table-summary -->
-
-                        </div><!-- End .summary -->
-                    </aside><!-- End .col-lg-3 -->
-                </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .checkout -->
+        {% include "CoreApp/components/recipe_analysis.html" %}
+        </div>
+    </div>
 </div>
 
 <div class="container">
@@ -138,8 +69,6 @@
             if (recipeChoice === 'nan') {
                 return; // Do nothing and exit the function
             };
-            
-            
             // AJAX call
             $.ajax({
                 type: "POST",

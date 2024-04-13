@@ -1,0 +1,15 @@
+{ "macronutrients": [
+    {
+    "name": "Carbo",
+    "description": "Carbohydrates are the body's primary source of energy. They include sugars, starches, and fiber."
+    },
+    {
+    "name": "Protein",
+    "description": "Proteins are essential for building and repairing tissues in the body. They are made up of amino acids."
+    },
+    {
+    "name": "Fat",
+    "description": "Fats are important for energy storage, insulation, and cushioning organs. They can be saturated or unsaturated."
+    }
+]
+}

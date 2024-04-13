@@ -9,7 +9,7 @@ app_name = 'CoreApp'
 urlpatterns = [
     path('', views.HomeView.as_view(), name='index'),
     path('obesity-overweight-children/', views.US11View.as_view(), name='US11'),
-    path('profile/', views.US12View.as_view(), name='US12'),
+    path('profile/', views.ProfileView.as_view(), name='profile'),
     path('food-additives/', views.US13View.as_view(), name='US13'),
     path('nutrition-guideline/', views.US21View.as_view(), name='US21'),
     path('US22/', views.US22View.as_view(), name='US22'),
@@ -20,6 +20,8 @@ urlpatterns = [
     path('dash/', views.US11DashboardView.as_view(), name='dash'),
     path('profile-dashboard/', views.US121View.as_view(), name='US121'),
     path('coming-soon/', views.ComingView.as_view(), name='coming'),
+    path('macronutrients-children/', views.MacronutrientsView.as_view(), name='macronutrients'),
+    
     
     # import data views
     path('data/', views.ImportDataView.as_view(), name='import_data'),
