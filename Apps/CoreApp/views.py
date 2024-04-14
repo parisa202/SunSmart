@@ -58,7 +58,7 @@ class HomeView(generic.TemplateView):
             
         return super().get_context_data(**kwargs)
 
-    
+#overweight info page    
 class US11View(generic.TemplateView):
     template_name = 'CoreApp/us11.html'
     
@@ -201,10 +201,18 @@ class US21View(generic.TemplateView):
 class US22View(generic.TemplateView):
     template_name = 'CoreApp/us22.html'
 
-
+#Reminder page
 class US23View(generic.TemplateView):
-    template_name = 'CoreApp/us23.html'
-
+    template_name = 'CoreApp/reminder_main.html'
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)
+  
+        new_context = {'main_title': 'Reminder',
+                    #    'sub_title': 'Obesity and Overweight among Children',
+                       'page_name': 'Reminder'
+        }
+        
+        return new_context
 
 class AboutUsView(generic.TemplateView):
     template_name = 'CoreApp/about_us.html'

@@ -8,8 +8,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'CoreApp/css/styles.css' %}">
-<link rel="stylesheet" href="{% static 'CoreApp/css/bootstrap.min.css' %}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
 <style>
     .alert.alert-success {
         font-size: xx-large;
@@ -54,20 +53,7 @@
         border: 1px solid #ccc;
     }
     /* Style for buttons */
-    .save_button {
-        padding: 10px 20px;
-        margin-right: 15px;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    /* Hover effect for buttons */
-    .save_button:hover {
-        background-color: #0056b3;
-    }
+    
     /* Style for buttons */
     .cancel_button {
         padding: 10px 20px;
@@ -130,84 +116,73 @@
 
 
 {% block main_content %}
-<div class="w3-content" style="max-width:2000px;margin-top:46px"></div>
     
-<div class="alert alert-success" role="alert">
-    SET REMINDERS
-</div>
+{% include "CoreApp/components/breadcrumb.html" %}
 
 <hr>
 
-<div class="nav-container">
-    <li class="nav-item"><a href="{% url "CoreApp:index" %}">Home</a></li>
-    <span>&gt;</span>
-    <a href="" class="nav-item">Set Reminders</a>
-</div>
+<div class="container col-10">
 
-<hr>
-<div class="w3-content" style="max-width:2000px;margin-top:45px"></div>
+    <h3 class="entry-content editor-content mb-2 pt-1" style="text-align: center;">Set Exact Date and Time</h3>
 
-<h1 style="text-align: center;">Set Exact Date and Time</h1>
-<div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+    <form id="reminderForm" style="margin-bottom: 10px; text-align: center;">
+        <label for="reminderDate">Date:</label>
+        <input type="date" id="reminderDate" name="reminderDate" style="margin-right: 15px;">
+        
+        <label for="reminderTime">Time:</label>
+        <input type="time" id="reminderTime" name="reminderTime" style="margin-right: 15px;">
 
-<form id="reminderForm" style="margin-bottom: 10px; text-align: center;">
-    <label for="reminderDate">Date:</label>
-    <input type="date" id="reminderDate" name="reminderDate" style="margin-right: 15px;">
-    
-    <label for="reminderTime">Time:</label>
-    <input type="time" id="reminderTime" name="reminderTime" style="margin-right: 15px;">
-    
-    <button type="button" class="save_button" onclick="saveReminder()" style="margin-right: 5px;">Save</button>
-    <button type="button" class="cancel_button" onclick="cancelReminder()">Cancel</button>
-</form>
+    </form>
 
-<h1 style="text-align: center;">Set a 2-hour Timer</h1>
-<div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+    <h3 style="text-align: center;">Set a 2-hour Timer</h3>
+    <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
 
 
-<div id="timer-container">
-    <div id="timer">02:00:00</div>
-    <div id="btn-container">
-        <button id="startBtn">Start</button>
-        <button id="stopBtn">Stop</button>
+    <div id="timer-container">
+        <div id="timer">02:00:00</div>
+        <div id="btn-container">
+            <button id="startBtn">Start</button>
+            <button id="stopBtn">Stop</button>
+        </div>
     </div>
-</div>
 
-<div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
+    <div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
 
-{% if request.session.user_id %}
-    <!-- Save Button -->
-    <div class="container">
-
-        <div class="row justify-content-center">
-            <div class="col-md-2">
-                <div class="cta-content">
-                    <form method="POST">{% csrf_token %}
-                        <input  type="hidden" name="submit_data">
-                        <button class="btn btn-primary btn-rounded">Submit</button>
-                    </form>
-                </div><!-- End .cta-content -->
-            </div><!-- End .col-xl-7 -->
-        </div><!-- End .row -->
-    
-    </div>
-{% else %}
+    {% if request.session.user_id %}
         <!-- Save Button -->
         <div class="container">
 
             <div class="row justify-content-center">
-                <div class="col-md-5 mb-5">
+                <div class="col-md-2">
                     <div class="cta-content">
-                        <input  type="hidden" name="submit_data">
-                        <a href="{% url 'CoreApp:login_or_register' %}" class="wishlist-link">
-                            <span class="btn btn-primary btn-rounded"><i class="icon-user"></i>Login to save this portion</span>
-                        </a> 
+                        <form method="POST">{% csrf_token %}
+                            <input  type="hidden" name="submit_data">
+                            <button class="btn btn-primary btn-rounded">Submit</button>
+                        </form>
                     </div><!-- End .cta-content -->
                 </div><!-- End .col-xl-7 -->
             </div><!-- End .row -->
-
+        
         </div>
-{% endif %}
+       
+    {% else %}
+            <!-- Save Button -->
+            <div class="container">
+
+                <div class="row justify-content-center">
+                    <div class="col-md-5 mb-5">
+                        <div class="cta-content">
+                            <input  type="hidden" name="submit_data">
+                            <a href="{% url 'CoreApp:login_or_register' %}" class="wishlist-link">
+                                <span class="btn btn-primary btn-rounded"><i class="icon-user"></i>Login to save this portion</span>
+                            </a> 
+                        </div><!-- End .cta-content -->
+                    </div><!-- End .col-xl-7 -->
+                </div><!-- End .row -->
+
+            </div>
+    {% endif %}
+</div>     
 <div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
 
 <script>
