@@ -1,6 +1,7 @@
 from typing import Any
 from django.http.request import HttpRequest as HttpRequest
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.views import generic
 from django.core.mail import send_mail
@@ -8,13 +9,24 @@ from django.core.management.utils import get_random_secret_key
 from .models import *
 from django.apps import apps
 import os
-from .utils import api_request
+from .utils import api_request, login_required
 import pandas as pd
 from django.core import serializers
 import json
 import requests
 
 
+class CustomLoginRequiredMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if 'user_id' not in request.session:
+            # Redirect to the login page
+            messages.add_message(self.request, messages.INFO, 'You need to login to access the content')
+            # Store the requested URL in the session
+            request.session['next'] = request.get_full_path()
+            return redirect('CoreApp:login_or_register')
+        return super().dispatch(request, *args, **kwargs)
+    
+    
 class HomeView(generic.TemplateView):
     template_name = 'CoreApp/index.html'
     
@@ -95,7 +107,7 @@ class US11DashboardView(generic.TemplateView):
         return new_context
 
 
-class ProfileView(generic.TemplateView):
+class ProfileView(CustomLoginRequiredMixin, generic.TemplateView):
     template_name = 'CoreApp/profile.html'
     recipes = None  
     
@@ -107,8 +119,35 @@ class ProfileView(generic.TemplateView):
         return super().setup(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        return {'recipes': self.recipes} 
- 
+        
+        new_context = {'main_title': 'Profile',
+                    #    'sub_title': 'Obesity and Overweight among Children',
+                       'page_name': 'Profile',
+                       'recipes': self.recipes
+                       }
+        return new_context
+    
+    
+class ProfileChildView(CustomLoginRequiredMixin, generic.TemplateView):
+    template_name = 'CoreApp/profile_child.html'
+    recipes = None  
+    
+    def setup(self, request, *args, **kwargs):
+        file_address = os.path.join('Data Sources', 'recipes.json')
+        with open(file_address, 'r') as f:
+            # JSON to dictionary
+            self.recipes = json.load(f)
+        return super().setup(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        
+        new_context = {'main_title': "Child's Profile",
+                    #    'sub_title': 'Obesity and Overweight among Children',
+                       'page_name': "Child's Profile",
+                       'recipes': self.recipes
+                       }
+        return new_context
+  
     
 class US121View(generic.TemplateView):
     template_name = 'CoreApp/us121.html'
@@ -171,6 +210,7 @@ class AboutUsView(generic.TemplateView):
     template_name = 'CoreApp/about_us.html'
 
 
+# class GuestTrackerView(CustomLoginRequiredMixin, generic.TemplateView):
 class GuestTrackerView(generic.TemplateView):
     template_name = 'CoreApp/Nutrition_Analysis.html'
     recipes = None
@@ -187,53 +227,62 @@ class GuestTrackerView(generic.TemplateView):
         return super().setup(request, *args, **kwargs)
     
     def post(self, request):
-        selected_recipe = request.POST.get('selected_recipe')
-        recipe_intake = request.POST.get('recipe_intake')
-                        
-        # find the recipe in recipes
-        for r in self.recipes:
-            if r.get('recipe_name') == selected_recipe:
-                recipe = r
-                break
-            else:
-                recipe = {'status': 'not found'}
-                
-        # send sign-in data to authentication API
-        api_url = 'https://juniorjoy.site/api/api/calcucalories'
-        data = {
-            "query": recipe['recipe_ingredients'],
-            "intake": recipe_intake,
-            "serving": recipe['recipe_servings']
-        }
-                    
-        response = requests.get(api_url, headers=self.headers, json=data)
         
-        if response.status_code == 200:
-            # Append the calorie information to the recipe
-            recipe['nutrient_info'] = response.json()            
-            response_data = response.json()
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            selected_recipe = request.POST.get('selected_recipe')
+            recipe_intake = request.POST.get('recipe_intake')
+                            
+            # find the recipe in recipes
+            for r in self.recipes:
+                if r.get('recipe_name') == selected_recipe:
+                    recipe = r
+                    break
+                else:
+                    recipe = {'status': 'not found'}
+                    
+            # send sign-in data to authentication API
+            api_url = 'https://juniorjoy.site/api/api/calcucalories'
+            data = {
+                "query": recipe['recipe_ingredients'],
+                "intake": recipe_intake,
+                "serving": recipe['recipe_servings']
+            }
+                        
+            response = requests.get(api_url, headers=self.headers, json=data)
+            
+            if response.status_code == 200:
+                # Append the calorie information to the recipe
+                recipe['nutrient_info'] = response.json()            
+                response_data = response.json()
 
-            recipe['calories_intake'] = response_data['calories_intake']
-            recipe['serving_size_g_intake'] = response_data['serving_size_g_intake']
-            recipe['fat_total_g_intake'] = response_data['fat_total_g_intake']
-            recipe['fat_saturated_g_intake'] = response_data['fat_saturated_g_intake']
-            recipe['protein_g_intake'] = response_data['protein_g_intake']
-            # recipe['sodium_mg_intake'] = response_data['sodium_mg_intake']
-            # recipe['potassium_mg_intake'] = response_data['potassium_mg_intake']
-            # recipe['cholesterol_mg_intake'] = response_data['cholesterol_mg_intake']
-            recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
-            recipe['fiber_g_intake'] = response_data['fiber_g_intake']
-            recipe['sugar_g_intake'] = response_data['sugar_g_intake']
+                recipe['calories_intake'] = response_data['calories_intake']
+                recipe['serving_size_g_intake'] = response_data['serving_size_g_intake']
+                recipe['fat_total_g_intake'] = response_data['fat_total_g_intake']
+                recipe['fat_saturated_g_intake'] = response_data['fat_saturated_g_intake']
+                recipe['protein_g_intake'] = response_data['protein_g_intake']
+                # recipe['sodium_mg_intake'] = response_data['sodium_mg_intake']
+                # recipe['potassium_mg_intake'] = response_data['potassium_mg_intake']
+                # recipe['cholesterol_mg_intake'] = response_data['cholesterol_mg_intake']
+                recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
+                recipe['fiber_g_intake'] = response_data['fiber_g_intake']
+                recipe['sugar_g_intake'] = response_data['sugar_g_intake']
 
+            else:
+                # Handle API error
+                recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
+                    
+            return JsonResponse(recipe)
+        
+        # Not AJAX request
         else:
-            # Handle API error
-            recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
-                
-        return JsonResponse(recipe)
+            submit_data = request.POST.get('submit_data', None)
+            messages.add_message(self.request, messages.SUCCESS, 'The information saved successfully')
+            return redirect('CoreApp:guest_tracker')
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         
         return {'recipes': self.recipes}  
+
 
 class MacronutrientsView(generic.TemplateView):
     template_name = 'CoreApp/Macronutrients.html'
@@ -270,14 +319,12 @@ class MacronutrientsView(generic.TemplateView):
         return new_context
     
 
-
-
-
 #not complete
 class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
     
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
+        
         form_type = request.POST.get('form_type')
 
         if form_type == 'signin':
@@ -313,53 +360,68 @@ class Login_RegisterView(generic.TemplateView):
             password = request.POST.get('singin-password')
             
             # send sign-in data to authentication API
-            api_url = 'http://3.25.234.118:8081/api/auth/login'
+            api_url = 'http://juniorjoy.site/api/auth/login'
             data = {
                 'email': email,
                 'password': password
             }
-            
-            # response = api_request(api_url, parameters=data, 'POST')
-            
+            response = api_request(url=api_url, parameters=data, request_type='POST')
+
             # handle response
-            # if response.status_code == 200:
-            #     # messages.success(self.request, 'Profile Updated Successfully')
-            #     return redirect('CoreApp:index')
-            # else: 
-            #     # messages.error(self.request, 'Something Wrong')
-            #     return super().get(request, *args, **kwargs)
+            if response.status_code == 200:
+                messages.add_message(self.request, messages.SUCCESS, 'User successfully logged in')
+                request.session['user_id'] = 'user_id' # changed this text to actual user ID
+                
+                next_url = request.session.get('next')
+                if next_url:
+                    del request.session['next']  # Remove the stored URL from the session
+                    return redirect(next_url)
+                else:
+                    return redirect('CoreApp:index')
+            else: 
+                messages.add_message(self.request, messages.WARNING, 'Something is wrong')
+                request.session.pop('user_id', None) # removing the key from session
+                return super().get(request, *args, **kwargs)
 
             
         elif form_type == 'register':
             # register form data
-            username = request.POST.get('register-username')
             email = request.POST.get('register-email')
             password = request.POST.get('register-password')
             
             # send register data to registration API
-            api_url = 'http://3.25.234.118:8081/api/users'
+            api_url = 'http://juniorjoy.site/api/users'
             
             data = {
-                'username': username,
                 'email': email,
                 'password': password
             }
             
-            # response = api_request(api_url, parameters=data, 'POST')
+            response = api_request(url=api_url, parameters=data, request_type='POST')
 
             # handle response
-            # if response.status_code == 200:
-            #     # messages.success(self.request, 'Profile Updated Successfully')
-            #     return redirect('CoreApp:index')
-            # else: 
-            #     # messages.error(self.request, 'Something Wrong')
-            #     return super().get(request, *args, **kwargs)
+            if response.status_code == 201:
+                messages.add_message(self.request, messages.SUCCESS, 'User is created. Please log in')
+                return redirect('CoreApp:login_or_register')
+            else: 
+                messages.add_message(self.request, messages.WARNING, 'Something is wrong')
+                return super().get(request, *args, **kwargs)
 
         else:
             # Invalid form type
             return JsonResponse({'error': 'Invalid form type'}, status=400)
+        
 
 
+class LogoutView(generic.View):
+    
+    def get(self, request, *args, **kwargs):
+        messages.add_message(self.request, messages.SUCCESS, 'User logged out')
+        request.session.pop('user_id', None) # removing the key from session
+        
+        return redirect('CoreApp:index')
+    
+    
 class ComingView(generic.TemplateView):
     template_name = 'CoreApp/coming_soon.html'
 

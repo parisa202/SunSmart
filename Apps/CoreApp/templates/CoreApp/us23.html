@@ -98,11 +98,7 @@
         padding: 5px;
         border-radius: 2%;
     }
-    #btn-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+
     #startBtn {
         padding: 10px 20px;
         margin-right: 10px;
@@ -165,18 +161,6 @@
     <button type="button" class="cancel_button" onclick="cancelReminder()">Cancel</button>
 </form>
 
-<form id="reminderForm" style="margin-bottom: 10px; text-align: center;">
-    <label for="reminderDate">Date:</label>
-    <input type="date" id="reminderDate" name="reminderDate" style="margin-right: 15px;">
-    
-    <label for="reminderTime">Time:</label>
-    <input type="time" id="reminderTime" name="reminderTime" style="margin-right: 15px;">
-    
-    <button type="button" class="save_button" onclick="saveReminder()" style="margin-right: 5px;">Save</button>
-    <button type="button" class="cancel_button" onclick="cancelReminder()">Cancel</button>
-</form>
-<div class="w3-content" style="max-width:2000px;margin-top:45px"></div>
-
 <h1 style="text-align: center;">Set a 2-hour Timer</h1>
 <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
 
@@ -188,20 +172,43 @@
         <button id="stopBtn">Stop</button>
     </div>
 </div>
-<div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
 
-<div id="timer-container">
-    <div id="timer">02:00:00</div>
-    <div id="btn-container">
-        <button id="startBtn">Start</button>
-        <button id="stopBtn">Stop</button>
-    </div>
-</div>
 <div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
 
+{% if request.session.user_id %}
+    <!-- Save Button -->
+    <div class="container">
 
-{% include "CoreApp/components/reminder.html" %}
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <div class="cta-content">
+                    <form method="POST">{% csrf_token %}
+                        <input  type="hidden" name="submit_data">
+                        <button class="btn btn-primary btn-rounded">Submit</button>
+                    </form>
+                </div><!-- End .cta-content -->
+            </div><!-- End .col-xl-7 -->
+        </div><!-- End .row -->
+    
+    </div>
+{% else %}
+        <!-- Save Button -->
+        <div class="container">
 
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-5">
+                    <div class="cta-content">
+                        <input  type="hidden" name="submit_data">
+                        <a href="{% url 'CoreApp:login_or_register' %}" class="wishlist-link">
+                            <span class="btn btn-primary btn-rounded"><i class="icon-user"></i>Login to save this portion</span>
+                        </a> 
+                    </div><!-- End .cta-content -->
+                </div><!-- End .col-xl-7 -->
+            </div><!-- End .row -->
+
+        </div>
+{% endif %}
+<div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
 
 <script>
     function saveReminder() {

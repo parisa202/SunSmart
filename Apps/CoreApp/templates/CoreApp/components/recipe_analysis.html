@@ -70,3 +70,42 @@
     </aside><!-- End .col-lg-3 -->
 </div><!-- End .row -->
 
+
+{% if request.session.user_id %}
+    <!-- Save Button -->
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <div class="cta-content">
+                    <form method="POST">{% csrf_token %}
+                        <input  type="hidden" name="submit_data">
+                        <button class="btn btn-primary btn-rounded">Submit</button>
+                    </form>
+                </div><!-- End .cta-content -->
+            </div><!-- End .col-xl-7 -->
+        </div><!-- End .row -->
+    
+    </div>
+{% else %}
+        <!-- Save Button -->
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="cta-content">
+                        <input  type="hidden" name="submit_data">
+                        <a href="{% url 'CoreApp:login_or_register' %}" class="wishlist-link">
+                            <span class="btn btn-primary btn-rounded"><i class="icon-user"></i>Login to save this portion</span>
+                        </a> 
+                    </div><!-- End .cta-content -->
+                </div><!-- End .col-xl-7 -->
+            </div><!-- End .row -->
+
+        </div>
+{% endif %}
+
+
+
+
+

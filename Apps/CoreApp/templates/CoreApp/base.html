@@ -47,6 +47,20 @@
 </head>
 
 <body>
+    <!-- Messages -->
+    {% if messages %}
+    <div class="top-message">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible alert-style fade show text-right animate_animated animatebounceInRight animate_slow mt-1" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="page-wrapper">
          <header class="header header-6">
             
@@ -63,14 +77,23 @@
                         </a>
                     </div><!-- End .header-left -->
 
-                    <div class="header-right" style="display: none;">
+                    {% if request.session.user_id %}
+                   
+                        <ul>
+                            <li><a href="{% url "CoreApp:logout" %}" >Logout</a></li>
+                            <li><a href="{% url "CoreApp:profile" %}">Profile</a></li>
+                        </ul>
+
+                    {% else %}
+                    <div class="header-right">
                         <a href="{% url 'CoreApp:login_or_register' %}" class="wishlist-link">
                             <i class="icon-user"></i>
                             <span class="wishlist-txt">Sign Up/Login</span>
-                        </a>
-
-                        
+                        </a> 
                     </div>
+                    {% endif %}
+
+
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
 

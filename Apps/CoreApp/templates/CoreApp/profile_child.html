@@ -16,6 +16,7 @@
 {% block main_content %}
 <main class="main">
     
+    {% include "CoreApp/components/breadcrumb.html" %}
 
     <div class="page-content">
         <div class="dashboard">
@@ -24,7 +25,7 @@
                     <aside class="col-md-4 col-lg-3">
                         <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">My Profile</a>
+                                <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Child's Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">My Children</a>
@@ -33,16 +34,13 @@
                                 <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">My Tracking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Nutrition Guideline</a>
-                            </li>
-                            <li class="nav-item" style="display: none;">
                                 <a class="nav-link" id="tab-setting-link" data-toggle="tab" href="#tab-setting" role="tab" aria-controls="tab-setting" aria-selected="false">Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="tab-reminder-link" data-toggle="tab" href="#tab-reminder" role="tab" aria-controls="tab-reminder" aria-selected="false">Reminder</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-signout-link" data-toggle="tab" href="#tab-signout" role="tab" aria-controls="tab-signout" aria-selected="false">Logout</a>
+                                <a class="nav-link" id="tab-signout-link" data-toggle="tab" href="#tab-signout" role="tab" aria-controls="tab-signout" aria-selected="false">Sign out</a>
                             </li>
                         </ul>
                     </aside><!-- End .col-lg-3 -->
@@ -60,14 +58,12 @@
                                                     <h3 class="card-title">Ishmam Ahasan Samin</h3><!-- End .card-title -->
                                                     <table class="table table-bordered">
                                                         <tr>
-                                                          <th width="30%">Email</th>
-                                                          <td width="2%">:</td>
-                                                          <td>Ishmam.a.s@gmail.com</td>
+                                                          <th width="30%">Name:</th>
+                                                          <td>Jack</td>
                                                         </tr>
                                                         <tr>
-                                                          <th width="30%">Phone</th>
-                                                          <td width="2%">:</td>
-                                                          <td>0487512875</td>
+                                                          <th width="30%">Date of Birth</th>
+                                                          <td>Nov 22, 2012</td>
                                                         </tr>
                                                       </table>
                                                     <a href="#">Edit <i class="icon-edit"></i></a></p>
@@ -118,9 +114,8 @@
                                   </div>
 
                                 
-                                <!-- <p>Hello <span class="font-weight-normal text-dark">User</span> (not <span class="font-weight-normal text-dark">User</span>? <a href="#">Log out</a>) 
-                                <br>
-                                From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p> -->
+        <!-- <p>Hello <span class="font-weight-normal text-dark">User</span> (not <span class="font-weight-normal text-dark">User</span>? <a href="#">Log out</a>) 
+        <br>From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p> -->
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
@@ -197,85 +192,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                    
-                                
-
 
                                 {% include "CoreApp/components/recipe_analysis.html" %}
-                               
+
                                 
-                            </div><!-- .End .tab-pane -->
-
-                            <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
-                                <div class="col-lg-8">
-                                    <div class="summary">
-                                        <h3 class="summary-title">Nutrition Guideline</h3>
-                                        
-    
-                                        <table class="table table-summary mt-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nutrition</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-    
-                                            <tbody>
-                                                <tr>
-                                                    <td>Calories:</td>
-                                                    <td></td>
-                                                </tr>
-    
-                                                <tr>
-                                                    <td>Protein:</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Dairy:</td>
-                                                    <td></td>
-                                                </tr><!-- End .summary-subtotal -->
-                                                <tr>
-                                                    <td>Grains:</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Fruits:</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Vegetables:</td>
-                                                    <td></td>
-                                                </tr>
-                                                <!-- End .summary-total -->
-    
-    
-                                            </tbody>
-                                        </table><!-- End .table table-summary -->
-    
-                                    </div><!-- End .summary -->
-                                </div>
-                            </div><!-- .End .tab-pane -->
-
-
-
-
-
-                            <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
-                                <div class="page-content">
-                                    <div class="checkout">
-                                        <div class="container">
-                                              
-                                           
-                                               
-                                        </div><!-- End .container -->
-                                    </div><!-- End .checkout -->
-                                </div>  
                             </div><!-- .End .tab-pane -->
 
                             
-
-
-
                             <div class="tab-pane fade" id="tab-setting" role="tabpanel" aria-labelledby="tab-setting-link">
                                 <div class="soon-content-wrapper">
                                     <img src="assets/images/logo-icon.png" alt="Logo" class="soon-logo mx-auto">
@@ -290,11 +213,6 @@
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-reminder" role="tabpanel" aria-labelledby="tab-reminder-link">
-
-
-
-
-
 
                             </div><!-- .End .tab-pane -->
 
@@ -312,8 +230,6 @@
     </div><!-- End .page-content -->
 </main>
 {% endblock main_content %}
-
-
 
 
 {% block more_script %}
