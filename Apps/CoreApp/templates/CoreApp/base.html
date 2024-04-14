@@ -77,11 +77,25 @@
                         </a>
                     </div><!-- End .header-left -->
 
+                    <!-- use later for saving recipe -->
+                    <a href="wishlist.html" class="wishlist-link" style ="display: none;">
+                        <i class="icon-heart-o"></i>
+                        <span class="wishlist-count">3</span>
+                    </a>
+
                     {% if request.session.user_id %}
                    
                         <ul>
-                            <li><a href="{% url "CoreApp:logout" %}" >Logout</a></li>
-                            <li><a href="{% url "CoreApp:profile" %}">Profile</a></li>
+                            <li><a href="{% url "CoreApp:logout" %}" class="wishlist-link" >
+                                <span class="wishlist-txt" >Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul>    
+                            <li><a href="{% url "CoreApp:profile" %}" class="wishlist-link">
+                                <span class="wishlist-txt" >Profile</span>
+                                </a>
+                            </li>
                         </ul>
 
                     {% else %}
