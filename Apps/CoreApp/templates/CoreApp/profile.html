@@ -38,8 +38,9 @@
                             <li class="nav-item" style="display: none;">
                                 <a class="nav-link" id="tab-setting-link" data-toggle="tab" href="#tab-setting" role="tab" aria-controls="tab-setting" aria-selected="false">Dashboard</a>
                             </li>
+                            <!-- not displayed -->
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-reminder-link" data-toggle="tab" href="#tab-reminder" role="tab" aria-controls="tab-reminder" aria-selected="false">Reminder</a>
+                                <a class="nav-link" id="tab-reminder-link" data-toggle="tab" href="#tab-reminder" role="tab" aria-controls="tab-reminder" aria-selected="false" style = "display:none">Reminder</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="tab-signout-link" data-toggle="tab" href="#tab-signout" role="tab" aria-controls="tab-signout" aria-selected="false">Logout</a>
@@ -299,9 +300,11 @@
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-signout" role="tabpanel" aria-labelledby="tab-signout-link">
-
-                                    
-                                    
+                                <p>Are you sure you want to logout?</p>
+                                <a href="{% url "CoreApp:logout" %}">
+                                    <span class="btn btn-primary btn-rounded"><i class="icon-user"></i>Logout</span>
+                                </a>
+                                
 
                             </div><!-- .End .tab-pane -->
                         </div>
