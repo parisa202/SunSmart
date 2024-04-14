@@ -204,6 +204,12 @@ class US22View(generic.TemplateView):
 #Reminder page
 class US23View(generic.TemplateView):
     template_name = 'CoreApp/reminder_main.html'
+    def post(self, request):
+        submit_data = request.POST.get('submit_data', None)
+        messages.add_message(self.request, messages.SUCCESS, 'The information saved successfully')
+        return redirect('CoreApp:US23')
+        
+    
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         super().get_context_data(**kwargs)
   
