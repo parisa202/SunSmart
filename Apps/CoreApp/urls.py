@@ -23,7 +23,7 @@ urlpatterns = [
     path('profile-dashboard/', views.US121View.as_view(), name='US121'),
     path('coming-soon/', views.ComingView.as_view(), name='coming'),
     path('macronutrients-children/', views.MacronutrientsView.as_view(), name='macronutrients'),
-    
+    path('recipe/', views.RecipeView.as_view(), name='recipe'),
     
     # import data views
     path('data/', views.ImportDataView.as_view(), name='import_data'),

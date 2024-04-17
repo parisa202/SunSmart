@@ -73,14 +73,14 @@
 
 {% if request.session.user_id %}
     <!-- Save Button -->
-    <div class="container">
+    <div class="container" >
 
         <div class="row justify-content-center">
             <div class="col-md-2">
                 <div class="cta-content">
                     <form method="POST">{% csrf_token %}
                         <input  type="hidden" name="submit_data">
-                        <button class="btn btn-primary btn-rounded">Submit</button>
+                        <button class="btn btn-primary btn-rounded" style = "display: NONE;">Submit</button>
                     </form>
                 </div><!-- End .cta-content -->
             </div><!-- End .col-xl-7 -->
@@ -96,7 +96,7 @@
                     <div class="cta-content">
                         <input  type="hidden" name="submit_data">
                         <a href="{% url 'CoreApp:login_or_register' %}" class="wishlist-link">
-                            <span class="btn btn-primary btn-rounded"><i class="icon-user"></i>Login to save this portion</span>
+                            <span class="btn btn-primary btn-rounded" style = "display: NONE;"><i class="icon-user"></i>Login to save this portion</span>
                         </a> 
                     </div><!-- End .cta-content -->
                 </div><!-- End .col-xl-7 -->
@@ -104,6 +104,7 @@
 
         </div>
 {% endif %}
+
 
 
 

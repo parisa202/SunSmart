@@ -333,6 +333,9 @@ class MacronutrientsView(generic.TemplateView):
         return new_context
     
 
+class RecipeView(generic.TemplateView):
+    template_name = 'CoreApp/recipe_view.html'
+
 #not complete
 class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
@@ -478,6 +481,5 @@ class ImportDataView(generic.View):
                 return HttpResponse(f"Model {model_name} not found.")
         except FileNotFoundError:
             return HttpResponse(f"File {file_name} not found.")
-    
     
     
