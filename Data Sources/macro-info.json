@@ -1,15 +1,18 @@
 { "macronutrients": [
     {
-    "name": "Carbo",
-    "description": "Carbohydrates are the body's primary source of energy. They include sugars, starches, and fiber."
+        "name": "Carbohydrates",
+        "benefits": "Carbs are the body's primary source of energy which is essential for children's cognitive performance and physical movement.",
+        "sources": "Healthy sources of carbs include corns, oats, quinoa, potatoes, sweet potatoes, rice etc."
     },
     {
-    "name": "Protein",
-    "description": "Proteins are essential for building and repairing tissues in the body. They are made up of amino acids."
+        "name": "Proteins",
+        "benefits": "Proteins are essential for a healthy immune system and children's growth and development.",
+        "sources": "Healthy sources of proteins include peas, beans, egg white, beef, lamb, sea fish etc."
     },
     {
-    "name": "Fat",
-    "description": "Fats are important for energy storage, insulation, and cushioning organs. They can be saturated or unsaturated."
+        "name": "Fats",
+        "benefits": "Fats are important for regulating hormone and help children absorb other nutrients.",
+        "sources": "Healthy sources of fats include avocados, egg yolk, butter, nuts, olive oil, coconut oil etc."
     }
 ]
 }
