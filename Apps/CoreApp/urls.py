@@ -24,6 +24,7 @@ urlpatterns = [
     path('coming-soon/', views.ComingView.as_view(), name='coming'),
     path('macronutrients-children/', views.MacronutrientsView.as_view(), name='macronutrients'),
     path('recipe/', views.RecipeView.as_view(), name='recipe'),
+    path('veggie-insights/', views.VeggiView.as_view(), name='Veggi'),
     
     # import data views
     path('data/', views.ImportDataView.as_view(), name='import_data'),

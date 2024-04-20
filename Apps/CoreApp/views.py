@@ -483,3 +483,28 @@ class ImportDataView(generic.View):
             return HttpResponse(f"File {file_name} not found.")
     
     
+#overweight info page    
+class VeggiView(generic.TemplateView):
+    template_name = 'CoreApp/vegetable.html'
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)
+        
+        # # query from table
+        # all_data = PB_AU_CONCERN.objects.all()
+        # serialized_data = serializers.serialize('json', all_data)
+        
+        
+        # all_data_bmi = PB_WHO_BMI.objects.all()
+        # serialized_data_bmi = serializers.serialize('json', all_data_bmi)
+    
+        
+        new_context = {'main_title': 'Veggie Insights',
+                    #    'sub_title': 'Obesity and Overweight among Children',
+                       'page_name': 'Veggie Insights',
+                    #    'json_data': serialized_data,
+                    #    'json_data_bmi': serialized_data_bmi
+                       }
+        
+        return new_context
+        
