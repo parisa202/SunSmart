@@ -1,0 +1,304 @@
+{% extends "V1CoreApp/base.html" %}
+{% load static %}
+
+
+{% block title_block %}
+
+{% endblock title_block %}
+
+{% block extra_css %}
+
+<style>
+    .alert.alert-success {
+        font-size: xx-large;
+        text-align: center;
+    }
+
+    .nav-container {
+        display: flex;
+        align-items: center;
+        font-size: large;
+    }
+    .nav-item {
+        margin-left: 20px;
+        margin-right: 20px;
+        text-decoration: none;
+        color: #333333;
+    }
+    .nav-item:last-child {
+        margin-right: 0;
+    }
+
+    /* Style for the reminder forms */
+    .reminder-form {
+        margin-bottom: 20px;
+        text-align: center;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* Style for labels */
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    /* Style for input fields */
+    input[type="date"],
+    input[type="time"] {
+        padding: 8px;
+        margin-right: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    /* Style for buttons */
+    
+    /* Style for buttons */
+    .cancel_button {
+        padding: 10px 20px;
+        margin-right: 5px;
+        border-radius: 5px;
+        background-color: #ff0019;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    /* Hover effect for buttons */
+    .cancel_button:hover {
+        background-color: #b30009;
+    }
+
+    #timer-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+    #timer {
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        margin-right: 35px;
+        border: 2px solid #333; /* Adding border with 2px width and solid style */
+        padding: 5px;
+        border-radius: 2%;
+    }
+
+    #startBtn {
+        padding: 10px 20px;
+        margin-right: 10px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    #startBtn:hover {
+        background-color: #0056b3;
+    }
+    #stopBtn {
+        padding: 10px 20px;
+        margin-right: 5px;
+        border-radius: 5px;
+        background-color: #ff0019;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    #stopBtn:hover {
+        background-color: #b30009;
+    }
+</style>
+{% endblock extra_css %}
+
+
+{% block main_content %}
+    
+{% include "V1CoreApp/components/breadcrumb.html" %}
+
+<hr>
+
+<div class="container col-10">
+
+
+    <div class="container col-10">
+        <h3 class="entry-content editor-content mb-2 pt-1 " style="text-align: center;">Reminder Tool for Meal Schedule</h3>
+        Effortlessly manage your child's meal schedule with our convenient reminder tool, tailored for busy parents. Simplify the chaos of daily life by staying on track with meal times, ensuring your child receives nourishing meals consistently, even amidst the busiest of schedules.</p>
+
+        <form class="form-group" id="reminderForm" style="margin-bottom: 10px; text-align: center;">
+            <div class="row justify-content-center">
+                <div class="form-group col-sm-4" style="text-align: center;">
+                    <label for="register-email-2">Your email address:</label>
+                    <input type="email" class="form-control" id="register-email-2" name="register-email" required>
+                </div><!-- End .form-group -->
+              
+            </div><!-- End .row -->
+
+            <div class="row justify-content-center">
+                <div class="form-group col-sm-4" style="text-align: center;">
+                    
+                    <label for="reminderDate">Date:</label>
+                    <div>
+                    <input type="date" id="reminderDate" name="reminderDate" style="margin-right: 15px;">
+                </div>
+                </div><!-- End .col-sm-4 -->
+            </div><!-- End .row -->
+
+            <div class="row justify-content-center">
+                <div class="form-group col-sm-4" style="text-align: center;">
+                    <label for="meal">Meal:</label>
+                    <div class="select-custom">
+                        <select name="selected_meal" id="meal" class="form-control">
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Lunch">Lunch</option>
+                            <option value="Dinner">Dinner</option>
+                        </select>
+                    </div><!-- End .select-custom -->
+                </div><!-- End .col-sm-4 -->
+            </div><!-- End .row -->
+        </form>
+        
+    </div>
+    <!-- Save Button -->
+    <div class="container">
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-2">
+                <div class="cta-content">
+                    <form method="POST">{% csrf_token %}
+                        <input  type="hidden" name="submit_data">
+                        <button class="btn btn-primary btn-rounded">Submit</button>
+                    </form>
+                </div><!-- End .cta-content -->
+            </div><!-- End .col-xl-7 -->
+        </div><!-- End .row -->
+    
+    </div>
+
+
+
+    <div class="entry-content editor-content" style ='justify-content: center'>
+        <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+          <div class="container col-10">
+                <div>
+                    <h3>Benefits of Mealtime Routines for Children</h3>
+                    Establishing a meal schedule for children is crucial for several reasons:</p>
+                </div>
+           
+                <ul>
+                <li>
+                  <strong>Teaches Good Mealtime Habits:</strong> Setting expectations early helps children understand mealtime routines, fostering healthy eating habits and eliminating mealtime struggles.
+                </li>
+                <li>
+                  <strong>Prevents Grazing:</strong> Following a schedule reduces the tendency for children to snack randomly throughout the day, which can lead to overeating unhealthy foods or undereating. Consistent meals ensure they're adequately nourished and less likely to fill up on empty calories.
+                </li>
+                <li>
+                  <strong>Promotes Healthy Digestion:</strong> Eating on a schedule supports regular bowel movements and helps balance blood sugar levels, leading to improved energy, concentration, and mood throughout the day. This rhythmic pattern optimizes digestion and overall well-being.
+                </li>
+              </ul>
+          </div>
+      </div>
+
+    <!-- Timer for reminder this is disable due to usability videos 
+    <h3 style="text-align: center;" style = "display: NONE;">Set a 2-hour Timer</h3>
+
+    <div id="timer-container">
+        <div id="timer">02:00:00</div>
+        <div id="btn-container">
+            <button id="startBtn">Start</button>
+            <button id="stopBtn">Stop</button>
+        </div>
+    </div>
+
+    <div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
+
+    -->
+        
+ 
+</div>     
+<div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
+
+<script>
+    function saveReminder() {
+        var date = document.getElementById("reminderDate").value;
+        var time = document.getElementById("reminderTime").value;
+        
+        // Perform date and time validation
+        var currentDate = new Date();
+        var selectedDate = new Date(date);
+        var selectedTime = time.split(':');
+        var selectedHour = parseInt(selectedTime[0]);
+        var selectedMinute = parseInt(selectedTime[1]);
+        // Check if the selected date is after the current date
+        if (selectedDate.getTime() < currentDate.getTime()) {
+            alert("Please select a date after the current date.");
+            return;
+        }
+        // If the selected date is the current date, compare the selected time with the current time
+        if (selectedDate.getTime() === currentDate.getTime()) {
+            // Convert current time to minutes since midnight for easier comparison
+            var currentMinutes = currentDate.getHours() * 60 + currentDate.getMinutes();
+            // Convert selected time to minutes since midnight for easier comparison
+            var selectedMinutes = selectedHour * 60 + selectedMinute;
+
+            // Check if the selected time is after the current time
+            if (selectedMinutes <= currentMinutes) {
+                alert("Please select a time after the current time.");
+                return;
+            }
+        }
+        // Process the reminder (e.g., save it to a database)
+    }
+
+    function cancelReminder() {
+        // Reset the form or perform any other necessary actions
+        document.getElementById("reminderForm").reset();
+    }
+
+
+    var timerInterval;
+    function startTimer(duration, display) {
+        var timer = duration, hours, minutes, seconds;
+        timerInterval = setInterval(function () {
+            hours = Math.floor((timer / 3600) % 24);
+            minutes = Math.floor((timer / 60) % 60);
+            seconds = Math.floor(timer % 60);
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var twoHours = 2 * 60 * 60;
+        var display = document.querySelector('#timer');
+        var startBtn = document.querySelector('#startBtn');
+        var stopBtn = document.querySelector('#stopBtn');
+        var isTimerRunning = false; // Define isTimerRunning here
+
+        startBtn.addEventListener('click', function() {
+            if (!isTimerRunning) { // Check if the timer is not running
+                startTimer(twoHours, display);
+                isTimerRunning = true;
+            }
+        });
+
+        stopBtn.addEventListener('click', function() {
+            if (isTimerRunning) { // Check if the timer is running
+                clearInterval(timerInterval);
+                display.textContent = '02:00:00';
+                isTimerRunning = false;
+            }
+        });
+    };
+</script>
+{% endblock main_content %}

@@ -1,0 +1,440 @@
+{% extends "V1CoreApp/base.html" %}
+
+{% block extra_css %}
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+{% endblock extra_css %}
+
+{% block main_content %}
+  
+  <style>
+      /* Add your CSS styles here */
+      .tooltip {
+        position: absolute;
+        text-align: center;
+        width: auto;
+        height: auto;
+        padding: 3px;
+        font: 10px sans-serif;
+        background: #d2efd5;
+        border: 0px;
+        border-radius: 5px;
+        pointer-events: none;
+      }
+    
+
+    /* Add your CSS styles here */
+  </style>
+</head>
+<body>
+  {% include "V1CoreApp/components/breadcrumb.html" %}
+  
+
+  <div class="entry-content editor-content" style ='justify-content: center'>
+    <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+      <div class="container col-10">
+        <div>
+            <h3>Exploring the Vital Role of Vegetables in Children's Diets</h3>
+            information about the importance of vegetable consumption in children.</p>
+            <h4>**What is a serve of vegetable**</h4>
+            information about one serve pf vegetable.</p>
+        </div>
+        <div class="entry-content editor-content">
+          <h3>Vegetable Consumption Among Australian Children </h3>
+          <p>Explanation of visualisations about the vegetable.
+        </div>
+      </div>
+  </div>
+
+  <div class="container col-10 justify-content-center">
+    <div  class="form-group mb-4" style="text-align: center;">
+      <!-- Age group selection menu -->
+      <label for="Age Group">Age Group:</label>
+      <select  class=" col-sm-2" id="ageGroupSelect">
+        <option value="2_3">2-3</option>
+        <option value="4_8">4-8</option>
+        <option value="9_11">9-11</option>
+      </select>
+
+      <!-- Concern selection menu -->
+      <label for="Concern">Usual daily consumption of:</label>
+      <select id="concernSelect">
+        <option value="Usual daily consumption of fruit">Fruit</option>
+        <option value="Usual daily consumption of vegetables">Vegetables</option>
+      </select>
+    </div>   
+    
+  </div> 
+  <div class="row entry-content justify-content-center">
+    <!-- Tooltip container -->
+    <div class="tooltip" id="tooltip" style="opacity: 0;"></div>
+    <div id="chart-container-male"></div>
+    <div id="chart-container-female"></div>
+  </div>
+  <div class="entry-content editor-content" style ='justify-content: center'>
+    <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+      <div class="container col-10">
+        <div>
+            <h3>Tips to Inspire Kids to Love Their Greens</h3>
+            information about the tips and tricks to motivate his child to consume vegetable.</p>
+        </div>
+      </div>
+  </div>
+  
+<script>
+  // Define your data
+  var data = [
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Persons", age_group: "2_3", proportion: 3.4, quality_comment_proportion: "", margin_of_error: 2.3 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Persons", age_group: "2_3", proportion: 0.6, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Persons", age_group: "2_3", proportion: 23.5, quality_comment_proportion: "", margin_of_error: 5.6 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Persons", age_group: "2_3", proportion: 40.3, quality_comment_proportion: "", margin_of_error: 6.7 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Persons", age_group: "2_3", proportion: 17.8, quality_comment_proportion: "", margin_of_error: 6.0 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Persons", age_group: "2_3", proportion: 11.6, quality_comment_proportion: "", margin_of_error: 5.6 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Persons", age_group: "2_3", proportion: 4.7, quality_comment_proportion: "", margin_of_error: 2.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Persons", age_group: "4_8", proportion: 1.4, quality_comment_proportion: "", margin_of_error: 0.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Persons", age_group: "4_8", proportion: 0.6, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Persons", age_group: "4_8", proportion: 26.8, quality_comment_proportion: "", margin_of_error: 3.0 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Persons", age_group: "4_8", proportion: 36.4, quality_comment_proportion: "", margin_of_error: 4.7 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Persons", age_group: "4_8", proportion: 23.3, quality_comment_proportion: "", margin_of_error: 3.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Persons", age_group: "4_8", proportion: 7.7, quality_comment_proportion: "", margin_of_error: 2.3 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Persons", age_group: "4_8", proportion: 2.9, quality_comment_proportion: "", margin_of_error: 1.4 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Persons", age_group: "9_11", proportion: 4.2, quality_comment_proportion: "", margin_of_error: 2.0 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Persons", age_group: "9_11", proportion: 1.3, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Persons", age_group: "9_11", proportion: 29.1, quality_comment_proportion: "", margin_of_error: 4.3 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Persons", age_group: "9_11", proportion: 38.1, quality_comment_proportion: "", margin_of_error: 5.7 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Persons", age_group: "9_11", proportion: 18.6, quality_comment_proportion: "", margin_of_error: 4.2 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Persons", age_group: "9_11", proportion: 5.0, quality_comment_proportion: "", margin_of_error: 2.5 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Persons", age_group: "9_11", proportion: 2.6, quality_comment_proportion: "", margin_of_error: 1.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Male", age_group: "2_3", proportion: 4.2, quality_comment_proportion: "", margin_of_error: 3.0 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Male", age_group: "2_3", proportion: 1.3, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Male", age_group: "2_3", proportion: 22.9, quality_comment_proportion: "", margin_of_error: 6.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Male", age_group: "2_3", proportion: 43.0, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: 10.6 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Male", age_group: "2_3", proportion: 17.0, quality_comment_proportion: "", margin_of_error: 5.7 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Male", age_group: "2_3", proportion: 9.1, quality_comment_proportion: "", margin_of_error: 5.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Male", age_group: "2_3", proportion: 8.8, quality_comment_proportion: "", margin_of_error: 5.5 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Male", age_group: "4_8", proportion: 2.2, quality_comment_proportion: "", margin_of_error: 1.1 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Male", age_group: "4_8", proportion: 0.7, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Male", age_group: "4_8", proportion: 27.9, quality_comment_proportion: "", margin_of_error: 5.6 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Male", age_group: "4_8", proportion: 37.7, quality_comment_proportion: "", margin_of_error: 5.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Male", age_group: "4_8", proportion: 22.5, quality_comment_proportion: "", margin_of_error: 5.0 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Male", age_group: "4_8", proportion: 8.9, quality_comment_proportion: "", margin_of_error: 3.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Male", age_group: "4_8", proportion: 1.9, quality_comment_proportion: "", margin_of_error: 1.3 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Male", age_group: "9_11", proportion: 7.1, quality_comment_proportion: "", margin_of_error: 3.7 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Male", age_group: "9_11", proportion: 1.1, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Male", age_group: "9_11", proportion: 34.5, quality_comment_proportion: "", margin_of_error: 7.2 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Male", age_group: "9_11", proportion: 38.4, quality_comment_proportion: "", margin_of_error: 8.4 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Male", age_group: "9_11", proportion: 14.9, quality_comment_proportion: "", margin_of_error: 5.3 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Male", age_group: "9_11", proportion: 4.6, quality_comment_proportion: "", margin_of_error: 3.2 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Male", age_group: "9_11", proportion: 3.2, quality_comment_proportion: "", margin_of_error: 2.3 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Female", age_group: "2_3", proportion: 2.0, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Female", age_group: "2_3", proportion: 0.0, quality_comment_proportion: "", margin_of_error: 0.0 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Female", age_group: "2_3", proportion: 24.1, quality_comment_proportion: "", margin_of_error: 6.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Female", age_group: "2_3", proportion: 38.1, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: 10.1 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Female", age_group: "2_3", proportion: 19.3, quality_comment_proportion: "", margin_of_error: 9.5 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Female", age_group: "2_3", proportion: 9.1, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Female", age_group: "2_3", proportion: 6.8, quality_comment_proportion: "", margin_of_error: 5.5 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Female", age_group: "4_8", proportion: 0.7, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Female", age_group: "4_8", proportion: 0.6, quality_comment_proportion: "", margin_of_error: 0.7 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Female", age_group: "4_8", proportion: 25.6, quality_comment_proportion: "", margin_of_error: 4.6 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Female", age_group: "4_8", proportion: 35.2, quality_comment_proportion: "", margin_of_error: 5.5 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Female", age_group: "4_8", proportion: 24.0, quality_comment_proportion: "", margin_of_error: 4.4 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Female", age_group: "4_8", proportion: 7.0, quality_comment_proportion: "", margin_of_error: 3.1 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Female", age_group: "4_8", proportion: 3.6, quality_comment_proportion: "", margin_of_error: 2.0 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Does not eat fruit", gender: "Female", age_group: "9_11", proportion: 1.5, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "Less than 1 serve", gender: "Female", age_group: "9_11", proportion: 1.6, quality_comment_proportion: "", margin_of_error: 1.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "1 serve", gender: "Female", age_group: "9_11", proportion: 26.3, quality_comment_proportion: "", margin_of_error: 4.7 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "2 serves", gender: "Female", age_group: "9_11", proportion: 37.8, quality_comment_proportion: "", margin_of_error: 6.8 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "3 serves", gender: "Female", age_group: "9_11", proportion: 23.7, quality_comment_proportion: "", margin_of_error: 5.2 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "4 serves", gender: "Female", age_group: "9_11", proportion: 6.3, quality_comment_proportion: "", margin_of_error: 2.6 },
+  { year: 2022, concern: "Usual daily consumption of fruit", concern_label: "5 or more serves", gender: "Female", age_group: "9_11", proportion: 4.2, quality_comment_proportion: "", margin_of_error: 2.5 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "1 serve", gender: "Female", age_group: "9_11", proportion: 12.1, quality_comment_proportion: "", margin_of_error: 4.3 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "2 serves", gender: "Male", age_group: "9_11", proportion: 38.1, quality_comment_proportion: "", margin_of_error: 5.7 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "3 serves", gender: "Male", age_group: "9_11", proportion: 17.6, quality_comment_proportion: "", margin_of_error: 4.2 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "4 serves", gender: "Persons", age_group: "9_11", proportion: 15.0, quality_comment_proportion: "", margin_of_error: 2.5 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "5 or more serves", gender: "Female", age_group: "9_11", proportion: 2.6, quality_comment_proportion: "", margin_of_error: 1.8 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "2 serves", gender: "Female", age_group: "2_3", proportion: 40.3, quality_comment_proportion: "", margin_of_error: 6.7 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "3 serves", gender: "Male", age_group: "2_3", proportion: 17.8, quality_comment_proportion: "", margin_of_error: 6.0 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "4 serves", gender: "Male", age_group: "2_3", proportion: 11.6, quality_comment_proportion: "", margin_of_error: 5.6 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "5 or more serves", gender: "Persons", age_group: "2_3", proportion: 4.7, quality_comment_proportion: "", margin_of_error: 2.8 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "Does not eat fruit", gender: "Persons", age_group: "4_8", proportion: 1.4, quality_comment_proportion: "", margin_of_error: 0.8 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "Less than 1 serve", gender: "Male", age_group: "4_8", proportion: 0.6, quality_comment_proportion: "Proportion has a high margin of error and should be used with caution.", margin_of_error: null },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "1 serve", gender: "Male", age_group: "4_8", proportion: 26.8, quality_comment_proportion: "", margin_of_error: 3.0 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "2 serves", gender: "Male", age_group: "4_8", proportion: 36.4, quality_comment_proportion: "", margin_of_error: 4.7 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "3 serves", gender: "Persons", age_group: "4_8", proportion: 23.3, quality_comment_proportion: "", margin_of_error: 3.8 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "4 serves", gender: "Persons", age_group: "4_8", proportion: 7.7, quality_comment_proportion: "", margin_of_error: 2.3 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "5 or more serves", gender: "Female", age_group: "4_8", proportion: 2.9, quality_comment_proportion: "", margin_of_error: 1.4 },
+    { year: 2022, concern: "Usual daily consumption of vegetables", concern_label: "Does not eat fruit", gender: "Female", age_group: "9_11", proportion: 4.2, quality_comment_proportion: "", margin_of_error: 2.0 },
+    ];
+
+  // Separate data for male and female
+  var maleData = data.filter(d => d.gender === "Male");
+  var femaleData = data.filter(d => d.gender === "Female");
+
+  // Define SVG dimensions
+  var margin = { top: 20, right: 30, bottom: 30, left: 40 };
+  var width = 550 - margin.left - margin.right;
+  var height = 300 - margin.top - margin.bottom;
+
+
+
+
+  // Create SVG containers for male and female charts
+  var svgMale = d3.select("#chart-container-male").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var svgFemale = d3.select("#chart-container-female").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+  var xScale = d3.scaleBand()
+    .domain(data.map(d => d.concern_label))
+    .range([0, width])
+    .padding(0.2);
+
+  var yScale = d3.scaleLinear()
+    .domain([0, d3.max(data, d => d.proportion) + 10])
+    .range([height, 0]);
+
+  // Define color scale for labels
+  var colorScale = d3.scaleOrdinal()
+    .domain(data.map(d => d.concern_label))
+    .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]);
+
+  // Define tooltip
+  var tooltip = d3.select("#tooltip");  
+
+  // Function to update the chart based on selected age group
+  function updateChart(selectedAgeGroup, selectedConcern, gender, svg) {
+    // Filter data based on age group, concern, and gender
+    var filteredData = data.filter(d => d.age_group === selectedAgeGroup && d.concern === selectedConcern && d.gender === gender);
+  
+    // Update scales
+    var xScale = d3.scaleBand()
+      .domain(filteredData.map(d => d.concern_label))
+      .range([0, width])
+      .padding(0.2);
+  
+    var yScale = d3.scaleLinear()
+      .domain([0, d3.max(filteredData, d => d.proportion) + 10])
+      .range([height, 0]);
+  
+    // Update axes
+    var xAxis = d3.axisBottom().scale(xScale);
+    var yAxis = d3.axisLeft().scale(yScale);
+  
+    svg.selectAll(".x-axis")
+      .call(xAxis);
+  
+    svg.selectAll(".y-axis")
+      .call(yAxis);
+  
+    // Update bars
+    var bars = svg.selectAll(".bar")
+      .data(filteredData);
+  
+    bars.enter().append("rect")
+      .attr("class", "bar")
+      .merge(bars)
+      .transition()
+      .duration(500)
+      .attr("x", d => xScale(d.concern_label))
+      .attr("y", d => yScale(d.proportion))
+      .attr("width", xScale.bandwidth())
+      .attr("height", d => height - yScale(d.proportion))
+      .attr("fill", d => colorScale(d.concern_label))
+      .attr("opacity", 0.55);
+  
+    bars.exit().remove();
+  
+    // Update error bars
+    var errorBars = svg.selectAll(".error-bar")
+      .data(filteredData.filter(d => d.margin_of_error));
+  
+    errorBars.enter().append("line")
+      .attr("class", "error-bar")
+      .merge(errorBars)
+      .transition()
+      .duration(500)
+      .attr("x1", d => xScale(d.concern_label) + xScale.bandwidth() / 2)
+      .attr("y1", d => yScale(d.proportion + d.margin_of_error))
+      .attr("x2", d => xScale(d.concern_label) + xScale.bandwidth() / 2)
+      .attr("y2", d => yScale(d.proportion - d.margin_of_error))
+      .attr("stroke", "black")
+      .attr("opacity", 0.5)
+      .attr("stroke-width", 0.5);
+  
+    errorBars.exit().remove();
+
+  /*  
+  // Add vertical line between "1 serve" and "2 serves"
+    svg.append("line")
+    .attr("class", "vertical-line")
+    .attr("x1",   (xScale("1 serve") + xScale("2 serves")+xScale.bandwidth() ) * 1/2)
+    .attr("y1", 0)
+    .attr("x2", (xScale("1 serve") + xScale("2 serves")+xScale.bandwidth() ) * 1/2)
+    .attr("y2", height)
+    .attr("stroke", "red")
+    .attr("stroke-width", 2)
+    .attr("stroke-dasharray", "5,5");  
+    */
+
+    svg.selectAll(".bar")
+    .data(data)
+    .enter().append("line")
+    .attr("class", "vertical-line")
+    .attr("x1", function(d) { 
+        if (d.age === "2_3") {
+            return xScale("1 serve") - xScale.bandwidth() / 2;
+        } else {
+            return (xScale("1 serve") + xScale("2 serves")+xScale.bandwidth())  * 1/2; 
+        }
+    })
+    .attr("y1", 0)
+    .attr("x2", function(d) { 
+      if (d.age === "2_3") {
+          return xScale("1 serve") - xScale.bandwidth() / 2;
+      } else {
+          return (xScale("1 serve") + xScale("2 serves")+xScale.bandwidth())  * 1/2; 
+      }
+  })
+  .attr("y2", height)
+  .attr("stroke", "red")
+  .attr("stroke-width", 2)
+  .attr("stroke-dasharray", "5,5");
+  bars.exit().remove();
+  
+    // Add horizontal lines for the error bars
+    var errorBarHorizontalUpper = svg.selectAll(".error-bar-horizontal-upper")
+      .data(filteredData.filter(d => d.margin_of_error));
+  
+    errorBarHorizontalUpper.enter().append("line")
+      .attr("class", "error-bar-horizontal-upper")
+      .merge(errorBarHorizontalUpper)
+      .attr("x1", d => xScale(d.concern_label) + xScale.bandwidth() * 3 / 8)
+      .attr("y1", d => yScale(d.proportion + d.margin_of_error))
+      .attr("x2", d => xScale(d.concern_label) + xScale.bandwidth() * 5 / 8)
+      .attr("y2", d => yScale(d.proportion + d.margin_of_error))
+      .attr("stroke", "black")
+      .attr("opacity", 0.5)
+      .attr("stroke-width", 1);
+  
+    errorBarHorizontalUpper.exit().remove();
+  
+    var errorBarHorizontalLower = svg.selectAll(".error-bar-horizontal-lower")
+      .data(filteredData.filter(d => d.margin_of_error));
+  
+    errorBarHorizontalLower.enter().append("line")
+      .attr("class", "error-bar-horizontal-lower")
+      .merge(errorBarHorizontalLower)
+      .attr("x1", d => xScale(d.concern_label) + xScale.bandwidth() * 3 / 8)
+      .attr("y1", d => yScale(d.proportion - d.margin_of_error))
+      .attr("x2", d => xScale(d.concern_label) + xScale.bandwidth() * 5 / 8)
+      .attr("y2", d => yScale(d.proportion - d.margin_of_error))
+      .attr("stroke", "black")
+      .attr("opacity", 0.5)
+      .attr("stroke-width", 1);
+  
+    errorBarHorizontalLower.exit().remove();
+  
+    // Update tooltips
+    svg.selectAll(".bar")
+      .on("mouseover", function(event, d) {
+        // Show tooltip
+        d3.select(this).attr("opacity", 0.85); // highlight selected bar
+        tooltip.html(`
+          <p><strong>Proportion:</strong> ${d.proportion}</p>
+          <p><strong>Margin of Error:</strong> ${d.margin_of_error || 'N/A'}</p>
+        `)
+          .style("left", (event.pageX) + "px")
+          .style("top", (event.pageY - 28) + "px")
+          .style("opacity", 1);
+      })
+      .on("mouseout", function() {
+        // Hide tooltip
+        d3.select(this).attr("opacity", 0.6);
+        tooltip.style("opacity", 0);
+      });
+  }
+// Call updateChart initially with default age group
+// Call updateChart initially with default values
+updateChart("4_8", "Usual daily consumption of fruit", "Male", svgMale);
+updateChart("4_8", "Usual daily consumption of fruit", "Female", svgFemale);
+
+// Event listener for selection change
+
+// Event listeners for selection change
+d3.select("#ageGroupSelect").on("change", function() {
+  var selectedAgeGroup = d3.select(this).property("value");
+  var selectedConcern = d3.select("#concernSelect").property("value");
+  updateChart(selectedAgeGroup, selectedConcern, "Male", svgMale);
+  updateChart(selectedAgeGroup, selectedConcern, "Female", svgFemale);
+});
+
+d3.select("#concernSelect").on("change", function() {
+  var selectedConcern = d3.select(this).property("value");
+  var selectedAgeGroup = d3.select("#ageGroupSelect").property("value");
+  updateChart(selectedAgeGroup, selectedConcern, "Male", svgMale);
+  updateChart(selectedAgeGroup, selectedConcern, "Female", svgFemale);
+});
+
+
+// Define color scale for labels
+var colorScale = d3.scaleOrdinal()
+  .domain(data.map(d => d.concern_label))
+  .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]);
+
+// Define tooltip
+var tooltip = d3.select("#tooltip");
+
+// Create axes
+var xAxis = d3.axisBottom().scale(xScale);
+var yAxis = d3.axisLeft().scale(yScale);
+
+svgMale.append("g")
+  .attr("class", "x-axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
+
+svgMale.append("g")
+  .attr("class", "y-axis")
+  .call(yAxis);
+
+svgFemale.append("g")
+  .attr("class", "x-axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
+
+svgFemale.append("g")
+  .attr("class", "y-axis")
+  .call(yAxis);
+// Add legend
+var legend = svg.selectAll(".legend")
+  .data(colorScale.domain())
+  .enter().append("g")
+  .attr("class", "legend")
+  .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+legend.append("rect")
+  .attr("x", width - 18)
+  .attr("width", 18)
+  .attr("height", 18)
+  .style("fill", colorScale);
+
+legend.append("text")
+  .attr("x", width - 24)
+  .attr("y", 9)
+  .attr("dy", ".35em")
+  .style("text-anchor", "end")
+  .text(function(d) { return d; });
+
+ 
+</script>
+
+</body>
+
+{% endblock main_content %}

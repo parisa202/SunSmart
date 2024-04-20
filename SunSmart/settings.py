@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     
     # Apps
     'Apps.CoreApp',
+    'Apps.V1CoreApp',
     'Apps.UserAuthentication',
 ]
 

@@ -1,0 +1,184 @@
+{% extends "V1CoreApp/base.html" %}
+{% load static %}
+
+
+{% block title_block %}
+    
+{% endblock title_block %}
+
+
+
+
+
+{% block main_content %}
+
+
+<div class="container">
+    <div class="page-header" style=" background-color:#d2efd5; text-align: center;">
+        <div class="container">
+            <h1 class="page-title col-lg-10 mx-auto" style="font-size: 24px;text-align: center;">Nutrition Guideline<span>{{sub_title}}</span></h1>
+        </div><!-- End .container -->
+</div>
+
+
+
+
+        <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url "V1CoreApp:index" %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Nutrition Guideline</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+    
+        <div class="page-content">
+            <div class="checkout">
+                <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <h2 class="checkout-title">Australian Nutrition Guideline for Children</h2><!-- End .checkout-title -->
+                                <p>Choose your child's age from menue and view the Australian Nutrition Guideline.</p><!-- End .checkout-title -->
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label>Age Group</label>
+                                        <div class="select-custom">
+                                            <select name="selected_age_range" id="age_range" class="form-control">
+                                                <option value="Ages 2 to 4">Ages 2 to 4</option>
+                                                <option value="Ages 5 to 8">Ages 5 to 8</option>
+                                                <option value="Ages 9 to 13">Ages 9 to 13</option>
+                                            </select>
+                                        </div><!-- End .select-custom -->
+                                    </div><!-- End .col-sm-6 -->
+                                </div>
+                                <div class="row mt-5" style="display: none;">
+                                    <div class="summary" style="min-width: -webkit-fill-available;">
+                                        <h3 class="summary-title">Recipe Description</h3>
+                                        <p id="recipe_description" style="padding-bottom: 1.7rem"></p>
+                                    </div><!-- End .summary -->
+                                </div>
+                            </div>
+                            <aside class="col-lg-4">
+                                <div class="summary">
+                                    <h3 class="summary-title">Nutrition Guideline</h3>
+                                    
+
+                                    <table class="table table-summary mt-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nutrition</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Calories:</td>
+                                                <td></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Protein:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Dairy:</td>
+                                                <td></td>
+                                            </tr><!-- End .summary-subtotal -->
+                                            <tr>
+                                                <td>Grains:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fruits:</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vegetables:</td>
+                                                <td></td>
+                                            </tr>
+                                            <!-- End .summary-total -->
+
+
+                                        </tbody>
+                                    </table><!-- End .table table-summary -->
+
+                                </div><!-- End .summary -->
+                            </aside><!-- End .col-lg-3 -->
+                        </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .checkout -->
+
+            <!-- section4 -->
+<div class="container">
+    <div class="cta cta-border mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-11 col-xl-10">
+                <div class="cta-content">
+                    <div class="cta-heading">
+                        <h3 class="cta-title text-center">Wondering if your child's meal hits the mark?</h3><!-- End .cta-title -->
+                    </div><!-- End .cta-heading -->
+                    
+                    <div class="cta-text">
+                        <p>Let our <strong>Nutrition Analysis tool</strong> be your guide! Enter your recipe and the portion size your child enjoyed, and get a personalized breakdown of its nutritional value. Compare against age-based guidelines for tailored insights. Click now to ensure your child gets the nutrients they need! </p>
+                    </div><!-- End .cta-text -->
+                    <a href="{% url "V1CoreApp:guest_tracker" %}" class="btn btn-primary btn-rounded"><span>Nutrition Analyzer</span><i class="icon-long-arrow-right"></i></a>
+                </div><!-- End .cta-content -->
+            </div><!-- End .col-xl-7 -->
+        </div><!-- End .row -->
+    </div><!-- End .cta -->
+ 
+</div>
+
+
+        </div>
+
+{% endblock main_content %}
+
+
+{% block more_script %}
+<script>
+    $(document).ready(function () {
+        $('#age_range').on('input', function (e) {
+            var ageChoice = $('#age_range').val(); // Get selected value
+
+            if (ageChoice === 'nan') {
+                return; // Do nothing and exit the function
+            };
+            
+         
+            // AJAX call
+            $.ajax({
+                type: "POST",
+                url: "{% url 'V1CoreApp:US21' %}", 
+                data: {'selected_age_range': ageChoice,
+                        'csrfmiddlewaretoken': '{{csrf_token}}'
+                        },
+                dataType: 'json',
+                success: function (response) {
+                    // Update with the received JSON data
+                    //console.log(response);
+                    if(response.status == 'not found'){
+                        $('#selected_age_range').empty();
+                    } else {
+                    
+                    $('.table-summary tbody').empty().append(
+                        '<tr><td>Calories:</td><td>' + response.daily_guidelines.calories +
+                        '<tr><td>Protein:</td><td>' + response.daily_guidelines.protein+
+                        '<tr><td>Dairy:</td><td>' + response.daily_guidelines.dairy+
+                        '<tr><td>Grains:</td><td>' + response.daily_guidelines.grains+
+                        '<tr><td>Fruits: </td><td>' + response.daily_guidelines.fruits+
+                        '<tr><td>Vegetables:</td><td>' + response.daily_guidelines.vegetables
+                    );
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ": " + request.responseText);
+                }
+            });
+        
+        });
+        
+    });
+</script>
+{% endblock more_script %}

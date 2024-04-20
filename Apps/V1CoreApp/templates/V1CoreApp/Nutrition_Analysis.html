@@ -1,0 +1,107 @@
+{% extends "V1CoreApp/base.html" %}
+{% load static %}
+
+
+{% block title_block %}
+    
+{% endblock title_block %}
+
+
+
+
+
+{% block main_content %}
+
+<div class="container">
+    <div class="page-header" style=" background-color:#d2efd5; text-align: center;">
+        <div class="container">
+            <h1 class="page-title col-lg-10 mx-auto" style="font-size: 24px;text-align: center;">Nutrition Analyzer<span>{{sub_title}}</span></h1>
+        </div><!-- End .container -->
+</div>
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "V1CoreApp:index" %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nutrition Analyzer</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="checkout">
+        <div class="container">
+        {% include "V1CoreApp/components/recipe_analysis.html" %}
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="cta cta-border mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-11 col-xl-10">
+                <div class="cta-content">
+                    <div class="cta-heading">
+                        <h3 class="cta-title text-center">Curious about your child's nutritional needs?</h3><!-- End .cta-title -->
+                    </div><!-- End .cta-heading -->
+                    
+                    <div class="cta-text">
+                        <p> After analyzing their meal with our Nutrition Analyzer, head over to Australian Nutrition Age-Based Guidelines for personalized recommendations. View Guidelines to ensure your child's diet is perfectly balanced for their growth and development!  </p>
+                    </div><!-- End .cta-text -->
+                    <a href="{% url "V1CoreApp:US21" %}" class="btn btn-primary btn-rounded"><span>Nutrition Guidelines</span><i class="icon-long-arrow-right"></i></a>
+                </div><!-- End .cta-content -->
+            </div><!-- End .col-xl-7 -->
+        </div><!-- End .row -->
+    </div><!-- End .cta -->
+ 
+</div>
+
+{% endblock main_content %}
+
+
+{% block more_script %}
+<script>
+    $(document).ready(function () {
+        $('#recipe, #intake').on('input', function (e) {
+            var recipeChoice = $('#recipe').val(); // Get selected value
+            var recipeIntake = $('#intake').val(); // Get selected value
+
+            if (recipeChoice === 'nan') {
+                return; // Do nothing and exit the function
+            };
+            // AJAX call
+            $.ajax({
+                type: "POST",
+                url: "{% url 'V1CoreApp:guest_tracker' %}", 
+                data: {'selected_recipe': recipeChoice,
+                        'recipe_intake': recipeIntake,
+                        'csrfmiddlewaretoken': '{{csrf_token}}'
+                        },
+                dataType: 'json',
+                success: function (response) {
+                    // Update with the received JSON data
+                    //console.log(response);
+                    if(response.status == 'not found'){
+                        $('#recipe_description').empty();
+                    } else {
+                    $('#recipe_description').text(response.recipe_instructions);
+                    $('.table-summary tbody').empty().append(
+                        '<tr><td>Calories:</td><td>' + response.calories_intake+ 'Kcal'+
+                        '<tr><td>Total Fat:</td><td>' + response.fat_total_g_intake+ 'g'+
+                        '<tr><td>Saturated Fat:</td><td>' + response.fat_saturated_g_intake+ 'g'+
+                        '<tr><td>Carbohydrates:</td><td>' + response.carbohydrates_total_g_intake+ 'g'+
+                        '<tr><td>Protein: </td><td>' + response.protein_g_intake+ 'g'+
+                        '<tr><td>Fiber:</td><td>' + response.fiber_g_intake+ 'g'
+                    );
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ": " + request.responseText);
+                }
+            });
+        });
+    });
+</script>
+{% endblock more_script %}
