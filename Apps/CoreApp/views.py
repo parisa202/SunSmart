@@ -336,6 +336,9 @@ class MacronutrientsView(generic.TemplateView):
 class RecipeView(generic.TemplateView):
     template_name = 'CoreApp/recipe_view.html'
 
+class RecipeListView(generic.TemplateView):
+    template_name = 'CoreApp/recipe_list.html'
+
 #not complete
 class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
@@ -441,6 +444,7 @@ class LogoutView(generic.View):
     
 class ComingView(generic.TemplateView):
     template_name = 'CoreApp/coming_soon.html'
+
 
 
 class ImportDataView(generic.View):

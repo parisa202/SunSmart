@@ -24,8 +24,8 @@ urlpatterns = [
     path('coming-soon/', views.ComingView.as_view(), name='coming'),
     path('macronutrients-children/', views.MacronutrientsView.as_view(), name='macronutrients'),
     path('recipe/', views.RecipeView.as_view(), name='recipe'),
+    path('recipe-list/', views.RecipeListView.as_view(), name='recipe_list'),
     path('veggie-insights/', views.VeggiView.as_view(), name='Veggi'),
-    
     # import data views
     path('data/', views.ImportDataView.as_view(), name='import_data'),
     # /data/?file_name=pb_who_bmi.csv&model_name=PB_WHO_BMI
