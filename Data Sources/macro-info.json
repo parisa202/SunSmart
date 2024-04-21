@@ -2,17 +2,17 @@
     {
         "name": "Carbohydrates",
         "benefits": "Carbs are the body's primary source of energy which is essential for children's cognitive performance and physical movement.",
-        "sources": "Healthy sources of carbs include corns, oats, quinoa, potatoes, sweet potatoes, rice etc."
+        "sources": "Healthy sources of carbohydrates include whole grains like oats and quinoa, legumes such as beans and lentils, fruits like apples and berries, and vegetables such as broccoli and spinach."
     },
     {
         "name": "Proteins",
-        "benefits": "Proteins are essential for a healthy immune system and children's growth and development.",
-        "sources": "Healthy sources of proteins include peas, beans, egg white, beef, lamb, sea fish etc."
+        "benefits": "Protein benefits children by supporting growth, muscle development, immune function, and overall health.",
+        "sources": "Healthy sources of proteins for children include lean meats such as chicken and turkey, fish, eggs, dairy products like yogurt and cheese, legumes such as beans and lentils, nuts, and seeds."
     },
     {
         "name": "Fats",
-        "benefits": "Fats are important for regulating hormone and help children absorb other nutrients.",
-        "sources": "Healthy sources of fats include avocados, egg yolk, butter, nuts, olive oil, coconut oil etc."
+        "benefits": "Healthy fats support brain development, aid in nutrient absorption, help maintain cell structure, regulate hormone production, and promote satiety and healthy weight management.",
+        "sources": "Healthy sources of fats for children include avocados, nuts, seeds, fatty fish such as salmon, and olive oil."
     }
 ]
 }

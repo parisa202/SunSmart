@@ -17,8 +17,8 @@
   <div style="display: flex; justify-content: center; padding-bottom: 10px;">
     <div class="container col-9.9">
       <div>
-        <h3>What is Macronutrient</h3>
-        <p>Macronutrients in food, like carbohydrates, proteins, and fats, are crucial for kids' energy and growth. Carbs, found in bread and fruits, fuel their play. Proteins from meat and beans help build strong muscles. Fats, in avocados and nuts, support brain power. Balancing these nutrients keeps kids healthy and energized for all their activities, ensuring they have the strength and stamina to play, learn, and explore every day.</p>
+        <h3>What is Micronutrient</h3>
+        <p>Micronutrients, like vitamins and minerals, are essential for kids' growth and health. They help with things like strong bones, a good immune system, and keeping their brains working well. Found in foods like fruits, veggies, and milk, these nutrients are crucial for kids to grow and stay energized. Even though they're needed in smaller amounts, they're super important for kids' overall health. Eating different kinds of foods helps kids get all the micronutrients they need to grow up strong and happy.</p>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
       <aside class="col-lg-5">
         <div class="sidebar">
           <div class="widget">
-            <h3 class="widget-title">Macronutrients</h3><!-- End .widget-title -->
+            <h3 class="widget-title">Micronutrients</h3><!-- End .widget-title -->
             <div class="tagcloud" id="tagcloud" style="font-weight: bold;">
               
               <style>
@@ -51,9 +51,16 @@
                 }
               </style>
               
-              <a name="Carbohydrates" style="background-color:rgb(107, 228, 170);color:#393232">Carbs</a>
-              <a name="Fats" style="background-color:rgb(107, 228, 170);color:#393232">Fats</a>
-              <a name="Proteins" style="background-color:rgb(107, 228, 170);color:#393232">Proteins</a>
+              <a name="Vitamin_A" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin A</a>
+              <a name="Vitamin_B" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin B</a>
+              <a name="Vitamin_C" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin C</a>
+              <a name="Vitamin_D" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin D</a>
+              <a name="Vitamin_E" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin E</a>
+              <a name="Vitamin_K" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin K</a>
+              <a name="Magnesium" style="background-color:rgb(107, 228, 170);color:#393232">Magnesium</a>
+              <a name="Calcium" style="background-color:rgb(107, 228, 170);color:#393232">Calcium</a>
+              <a name="Zinc" style="background-color:rgb(107, 228, 170);color:#393232">Zinc</a>
+              <a name="Iron" style="background-color:rgb(107, 228, 170);color:#393232">Iron</a>
             </div>
           </div>
         </div><!-- End .sidebar -->
@@ -62,9 +69,9 @@
       <div class="col-lg-7">
         <div class="entry-content editor-content">
           <h3>How will this nutrition benefit your children?</h3>
-            <p id="macro_benefits" style="height: 100px;">Click the button on the left</p>
+            <p id="micro_benefits" style="height: 100px;">Click the button on the left</p>
           <h3>Where can you help your children get this nutrition?</h3>
-            <p id="macro_sources" style="height: 100px;">Click the button on the left</p>
+            <p id="micro_sources" style="height: 100px;">Click the button on the left</p>
         </div>
       </div><!-- End .col-lg-7 -->
 
@@ -104,7 +111,7 @@
         // AJAX call
         $.ajax({
             type: "POST",
-            url: "{% url 'CoreApp:macronutrients' %}", 
+            url: "{% url 'CoreApp:micronutrients' %}", 
             data: {'selected_tag': tagChoice,
                     'csrfmiddlewaretoken': '{{csrf_token}}'
                   },
@@ -113,11 +120,11 @@
                 // Update with the received JSON data
                 console.log(response);
                 if(response.status == 'not found'){
-                    $('#macro_benefits').empty();
-                    $('#macro_sources').empty();
+                    $('#micro_benefits').empty();
+                    $('#micro_sources').empty();
                 } else {
-                $('#macro_benefits').text(response.benefits);
-                $('#macro_sources').text(response.sources);
+                $('#micro_benefits').text(response.benefits);
+                $('#micro_sources').text(response.sources);
                 }
             },
             error: function (request, status, error) {
