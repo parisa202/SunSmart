@@ -1,31 +1,31 @@
 { "micronutrients": [
     {
-        "name": "Vitamin A",
+        "name": "Vitamin_A",
         "benefits": "Vitamin A is very important for preventing poor vision and dry eyes, and promotes hair and skin growth of children. Most importantly, it is essential for a good immune response to infectious diseases such as diarrhea, respiratory diseases and measles.",
         "sources": "Dietary sources of Vitamin A include milk, cheese, eggs and yellow to orange vegetables such as carrots, yams and squash."
     },
     {
-        "name": "Vitamin B",
+        "name": "Vitamin_B",
         "benefits": "Vitamin B is important for helping children's metabolism, energy production, healthy circulation and nervous system.",
         "sources": "Foods rich in Vitamin B are meat, chicken, fish, nuts, eggs, milk, cheese, beans, and soybeans."
     },
     {
-        "name": "Vitamin C",
+        "name": "Vitamin_C",
         "benefits": "Vitamin C plays an important role in children's growth, development and good immunity. It is an important antioxidant that helps fight disease and toxins. This vitamin also helps promote iron absorption in the gut.",
         "sources": "There are many colorful fruits rich in vitamin C that will appeal to children. For example, oranges, kiwis, grapefruit, strawberries, raspberries, and vegetables such as tomatoes, cabbage, cauliflower, and Brussels sprouts."
     },
     {
-        "name": "Vitamin D",
+        "name": "Vitamin_D",
         "benefits": "Vitamin D is a fat-soluble vitamin that promotes the formation of children's bones and teeth.",
         "sources": "Good food sources of vitamin D are milk and fatty fish such as salmon and mackerel. The best source of vitamin D is sunlight, especially in the morning."
     },
     {
-        "name": "Vitamin E",
+        "name": "Vitamin_E",
         "benefits": "Vitamin E is an important antioxidant that helps to boost immunity and promote skin growth of children.",
         "sources": "Foods rich in vitamin E are almonds, peanuts, spinach, and avocados."
     },
     {
-        "name": "Vitamin K",
+        "name": "Vitamin_K",
         "benefits": "Vitamin K is a very important vitamin that can prevent bleeding disorders of children.",
         "sources": "Foods rich in vitamin K include vegetables like spinach, kale, lettuce, brussels sprouts, broccoli, and fruits like plums, kiwi, avocado, berries, and pomegranates."
     },

@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title_block %}  
+{% block title_block %}
 {% endblock title_block %}
 
 {% block extra_css %}
@@ -11,55 +11,76 @@
 
 {% block main_content %}
 
-    {% include "CoreApp/components/breadcrumb.html" %}
-    <div class="entry-content editor-content" style ='justify-content: center'>
-      <div style="display: flex; justify-content: center; padding-bottom: 10px;">
-        <div class="container col-10">
-          <div>
-              <h3>What is Micronutrient</h3>
-              According to research conducted by Jebeile and colleagues (2022), primary strategies for preventing overweight and obesity focus on family behaviours, including diet, physical activity, sedentary habits, and sleep quality. These approaches are supported by behaviour change techniques.
-              Hence, it is crucial to prioritise improvements in easily modifiable factors to prevent overweight and obesity. Since family behaviours and habits are internal factors that play a significant role, it is important to note that external factors can also influence these behaviours.</p>
-          </div>
-          <!-- <img src="{% static 'CoreApp/img/US1.3_2.jpeg' %}" alt="" style="width: 260px; height: auto;"> -->
-         
-        </div>
+{% include "CoreApp/components/breadcrumb.html" %}
+<div class="entry-content editor-content" style ='justify-content: center'>
+  
+  <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+    <div class="container col-9.9">
+      <div>
+        <h3>What is Micronutrient</h3>
+        <p>Micronutrients, like vitamins and minerals, are essential for kids' growth and health. They help with things like strong bones, a good immune system, and keeping their brains working well. Found in foods like fruits, veggies, and milk, these nutrients are crucial for kids to grow and stay energized. Even though they're needed in smaller amounts, they're super important for kids' overall health. Eating different kinds of foods helps kids get all the micronutrients they need to grow up strong and happy.</p>
       </div>
+    </div>
+  </div>
 
-<div class="container"><!-- container macro -->
-  <div class="row">
-
-    <aside class="col-lg-3">
-      <div class="sidebar">
+  <div class="container"><!-- container macro -->
+    <div class="row">
+    
+      <aside class="col-lg-5">
+        <div class="sidebar">
           <div class="widget">
             <h3 class="widget-title">Micronutrients</h3><!-- End .widget-title -->
-            <div class="tagcloud" id="tagcloud">
-              <a name="Protein" >Protein</a>
-              <a name="Fat" >Fat</a>
-              <a name="Carbo" >Carbo</a>
+            <div class="tagcloud" id="tagcloud" style="font-weight: bold;">
+              
+              <style>
+                .tagcloud a {
+                  padding: 10px 20px;
+                  border: 1px solid #ccc;
+                  border-radius: 10px; /* Adjust border radius for rounded corners */
+                  text-decoration: none;
+                  color: #333;
+                  font-weight: bold;
+                  background-color: #fff;
+                  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+                }
+            
+                .tagcloud a:hover {
+                  background-color: #f0f0f0;
+                  border-color: #999;
+                  color: #000; /* Change text color on hover */
+                }
+              </style>
+              
+              <a name="Vitamin_A" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin A</a>
+              <a name="Vitamin_B" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin B</a>
+              <a name="Vitamin_C" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin C</a>
+              <a name="Vitamin_D" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin D</a>
+              <a name="Vitamin_E" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin E</a>
+              <a name="Vitamin_K" style="background-color:rgb(107, 228, 170);color:#393232">Vitamin K</a>
+              <a name="Magnesium" style="background-color:rgb(107, 228, 170);color:#393232">Magnesium</a>
+              <a name="Calcium" style="background-color:rgb(107, 228, 170);color:#393232">Calcium</a>
+              <a name="Zinc" style="background-color:rgb(107, 228, 170);color:#393232">Zinc</a>
+              <a name="Iron" style="background-color:rgb(107, 228, 170);color:#393232">Iron</a>
             </div>
+          </div>
+        </div><!-- End .sidebar -->
+      </aside><!-- End .col-lg-5 -->
+
+      <div class="col-lg-7">
+        <div class="entry-content editor-content">
+          <h3>How will this nutrition benefit your children?</h3>
+            <p id="micro_benefits" style="height: 100px;">Click the button on the left</p>
+          <h3>Where can you help your children get this nutrition?</h3>
+            <p id="micro_sources" style="height: 100px;">Click the button on the left</p>
         </div>
-      </div><!-- End .sidebar -->
-    </aside><!-- End .col-lg-3 -->
+      </div><!-- End .col-lg-7 -->
 
-    <div class="col-lg-9">
-      <div class="entry-content editor-content">
-      </h3>Explore micronutrients </h3>
-      <p id="micro_description" style="padding-bottom: 1.7rem">1111</p>
-
-      <p>select micronutrient and see the explanation
-
-      </h3>Ways to include carbohydrates in your child’s diet</h3>
-    </div>
-
-    </div><!-- End .col-lg-9 -->
-  </div><!-- End row information --> 
-
-</div><!-- End container macro -->
+    </div><!-- End row information -->
+  </div><!-- End container macro -->
 
   <div class="container">
- 
     <hr class="mb-2">
-    <div class="cta bg-image pt-3 pb-3 mb-3" style="background-color:#d2efd5;background-position: center right;">
+      <div class="cta bg-image pt-3 pb-3 mb-3" style="background-color:#d2efd5;background-position: center right;">
         <div class="row justify-content-center">
             <div class="col-sm-10 col-md-8 col-lg-8">
                 <div class="cta-text text-center">
@@ -71,38 +92,39 @@
                 </div><!-- End .cta-text -->
             </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
         </div><!-- End .row -->
-    </div><!-- End .cta -->
+      </div><!-- End .cta -->
+    </hr>
+  </div>
 
 </div>
-</div>
+
 <script>
-  
   $(document).ready(function () {
-    
     //var tagcloud = 
-
     $('#tagcloud a').on('click', function (e) {
         var tagChoice = $(this).attr('name'); // Get selected value
 
         if (tagChoice === 'nan') {
             return; // Do nothing and exit the function
         };
-        //console.log(tagChoice)
+        // console.log(tagChoice)
         // AJAX call
         $.ajax({
             type: "POST",
-            url: "{% url 'CoreApp:macronutrients' %}", 
+            url: "{% url 'CoreApp:micronutrients' %}", 
             data: {'selected_tag': tagChoice,
                     'csrfmiddlewaretoken': '{{csrf_token}}'
-                    },
+                  },
             dataType: 'json',
             success: function (response) {
                 // Update with the received JSON data
                 console.log(response);
                 if(response.status == 'not found'){
-                    $('#macro_description').empty();
+                    $('#micro_benefits').empty();
+                    $('#micro_sources').empty();
                 } else {
-                $('#macro_description').text(response.description);
+                $('#micro_benefits').text(response.benefits);
+                $('#micro_sources').text(response.sources);
                 }
             },
             error: function (request, status, error) {
@@ -111,7 +133,6 @@
             
         });
     });
-});
-
+  });
 </script>
-  {% endblock main_content %}
+{% endblock main_content %}
