@@ -324,7 +324,7 @@ class MacronutrientsView(generic.TemplateView):
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         super().get_context_data(**kwargs)
-        tags = ['fashion', 'style', 'CARBOHYDRATES', 'PROTEIN', 'travel', 'shopping', 'hobbies']
+        # tags = ['fashion', 'style', 'CARBOHYDRATES', 'PROTEIN', 'travel', 'shopping', 'hobbies']
         new_context = {'main_title': 'Understanding Macronutrients for Children',
                        'sub_title': '',
                        'page_name': 'Understanding Macronutrients'
@@ -358,7 +358,7 @@ class MicronutrientsView(generic.TemplateView):
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         super().get_context_data(**kwargs)
-        tags = ['fashion', 'style', 'CARBOHYDRATES', 'PROTEIN', 'travel', 'shopping', 'hobbies']
+        # tags = ['fashion', 'style', 'CARBOHYDRATES', 'PROTEIN', 'travel', 'shopping', 'hobbies']
         new_context = {'main_title': 'Understanding Micronutrients for Children',
                        'sub_title': '',
                        'page_name': 'Understanding Micronutrients'
