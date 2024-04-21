@@ -332,6 +332,40 @@ class MacronutrientsView(generic.TemplateView):
         
         return new_context
     
+class MicronutrientsView(generic.TemplateView):
+    template_name = 'CoreApp/Micronutrients.html'
+    micro_info = None
+    
+    def setup(self, request, *args, **kwargs):
+        file_address = os.path.join('Data Sources', 'micro-info.json')
+        with open(file_address, 'r') as f:
+            # JSON to dictionary
+            self.micro_info = json.load(f)
+        return super().setup(request, *args, **kwargs)
+    
+    
+    def post(self, request):
+        selected_tag = request.POST.get('selected_tag')
+        
+        # find 
+        for r in self.micro_info['micronutrients']:
+            if r.get('name') == selected_tag:
+                info = r
+                break
+            else:
+                info = {'status': 'not found'}
+        return JsonResponse(info)
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)
+        tags = ['fashion', 'style', 'CARBOHYDRATES', 'PROTEIN', 'travel', 'shopping', 'hobbies']
+        new_context = {'main_title': 'Understanding Micronutrients for Children',
+                       'sub_title': '',
+                       'page_name': 'Understanding Micronutrients'
+                       }
+        
+        return new_context
+    
 
 class RecipeView(generic.TemplateView):
     template_name = 'CoreApp/recipe_view.html'
