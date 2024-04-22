@@ -18,7 +18,11 @@
 
             <div class="col-sm-6">
                 <label>Portion</label>
-                <input type="text" id="intake" name="recipe_intake" class="form-control" required="" value="1">
+                <!-- <input type="text" id="intake" name="recipe_intake" class="form-control" required="" value="1"> -->
+                <select id="intake" name="recipe_intake" class="form-control" required="">
+                    <option value="0.5">0.5 (Child)</option>
+                    <option value="1" selected>1 (Adult)</option>
+                </select>
             </div><!-- End .col-sm-6 -->
         </div>
         <div class="row mt-5">

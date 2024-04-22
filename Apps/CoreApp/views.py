@@ -204,23 +204,22 @@ class US22View(generic.TemplateView):
 #Reminder page
 class ReminderView(generic.TemplateView):
     template_name = 'CoreApp/reminder_main.html'
+    
     def post(self, request):
         email = request.POST.get('email', None)
         date = request.POST.get('date', None)
         meal = request.POST.get('meal', None)
         
-      
-
         # send sign-in data to authentication API
         api_url = 'http://juniorjoy.site/api/reminder/set-ses-reminder'
         
         data = {'email': email,
-                    'date': date,
-                    'meal': meal
+                'date': date,
+                'meal': meal
         }
         response = api_request(url=api_url, parameters=data, request_type='POST')    
        
-        messages.add_message(self.request, messages.SUCCESS, 'The reminder has been set successfully')
+        messages.add_message(self.request, messages.SUCCESS, 'The reminder has been set successfully  ')
         
         return redirect('CoreApp:US23')
         
@@ -229,7 +228,7 @@ class ReminderView(generic.TemplateView):
         super().get_context_data(**kwargs)
   
         new_context = {'main_title': 'Reminder',
-                    #    'sub_title': 'Obesity and Overweight among Children',
+                       'sub_title': '',
                        'page_name': 'Reminder'
         }
         
