@@ -1,4 +1,5 @@
 {% extends "CoreApp/base.html" %}
+{% load static %}
 
 {% block extra_css %}
   <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -36,7 +37,60 @@
             <h3>Exploring the Vital Role of Vegetables in Children's Diets</h3>
             information about the importance of vegetable consumption in children.</p>
             <h4>**What is a serve of vegetable**</h4>
-            information about one serve pf vegetable.</p>
+            
+
+
+            <div class="row justify-content-center">
+              <div class="col-sm-6 col-lg-4">
+                <div class="banner">
+                    <img src="{% static "assets/images/banners/banner-serve-veg.jpg" %}"  alt="Banner">
+                </div><!-- End .banner -->
+              </div><!-- End .col-lg-4 -->
+
+              <div class="col-sm-6 col-lg-4 order-lg-last">
+                <div class="banner">
+                    <img src="{% static "assets/images/banners/banner-serve-fruit.jpg" %}"  alt="Banner">
+                </div><!-- End .banner -->
+                  </div><!-- End .col-lg-4 -->
+
+                  <div class="col-lg-4">
+                      <div class="row">
+                          <div class="col-sm-6 col-lg-12">
+                        <div class="banner">
+                            <img src="{% static "assets/images/banners/banner-serve-tip1.png" %}" alt="Banner">
+                        </div><!-- End .banner -->
+                          </div><!-- End .col-sm-6 col-lg-12 -->
+
+                      <div class="col-sm-6 col-lg-12">
+                        <div class="banner">
+                            <img src="{% static "assets/images/banners/banner-serve-tip2.png" %}" alt="Banner">
+                        </div><!-- End .banner -->
+                      </div><!-- End .col-sm-6 col-lg-12 -->
+                      </div><!-- End .row -->
+                  </div><!-- End .col-lg-4 -->
+            </div>
+
+            <p style="margin-bottom: 5px;"></pstyle>><strong> standard serve of vegetable or fruit is about 75g (100–350kJ) or:</strong></p>
+            <ul style="margin: 0; padding: 0; list-style-type: none;">
+              <li style="margin-bottom: 5px;">1/2 cup cooked green or orange vegetables (for example, broccoli, spinach, carrots or pumpkin)</li>
+              <li style="margin-bottom: 5px;">1/2 cup cooked dried or canned beans, peas or lentils</li>
+              <li style="margin-bottom: 5px;">1 cup green leafy or raw salad vegetables</li>
+              <li style="margin-bottom: 5px;">1/2 cup sweet corn</li>
+              <li style="margin-bottom: 5px;">1/2 medium potato or other starchy vegetables (sweet potato, taro or cassava)</li>
+              <li style="margin-bottom: 5px;">1 medium tomato</li>
+            </ul>
+            <p style="margin-bottom: 5px;"><strong> standard serve of fruit is about 150g (350kJ) or:</strong></p>
+            <ul style="margin: 0; padding: 0; list-style-type: none;">
+              <li style="margin-bottom: 5px;">1 medium apple, banana, orange or pear</li>
+              <li style="margin-bottom: 5px;">2 small apricots, kiwi fruits or plums</li>
+              <li style="margin-bottom: 5px;">1 cup diced or canned fruit (no added sugar)</li>
+            </ul>
+            <p style="margin-top: 5px;">Or only occasionally:</p>
+            <ul style="margin: 0; padding: 0; list-style-type: none;">
+              <li style="margin-bottom: 5px;">125ml (½ cup) fruit juice (no added sugar)</li>
+              <li style="margin-bottom: 5px;">30g dried fruit (for example, 4 dried apricot halves, 1½ tablespoons of sultanas)</li>
+            </ul>
+            
         </div>
         <div class="entry-content editor-content">
           <h3>Vegetable Consumption Among Australian Children </h3>
