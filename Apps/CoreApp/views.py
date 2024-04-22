@@ -387,6 +387,9 @@ class RecipeView(generic.TemplateView):
 class RecipeListView(generic.TemplateView):
     template_name = 'CoreApp/recipe_list.html'
 
+class OuterRecipeAnalysisView(generic.TemplateView):
+    template_name = 'CoreApp/outer_recipe_analysis.html'
+
 #not complete
 class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
