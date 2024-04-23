@@ -22,6 +22,15 @@ class PB_AU_CONCERN(models.Model):
     age_group = models.CharField(max_length=20, choices = AGE_GROUP, null=True, blank=True)
     percentage = models.FloatField(null=True, blank=True)
     
+class PB_AU_VEGGIE(models.Model):
+    year = models.IntegerField( null=True, blank=True)
+    concern = models.CharField(max_length=150, null=True, blank=True)
+    concern_label = models.CharField(max_length=150, null=True, blank=True)
+    gender = models.CharField(max_length=20, choices = GENDER_TYPE, null=True, blank=True)
+    age_group = models.CharField(max_length=20, choices = AGE_GROUP, null=True, blank=True)
+    percentage = models.FloatField(null=True, blank=True)
+    margin_error = models.FloatField(null=True, blank=True)    
+    
 class PB_WHO_BMI(models.Model):
     bmi = models.CharField(max_length=150, null=True, blank=True)
     year = models.IntegerField( null=True, blank=True)

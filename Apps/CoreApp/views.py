@@ -17,6 +17,9 @@ import pandas as pd
 from django.core import serializers
 import json
 import requests
+from django.db.models import Q
+from functools import reduce
+from operator import or_
 
 
 class CustomLoginRequiredMixin:
@@ -108,49 +111,7 @@ class US11DashboardView(generic.TemplateView):
                        'json_data_bmi': serialized_data_bmi}
         
         return new_context
-
-
-class ProfileView(CustomLoginRequiredMixin, generic.TemplateView):
-    template_name = 'CoreApp/profile.html'
-    recipes = None  
-    
-    def setup(self, request, *args, **kwargs):
-        file_address = os.path.join('Data Sources', 'recipes.json')
-        with open(file_address, 'r') as f:
-            # JSON to dictionary
-            self.recipes = json.load(f)
-        return super().setup(request, *args, **kwargs)
-    
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        
-        new_context = {'main_title': 'Profile',
-                    #    'sub_title': 'Obesity and Overweight among Children',
-                       'page_name': 'Profile',
-                       'recipes': self.recipes
-                       }
-        return new_context
-    
-    
-class ProfileChildView(CustomLoginRequiredMixin, generic.TemplateView):
-    template_name = 'CoreApp/profile_child.html'
-    recipes = None  
-    
-    def setup(self, request, *args, **kwargs):
-        file_address = os.path.join('Data Sources', 'recipes.json')
-        with open(file_address, 'r') as f:
-            # JSON to dictionary
-            self.recipes = json.load(f)
-        return super().setup(request, *args, **kwargs)
-    
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        
-        new_context = {'main_title': "Child's Profile",
-                    #    'sub_title': 'Obesity and Overweight among Children',
-                       'page_name': "Child's Profile",
-                       'recipes': self.recipes
-                       }
-        return new_context
-  
+ 
     
 class US121View(generic.TemplateView):
     template_name = 'CoreApp/us121.html'
@@ -414,131 +375,54 @@ class RecipeDetailView(DetailView):
         return context
 
 
-class RecipeListView(generic.TemplateView):
+class RecipeListView(generic.ListView):
     template_name = 'CoreApp/recipe_list.html'
+    model = RECIPES
+    context_object_name = 'all_recipes'
+    all_selected_options = None
+       
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.all_selected_options = []
+        
+        # GET parameters from the request 
+        health_tag = self.request.GET.getlist('health_tag')
+        meal = self.request.GET.getlist('meal')
+        
+        self.all_selected_options.extend(health_tag)
+        self.all_selected_options.extend(meal)
+        
+        # Filter queryset based on parameters
+        if not (health_tag=='' or health_tag==[] or health_tag==None):
+            tempQuery = reduce(or_, (Q(health_tag__tag__exact=t) for t in health_tag))
+            queryset = queryset.filter(tempQuery)
+            
+        if not (meal=='' or meal==[] or meal==None):
+            tempQuery = reduce(or_, (Q(meal__type__exact=t) for t in meal))
+            queryset = queryset.filter(tempQuery)
+            
+        self.queryset = queryset
+        return queryset
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         
         # query from table
+        all_recipes_count = self.queryset.count()
         
-        all_data_recipe = RECIPES.objects.all()
-        all_recipes_count = all_data_recipe.count()
-        
-        new_context = {'main_title': 'Healthy Recipes',
+        context.update({'main_title': 'Healthy Recipes',
                        'page_name': 'Healthy Recipes',
-                       'all_recipes': all_data_recipe,
                        'all_recipes_count' : all_recipes_count,
-                       }
+                       'selected_options': self.all_selected_options
+                       })
         
-        return new_context
+        return context
     
 
 class OuterRecipeAnalysisView(generic.TemplateView):
     template_name = 'CoreApp/outer_recipe_analysis.html'
 
-#not complete
-class Login_RegisterView(generic.TemplateView):
-    template_name = 'CoreApp/login.html'
-    
-    def post(self, request, *args, **kwargs):
-        
-        form_type = request.POST.get('form_type')
 
-        if form_type == 'signin':
-        #     # Get the input value
-        #     input_value = request.POST.get('signin-input')
-
-        #     # Check if input is an email
-        #     if re.match(self.EMAIL_REGEX, input_value):
-        #         # send email sign-in data to email authentication API
-        #         api_url = 'http://email-auth-api-url'
-        #         data = {
-        #             'email': input_value,
-        #             'password': request.POST.get('signin-password')
-        #         }
-        #     # Check if input is a phone number
-        #     elif re.match(self.PHONE_REGEX, input_value):
-        #         # send phone sign-in data to phone authentication API
-        #         api_url = 'http://phone-auth-api-url'
-        #         data = {
-        #             'phone': input_value,
-        #             'password': request.POST.get('signin-password')
-        #         }
-        #     else:
-        #         # Handle invalid input (neither email nor phone number)
-        #         return HttpResponse('Invalid input')          
-            
-            
-            
-            
-            
-            # sign-in form data
-            email = request.POST.get('singin-email')
-            password = request.POST.get('singin-password')
-            
-            # send sign-in data to authentication API
-            api_url = 'http://juniorjoy.site/api/auth/login'
-            data = {
-                'email': email,
-                'password': password
-            }
-            response = api_request(url=api_url, parameters=data, request_type='POST')
-
-            # handle response
-            if response.status_code == 200:
-                messages.add_message(self.request, messages.SUCCESS, 'User successfully logged in')
-                request.session['user_id'] = 'user_id' # changed this text to actual user ID
-                
-                next_url = request.session.get('next')
-                if next_url:
-                    del request.session['next']  # Remove the stored URL from the session
-                    return redirect(next_url)
-                else:
-                    return redirect('CoreApp:index')
-            else: 
-                messages.add_message(self.request, messages.WARNING, 'Something is wrong')
-                request.session.pop('user_id', None) # removing the key from session
-                return super().get(request, *args, **kwargs)
-
-            
-        elif form_type == 'register':
-            # register form data
-            email = request.POST.get('register-email')
-            password = request.POST.get('register-password')
-            
-            # send register data to registration API
-            api_url = 'http://juniorjoy.site/api/users'
-            
-            data = {
-                'email': email,
-                'password': password
-            }
-            
-            response = api_request(url=api_url, parameters=data, request_type='POST')
-
-            # handle response
-            if response.status_code == 201:
-                messages.add_message(self.request, messages.SUCCESS, 'User is created. Please log in')
-                return redirect('CoreApp:login_or_register')
-            else: 
-                messages.add_message(self.request, messages.WARNING, 'Something is wrong')
-                return super().get(request, *args, **kwargs)
-
-        else:
-            # Invalid form type
-            return JsonResponse({'error': 'Invalid form type'}, status=400)
-        
-
-class LogoutView(generic.View):
-    
-    def get(self, request, *args, **kwargs):
-        messages.add_message(self.request, messages.SUCCESS, 'User logged out')
-        request.session.pop('user_id', None) # removing the key from session
-        
-        return redirect('CoreApp:index')
-    
-    
 class ComingView(generic.TemplateView):
     template_name = 'CoreApp/coming_soon.html'
 
@@ -568,13 +452,24 @@ class ImportDataView(generic.View):
                             crude_estimate=row['crude_estimate']
                         )
                         
-                    else: # model PB_AU_CONCERN
-                        model_class.objects.create(
-                            concern=row['concern'], 
-                            gender=row['gender'],
-                            age_group=row['age_group'],
-                            percentage=row['percentage']
-                        )
+                    else:
+                        if model_name == 'PB_AU_CONCERN': # model PB_AU_CONCERN
+                            model_class.objects.create(
+                                concern=row['concern'], 
+                                gender=row['gender'],
+                                age_group=row['age_group'],
+                                percentage=row['percentage']
+                            )
+                        else:  # model PB_AU_VEGGIE
+                            model_class.objects.create( 
+                                year=row['year'],			
+                                concern=row['concern'],
+                                concern_label=row['concern_label'],  
+                                gender=row['gender'],
+                                age_group=row['age_group'],
+                                percentage=row['proportion'],
+                                margin_error = row['95% Margin of Error of proportion']
+                            )   
                     
                 return HttpResponse(f"Data {file_name} has been stored in the {model_name} table.")
             else:
@@ -587,22 +482,32 @@ class ImportDataView(generic.View):
 class VeggiView(generic.TemplateView):
     template_name = 'CoreApp/vegetable.html'
     
+    
+   
+    
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         super().get_context_data(**kwargs)
-        
-        # # query from table
-        # all_data = PB_AU_CONCERN.objects.all()
-        # serialized_data = serializers.serialize('json', all_data)
-        
-        
-        # all_data_bmi = PB_WHO_BMI.objects.all()
-        # serialized_data_bmi = serializers.serialize('json', all_data_bmi)
-    
+
+         # query from table
+        all_data = PB_AU_VEGGIE.objects.all()
+        serialized_data = serializers.serialize('json', all_data)
+       
+        # Convert the serialized data to a list of dictionaries
+        data_list = json.loads(serialized_data)
+
+        # Replace NaN with None
+        for data in data_list:
+            for key, value in data['fields'].items():
+                if isinstance(value, float) and value != value:  # Check if value is NaN
+                    data['fields'][key] = 0
+
+        # Convert the data list back to JSON
+        fixed_serialized_data = json.dumps(data_list)
         
         new_context = {'main_title': 'Veggie Insights',
                     #    'sub_title': 'Obesity and Overweight among Children',
                        'page_name': 'Veggie Insights',
-                    #    'json_data': serialized_data,
+                       'json_data': fixed_serialized_data,
                     #    'json_data_bmi': serialized_data_bmi
                        }
         
