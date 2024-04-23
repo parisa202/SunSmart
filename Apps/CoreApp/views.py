@@ -6,6 +6,9 @@ from django.http import HttpResponse, JsonResponse
 from django.views import generic
 from django.core.mail import send_mail
 from django.core.management.utils import get_random_secret_key
+from django.views.generic.detail import DetailView
+from django.utils.text import slugify
+from django.views.generic.detail import DetailView
 from .models import *
 from django.apps import apps
 import os
@@ -234,6 +237,7 @@ class ReminderView(generic.TemplateView):
         
         return new_context
 
+
 class AboutUsView(generic.TemplateView):
     template_name = 'CoreApp/about_us.html'
 
@@ -345,6 +349,7 @@ class MacronutrientsView(generic.TemplateView):
                        }
         
         return new_context
+
     
 class MicronutrientsView(generic.TemplateView):
     template_name = 'CoreApp/Micronutrients.html'
@@ -381,11 +386,53 @@ class MicronutrientsView(generic.TemplateView):
         return new_context
     
 
-class RecipeView(generic.TemplateView):
-    template_name = 'CoreApp/recipe_view.html'
+class RecipeDetailView(DetailView):
+    model = RECIPES
+    template_name = 'CoreApp/recipe_detail.html'
+    slug_field = 'slug'
+    
+    # # Access ingredients for a recipe
+    # ingredients_for_recipe = RECIPES.ingredients.all()
+    # for ingredient in ingredients_for_recipe:
+    #     print(f"{ingredient.name}: {RECIPE_INGREDIENT.objects.get(recipe=RECIPES, ingredient=ingredient).quantity}")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Get the current recipe object
+        recipe = self.get_object()
+
+        # Include recipe health tags in context
+        context['health_tags'] = recipe.health_tag.all()
+
+        # Include recipe diet labels in context
+        context['diet_labels'] = recipe.diet_label.all()
+
+        # Include recipe ingredients in context
+        context['ingredients'] = recipe.ingredients.all()
+
+        return context
+
 
 class RecipeListView(generic.TemplateView):
     template_name = 'CoreApp/recipe_list.html'
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)
+        
+        # query from table
+        
+        all_data_recipe = RECIPES.objects.all()
+        all_recipes_count = all_data_recipe.count()
+        
+        new_context = {'main_title': 'Healthy Recipes',
+                       'page_name': 'Healthy Recipes',
+                       'all_recipes': all_data_recipe,
+                       'all_recipes_count' : all_recipes_count,
+                       }
+        
+        return new_context
+    
 
 #not complete
 class Login_RegisterView(generic.TemplateView):
@@ -480,7 +527,6 @@ class Login_RegisterView(generic.TemplateView):
             return JsonResponse({'error': 'Invalid form type'}, status=400)
         
 
-
 class LogoutView(generic.View):
     
     def get(self, request, *args, **kwargs):
@@ -492,7 +538,6 @@ class LogoutView(generic.View):
     
 class ComingView(generic.TemplateView):
     template_name = 'CoreApp/coming_soon.html'
-
 
 
 class ImportDataView(generic.View):
@@ -559,4 +604,44 @@ class VeggiView(generic.TemplateView):
                        }
         
         return new_context
+
+
+class LoadRecipesDataView(generic.View):
+    def get(self, request, *args, **kwargs):
         
+        
+        # Files are stored in a folder named 'Data Sources' within your Django project directory
+        file_address = os.path.join('Data Sources', 'recipes_list.json')
+        
+        try:
+            with open(file_address, 'r') as f:
+                # JSON to dictionary
+                recipes = json.load(f)
+                
+                for r in recipes:
+                    # TAG
+                    for tag in r["recipe"]["healthLabels"]:
+                        HEALTH_TAG.objects.create(tag=tag)
+                    
+                    # TYPE   
+                    for type in r["recipe"]["mealType"]:
+                        MEAL_TYPE.objects.create(type=type)
+                    
+                    # RECIPE
+                    temp_recipe, created = RECIPES.objects.get_or_create(
+                                                    name=r["recipe"]["label"],
+                                                    description= r["recipe"]["url"]
+                                                )
+                    print(temp_recipe, created)
+                    if created:
+                        health_tags = HEALTH_TAG.objects.filter(tag__in=r["recipe"]["healthLabels"])
+                        temp_recipe.health_tag.add(*health_tags)
+                        
+                        meals = MEAL_TYPE.objects.filter(type__in=r["recipe"]["mealType"])
+                        temp_recipe.meal.add(*meals)
+                    
+                        
+            return HttpResponse(f"Recipes are stored!")
+                
+        except FileNotFoundError:
+            return HttpResponse(f"File {file_name} not found.")

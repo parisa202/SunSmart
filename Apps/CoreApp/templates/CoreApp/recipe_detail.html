@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title_block %}
-  
+
 {% endblock title_block %}
 
 
@@ -12,12 +12,14 @@
 {% endblock extra_css %}
 
 {% block main_content %}
+
+
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="index.html">Recipe List</a></li>
+                <li class="breadcrumb-item"><a href="{% url "CoreApp:index" %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url "CoreApp:recipes" %}">Recipe List</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Recipe List</li>
             </ol>
         </div><!-- End .container -->
@@ -38,19 +40,7 @@
 
                     <div class="col-md-6">
                         <div class="product-details">
-                            <h1 class="product-title">CinnamonChicken</h1><!-- End .product-title -->
-
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
-                                <!-- <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a> -->
-                            </div><!-- End .rating-container -->
-
-                            <div class="product-price">
-                                <!-- <p>See full recipe on: Martha Stewart</p> -->
-                                
-                            </div><!-- End .full recipe -->
+                            <h1 class="product-title">{{object.name}}</h1><!-- End .product-title -->
 
                             <div class="product-content">
                                 <p>Cumin, coriander, and cinnamon give this easy soup an exotic Moroccan flavor. With bits of tender chicken and carrots, it makes a satisfying lunch. </p>
@@ -60,48 +50,26 @@
                             <div class="product-details-footer">
                                 <div class="product-cat">
                                     <h5>Diet Labels:</h5>
-                                    <p>Low-Carb</p>
+                                    <div class="row">
+                                        {% for tag in health_tags %}
+                                            <div class="col-6 col-md-4 col-sm-4 col-xl-3">
+                                                {{ label.label }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div><!-- End .product-cat -->
-
                             </div>
 
                             <div class="product-details-footer">
-                                <div class="product-cat">
-                                    <h5>Health Labels:</h5>
-                                    <p>Sugar-Conscious,
-                                        Keto-Friendly,
-                                        Paleo,
-                                        Mediterranean,
-                                        Dairy-Free,
-                                        Gluten-Free,
-                                        Wheat-Free,
-                                        Egg-Free,
-                                        Peanut-Free,
-                                        Tree-Nut-Free,
-                                        Soy-Free,
-                                        Fish-Free,
-                                        Shellfish-Free,
-                                        Pork-Free,
-                                        Red-Meat-Free,
-                                        Crustacean-Free,
-                                        Celery-Free,
-                                        Mustard-Free,
-                                        Sesame-Free,
-                                        Lupine-Free,
-                                        Mollusk-Free,
-                                        Alcohol-Free,
-                                        No oil added,
-                                        Sulfite-Free,
-                                        FODMAP-Free,
-                                        Kosher,
-                                        Immuno-Supportive</p>
-                                </div><!-- End .product-cat -->
-
+                                <h5>Health Labels:</h5>
+                                <div class="row">
+                                    {% for tag in health_tags %}
+                                        <div class="col-6 col-md-4 col-sm-4 col-xl-3">
+                                                {{ tag.tag }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
-
-                            <div class="product-details-action">
-                                <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Like</span></a>
-                            </div><!-- End .product-details-action -->
 
                             </div><!-- End .product-details-footer -->
                         </div><!-- End .product-details -->
@@ -122,14 +90,22 @@
                     </li>
                 </ul>
                 <div class="tab-content">
+
+                    <!-- Ingredient tab -->
                     <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
                         <div class="product-desc-content">
                             <!-- <h3>Ingredients</h3> -->
                             <p>1 chicken (3 pounds), cut into 8 pieces
                                 Coarse salt and freshly ground pepper
                                 1/4 teaspoon ground cinnamon</p>
+                            {% for ingredient in ingredients %}
+                                {{ ingredient.name }}
+                            {% endfor %}
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
+                    <!-- END Ingredient tab -->
+
+                    <!-- Nutrition tab -->
                     <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
                         <div class="product-desc-content">
 
@@ -161,22 +137,23 @@
                                         </span>
                                     </div>
                                 </div> 
-                                
-
-                                
                             </div>
                             
-
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
+                    <!-- END Nutrition tab -->
+
+                    <!-- Prepration tab -->
                     <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
-                        <div class="product-desc-content">
-                            <button class="btn btn-primary btn-rounded" onclick="window.location.href='https://www.marthastewart.com/318142/chicken-and-chickpea-soup'">Instruction</button> on Martha Stewart
+                        <div class="product-desc-content" style="text-align: center;">
+                            <button class="btn btn-primary btn-rounded" onclick="window.location.href='{{object.url}}'">View Instruction</button>
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
-                    <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                    <!-- Prepration tab -->
 
+                    <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                     </div><!-- .End .tab-pane -->
+
                 </div><!-- End .tab-content -->
             </div><!-- End .product-details-tab -->
 

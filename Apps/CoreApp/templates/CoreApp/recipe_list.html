@@ -13,28 +13,13 @@
 
 {% block main_content %}
 
-
+{% include "CoreApp/components/breadcrumb.html" %}
 
 
 
 
 <body>
     <div class="page-wrapper">
-        <main class="main">
-        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
-        		<div class="container">
-        			<h1 class="page-title">Recipe List<span>Healthy life starts NOW!</span></h1>
-        		</div><!-- End .container -->
-        	</div><!-- End .page-header -->
-            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url "CoreApp:index" %}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Recipe List</li>
-                    </ol>
-                </div><!-- End .container -->
-            </nav><!-- End .breadcrumb-nav -->
-
             <div class="page-content">
                 <div class="container">
         			<div class="toolbox">
@@ -44,7 +29,7 @@
 
                         <div class="toolbox-center">
                             <div class="toolbox-info">
-                                Showing <span>12 of 56</span> Products
+                                Showing <span>{{ all_recipes|length }} of {{ all_recipes_count }}</span> Healthy Recipes
                             </div><!-- End .toolbox-info -->
                         </div><!-- End .toolbox-center -->
 
@@ -62,46 +47,49 @@
         				</div><!-- End .toolbox-right -->
         			</div>
                     <!-- End .toolbox -->
-
                     <div class="recipes">
                         <div class="row">
-                            <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                                <div class="product">
-                                    <figure class="product-media">
-                                        <!-- <span class="product-label label-new">New</span> -->
-                                        <a href="{% url "CoreApp:recipe" %}">
-                                            <img src="{% static "assets/images/CinnamonChicken.jpg" %}" alt="Product image" class="product-image">
-                                        </a>
+                            {% for recipe in all_recipes %}
+                                <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                            
+                                    <div class="product">
+                                        <figure class="product-media">
+                                            <!-- <span class="product-label label-new">New</span> -->
+                                            
+                                            <a  href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">
+                                               
+                                                <img src="{% static "assets/images/CinnamonChicken.jpg" %}" alt="Product image" class="product-image">
+                                            </a>
 
-                                        <div class="product-action-vertical">
-                                            <!-- <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a> -->
-                                        </div><!-- End .product-action -->
+                                            <div class="product-action-vertical">
+                                                <!-- <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a> -->
+                                            </div><!-- End .product-action -->
 
-                                        <div class="product-action action-icon-top">
-                                            <!-- <a href="#" class="btn-product btn-cart"><span>add to cart</span></a> -->
-                                            <!-- <a href="{% url "CoreApp:recipe" %}" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a> -->
-                                            <!-- <a href="#" class="btn-product btn-compare" title="Compare"><span>compare</span></a> -->
-                                        </div><!-- End .product-action -->
-                                    </figure><!-- End .product-media -->
+                                            <div class="product-action action-icon-top">
+                                                
+                                            </div><!-- End .product-action -->
+                                        </figure><!-- End .product-media -->
 
-                                    <div class="product-body">
-                                        <div class="product-cat">
-                                            <a href="#">Chicken</a>
-                                        </div><!-- End .product-cat -->
-                                        <h3 class="product-title"><a href="{% url "CoreApp:recipe" %}">Cinnamon Chicken</a></h3><!-- End .product-title -->
-                                        <div class="product-price">
-                                            <!-- $50.00 -->
-                                        </div><!-- End .product-price -->
-                                        <div class="ratings-container">
-                                            <div class="ratings">
-                                                <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
-                                            <!-- <span class="ratings-text">( 0 Reviews )</span> -->
-                                        </div><!-- End .rating-container -->
-                                    </div><!-- End .product-body -->
-                                </div><!-- End .product -->
-                            </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
-
+                                        <div class="product-body">
+                                            <div class="product-cat">
+                                                <a href="#">{{recipe.slug}}</a>
+                                            </div><!-- End .product-cat -->
+                                            
+                                            <h3 class="product-title"><a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">{{recipe.name}}</a></h3><!-- End .product-title -->
+                                            <div class="product-price">
+                                                <!-- $50.00 -->
+                                            </div><!-- End .product-price -->
+                                            <div class="ratings-container">
+                                                <div class="ratings">
+                                                    <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
+                                                </div><!-- End .ratings -->
+                                                <!-- <span class="ratings-text">( 0 Reviews )</span> -->
+                                            </div><!-- End .rating-container -->
+                                        </div><!-- End .product-body -->
+                                    </div><!-- End .product -->
+                            
+                                </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                            {% endfor %}
 
                         </div><!-- End .row -->
 
@@ -115,12 +103,13 @@
                         <div class="sidebar-filter-wrapper">
                             <div class="widget widget-clean">
                                 <!-- <label><i class="icon-close"></i>Filters</label> -->
+                                <a href="#" class="sidebar-filter-clear">Submit</a>
                                 <a href="#" class="sidebar-filter-clear">Clean All</a>
                             </div><!-- End .widget -->
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
-                                        Macronutrients
+                                        Health Labels:
                                     </a>
                                 </h3><!-- End .widget-title -->
 
@@ -130,7 +119,7 @@
                                             <div class="filter-item">
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" id="cat-1">
-                                                    <label class="custom-control-label" for="cat-1">Fat</label>
+                                                    <label class="custom-control-label" for="cat-1">Alcohol-Free/label>
                                                 </div><!-- End .custom-checkbox -->
                                                 <span class="item-count">3</span>
                                             </div><!-- End .filter-item -->
@@ -138,7 +127,7 @@
                                             <div class="filter-item">
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" id="cat-2">
-                                                    <label class="custom-control-label" for="cat-2">Saturated</label>
+                                                    <label class="custom-control-label" for="cat-2">Peanut-Free</label>
                                                 </div><!-- End .custom-checkbox -->
                                                 <span class="item-count">0</span>
                                             </div><!-- End .filter-item -->
@@ -146,7 +135,7 @@
                                             <div class="filter-item">
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" id="cat-3">
-                                                    <label class="custom-control-label" for="cat-3">Trans</label>
+                                                    <label class="custom-control-label" for="cat-3">Dairy-Free</label>
                                                 </div><!-- End .custom-checkbox -->
                                                 <span class="item-count">4</span>
                                             </div><!-- End .filter-item -->
@@ -405,8 +394,6 @@
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
         </main><!-- End .main -->
-
-    </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
 
 
