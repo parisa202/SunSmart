@@ -29,6 +29,7 @@ urlpatterns = [
     path('recipes/', views.RecipeListView.as_view(), name='recipes'),
     path("recipes/<slug:slug>/", RecipeDetailView.as_view(), name="recipe-detail"),
     path('veggie-insights/', views.VeggiView.as_view(), name='Veggi'),
+    path('outer-recipe-analysis/', views.OuterRecipeAnalysisView.as_view(), name='outer_recipe_analysis'),
     # import data views
     path('data/', views.ImportDataView.as_view(), name='import_data'),
     path('rr/', views.LoadRecipesDataView.as_view()),

@@ -434,6 +434,9 @@ class RecipeListView(generic.TemplateView):
         return new_context
     
 
+class OuterRecipeAnalysisView(generic.TemplateView):
+    template_name = 'CoreApp/outer_recipe_analysis.html'
+
 #not complete
 class Login_RegisterView(generic.TemplateView):
     template_name = 'CoreApp/login.html'
