@@ -90,19 +90,23 @@
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li><a href="{% url "CoreApp:index" %}">Home</a></li>
-                                
+
                                 <li>
-                                    <a href="{% url "CoreApp:US11" %}">Obesity Trend</a>
+                                    <a href="{% url "CoreApp:index" %}" class="sf-with-ul">Dietary Awareness</a>
+                                    <ul>
+                                        <li>
+                                            <a href="{% url "CoreApp:US11" %}">Obesity Trend</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url "CoreApp:US13" %}">Food Additives</a> 
+                                        </li>
+                                    </ul>
                                 </li>
 
                                 <li>
                                     <a href="{% url "CoreApp:Veggi" %}">Veggie Insights</a> 
                                 </li>
 
-                                <li>
-                                    <a href="{% url "CoreApp:US13" %}">Food Additives</a> 
-                                </li>
-                                
                                 <li>
                                     <a href="{% url "CoreApp:US21" %}">Nutrition Guideline</a> 
                                 </li>
