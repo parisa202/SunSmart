@@ -90,38 +90,58 @@
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li><a href="{% url "CoreApp:index" %}">Home</a></li>
-                                    <!-- home menue -->
-                                    
-
-                                   <!-- End .home menue -->
                                 
-                                <li><a href="{% url "CoreApp:US11" %}">Obesity Trend</a></li>
+                                <li>
+                                    <a href="{% url "CoreApp:US11" %}">Obesity Trend</a>
+                                </li>
+
+                                <li>
+                                    <a href="{% url "CoreApp:Veggi" %}">Veggie Insights</a> 
+                                </li>
+
                                 <li>
                                     <a href="{% url "CoreApp:US13" %}">Food Additives</a> 
                                 </li>
+                                
                                 <li>
                                     <a href="{% url "CoreApp:US21" %}">Nutrition Guideline</a> 
                                 </li>
-                                <li>
-                                    <a href="{% url "CoreApp:guest_tracker" %}">Nutrition Analyzer</a>
-                                </li>
-                                <li>
-                                    <a href="{% url "CoreApp:US23" %}">Set Reminder</a>
-                                </li> 
-                                <li>
-                                    <a href="{% url "CoreApp:index" %}" class="sf-with-ul">More</a>
 
+                                <li>
+                                    <a href="{% url "CoreApp:recipes" %}">Healthy Recipes</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="{% url "CoreApp:index" %}" class="sf-with-ul">Know Nutrients</a>
                                     <ul>
                                         <li>
-                                            <a href="{% url "CoreApp:about" %}">About us</a>
-
-                            
+                                            <a href="{% url "CoreApp:macronutrients" %}">Macronutrients</a>
+                                            <a href="{% url "CoreApp:micronutrients" %}">Micronutrients</a>
                                         </li>
-                                        
                                     </ul>
                                 </li>
                                 
-                                
+                                <li>
+                                    <a href="{% url "CoreApp:index" %}" class="sf-with-ul">Recipe Analyzer</a>
+                                    <ul>
+                                        <li>
+                                            <a href="{% url "CoreApp:guest_tracker" %}">Our Recipes</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url "CoreApp:outer_recipe_analysis" %}">Your Recipes</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="{% url "CoreApp:index" %}" class="sf-with-ul">More</a>
+                                    <ul>
+                                        <li>
+                                            <a href="{% url "CoreApp:US23" %}">Set Reminder</a>
+                                            <a href="{% url "CoreApp:about" %}">About us</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->
 
@@ -215,10 +235,10 @@
             <div class="footer-bottom">
                 <div class="container">
                     <p class="footer-copyright">Copyright © 2024 JuniorJoy. All Rights Reserved.</p><!-- End .footer-copyright -->
-                    <ul class="footer-menu">
+                    <!-- <ul class="footer-menu">
                         <li><a href="{% url "CoreApp:coming" %}">Terms and conditions</a></li>
                         <li><a href="{% url "CoreApp:coming" %}">Privacy Policy</a></li>
-                    </ul><!-- End .footer-menu -->
+                    </ul>End .footer-menu -->
 
                     <div class="social-icons social-icons-color" style="display: none;">
                         <span class="social-label">Social Media</span>
