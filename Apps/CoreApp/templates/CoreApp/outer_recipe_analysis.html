@@ -33,16 +33,19 @@
     <div class="col-lg-8">
         <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
         <div class="row">
-            <p>Enter an ingredient list list for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br>Enter each ingredient on a new line.</p>
             <div class="col-sm-12 mx-auto">
+                <p>Enter an ingredient list list for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br>Enter each ingredient on a new line.</p>
                 <form id="demoAnalysisForm" data-gtm-form-interact-id="0">
                     <p>
                       <textarea name="" id="demoAnalysis" cols="30" rows="10" class="form-control" data-gtm-form-interact-field-id="0">1 cup rice</textarea>
                     </p>
-                    <p>
-                        <button type="button" class="btn btn-green px-5 calc-analysis-api">Analyze</button>
-                        <button type="button" class="btn btn-green px-5 calc-analysis-api-new" style="display: inline-block;">New recipe</button>
-                    </p>
+                    <div style="text-align: center;">
+                            <button type="button" class="btn btn-primary btn-rounded">Analyze</button>
+                            <button type="button" class="btn btn-primary btn-rounded" style="display: inline-block;">New recipe</button>
+                    </div>
+                        
+                    
+                    
                     <div class="err-result">
                         <span class="addition-e">We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling or if you have entered a quantities for the ingredients.
                         </span>
@@ -89,7 +92,7 @@
                 <tbody>
                     <tr>
                         <td colspan="2" class="small-info" style="font-size: larger;"><b>Calories</b></td>
-                        <td class="nob">702</td>
+                        <td class="nob">{{ energy }}</td>
                     </tr>
                     <tr>
                         <td colspan="3" class="small-info" style="font-size: smaller;"><b>% Daily Value*</b></td>
