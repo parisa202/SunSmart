@@ -70,7 +70,12 @@ class INGREDIENT(models.Model):
     food_category = models.CharField(max_length=100)
     def __str__(self):
         return self.name
-    
+
+class NUTRIENTS(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+
 class RECIPES(models.Model):
     name = models.CharField(max_length=150, null=True, blank=True)
     description = models.TextField( null=True, blank=True)
@@ -108,3 +113,12 @@ class RECIPE_INGREDIENT(models.Model):
 
     def __str__(self):
         return f"{self.quantity} {self.measure} of {self.ingredient.name} for {self.recipe}"
+    
+class RECIPE_NUTRIENTS(models.Model):
+    recipe = models.ForeignKey(RECIPES, on_delete=models.CASCADE)
+    nutrient = models.ForeignKey(NUTRIENTS, on_delete=models.CASCADE)
+    quantity = models.CharField(max_length=100)
+    measure = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.quantity} {self.measure} of {self.nutrient.name} for {self.recipe}"
