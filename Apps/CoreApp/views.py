@@ -552,4 +552,4 @@ class LoadRecipesDataView(generic.View):
             return HttpResponse(f"Recipes are stored!")
                 
         except FileNotFoundError:
-            return HttpResponse(f"File {file_name} not found.")
+            return HttpResponse(f"File recipes_list.json not found.")
