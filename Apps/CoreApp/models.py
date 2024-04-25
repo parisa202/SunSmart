@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-
+import numpy
 
 GENDER_TYPE = [
     ("M", "Male"),
@@ -40,30 +40,15 @@ class PB_WHO_BMI(models.Model):
 
 class HEALTH_TAG(models.Model):
     tag = models.CharField(max_length=150, null=True, blank=True)
-    
-    def save(self, *args, **kwargs):
-        # Check for duplicates before saving
-        if HEALTH_TAG.objects.filter(tag=self.tag).exists():
-            return
-        super().save(*args, **kwargs)
+
 
 class DIET_LABEL(models.Model):
     label = models.CharField(max_length=150, null=True, blank=True)
-    
-    def save(self, *args, **kwargs):
-        # Check for duplicates before saving
-        if DIET_LABEL.objects.filter(tag=self.tag).exists():
-            return
-        super().save(*args, **kwargs)
+
 
 class MEAL_TYPE(models.Model):
     type = models.CharField(max_length=150, null=True, blank=True)
-    
-    def save(self, *args, **kwargs):
-        # Check for duplicates before saving
-        if MEAL_TYPE.objects.filter(type=self.type).exists():
-            return
-        super().save(*args, **kwargs)
+
 
 class INGREDIENT(models.Model):
     name = models.CharField(max_length=100)
@@ -77,14 +62,21 @@ class NUTRIENTS(models.Model):
         return self.name
 
 class RECIPES(models.Model):
-    name = models.CharField(max_length=150, null=True, blank=True)
+    name = models.CharField(max_length=500, null=True, blank=True)
     description = models.TextField( null=True, blank=True)
+    url = models.URLField(max_length=1000)
+    total_time = models.CharField(max_length=5, null=True, blank=True)
+    serving = models.CharField(max_length=5, null=True, blank=True)
+    
     health_tag = models.ManyToManyField(HEALTH_TAG, related_name='recipes_h')
     diet_label = models.ManyToManyField(DIET_LABEL, related_name='recipes_d')
-    url = models.URLField(max_length=200)
     meal = models.ManyToManyField(MEAL_TYPE, related_name='recipes_m')
-    slug = models.SlugField(unique=True, null=True, blank=True)
     ingredients = models.ManyToManyField(INGREDIENT, through='RECIPE_INGREDIENT')
+    nutrients = models.ManyToManyField(NUTRIENTS, through='RECIPE_NUTRIENTS')
+    
+    slug = models.SlugField(max_length=500, unique=True, null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True, editable=False)
+    
     
 
     def save(
@@ -93,6 +85,7 @@ class RECIPES(models.Model):
         self.slug = slugify(self.name)
         if update_fields is not None and "name" in update_fields:
             update_fields = {"slug"}.union(update_fields)
+                          
         super().save(
             force_insert=force_insert,
             force_update=force_update,
@@ -106,19 +99,27 @@ class RECIPES(models.Model):
         
 
 class RECIPE_INGREDIENT(models.Model):
-    recipe = models.ForeignKey(RECIPES, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(RECIPES, related_name='related_ingredients', on_delete=models.CASCADE)
     ingredient = models.ForeignKey(INGREDIENT, on_delete=models.CASCADE)
-    quantity = models.CharField(max_length=100)
-    measure = models.CharField(max_length=50)
+    quantity = models.CharField(max_length=100, null=True, blank=True)
+    measure = models.CharField(max_length=50, null=True, blank=True)
+    ingredient_text = models.CharField(max_length=700, null=True, blank=True)
 
     def __str__(self):
         return f"{self.quantity} {self.measure} of {self.ingredient.name} for {self.recipe}"
     
 class RECIPE_NUTRIENTS(models.Model):
-    recipe = models.ForeignKey(RECIPES, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(RECIPES, related_name='related_nutrients', on_delete=models.CASCADE)
     nutrient = models.ForeignKey(NUTRIENTS, on_delete=models.CASCADE)
-    quantity = models.CharField(max_length=100)
-    measure = models.CharField(max_length=50)
+    quantity = models.CharField(max_length=100, null=True, blank=True)
+    measure = models.CharField(max_length=50, null=True, blank=True)
+
 
     def __str__(self):
-        return f"{self.quantity} {self.measure} of {self.nutrient.name} for {self.recipe}"
+        return f"{self.nutrient.name} : {numpy.round(float(self.quantity))} {self.measure} "
+    
+
+class PAGE_VIEW(models.Model):
+    path = models.CharField(max_length=1001, unique=True)
+    views = models.IntegerField(default=1)
+    

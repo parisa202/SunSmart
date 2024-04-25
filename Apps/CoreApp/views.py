@@ -351,28 +351,14 @@ class RecipeDetailView(DetailView):
     model = RECIPES
     template_name = 'CoreApp/recipe_detail.html'
     slug_field = 'slug'
+    context_object_name = 'the_recipe'
     
     # # Access ingredients for a recipe
     # ingredients_for_recipe = RECIPES.ingredients.all()
     # for ingredient in ingredients_for_recipe:
     #     print(f"{ingredient.name}: {RECIPE_INGREDIENT.objects.get(recipe=RECIPES, ingredient=ingredient).quantity}")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
-        # Get the current recipe object
-        recipe = self.get_object()
-
-        # Include recipe health tags in context
-        context['health_tags'] = recipe.health_tag.all()
-
-        # Include recipe diet labels in context
-        context['diet_labels'] = recipe.diet_label.all()
-
-        # Include recipe ingredients in context
-        context['ingredients'] = recipe.ingredients.all()
-
-        return context
+    
 
 
 class RecipeListView(generic.ListView):
@@ -388,9 +374,11 @@ class RecipeListView(generic.ListView):
         # GET parameters from the request 
         health_tag = self.request.GET.getlist('health_tag')
         meal = self.request.GET.getlist('meal')
+        ingredient = self.request.GET.getlist('ingredient')
         
         self.all_selected_options.extend(health_tag)
         self.all_selected_options.extend(meal)
+        self.all_selected_options.extend(ingredient)
         
         # Filter queryset based on parameters
         if not (health_tag=='' or health_tag==[] or health_tag==None):
@@ -401,8 +389,13 @@ class RecipeListView(generic.ListView):
             tempQuery = reduce(or_, (Q(meal__type__exact=t) for t in meal))
             queryset = queryset.filter(tempQuery)
             
-        self.queryset = queryset
-        return queryset
+        if not (ingredient=='' or ingredient==[] or ingredient==None):
+            tempQuery = reduce(or_, (Q(ingredients__name__exact=t) for t in ingredient))
+            queryset = queryset.filter(tempQuery)
+        
+        self.queryset = queryset.distinct()
+        
+        return queryset.distinct()
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -410,10 +403,13 @@ class RecipeListView(generic.ListView):
         # query from table
         all_recipes_count = self.queryset.count()
         
+        alcohol = self.queryset.exclude(health_tag__tag='Alcohol-Free')
+        
         context.update({'main_title': 'Healthy Recipes',
                        'page_name': 'Healthy Recipes',
                        'all_recipes_count' : all_recipes_count,
-                       'selected_options': self.all_selected_options
+                       'selected_options': self.all_selected_options,
+                       'ddd': alcohol
                        })
         
         return context
@@ -527,26 +523,57 @@ class LoadRecipesDataView(generic.View):
                 recipes = json.load(f)
                 
                 for r in recipes:
-                    # TAG
-                    for tag in r["recipe"]["healthLabels"]:
-                        HEALTH_TAG.objects.create(tag=tag)
-                    
-                    # TYPE   
-                    for type in r["recipe"]["mealType"]:
-                        MEAL_TYPE.objects.create(type=type)
-                    
-                    # RECIPE
+                    # create RECIPE
                     temp_recipe, created = RECIPES.objects.get_or_create(
                                                     name=r["recipe"]["label"],
-                                                    description= r["recipe"]["url"]
+                                                    description= r["recipe"]["url"],
+                                                    url= r["recipe"]["url"],
+                                                    total_time = r["recipe"]["totalTime"],
+                                                    serving = r["recipe"]["yield"]
                                                 )
-                    print(temp_recipe, created)
                     if created:
-                        health_tags = HEALTH_TAG.objects.filter(tag__in=r["recipe"]["healthLabels"])
-                        temp_recipe.health_tag.add(*health_tags)
+                        # HEALTH TAG
+                        for tag in r["recipe"]["healthLabels"]:
+                            temp_health_tag, c = HEALTH_TAG.objects.get_or_create(tag=tag)
+                            # adding Healthe tags
+                            temp_recipe.health_tag.add(temp_health_tag)
                         
-                        meals = MEAL_TYPE.objects.filter(type__in=r["recipe"]["mealType"])
-                        temp_recipe.meal.add(*meals)
+                        # MEAL TYPE   
+                        for type in r["recipe"]["mealType"]:
+                            temp_meal_type, c = MEAL_TYPE.objects.get_or_create(type=type)
+                            # adding meal type
+                            temp_recipe.meal.add(temp_meal_type)
+                    
+                        # DIET LABEL   
+                        for label in r["recipe"]["dietLabels"]:
+                            temp_diet_label, c = DIET_LABEL.objects.get_or_create(label=label)
+                            # adding diet label
+                            temp_recipe.diet_label.add(temp_diet_label)
+                                                             
+                        # INGREDIENTS
+                        for ingredient in r["recipe"]["ingredients"]:
+                            temp_ingredient, c = INGREDIENT.objects.get_or_create(name=ingredient['food'], food_category=ingredient['foodCategory'])   
+ 
+                            # creating RECIPE_INGREDIENT
+                            RECIPE_INGREDIENT.objects.create(
+                                                        recipe = temp_recipe,
+                                                        ingredient = temp_ingredient,
+                                                        quantity = ingredient['quantity'],
+                                                        measure = ingredient['measure'],
+                                                        ingredient_text = ingredient['text']
+                                                    )
+
+                        # NUTRIENTS   
+                        for key, nutrient in r["recipe"]["totalNutrients"].items():
+                            temp_nutrient, c = NUTRIENTS.objects.get_or_create(name=nutrient['label'])   
+ 
+                            # creating RECIPE_NUTRIENT
+                            RECIPE_NUTRIENTS.objects.create(
+                                                        recipe = temp_recipe,
+                                                        nutrient = temp_nutrient,
+                                                        quantity = nutrient['quantity'],
+                                                        measure = nutrient['unit']
+                                                    )                       
                     
                         
             return HttpResponse(f"Recipes are stored!")

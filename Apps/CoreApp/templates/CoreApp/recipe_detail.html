@@ -32,7 +32,8 @@
                     <div class="col-md-6">
                         <div class="product-gallery product-gallery-vertical">
                             <figure class="product-main-image">
-                                <img id="product-zoom" src="{% static "assets/images/CinnamonChicken.jpg" %}" data-zoom-image="assets/images/products/single/1-big.jpg" alt="product image">
+                                
+                                <img id="product-zoom" src="{% static 'assets/images/recipes/'|add:the_recipe.name|add:'300_300.jpeg' %}" data-zoom-image="assets/images/products/single/1-big.jpg" alt="product image">
                             </figure><!-- End .product-main-image -->
 
                         </div><!-- End .product-gallery -->
@@ -40,7 +41,7 @@
 
                     <div class="col-md-6">
                         <div class="product-details">
-                            <h1 class="product-title">{{object.name}}</h1><!-- End .product-title -->
+                            <h1 class="product-title">{{the_recipe.name}}</h1><!-- End .product-title -->
 
                             <div class="product-content">
                                 <p>Cumin, coriander, and cinnamon give this easy soup an exotic Moroccan flavor. With bits of tender chicken and carrots, it makes a satisfying lunch. </p>
@@ -51,9 +52,9 @@
                                 <div class="product-cat">
                                     <h5>Diet Labels:</h5>
                                     <div class="row">
-                                        {% for tag in health_tags %}
-                                            <div class="col-6 col-md-4 col-sm-4 col-xl-3">
-                                                {{ label.label }}
+                                        {% for diet in the_recipe.diet_label.all %}
+                                            <div class="col-6 ">
+                                                {{ diet.label }}
                                             </div>
                                         {% endfor %}
                                     </div>
@@ -63,11 +64,11 @@
                             <div class="product-details-footer">
                                 <h5>Health Labels:</h5>
                                 <div class="row">
-                                    {% for tag in health_tags %}
-                                        <div class="col-6 col-md-4 col-sm-4 col-xl-3">
-                                                {{ tag.tag }}
-                                        </div>
-                                    {% endfor %}
+                                    {% for tag in the_recipe.health_tag.all %}
+                                    <div class="col-6 col-md-4 col-sm-4 col-xl-3">
+                                        {{ tag.tag }}
+                                    </div>
+                                {% endfor %}
                                 </div>
                             </div>
 
@@ -95,11 +96,8 @@
                     <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
                         <div class="product-desc-content">
                             <!-- <h3>Ingredients</h3> -->
-                            <p>1 chicken (3 pounds), cut into 8 pieces
-                                Coarse salt and freshly ground pepper
-                                1/4 teaspoon ground cinnamon</p>
-                            {% for ingredient in ingredients %}
-                                {{ ingredient.name }}
+                            {% for i in the_recipe.related_ingredients.all %}
+                                {{ i.ingredient_text }} <br>
                             {% endfor %}
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
@@ -110,33 +108,10 @@
                         <div class="product-desc-content">
 
                             <div id="nutrition-list">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <h2>Fat</h2>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <span class="percent">
-                                            <span>54%</span>
-                                        </span>
-                                        <span class="size">
-                                            <span itemprop="fatContent" data-unit="g">35g</span>
-                                        </span>
-                                    </div>
-                                </div> 
-
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <h2>Fat</h2>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <span class="percent">
-                                            <span>54%</span>
-                                        </span>
-                                        <span class="size">
-                                            <span itemprop="fatContent" data-unit="g">35g</span>
-                                        </span>
-                                    </div>
-                                </div> 
+                                 <!-- <h3>Ingredients</h3> -->
+                                {% for i in the_recipe.related_nutrients.all %}
+                                    {{ i }} <br>
+                                {% endfor %}
                             </div>
                             
                         </div><!-- End .product-desc-content -->

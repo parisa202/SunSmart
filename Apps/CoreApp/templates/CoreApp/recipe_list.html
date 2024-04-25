@@ -39,7 +39,6 @@
         						<div class="select-custom">
 									<select name="sortby" id="sortby" class="form-control">
 										<option value="popularity" selected="selected">Most Popular</option>
-										<option value="rating">Most Rated</option>
 										<option value="date">Date</option>
 									</select>
 								</div>
@@ -58,7 +57,7 @@
                                             
                                             <a  href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">
                                                
-                                                <img src="{% static "assets/images/CinnamonChicken.jpg" %}" alt="Product image" class="product-image">
+                                                <img src="{% static 'assets/images/recipes/'|add:recipe.name|add:'300_300.jpeg' %}" alt="Product image" class="product-image">
                                             </a>
 
                                             <div class="product-action-vertical">
@@ -72,19 +71,14 @@
 
                                         <div class="product-body">
                                             <div class="product-cat">
-                                                <a href="#">{{recipe.slug}}</a>
+                                                <p>{% for meal in recipe.meal.all %} {{meal.type}} {% endfor %}</p>
                                             </div><!-- End .product-cat -->
                                             
                                             <h3 class="product-title"><a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">{{recipe.name}}</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 <!-- $50.00 -->
                                             </div><!-- End .product-price -->
-                                            <div class="ratings-container">
-                                                <div class="ratings">
-                                                    <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
-                                                </div><!-- End .ratings -->
-                                                <!-- <span class="ratings-text">( 0 Reviews )</span> -->
-                                            </div><!-- End .rating-container -->
+                                            
                                         </div><!-- End .product-body -->
                                     </div><!-- End .product -->
                             
@@ -102,11 +96,56 @@
                     <aside class="sidebar-shop sidebar-filter">
                         <form action="{% url "CoreApp:recipes" %}" method="GET">
                             <div class="sidebar-filter-wrapper">
+                            
                                 <div class="widget widget-clean">
                                     <!-- <label><i class="icon-close"></i>Filters</label> -->
                                     <button type="submit">Submit</button>
                                     <a href="#" class="sidebar-filter-clear">Clean All</a>
                                 </div><!-- End .widget -->
+
+
+                                <!-- meal type filter -->
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title">
+                                        <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                            Meal Type:
+                                        </a>
+                                    </h3><!-- End .widget-title -->
+
+                                    <div class="collapse show" id="widget-1">
+                                        <div class="widget-body">
+                                            <div class="filter-items filter-items-count">
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="lunch/dinner" name="meal" type="checkbox" class="custom-control-input" id="cat-9" {% if 'lunch/dinner' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-9">Lunch or Dinner</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">3</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="breakfast" name="meal" type="checkbox" class="custom-control-input" id="cat-10" {% if 'breakfast' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-10">Breakfast</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">0</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="brunch" name="meal" type="checkbox" class="custom-control-input" id="cat-11" {% if 'brunch' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-11">Brunch</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">4</span>
+                                                </div><!-- End .filter-item -->
+                                            </div><!-- End .filter-items -->
+                                        </div><!-- End .widget-body -->
+                                    </div><!-- End .collapse -->
+                                </div><!-- End .widget -->
+                                <!-- END meal type filter -->
+
+
+                                
                                 <div class="widget widget-collapsible">
                                     <h3 class="widget-title">
                                         <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
@@ -119,7 +158,7 @@
                                             <div class="filter-items filter-items-count">
                                                 <div class="filter-item">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-1">
+                                                        <input value="Alcohol-Free" name="health_tag" type="checkbox" class="custom-control-input" id="cat-1" {% if 'Alcohol-Free' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-1">Alcohol-Free</label>
                                                     </div><!-- End .custom-checkbox -->
                                                     <span class="item-count">3</span>
@@ -140,80 +179,16 @@
                                                     </div><!-- End .custom-checkbox -->
                                                     <span class="item-count">4</span>
                                                 </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-4">
-                                                        <label class="custom-control-label" for="cat-4">Monounsaturated</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">2</span>
-                                                </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-5">
-                                                        <label class="custom-control-label" for="cat-5">Polyunsaturated</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">2</span>
-                                                </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-6">
-                                                        <label class="custom-control-label" for="cat-6">Carbs</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">1</span>
-                                                </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-7">
-                                                        <label class="custom-control-label" for="cat-7">Fiber</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">1</span>
-                                                </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Sugars</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Sugars</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                                                            
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Sugars</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                                                            
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-9">
-                                                        <label class="custom-control-label" for="cat-9">Protein</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                
                                             </div><!-- End .filter-items -->
                                         </div><!-- End .widget-body -->
                                     </div><!-- End .collapse -->
+
                                 </div><!-- End .widget -->
 
                                 <div class="widget widget-collapsible">
                                     <h3 class="widget-title">
                                         <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
-                                            Micronutrients
+                                            Ingredients
                                         </a>
                                     </h3><!-- End .widget-title -->
 
@@ -222,174 +197,51 @@
                                             <div class="filter-items filter-items-count">
                                                 <div class="filter-item">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-1">
-                                                        <label class="custom-control-label" for="cat-1">Cholesterol</label>
+                                                        <input value="broccoli" name="ingredient" type="checkbox" class="custom-control-input" id="cat-4" {% if 'broccoli' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-4">Broccoli</label>
                                                     </div><!-- End .custom-checkbox -->
                                                     <span class="item-count">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-2">
-                                                        <label class="custom-control-label" for="cat-2">Sodium</label>
+                                                        <input value="celery" name="ingredient" type="checkbox" class="custom-control-input" id="cat-5" {% if 'celery' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-5">Celery</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
+                                                    <span class="item-count">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-3">
-                                                        <label class="custom-control-label" for="cat-3">Calcium</label>
+                                                        <input value="lentils" name="ingredient" type="checkbox" class="custom-control-input" id="cat-6" {% if 'lentils' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-6">Lentils</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">4</span>
+                                                    <span class="item-count">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-4">
-                                                        <label class="custom-control-label" for="cat-4">Magnesium</label>
+                                                        <input value="apple" name="ingredient" type="checkbox" class="custom-control-input" id="cat-7" {% if 'apple' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-7">Apple</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">2</span>
+                                                    <span class="item-count">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-5">
-                                                        <label class="custom-control-label" for="cat-5">Potassium</label>
+                                                        <input value="eggs" name="ingredient" type="checkbox" class="custom-control-input" id="cat-8" {% if 'eggs' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-8">Eggs</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">2</span>
+                                                    <span class="item-count">3</span>
                                                 </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-6">
-                                                        <label class="custom-control-label" for="cat-6">Iron</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">1</span>
-                                                </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-7">
-                                                        <label class="custom-control-label" for="cat-7">Phosphorus</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">1</span>
-                                                </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Vitamin A</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Vitamin C</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                                                            
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Thiamin (B1)</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Riboflavin (B2)</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                                                                                                                    
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Niacin (B3)</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                                                            
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Vitamin B6</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                                                            
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Folate (Equivalent)</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                                                            
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Vitamin B12</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                                                            
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                        <label class="custom-control-label" for="cat-8">Vitamin D</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-9">
-                                                        <label class="custom-control-label" for="cat-9">Vitamin E</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                
-                                                <div class="filter-item">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="cat-9">
-                                                        <label class="custom-control-label" for="cat-9">Vitamin E</label>
-                                                    </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
-                                                </div><!-- End .filter-item -->
-                                                
+                              
                                             </div><!-- End .filter-items -->
                                         </div><!-- End .widget-body -->
                                     </div><!-- End .collapse -->
                                 </div><!-- End .widget -->
 
 
-                                <div class="widget widget-collapsible">
-                                    <h3 class="widget-title">
-                                        <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
-                                            Price
-                                        </a>
-                                    </h3><!-- End .widget-title -->
 
-                                    <div class="collapse show" id="widget-5">
-                                        <div class="widget-body">
-                                            <div class="filter-price">
-                                                <div class="filter-price-text">
-                                                    Price Range:
-                                                    <span id="filter-price-range"></span>
-                                                </div><!-- End .filter-price-text -->
-
-                                                <div id="price-slider"></div><!-- End #price-slider -->
-                                            </div><!-- End .filter-price -->
-                                        </div><!-- End .widget-body -->
-                                    </div><!-- End .collapse -->
-                                </div><!-- End .widget -->
                             </div><!-- End .sidebar-filter-wrapper -->
                         </form>
                     </aside><!-- End .sidebar-filter -->
