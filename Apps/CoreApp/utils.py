@@ -1,5 +1,6 @@
 # Useful fuctions for the whole project
 
+from django.shortcuts import redirect
 import requests
 import json
 
