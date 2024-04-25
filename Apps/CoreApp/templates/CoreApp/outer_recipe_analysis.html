@@ -35,13 +35,12 @@
         <div class="row">
             <div class="col-sm-12 mx-auto">
                 <p>Enter an ingredient list list for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br>Enter each ingredient on a new line.</p>
-                <form id="demoAnalysisForm" data-gtm-form-interact-id="0">
+                <form id="demoAnalysisForm" method ="post">{% csrf_token %}
                     <p>
-                      <textarea name="" id="demoAnalysis" cols="30" rows="10" class="form-control" data-gtm-form-interact-field-id="0">1 cup rice</textarea>
+                      <textarea name="custom_recipe" id="demoAnalysis" cols="30" rows="10" class="form-control">1 cup rice</textarea>
                     </p>
                     <div style="text-align: center;">
-                            <button type="button" class="btn btn-primary btn-rounded">Analyze</button>
-                            <button type="button" class="btn btn-primary btn-rounded" style="display: inline-block;">New recipe</button>
+                            <button  type="submit" class="btn btn-primary btn-rounded">Analyze</button>
                     </div>
                         
                     
@@ -52,26 +51,7 @@
                     </div>
                     <div class="demo-result">
                         <div class="col-md-12">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Qty</th>
-                                        <th>Unit</th>
-                                        <th>Food</th>
-                                        <th>Calories</th>
-                                        <th>Weight</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>1</th>
-                                        <th>cup</th>
-                                        <th>rice</th>
-                                        <th>702 kcal</th>
-                                        <th>195 g</th>
-                                    </tr>
-                                </tbody>
-                            </table>
+
                         </div>
                     </div>
                 </form>
@@ -81,92 +61,45 @@
     <aside class="col-lg-4">
         <div class="summary">
             <h3 class="summary-title">Nutrition Analysis</h3>
-            <!-- <p id="food_description" style="border-bottom: .1rem solid #ebebeb; padding-bottom: 1.7rem"></p> -->
+            <p id="food_description" style="border-bottom: .1rem solid #ebebeb; padding-bottom: 1.7rem"></p>
 
             <table class="table table-summary mt-3">
                 <thead>
                     <tr>
-                        <th colspan="3" class="amps">Amount Per Serving</th>
+                        <th>Nutrition</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr>
-                        <td colspan="2" class="small-info" style="font-size: larger;"><b>Calories</b></td>
-                        <td class="nob">{{ energy }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="small-info" style="font-size: smaller;"><b>% Daily Value*</b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="small-info"><b>Total Fat</b> 1.1 g</th>
-                        <td><b>2 %</b></td>
-                    </tr>
-                    <tr>
-                        <td class="blank-cell"></td>
-                        <th style="white-space: nowrap;">Saturated Fat 0.3 g</th>
-                        <td><b>2 %</b></td>
-                    </tr>
-                    <tr>
-                        <td class="blank-cell"></td>
-                        <th>Trans Fat -</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="small-info"><b>Cholesterol</b> 0 mg</th>
-                        <td><b>0 %</b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="small-info"><b>Sodium</b> 2 mg</th>
-                        <td><b>0 %</b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="small-info"><b>Total Carbohydrate</b> 154.6 g</th>
-                        <td><b>52 %</b></td>
-                    </tr>
-                    <tr>
-                        <td class="blank-cell"></td>
-                        <th>Dietary Fiber -</th>
-                        <td><b>-</b></td>
-                    </tr>
-                    <tr>
-                        <td class="blank-cell"></td>
-                        <th>Total Sugars -</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="blank-cell"></td>
-                        <th>Includes - Added Sugars</th>
-                        <td></td>
-                    </tr>
-                    <tr class="thick-end">
-                        <td colspan="2" class="small-info"><b>Protein</b> 12.9 g</th>
-                        <td><b>26 %</b></td>
+                        <td>Calories:</td>
+                        <td>{{api_data.calories_intake}}Kcal</td>
                     </tr>
 
                     <tr>
-                        <th>Vitamin D 0 µg</th>
-                        <td><b>0 %</b></td>
+                        <td>Total Fat:</td>
+                        <td>{{api_data.fat_total_g_intake}}g</td>
                     </tr>
                     <tr>
-                        <th>Calcium 17.6 mg</th>
-                        <td><b>2 %</b></td>
+                        <td>Saturated Fat:</td>
+                        <td>{{api_data.fat_saturated_g_intake}}g</td>
+                    </tr><!-- End .summary-subtotal -->
+                    <tr>
+                        <td>Carbohydrates:</td>
+                        <td>{{api_data.carbohydrates_total_g_intake}}g</td>
                     </tr>
                     <tr>
-                        <th>Iron 1.6 mg</th>
-                        <td><b>9 %</b></td>
+                        <td>Fiber:</td>
+                        <td>{{api_data.fiber_g_intake}}g</td>
                     </tr>
-                    <tr class="thin-end">
-                        <th>Potassium 167.7 mg</th>
-                        <td><b>4 %</b></td>
-                    </tr>
+                    <tr>
+                        <td>Sugar:</td>
+                        <td>{{api_data.sugar_g_intake}}g</td>
+                    </tr><!-- End .summary-total -->
                 </tbody>
-            </table>
-            
-
-                
-
             </table><!-- End .table table-summary -->
-            <p class="small-info" id="small-nutrition-info">*Percent Daily Values are based on a 2000 calorie diet</p>
+
         </div><!-- End .summary -->
     </aside><!-- End .col-lg-3 -->
 </div><!-- End .row -->
@@ -179,6 +112,11 @@
 {% endblock main_content %}
 
 
-{% block more_script %}
 
+{% block more_script %}
+<script>
+    document.getElementById('newRecipeBtn').addEventListener('click', function() {
+        document.getElementById('demoAnalysis').value = ''; // Clear the textarea
+      });
+</script>
 {% endblock more_script %}

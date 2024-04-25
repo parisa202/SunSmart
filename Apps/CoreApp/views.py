@@ -1,8 +1,9 @@
 from typing import Any
 from django.http.request import HttpRequest as HttpRequest
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib import messages
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.mail import send_mail
 from django.core.management.utils import get_random_secret_key
@@ -417,47 +418,52 @@ class RecipeListView(generic.ListView):
 
 class OuterRecipeAnalysisView(generic.TemplateView):
     template_name = 'CoreApp/outer_recipe_analysis.html'
-    recipes = None
     headers = {
         "Content-Type": "application/json"
     }
 
-    def get_nutrition_info(selected_recipe):
-        api_url = 'https://api.edamam.com/api/nutrition-data'
-        app_id = 'ab17b80b'
-        app_key = '60cf22a175864dd0e543affb11b4b79c'
-
-        params = {
-            'app_id': app_id,
-            'app_key': app_key,
-            'ingr': selected_recipe
+    def post(self, request, **kwargs):
+        custom_recipe = request.POST.get('custom_recipe')
+        recipe_intake = 1
+        serving = 1
+            
+        # send sign-in data to authentication API
+        api_url = 'https://juniorjoy.site/api/api/calcucalories'
+        data = {
+            "query": custom_recipe,
+            "intake": recipe_intake,
+            "serving": serving
         }
 
-        response = requests.get(api_url, params=params)
-
+        response = requests.get(api_url, headers=self.headers, json=data)
+        recipe = {}
+        
         if response.status_code == 200:
-            nutrition_info = response.json()
-            # get the nutritional information
-            calories = nutrition_info['totalNutrients']['ENERC_KCAL']['quantity']
-            protein = nutrition_info['totalNutrients']['PROCNT']['quantity']
-            fat = nutrition_info['totalNutrients']['FAT']['quantity']
-            carbohydrate = nutrition_info['totalNutrients']['CHOCDF']['quantity']
+            # Append the calorie information to the recipe
+            recipe['nutrient_info'] = {'success': 'calorie information received'}            
+            response_data = response.json()
 
-            context = {
-                'calories': calories,
-                'protein': protein,
-                'fat': fat,
-                'carbohydrate': carbohydrate,
-            }
+            recipe['calories_intake'] = response_data['calories_intake']
+            recipe['serving_size_g_intake'] = response_data['serving_size_g_intake']
+            recipe['fat_total_g_intake'] = response_data['fat_total_g_intake']
+            recipe['fat_saturated_g_intake'] = response_data['fat_saturated_g_intake']
+            recipe['protein_g_intake'] = response_data['protein_g_intake']
+            # recipe['sodium_mg_intake'] = response_data['sodium_mg_intake']
+            # recipe['potassium_mg_intake'] = response_data['potassium_mg_intake']
+            # recipe['cholesterol_mg_intake'] = response_data['cholesterol_mg_intake']
+            recipe['carbohydrates_total_g_intake'] = response_data['carbohydrates_total_g_intake']
+            recipe['fiber_g_intake'] = response_data['fiber_g_intake']
+            recipe['sugar_g_intake'] = response_data['sugar_g_intake']
 
-            return render(request, 'outer_recipe_analysis.html', context)
         else:
-            return {'error': 'Failed to retrieve nutrition information'}
-
-
-
-
-
+            # Handle API error
+            recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
+                
+        self.context = self.get_context_data(**kwargs)
+        self.context['api_data'] = recipe
+        
+        return render(request, self.template_name, context=self.context)
+                 
 
 
 class ComingView(generic.TemplateView):
