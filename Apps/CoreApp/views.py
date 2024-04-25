@@ -417,6 +417,47 @@ class RecipeListView(generic.ListView):
 
 class OuterRecipeAnalysisView(generic.TemplateView):
     template_name = 'CoreApp/outer_recipe_analysis.html'
+    recipes = None
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    def get_nutrition_info(selected_recipe):
+        api_url = 'https://api.edamam.com/api/nutrition-data'
+        app_id = 'ab17b80b'
+        app_key = '60cf22a175864dd0e543affb11b4b79c'
+
+        params = {
+            'app_id': app_id,
+            'app_key': app_key,
+            'ingr': selected_recipe
+        }
+
+        response = requests.get(api_url, params=params)
+
+        if response.status_code == 200:
+            nutrition_info = response.json()
+            # get the nutritional information
+            calories = nutrition_info['totalNutrients']['ENERC_KCAL']['quantity']
+            protein = nutrition_info['totalNutrients']['PROCNT']['quantity']
+            fat = nutrition_info['totalNutrients']['FAT']['quantity']
+            carbohydrate = nutrition_info['totalNutrients']['CHOCDF']['quantity']
+
+            context = {
+                'calories': calories,
+                'protein': protein,
+                'fat': fat,
+                'carbohydrate': carbohydrate,
+            }
+
+            return render(request, 'outer_recipe_analysis.html', context)
+        else:
+            return {'error': 'Failed to retrieve nutrition information'}
+
+
+
+
+
 
 
 class ComingView(generic.TemplateView):
