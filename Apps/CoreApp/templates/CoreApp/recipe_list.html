@@ -35,9 +35,9 @@
 
         				<div class="toolbox-right">
         					<div class="toolbox-sort">
-        						<label for="sortby">Sort by:</label>
+        						<label for="sortby" style = "display:none">Sort by:</label>
         						<div class="select-custom">
-									<select name="sortby" id="sortby" class="form-control">
+									<select name="sortby" id="sortby" class="form-control" style = "display:none">
 										<option value="popularity" selected="selected">Most Popular</option>
 										<option value="date">Date</option>
 									</select>
@@ -56,7 +56,6 @@
                                             <!-- <span class="product-label label-new">New</span> -->
                                             
                                             <a  href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">
-                                               
                                                 <img src="{% static 'assets/images/recipes/'|add:recipe.name|add:'300_300.jpeg' %}" alt="Product image" class="product-image">
                                             </a>
 
@@ -120,7 +119,7 @@
                                                         <input value="lunch/dinner" name="meal" type="checkbox" class="custom-control-input" id="cat-9" {% if 'lunch/dinner' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-9">Lunch or Dinner</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">3</span>
+                                                    <span class="item-count" style = "display:none">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
@@ -128,7 +127,7 @@
                                                         <input value="breakfast" name="meal" type="checkbox" class="custom-control-input" id="cat-10" {% if 'breakfast' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-10">Breakfast</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
+                                                    <span class="item-count" style = "display:none">0</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
@@ -136,7 +135,7 @@
                                                         <input value="brunch" name="meal" type="checkbox" class="custom-control-input" id="cat-11" {% if 'brunch' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-11">Brunch</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">4</span>
+                                                    <span class="item-count" style = "display:none">4</span>
                                                 </div><!-- End .filter-item -->
                                             </div><!-- End .filter-items -->
                                         </div><!-- End .widget-body -->
@@ -161,7 +160,7 @@
                                                         <input value="Alcohol-Free" name="health_tag" type="checkbox" class="custom-control-input" id="cat-1" {% if 'Alcohol-Free' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-1">Alcohol-Free</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">3</span>
+                                                    <span class="item-count" style = "display:none">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
@@ -169,7 +168,7 @@
                                                         <input value="Egg-Free" name="health_tag" type="checkbox" class="custom-control-input" id="cat-2" {% if 'Egg-Free' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-2">Egg-Free</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">0</span>
+                                                    <span class="item-count" style = "display:none">0</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
@@ -177,7 +176,7 @@
                                                         <input value="Dairy-Free" name="health_tag" type="checkbox" class="custom-control-input" id="cat-3" {% if 'Dairy-Free' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-3">Dairy-Free</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">4</span>
+                                                    <span class="item-count" style = "display:none">4</span>
                                                 </div><!-- End .filter-item -->
                                             </div><!-- End .filter-items -->
                                         </div><!-- End .widget-body -->
@@ -200,7 +199,7 @@
                                                         <input value="broccoli" name="ingredient" type="checkbox" class="custom-control-input" id="cat-4" {% if 'broccoli' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-4">Broccoli</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">3</span>
+                                                    <span class="item-count" style = "display:none">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
@@ -208,7 +207,7 @@
                                                         <input value="celery" name="ingredient" type="checkbox" class="custom-control-input" id="cat-5" {% if 'celery' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-5">Celery</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">3</span>
+                                                    <span class="item-count" style = "display:none">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
@@ -216,7 +215,7 @@
                                                         <input value="lentils" name="ingredient" type="checkbox" class="custom-control-input" id="cat-6" {% if 'lentils' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-6">Lentils</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">3</span>
+                                                    <span class="item-count" style = "display:none">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
@@ -224,7 +223,7 @@
                                                         <input value="apple" name="ingredient" type="checkbox" class="custom-control-input" id="cat-7" {% if 'apple' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-7">Apple</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">3</span>
+                                                    <span class="item-count" style = "display:none">3</span>
                                                 </div><!-- End .filter-item -->
 
                                                 <div class="filter-item">
@@ -232,7 +231,7 @@
                                                         <input value="eggs" name="ingredient" type="checkbox" class="custom-control-input" id="cat-8" {% if 'eggs' in selected_options %}checked{% endif %}>
                                                         <label class="custom-control-label" for="cat-8">Eggs</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">3</span>
+                                                    <span class="item-count" style = "display:none">3</span>
                                                 </div><!-- End .filter-item -->
                               
                                             </div><!-- End .filter-items -->
