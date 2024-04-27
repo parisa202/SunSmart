@@ -2,17 +2,31 @@
     {
         "name": "Vitamin_A",
         "benefits": "Vitamin A is very important for preventing poor vision and dry eyes, and promotes hair and skin growth of children. Most importantly, it is essential for a good immune response to infectious diseases such as diarrhea, respiratory diseases and measles.",
-        "sources": "Dietary sources of Vitamin A include milk, cheese, eggs and yellow to orange vegetables such as carrots, yams and squash."
+        "sources": "Dietary sources of Vitamin A include milk, cheese, eggs and yellow to orange vegetables such as carrots, yams and squash.",
+        "image1" : "/static/assets/images/icons/carrot.png",
+        "image2" : "/static/assets/images/icons/eggs.png",
+        "image3" : "/static/assets/images/icons/cheese.png",
+        "image4" : "/static/assets/images/icons/milk.png"
     },
     {
         "name": "Vitamin_B",
         "benefits": "Vitamin B is important for helping children's metabolism, energy production, healthy circulation and nervous system.",
-        "sources": "Foods rich in Vitamin B are meat, chicken, fish, nuts, eggs, milk, cheese, beans, and soybeans."
+        "sources": "Foods rich in Vitamin B are meat, chicken, fish, nuts, eggs, milk, cheese, beans, and soybeans.",
+        "image1" : "/static/assets/images/icons/eggs.png",
+        "image2" : "/static/assets/images/icons/fish.png",
+        "image3" : "/static/assets/images/icons/green-beans.png",
+        "image4" : "/static/assets/images/icons/cheese.png"
+    
     },
     {
         "name": "Vitamin_C",
         "benefits": "Vitamin C plays an important role in children's growth, development and good immunity. It is an important antioxidant that helps fight disease and toxins. This vitamin also helps promote iron absorption in the gut.",
-        "sources": "There are many colorful fruits rich in vitamin C that will appeal to children. For example, oranges, kiwis, grapefruit, strawberries, raspberries, and vegetables such as tomatoes, cabbage, cauliflower, and Brussels sprouts."
+        "sources": "There are many colorful fruits rich in vitamin C that will appeal to children. For example, oranges, kiwis, grapefruit, strawberries, raspberries, and vegetables such as tomatoes, cabbage, cauliflower, and Brussels sprouts.",
+        "image1" : "/static/assets/images/icons/strawberry.png",
+        "image2" : "/static/assets/images/icons/orange.png",
+        "image3" : "/static/assets/images/icons/cabbage-.png",
+        "image4" : "/static/assets/images/icons/cauliflower.png"
+    
     },
     {
         "name": "Vitamin_D",

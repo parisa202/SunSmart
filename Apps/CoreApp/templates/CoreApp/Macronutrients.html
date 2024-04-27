@@ -40,14 +40,24 @@
                   text-decoration: none;
                   color: #000000;
                   font-weight: bold;
-                  background-color: #80dd88;
+                  background-color:  #d2efd5;
                   transition: background-color 0.3s, border-color 0.3s, color 0.3s;
                 }
             
                 .tagcloud a:hover {
-                  background-color: #0a9c38;
+                  background-color: #72dcdc;
                   border-color: #000000;
                   color: #000000; /* Change text color on hover */
+                }
+                .food-icon {
+                  width: 50px;
+                  height: 50px;
+                  transition: transform 0.3s ease;
+                }
+                
+                /* Define the hover effect */
+                .food-icon:hover {
+                  transform: scale(1.2); /* Scale up the image on hover */
                 }
               </style>
               <!-- style="background-color:rgb(107, 228, 170);color:#393232" -->
@@ -62,9 +72,16 @@
       <div class="col-lg-7">
         <div class="entry-content editor-content">
           <h3>How will this nutrition benefit your children?</h3>
+          <img id="arrow-icon"  class ="food-icon"src="{% static 'assets/images/icons/fast-backward.gif' %}" alt="vegetable icon" style="width: 50px; height: 50;">
             <p id="macro_benefits" style="height: 100px;">Click the button on the left</p>
           <h3>Where can you help your children get this nutrition?</h3>
             <p id="macro_sources" style="height: 100px;">Click the button on the left</p>
+        </div>
+        <div class ="row col-9" id="food-icons" style = "display: none;  justify-content: space-between; ">
+          <img id="food-icon1" class ="food-icon" src="{% static 'assets/images/icons/carrot.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+          <img id="food-icon2"  class ="food-icon"src="{% static 'assets/images/icons/eggs.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+          <img id="food-icon3"  class ="food-icon" src="{% static 'assets/images/icons/cauliflower.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+          <img id="food-icon4"  class ="food-icon" src="{% static 'assets/images/icons/cauliflower.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
         </div>
       </div><!-- End .col-lg-7 -->
 
@@ -118,6 +135,12 @@
                 } else {
                 $('#macro_benefits').text(response.benefits);
                 $('#macro_sources').text(response.sources);
+                $('#food-icons').show();
+                $('#arrow-icon').hide();
+                $('#food-icon1').attr('src', response.image1).hide().fadeIn();
+                $('#food-icon2').attr('src', response.image2).hide().fadeIn();
+                $('#food-icon3').attr('src', response.image3).hide().fadeIn();
+                $('#food-icon4').attr('src', response.image4).hide().fadeIn();
                 }
             },
             error: function (request, status, error) {
