@@ -34,20 +34,22 @@
         <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <p>Enter an ingredient list list for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br>Enter each ingredient on a new line.</p>
+                <p>Enter a list of ingredients for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br></p>
+                <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
                 <form id="demoAnalysisForm" method ="post">{% csrf_token %}
                     <p>
-                      <textarea name="custom_recipe" id="demoAnalysis" cols="30" rows="10" class="form-control">1 cup rice</textarea>
+                      <textarea name="custom_recipe" id="demoAnalysis" cols="30" rows="10" class="form-control"></textarea>
                     </p>
+                    <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
                     <div style="text-align: center;">
                             <button  type="submit" class="btn btn-primary btn-rounded">Analyze</button>
                     </div>
-                        
+                    <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
                     
                     
                     <div class="err-result">
-                        <span class="addition-e">We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling or if you have entered a quantities for the ingredients.
-                        </span>
+                        <p class="addition-e">Note: We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling and the quantity.
+                        </p>
                     </div>
                     <div class="demo-result">
                         <div class="col-md-12">
