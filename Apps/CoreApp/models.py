@@ -38,6 +38,10 @@ class PB_WHO_BMI(models.Model):
     crude_estimate = models.FloatField(null=True, blank=True)
     
 
+class PAGE_VIEW(models.Model):
+    path = models.CharField(max_length=1001, unique=True)
+    views = models.IntegerField(default=1)
+    
 class HEALTH_TAG(models.Model):
     tag = models.CharField(max_length=150, null=True, blank=True)
 
@@ -75,17 +79,20 @@ class RECIPES(models.Model):
     nutrients = models.ManyToManyField(NUTRIENTS, through='RECIPE_NUTRIENTS')
     
     slug = models.SlugField(max_length=500, unique=True, null=True, blank=True)
+    page_view = models.OneToOneField(PAGE_VIEW, on_delete=models.CASCADE, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True, editable=False)
     
-    
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.slug = slugify(self.name)
         if update_fields is not None and "name" in update_fields:
             update_fields = {"slug"}.union(update_fields)
                           
+        # Create or update associated PAGE_VIEW
+        if not self.page_view_id:
+            page_view, _ = PAGE_VIEW.objects.get_or_create(path=self.get_absolute_url())
+            self.page_view = page_view
+            
         super().save(
             force_insert=force_insert,
             force_update=force_update,
@@ -95,7 +102,7 @@ class RECIPES(models.Model):
         
     def get_absolute_url(self):
         # return urllib.parse.unquote(reverse('CoreAPP:recipe-detail', kwargs={'slug': self.slug}))
-        reverse('CoreApp:recipe-detail', kwargs={'slug': self.slug})
+        return reverse('CoreApp:recipe-detail', kwargs={'slug': self.slug})
         
 
 class RECIPE_INGREDIENT(models.Model):
@@ -119,7 +126,5 @@ class RECIPE_NUTRIENTS(models.Model):
         return f"{self.nutrient.name} : {numpy.round(float(self.quantity))} {self.measure} "
     
 
-class PAGE_VIEW(models.Model):
-    path = models.CharField(max_length=1001, unique=True)
-    views = models.IntegerField(default=1)
+
     

@@ -7,9 +7,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views import generic
 from django.core.mail import send_mail
 from django.core.management.utils import get_random_secret_key
-from django.views.generic.detail import DetailView
 from django.utils.text import slugify
-from django.views.generic.detail import DetailView
 from .models import *
 from django.apps import apps
 import os
@@ -348,7 +346,7 @@ class MicronutrientsView(generic.TemplateView):
         return new_context
     
 
-class RecipeDetailView(DetailView):
+class RecipeDetailView(generic.DetailView):
     model = RECIPES
     template_name = 'CoreApp/recipe_detail.html'
     slug_field = 'slug'
@@ -367,19 +365,23 @@ class RecipeListView(generic.ListView):
     model = RECIPES
     context_object_name = 'all_recipes'
     all_selected_options = None
+    # paginate_by  = 12
        
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().distinct()           
         self.all_selected_options = []
         
         # GET parameters from the request 
         health_tag = self.request.GET.getlist('health_tag')
         meal = self.request.GET.getlist('meal')
         ingredient = self.request.GET.getlist('ingredient')
+        sortby = self.request.GET.get('sortby', 'no_selection')
         
+        # Use for check mark the selected filters in template
         self.all_selected_options.extend(health_tag)
         self.all_selected_options.extend(meal)
         self.all_selected_options.extend(ingredient)
+        self.all_selected_options.append(sortby)
         
         # Filter queryset based on parameters
         if not (health_tag=='' or health_tag==[] or health_tag==None):
@@ -394,23 +396,31 @@ class RecipeListView(generic.ListView):
             tempQuery = reduce(or_, (Q(ingredients__name__exact=t) for t in ingredient))
             queryset = queryset.filter(tempQuery)
         
-        self.queryset = queryset.distinct()
+        # order by must be the last if clause
+        if (sortby=='' or sortby==None):
+            queryset = queryset.order_by('-created_on')
         
-        return queryset.distinct()
+        else:
+            if sortby=='popularity':
+                queryset = queryset.order_by('-page_view__views')                                     
+            if sortby=='date':
+                queryset = queryset.order_by('-created_on')
+
+        
+        self.queryset = queryset
+        
+        return queryset
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         
         # query from table
         all_recipes_count = self.queryset.count()
-        
-        alcohol = self.queryset.exclude(health_tag__tag='Alcohol-Free')
-        
+               
         context.update({'main_title': 'Healthy Recipes',
                        'page_name': 'Healthy Recipes',
                        'all_recipes_count' : all_recipes_count,
                        'selected_options': self.all_selected_options,
-                       'ddd': alcohol
                        })
         
         return context
@@ -620,7 +630,9 @@ class LoadRecipesDataView(generic.View):
                                                         nutrient = temp_nutrient,
                                                         quantity = nutrient['quantity'],
                                                         measure = nutrient['unit']
-                                                    )                       
+                                                    )  
+                        
+                    temp_recipe.save()                         
                     
                         
             return HttpResponse(f"Recipes are stored!")
