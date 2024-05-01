@@ -1,0 +1,184 @@
+{% extends "V2CoreApp/base.html" %}
+{% load static %}
+
+
+{% block title_block %}
+    
+{% endblock title_block %}
+
+
+
+
+
+{% block main_content %}
+
+<div class="container">
+    <div class="page-header" style=" background-color:#d2efd5; text-align: center;">
+        <div class="container">
+            <h1 class="page-title col-lg-10 mx-auto" style="font-size: 24px;text-align: center;">Recipe Analyzer<span>{{sub_title}}</span></h1>
+        </div><!-- End .container -->
+</div>
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "V2CoreApp:index" %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Recipe Analyzer</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+
+<div class="row">
+    <div class="col-lg-8">
+        <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
+        <div class="row">
+            <div class="col-sm-12 mx-auto">
+                <p>Enter an ingredient list list for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br>Enter each ingredient on a new line.</p>
+                <form id="demoAnalysisForm" data-gtm-form-interact-id="0">
+                    <p>
+                      <textarea name="" id="demoAnalysis" cols="30" rows="10" class="form-control" data-gtm-form-interact-field-id="0">1 cup rice</textarea>
+                    </p>
+                    <div style="text-align: center;">
+                            <button type="button" class="btn btn-primary btn-rounded">Analyze</button>
+                            <button type="button" class="btn btn-primary btn-rounded" style="display: inline-block;">New recipe</button>
+                    </div>
+                        
+                    
+                    
+                    <div class="err-result">
+                        <span class="addition-e">We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling or if you have entered a quantities for the ingredients.
+                        </span>
+                    </div>
+                    <div class="demo-result">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Qty</th>
+                                        <th>Unit</th>
+                                        <th>Food</th>
+                                        <th>Calories</th>
+                                        <th>Weight</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>1</th>
+                                        <th>cup</th>
+                                        <th>rice</th>
+                                        <th>702 kcal</th>
+                                        <th>195 g</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <aside class="col-lg-4">
+        <div class="summary">
+            <h3 class="summary-title">Nutrition Analysis</h3>
+            <!-- <p id="food_description" style="border-bottom: .1rem solid #ebebeb; padding-bottom: 1.7rem"></p> -->
+
+            <table class="table table-summary mt-3">
+                <thead>
+                    <tr>
+                        <th colspan="3" class="amps">Amount Per Serving</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2" class="small-info" style="font-size: larger;"><b>Calories</b></td>
+                        <td class="nob">{{ energy }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="small-info" style="font-size: smaller;"><b>% Daily Value*</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="small-info"><b>Total Fat</b> 1.1 g</th>
+                        <td><b>2 %</b></td>
+                    </tr>
+                    <tr>
+                        <td class="blank-cell"></td>
+                        <th style="white-space: nowrap;">Saturated Fat 0.3 g</th>
+                        <td><b>2 %</b></td>
+                    </tr>
+                    <tr>
+                        <td class="blank-cell"></td>
+                        <th>Trans Fat -</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="small-info"><b>Cholesterol</b> 0 mg</th>
+                        <td><b>0 %</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="small-info"><b>Sodium</b> 2 mg</th>
+                        <td><b>0 %</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="small-info"><b>Total Carbohydrate</b> 154.6 g</th>
+                        <td><b>52 %</b></td>
+                    </tr>
+                    <tr>
+                        <td class="blank-cell"></td>
+                        <th>Dietary Fiber -</th>
+                        <td><b>-</b></td>
+                    </tr>
+                    <tr>
+                        <td class="blank-cell"></td>
+                        <th>Total Sugars -</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="blank-cell"></td>
+                        <th>Includes - Added Sugars</th>
+                        <td></td>
+                    </tr>
+                    <tr class="thick-end">
+                        <td colspan="2" class="small-info"><b>Protein</b> 12.9 g</th>
+                        <td><b>26 %</b></td>
+                    </tr>
+
+                    <tr>
+                        <th>Vitamin D 0 µg</th>
+                        <td><b>0 %</b></td>
+                    </tr>
+                    <tr>
+                        <th>Calcium 17.6 mg</th>
+                        <td><b>2 %</b></td>
+                    </tr>
+                    <tr>
+                        <th>Iron 1.6 mg</th>
+                        <td><b>9 %</b></td>
+                    </tr>
+                    <tr class="thin-end">
+                        <th>Potassium 167.7 mg</th>
+                        <td><b>4 %</b></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+
+                
+
+            </table><!-- End .table table-summary -->
+            <p class="small-info" id="small-nutrition-info">*Percent Daily Values are based on a 2000 calorie diet</p>
+        </div><!-- End .summary -->
+    </aside><!-- End .col-lg-3 -->
+</div><!-- End .row -->
+
+
+
+
+
+
+{% endblock main_content %}
+
+
+{% block more_script %}
+
+{% endblock more_script %}

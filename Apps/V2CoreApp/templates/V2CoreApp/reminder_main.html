@@ -1,0 +1,124 @@
+{% extends "V2CoreApp/base.html" %}
+
+{% load static %}
+
+{% block title_block %}
+{% endblock title_block %}
+
+{% block main_content %}
+    
+{% include "V2CoreApp/components/breadcrumb.html" %}
+
+
+<div class="container col-10">
+    <div class="container col-10">
+        <h3 class="entry-content editor-content mb-2 pt-1 " style="text-align: center;">Reminder Tool for Meal Schedule</h3>
+        Effortlessly manage your child's meal schedule with our convenient reminder tool, tailored for busy parents. Simplify the chaos of daily life by staying on track with meal times, ensuring your child receives nourishing meals consistently, even amidst the busiest of schedules.</p>
+        <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+        
+        <div class="">
+            <form class="form-group" name="reminderForm" method="POST" style="margin-bottom: 10px; text-align: center;"> {% csrf_token %}
+                <div class="row justify-content-center">
+                    <div class="form-group col-sm-4" style="text-align: center;">
+                        <label for="email">Your email address:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div><!-- End .form-group -->
+                </div><!-- End .row -->
+                
+                <div class="row justify-content-center">
+                    <div class="form-group col-sm-4" style="text-align: center;">
+                        <label for="date">Date:</label>
+                        <div>
+                            <input type="date" id="date" name="date" style="margin-right: 15px;" onchange="validateDate()" required>
+                        </div>
+                    </div><!-- End .col-sm-4 -->
+                </div><!-- End .row -->
+
+                <div class="row justify-content-center">
+                    <div class="form-group col-sm-4" style="text-align: center;">
+                        <label for="meal">Meal:</label>
+                        <div class="select-custom">
+                            <select name="meal" id="meal" class="form-control" required>
+                                <option value="Breakfast">Breakfast (8:00 AM)</option>
+                                <option value="Lunch">Lunch (12:00 PM)</option>
+                                <option value="Dinner">Dinner (6:00 PM)</option>
+                            </select>
+                        </div><!-- End .select-custom -->
+                    </div><!-- End .col-sm-4 -->
+                </div><!-- End .row -->
+
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-2">
+                        <div class="cta-content">
+                            <button class="btn btn-primary btn-rounded">Set Reminder</button>
+                        </div><!-- End .cta-content -->
+                    </div><!-- End .col-xl-7 -->
+                </div><!-- End .row -->
+            </form>
+            
+            <div class="w3-content" style="max-width:2000px;margin-top:60px"></div>
+
+            <div class="entry-content editor-content" style ='justify-content: center'>
+                <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+                  <div class="container col-10">
+                        <div>
+                            <h3>Benefits of Mealtime Routines for Children</h3>
+                            Establishing a meal schedule for children is crucial for several reasons:</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <strong>Teaches Good Mealtime Habits:</strong>
+                                Setting expectations early helps children understand mealtime routines, fostering healthy eating habits and eliminating mealtime struggles.
+                            </li>
+                            <li>
+                                <strong>Prevents Grazing:</strong>
+                                Following a schedule reduces the tendency for children to snack randomly throughout the day, which can lead to overeating unhealthy foods or undereating. Consistent meals ensure they're adequately nourished and less likely to fill up on empty calories.
+                            </li>
+                            <li>
+                                <strong>Promotes Healthy Digestion:</strong>
+                                Eating on a schedule supports regular bowel movements and helps balance blood sugar levels, leading to improved energy, concentration, and mood throughout the day. This rhythmic pattern optimizes digestion and overall well-being.
+                            </li>
+                        </ul>
+                        <style>
+                            ul {
+                                list-style: none;
+                                padding: 0;
+                                margin: 0;
+                            }
+                            li {
+                                text-align: justify;
+                            }
+                            li::after {
+                                content: "";
+                                flex-grow: 1;
+                            }
+                            strong {
+                                display: inline-block;
+                            }
+                            strong::after {
+                                content: "\A";
+                                white-space: pre;
+                            }
+                        </style>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="w3-content" style="max-width:2000px;margin-top:45px"></div>
+
+<script>
+    function validateDate() {
+        var inputDate = new Date(document.getElementById('date').value);
+        var currentDate = new Date();
+        
+        if (inputDate < currentDate) {
+            alert('Please select a date after the current date.');
+            document.getElementById('date').value = ''; // Clear the input field
+        }
+    }
+</script>
+{% endblock main_content %}

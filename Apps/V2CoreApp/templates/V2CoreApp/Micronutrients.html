@@ -1,0 +1,165 @@
+{% extends "V2CoreApp/base.html" %}
+
+{% load static %}
+
+{% block title_block %}
+{% endblock title_block %}
+
+{% block extra_css %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock extra_css %}
+
+{% block main_content %}
+
+{% include "V2CoreApp/components/breadcrumb.html" %}
+<div class="entry-content editor-content" style ='justify-content: center'>
+  
+  <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+    <div class="container col-9.9">
+      <div>
+        <h3>What is Micronutrient</h3>
+        <p>Micronutrients, like vitamins and minerals, are essential for kids' growth and health. They help with things like strong bones, a good immune system, and keeping their brains working well. Found in foods like fruits, veggies, and milk, these nutrients are crucial for kids to grow and stay energized. Even though they're needed in smaller amounts, they're super important for kids' overall health. Eating different kinds of foods helps kids get all the micronutrients they need to grow up strong and happy.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><!-- container macro -->
+    <div class="row">
+    
+      <aside class="col-lg-5">
+        <div class="sidebar">
+          <div class="widget">
+            <h3 class="widget-title">Micronutrients</h3><!-- End .widget-title -->
+            <div class="tagcloud" id="tagcloud" style="font-weight: bold;">
+              
+              <style>
+                .tagcloud a {
+                  padding: 10px 20px;
+                  border: 0px solid #ccc;
+                  border-radius: 10px; /* Adjust border radius for rounded corners */
+                  text-decoration: none;
+                  color: #000000;
+                  font-weight: bold;
+                  background-color: #d2efd5;
+                  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+                }
+            
+                .tagcloud a:hover {
+                  background-color: #72dcdc;
+                  border-color: #000000;
+                  color: #000000; /* Change text color on hover */
+                }
+                /* Define the initial state of the images */
+                .food-icon {
+                  width: 50px;
+                  height: 50px;
+                  transition: transform 0.3s ease;
+                }
+
+                /* Define the hover effect */
+                .food-icon:hover {
+                  transform: scale(1.2); /* Scale up the image on hover */
+                }
+              </style>
+              
+              <a name="Vitamin_A">Vitamin A</a>
+              <a name="Vitamin_B">Vitamin B</a>
+              <a name="Vitamin_C">Vitamin C</a>
+              <a name="Vitamin_D">Vitamin D</a>
+              <a name="Vitamin_E">Vitamin E</a>
+              <a name="Vitamin_K">Vitamin K</a>
+              <a name="Magnesium">Magnesium</a>
+              <a name="Calcium">Calcium</a>
+              <a name="Zinc">Zinc</a>
+              <a name="Iron">Iron</a>
+
+          </div>
+        </div><!-- End .sidebar -->
+      </aside><!-- End .col-lg-5 -->
+
+      <div class="col-lg-7">
+        <div class="entry-content editor-content">
+          <h3>How will this nutrition benefit your children?</h3>
+          <img id="arrow-icon"  class ="food-icon"src="{% static 'assets/images/icons/fast-backward.gif' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+            <p id="micro_benefits" style="height: 100px;">Click the button on the left</p>
+          <h3>Where can you help your children get this nutrition?</h3>
+            <p id="micro_sources" style="height: 100px;">Click the button on the left</p>
+            <div class ="row col-9" id="food-icons" style = "display: none;  justify-content: space-between; ">
+              <img id="food-icon1" class ="food-icon" src="{% static 'assets/images/icons/carrot.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+              <img id="food-icon2"  class ="food-icon"src="{% static 'assets/images/icons/eggs.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+              <img id="food-icon3"  class ="food-icon" src="{% static 'assets/images/icons/cauliflower.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+              <img id="food-icon4"  class ="food-icon" src="{% static 'assets/images/icons/cauliflower.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+            </div>
+        </div>
+      </div><!-- End .col-lg-7 -->
+
+    </div><!-- End row information -->
+  </div><!-- End container macro -->
+
+  <div class="container">
+    <hr class="mb-2">
+      <div class="cta bg-image pt-3 pb-3 mb-3" style="background-color:#d2efd5;background-position: center right;">
+        <div class="row justify-content-center">
+            <div class="col-sm-10 col-md-8 col-lg-8">
+                <div class="cta-text text-center">
+                    <h3 class="cta-title"> Would you like to know more about Macronutrients? </h3><!-- End .cta-title -->
+                    <p class="cta-desc"><p>Discover Macronutrients that are essential to children's daily activities
+                    </p><!-- End .cta-desc -->
+            
+                    <a href="{% url "V2CoreApp:macronutrients" %}" class="btn btn-primary btn-rounded"><span>Explore Macronutrients</span><i class="icon-long-arrow-right"></i></a>
+                </div><!-- End .cta-text -->
+            </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
+        </div><!-- End .row -->
+      </div><!-- End .cta -->
+    </hr>
+  </div>
+  <div>
+
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    //var tagcloud = 
+    $('#tagcloud a').on('click', function (e) {
+        var tagChoice = $(this).attr('name'); // Get selected value
+
+        if (tagChoice === 'nan') {
+            return; // Do nothing and exit the function
+        };
+        // console.log(tagChoice)
+        // AJAX call
+        $.ajax({
+            type: "POST",
+            url: "{% url 'V2CoreApp:micronutrients' %}", 
+            data: {'selected_tag': tagChoice,
+                    'csrfmiddlewaretoken': '{{csrf_token}}'
+                  },
+            dataType: 'json',
+            success: function (response) {
+                // Update with the received JSON data
+                console.log(response);
+                if(response.status == 'not found'){
+                    $('#micro_benefits').empty();
+                    $('#micro_sources').empty();
+                } else {
+                $('#micro_benefits').text(response.benefits);
+                $('#micro_sources').text(response.sources);
+                $('#food-icons').show();
+                $('#arrow-icon').hide();
+                $('#food-icon1').attr('src', response.image1).hide().fadeIn();
+                $('#food-icon2').attr('src', response.image2).hide().fadeIn();
+                $('#food-icon3').attr('src', response.image3).hide().fadeIn();
+                $('#food-icon4').attr('src', response.image4).hide().fadeIn();
+                }
+            },
+            error: function (request, status, error) {
+                console.log(request.status + ": " + request.responseText);
+            }
+            
+        });
+    });
+  });
+</script>
+{% endblock main_content %}

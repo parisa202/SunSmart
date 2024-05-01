@@ -22,4 +22,5 @@ urlpatterns = [
     path("", include('Apps.CoreApp.urls')),
     path("user/", include('Apps.UserAuthentication.urls')),
     path("iteration1/", include('Apps.V1CoreApp.urls')),
+    path("iteration2/", include('Apps.V2CoreApp.urls')),
 ]

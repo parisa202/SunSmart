@@ -1,0 +1,124 @@
+{% extends "V2CoreApp/base.html" %}
+{% load static %}
+
+
+{% block title_block %}
+    
+{% endblock title_block %}
+
+
+
+
+
+{% block main_content %}
+
+<div class="container">
+    <div class="page-header" style=" background-color:#d2efd5; text-align: center;">
+        <div class="container">
+            <h1 class="page-title col-lg-10 mx-auto" style="font-size: 24px;text-align: center;">Recipe Analyzer<span>{{sub_title}}</span></h1>
+        </div><!-- End .container -->
+</div>
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "V2CoreApp:index" %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Recipe Analyzer</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+
+<div class="row">
+    <div class="col-lg-8">
+        <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
+        <div class="row">
+            <div class="col-sm-12 mx-auto">
+                <p>Enter a list of ingredients for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br></p>
+                <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+                <form id="demoAnalysisForm" method ="post">{% csrf_token %}
+                    <p>
+                      <textarea name="custom_recipe" id="demoAnalysis" cols="30" rows="10" class="form-control"></textarea>
+                    </p>
+                    <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                    <div style="text-align: center;">
+                            <button  type="submit" class="btn btn-primary btn-rounded">Analyze</button>
+                    </div>
+                    <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                    
+                    
+                    <div class="err-result">
+                        <p class="addition-e">Note: We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling and the quantity.
+                        </p>
+                    </div>
+                    <div class="demo-result">
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <aside class="col-lg-4">
+        <div class="summary">
+            <h3 class="summary-title">Nutrition Analysis</h3>
+            <p id="food_description" style="border-bottom: .1rem solid #ebebeb; padding-bottom: 1.7rem"></p>
+
+            <table class="table table-summary mt-3">
+                <thead>
+                    <tr>
+                        <th>Nutrition</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Calories:</td>
+                        <td>{{api_data.calories_intake}}Kcal</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Fat:</td>
+                        <td>{{api_data.fat_total_g_intake}}g</td>
+                    </tr>
+                    <tr>
+                        <td>Saturated Fat:</td>
+                        <td>{{api_data.fat_saturated_g_intake}}g</td>
+                    </tr><!-- End .summary-subtotal -->
+                    <tr>
+                        <td>Carbohydrates:</td>
+                        <td>{{api_data.carbohydrates_total_g_intake}}g</td>
+                    </tr>
+                    <tr>
+                        <td>Fiber:</td>
+                        <td>{{api_data.fiber_g_intake}}g</td>
+                    </tr>
+                    <tr>
+                        <td>Sugar:</td>
+                        <td>{{api_data.sugar_g_intake}}g</td>
+                    </tr><!-- End .summary-total -->
+                </tbody>
+            </table><!-- End .table table-summary -->
+
+        </div><!-- End .summary -->
+    </aside><!-- End .col-lg-3 -->
+</div><!-- End .row -->
+
+
+
+
+
+
+{% endblock main_content %}
+
+
+
+{% block more_script %}
+<script>
+    document.getElementById('newRecipeBtn').addEventListener('click', function() {
+        document.getElementById('demoAnalysis').value = ''; // Clear the textarea
+      });
+</script>
+{% endblock more_script %}

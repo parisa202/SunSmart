@@ -1,0 +1,264 @@
+{% extends "V2CoreApp/base.html" %}
+{% load static %}
+
+{% block title_block %}
+<title>Home Page</title>
+{% endblock title_block %}
+
+
+
+{% block main_content %}
+
+<!-- Section 1 Slider Section -->
+<div class="intro-section">
+    <div class="intro-section-slider">
+        <div class="container">
+            <div class="intro-slider-container slider-container-ratio mb-0">
+                <div class="intro-slider owl-carousel owl-simple owl-light" data-toggle="owl" 
+                    data-owl-options='{
+                        "nav": false, 
+                        "dots": true,
+                        "responsive": {
+                            "1200": {
+                                "nav": true,
+                                "dots": false
+                            }
+                        }
+                    }'>
+                    <div class="intro-slide">
+                        <figure class="slide-image">
+                            <picture>
+                                <source media="(max-width: 480px)" srcset="{% static "assets/images/banners/banner1-480w.jpg" %}">
+                                <img src="{% static "assets/images/banners/banner4.jpg" %}" alt="Image Desc">
+                            </picture>
+                        </figure><!-- End .slide-image -->
+
+                        <div class="intro-content">
+                            
+                            <h2 class="intro-title text-white">Know Nutrients <br></h2><!-- End .intro-title -->
+                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                            <h3 class="intro-subtitle">Understand the macro- and micronutrients<br><br>that are essential to your children</h3>
+                            <!-- <h2 class="intro-title text-white">Anaylze your children's nurtrion needs today! <br></h2> -->
+                            
+                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                            <!-- <h3 class="intro-subtitle col-md-8">Encouraging children to prioritise nutritious foods for a healthy and vibrant life, emphasising the connection between good nutrition and overall well-being.</h3>End .h3 intro-subtitle -->
+                            <a href="{% url "V2CoreApp:macronutrients" %}" class="btn btn-primary">
+
+                                <span>EXPLORE NOW</span>
+                            </a>
+
+
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+
+                    <div class="intro-slide">
+                        <figure class="slide-image">
+                            <picture>
+                                <source media="(max-width: 480px)" srcset="{% static "assets/images/banners/banner3-480w.jpg" %}">
+                                <img src="{% static "assets/images/banners/banner5.jpg" %}" alt="Image Desc">
+                            </picture>
+                        </figure><!-- End .slide-image -->
+
+                        <div class="intro-content">
+                            <h2 class="intro-title text-white">Nutrition Guideline <br></h2><!-- End .intro-title -->
+                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                            <h3 class="intro-subtitle">Know more about<br><br>your children's nutritional needs?</h3>
+                            <!-- <h3 class="intro-subtitle text-primary">Explore our curated collection of nutritious meals for children.</h3> End .h3 intro-subtitle -->
+                            <!-- <h2 class="intro-title text-primary">Nurturing <br> Your Child's Health <br> Every Step of the Way</h2> -->
+                            <!-- <h2 class="intro-title text-primary">Explore our curated collection of nutritious meals for children. -->
+                            </h2> <!-- End .intro-title-->
+                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+
+                            <a href="{% url "V2CoreApp:US21" %}" class="btn btn-primary">
+                                <span>DISCOVER NOW</span>
+                            </a>
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+
+                    <div class="intro-slide">
+                        <figure class="slide-image">
+                            <picture>
+                                <source media="(max-width: 480px)" srcset="{% static "assets/images/banners/banner2-480w.jpg" %}">
+                                <img src="{% static "assets/images/banners/banner2.jpg" %}" alt="Image Desc">
+                            </picture>
+                        </figure><!-- End .slide-image -->
+
+                        <div class="intro-content">
+                            <h2 class="intro-title text-white">Beware Additives <br></h2><!-- End .intro-title -->
+                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                            <h3 class="intro-subtitle">Care more about<br><br>food additives<br>
+                            
+                            <!-- <h2 class="intro-title text-white">Explore our curated <br> collection of nutritious <br> meals for children</h2>End .intro-title -->
+                            <!-- <h2 class="intro-subtitle ">Every day as a parent is a chance to inspire, nurture, <br> and shape the incredible future of your child. -->
+                            </h2><!-- End .h3 intro-subtitle -->
+                            
+
+                            <div class="intro-text text-white"> 
+                            </div><!-- End .intro-text -->
+                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                            <a href="{% url "V2CoreApp:US13" %}" class="btn btn-primary">
+                                <span>LEARN MORE</span>
+                            </a>
+                             
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+                </div><!-- End .intro-slider owl-carousel owl-simple -->
+                        
+                <span class="slider-loader"></span><!-- End .slider-loader -->
+            </div><!-- End .intro-slider-container -->
+        </div><!-- End .container -->
+    </div><!-- End .intro-section-slider -->
+
+
+</div><!-- End .intro-section -->
+<!-- End Section 1 Slider Section -->
+
+
+<!-- section2 obesity -->
+<div class="container">
+ 
+    <hr class="mb-2">
+    <div class="cta bg-image pt-3 pb-3 mb-3" style="background-color:#d2efd5;background-position: center right;">
+        <div class="row justify-content-center">
+            <div class="col-sm-10 col-md-8 col-lg-8">
+                <div class="cta-text text-center">
+                    <h3 class="cta-title">Combatting Childhood Overweight Starts with You</h3><!-- End .cta-title -->
+                    <p class="cta-desc"><p>In Australia, the prevalence of overweight and obesity among children is a growing concern. Explore the alarming trend and discover actionable tips from experts on how to address this issue.
+                    </p><!-- End .cta-desc -->
+                    <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                    <a href="{% url "V2CoreApp:US11" %}" class="btn btn-primary btn-rounded"><span>Explore More</span><i class="icon-long-arrow-right"></i></a>
+                </div><!-- End .cta-text -->
+            </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
+        </div><!-- End .row -->
+    </div><!-- End .cta -->
+
+</div>
+
+
+
+
+
+<!-- Section 3 action banners -->
+<div class="pt-3 pb-3">
+  <div class="container">
+      <div class="banner-group">
+          <div class="row">
+              <div class="col-sm-6 col-lg-4">
+                  <div class="banner banner-overlay banner-lg">
+                          <img src="{% static "assets/images/banners/US12-1.jpg" %}" alt="Banner">
+                      <div class="banner-content banner-content-bottom">
+                          <h4 class="banner-subtitle text-white">Check Nutritions of your Child’s diets</a></h4><!-- End .banner-subtitle -->
+                          <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                          <h3 class="banner-title text-white">Are you mindful of your <br> child's daily plate count?</a></h3><!-- End .banner-title -->
+                          <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+                          <a href="{% url "V2CoreApp:guest_tracker" %}" class="btn btn-outline-white banner-link">Analyze Now</a>
+                      </div><!-- End .banner-content -->
+                  </div><!-- End .banner -->
+              </div><!-- End .col-lg-4 -->
+              <div class="col-sm-6 col-lg-4">
+                <div class="banner banner-overlay banner-lg">
+                        <img src="{% static "assets/images/banners/US11.jpg" %}" alt="Banner">
+                    <div class="banner-content banner-content-bottom">
+                        <h4 class="banner-subtitle text-white">Nutrition Needs Based On Your <br>Child’s Age</a></h4><!-- End .banner-subtitle -->
+                        <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                        <h3 class="banner-title text-white">Are you meeting your child's<br> nutritional needs?</a></h3><!-- End .banner-title -->
+                        <!-- <div class="banner-text text-white">Ready to record daily routine to build your child’s dietary plan?</a></div><!-- End .banner-text -->
+                        <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+                        <a href="{% url "V2CoreApp:US21" %}" class="btn btn-outline-white banner-link">Discover Now</a>
+                    </div><!-- End .banner-content -->
+                </div><!-- End .banner -->
+            </div><!-- End .col-lg-4 -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="banner banner-overlay banner-lg">
+                        <img src="{% static "assets/images/banners/US21.jpg" %}" alt="Banner">
+                    <div class="banner-content banner-content-bottom">
+                        <h4 class="banner-subtitle text-white">Beware of the food additives in common foods</a></h4><!-- End .banner-subtitle -->
+                        <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                        <h3 class="banner-title text-white">What do you know about <br>food Additives?</a></h3><!-- End .banner-title -->
+                        <!--<div class="banner-text text-white">from $19.00</a></div><!-- End .banner-text -->
+                        <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+                        <a href="{% url "V2CoreApp:US13" %}" class="btn btn-outline-white banner-link">Learn More</a>
+                    </div><!-- End .banner-content -->
+                </div><!-- End .banner -->
+            </div><!-- End .col-lg-4 -->
+          </div><!-- End .row -->
+      </div><!-- End .banner-group -->
+
+  </div><!-- End .container -->
+</div><!-- End .bg-lighter -->
+<!-- End Section 3 action banners -->
+
+<!-- section4 -->
+<div class="container">
+    <div class="cta cta-border mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-11 col-xl-10">
+                <div class="cta-content">
+                    <div class="cta-heading">
+                        <h3 class="cta-title text-center">Food For Health<br>Joy For Life</h3><!-- End .cta-title -->
+                    </div><!-- End .cta-heading -->
+                    
+                    <div class="cta-text">
+                        <p>Embrace the journey of nurturing your child's health with JuniorJoy, where every small step you take today paves the way for a brighter, healthier future tomorrow.</p>
+                    </div><!-- End .cta-text -->
+                    <!-- <a href="#" class="btn btn-primary btn-rounded"><span>Click Here</span><i class="icon-long-arrow-right"></i></a> -->
+                </div><!-- End .cta-content -->
+            </div><!-- End .col-xl-7 -->
+        </div><!-- End .row -->
+    </div><!-- End .cta -->
+ 
+</div>
+
+<!-- Section 5 small action banners -->
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-6 col-md-4">
+            <div class="banner banner-cat">
+                    <img src="{% static "assets/images/banners/footerus12.jpg" %}" alt="Banner">
+                <div class="banner-content banner-content-overlay text-center">
+                    <h3 class="banner-title font-weight-normal">Nutrition Analyzer</h3>
+                    <h4 class="banner-subtitle">Analyze Your children's Diet</h4>
+                    <a href="{% url "V2CoreApp:guest_tracker" %}" class="banner-link">Explore More</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- This is the "Nutrition Analysis Tool" function -->
+        <!-- <div class="col-sm-6 col-md-4">
+            <div class="banner banner-cat">
+                    <img src="{% static "assets/images/banners/footerus13.jpg" %}" alt="Banner">
+                <div class="banner-content banner-content-overlay text-center">
+                    <h3 class="banner-title font-weight-normal">Nutrition Analysis Tool</h3>End .banner-title -->
+                    <!-- <h4 class="banner-subtitle">Get insight into your children's diet</h4>End .banner-subtitle -->
+                    <!-- <a href="{% url "V2CoreApp:guest_tracker" %}" class="banner-link">Explore More</a> -->
+                <!-- </div>End .banner-content -->
+            <!-- </div>End .banner -->
+        <!-- </div>End .col-md-4 -->
+
+
+
+        <!-- <div class="col-sm-6 col-md-4">
+            <div class="banner banner-cat">
+                    <img src="{% static "assets/images/banners/footerus11.jpg" %}" alt="Banner">
+                <div class="banner-content banner-content-overlay text-center">
+                    <h3 class="banner-title font-weight-normal">Set Reminders</h3>
+                    
+                    <h4 class="banner-subtitle">Effortless Mealtime Scheduling</h4>
+                    
+                    <a href="{% url "V2CoreApp:US23" %}" class="banner-link">Set Now</a>
+                </div>
+                
+            </div>
+            
+       </div>
+       
+    </div>
+</div> --> 
+<!-- End Section 5 small action banners -->
+<div class="w3-content" style="max-width:2000px;margin-top:100px"></div>
+
+{% endblock main_content %}
+

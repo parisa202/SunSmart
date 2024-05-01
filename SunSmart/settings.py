@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # Apps
     'Apps.CoreApp',
     'Apps.V1CoreApp',
+    'Apps.V2CoreApp',
     'Apps.UserAuthentication',
 ]
 
@@ -65,7 +66,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "Apps.CoreApp.middleware.PageViewMiddleware"
+    "Apps.CoreApp.middleware.PageViewMiddleware",
+    "Apps.V2CoreApp.middleware.PageViewMiddleware"
     
 ]
 

@@ -1,0 +1,274 @@
+{% extends "V2CoreApp/base.html" %}
+{% load static %}
+
+{% block title_block %}
+  
+{% endblock title_block %}
+
+
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+
+
+{% block main_content %}
+
+{% include "V2CoreApp/components/breadcrumb.html" %}
+
+
+
+    <div class="page-wrapper">
+            <div class="page-content">
+                <div class="container">
+        			<div class="toolbox">
+        				<div class="toolbox-left">
+                            <a href="#" class="sidebar-toggler"><i class="icon-bars"></i>Filters</a>
+        				</div><!-- End .toolbox-left -->
+
+                        <div class="toolbox-center">
+                            <div class="toolbox-info">
+                                Showing <span>{{ all_recipes|length }} of {{ all_recipes_count }}</span> Healthy Recipes
+                            </div><!-- End .toolbox-info -->
+                        </div><!-- End .toolbox-center -->
+
+        				<div class="toolbox-right">
+        					<div class="toolbox-sort">
+                                <form id="sortForm" action="{% url "V2CoreApp:recipes" %}" method="GET">
+                                    {% for key, values in request.GET.lists %}
+                                        {% if key != 'sortby' %}
+                                            {% for value in values %}
+                                                <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <label for="sortby" style = "display:none">Sort by:</label>
+                                    <div class="select-custom">
+                                        <select name="sortby" id="sortby" class="form-control">
+                                            <option value="" {% if 'no_selection' in selected_options %}selected{% endif %}>-------</option>
+                                            <option value="popularity" {% if 'popularity' in selected_options %}selected{% endif %}>Most Popular</option>
+                                            <option value="date" {% if 'date' in selected_options %}selected{% endif %}>Date</option>
+                                        </select>
+                                    </div>
+                                </form>
+        					</div><!-- End .toolbox-sort -->
+        				</div><!-- End .toolbox-right -->
+        			</div>
+                    <!-- End .toolbox -->
+                    <div class="recipes">
+                        <div class="row">
+                            {% for recipe in all_recipes %}
+                                <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                            
+                                    <div class="product">
+                                        <figure class="product-media">
+                                            <!-- <span class="product-label label-new">New</span> -->
+                                            
+                                            <a  href="{% url 'V2CoreApp:recipe-detail' slug=recipe.slug %}">
+                                                <img src="{% static 'assets/images/recipes/'|add:recipe.name|add:'300_300.jpeg' %}" alt="Product image" class="product-image">
+                                            </a>
+
+                                            <div class="product-action-vertical">
+                                                <!-- <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a> -->
+                                            </div><!-- End .product-action -->
+
+                                            <div class="product-action action-icon-top">
+                                                
+                                            </div><!-- End .product-action -->
+                                        </figure><!-- End .product-media -->
+
+                                        <div class="product-body">
+                                            <div class="product-cat">
+                                                <p>{% for meal in recipe.meal.all %} {{meal.type}} {% endfor %}</p>
+                                            </div><!-- End .product-cat -->
+                                            
+                                            <h3 class="product-title"><a href="{% url 'V2CoreApp:recipe-detail' slug=recipe.slug %}">{{recipe.name}}</a></h3><!-- End .product-title -->
+                                            <div class="product-price">
+                                                <!-- $50.00 -->
+                                            </div><!-- End .product-price -->
+                                            
+                                        </div><!-- End .product-body -->
+                                    </div><!-- End .product -->
+                            
+                                </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                            {% endfor %}
+
+                        </div><!-- End .row -->
+
+                        <div class="load-more-container text-center">
+                            <!-- <a href="#" class="btn btn-outline-darker btn-load-more">More Recipes <i class="icon-refresh"></i></a> -->
+                        </div><!-- End .load-more-container -->
+                    </div><!-- End .products -->
+
+                    <div class="sidebar-filter-overlay"></div><!-- End .sidebar-filter-overlay -->
+                    <aside class="sidebar-shop sidebar-filter">
+                        <form action="{% url "V2CoreApp:recipes" %}" method="GET">
+                            <div class="sidebar-filter-wrapper">
+                            
+                                <div class="widget widget-clean">
+                                    <!-- <label><i class="icon-close"></i>Filters</label> -->
+                                    <button type="submit">Submit</button>
+                                    <a href="#" class="sidebar-filter-clear">Clean All</a>
+                                </div><!-- End .widget -->
+
+
+                                <!-- meal type filter -->
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title">
+                                        <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                            Meal Type:
+                                        </a>
+                                    </h3><!-- End .widget-title -->
+
+                                    <div class="collapse show" id="widget-1">
+                                        <div class="widget-body">
+                                            <div class="filter-items filter-items-count">
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="lunch/dinner" name="meal" type="checkbox" class="custom-control-input" id="cat-9" {% if 'lunch/dinner' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-9">Lunch or Dinner</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">3</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="breakfast" name="meal" type="checkbox" class="custom-control-input" id="cat-10" {% if 'breakfast' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-10">Breakfast</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">0</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="brunch" name="meal" type="checkbox" class="custom-control-input" id="cat-11" {% if 'brunch' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-11">Brunch</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">4</span>
+                                                </div><!-- End .filter-item -->
+                                            </div><!-- End .filter-items -->
+                                        </div><!-- End .widget-body -->
+                                    </div><!-- End .collapse -->
+                                </div><!-- End .widget -->
+                                <!-- END meal type filter -->
+
+
+                                
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title">
+                                        <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                            Health Labels:
+                                        </a>
+                                    </h3><!-- End .widget-title -->
+
+                                    <div class="collapse show" id="widget-1">
+                                        <div class="widget-body">
+                                            <div class="filter-items filter-items-count">
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="Fish-Free" name="health_tag" type="checkbox" class="custom-control-input" id="cat-1" {% if 'Fish-Free' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-1">Fish-Free</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">3</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="Egg-Free" name="health_tag" type="checkbox" class="custom-control-input" id="cat-2" {% if 'Egg-Free' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-2">Egg-Free</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">0</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="Dairy-Free" name="health_tag" type="checkbox" class="custom-control-input" id="cat-3" {% if 'Dairy-Free' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-3">Dairy-Free</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">4</span>
+                                                </div><!-- End .filter-item -->
+                                            </div><!-- End .filter-items -->
+                                        </div><!-- End .widget-body -->
+                                    </div><!-- End .collapse -->
+
+                                </div><!-- End .widget -->
+
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title">
+                                        <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
+                                            Ingredients
+                                        </a>
+                                    </h3><!-- End .widget-title -->
+
+                                    <div class="collapse show" id="widget-2">
+                                        <div class="widget-body">
+                                            <div class="filter-items filter-items-count">
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="broccoli" name="ingredient" type="checkbox" class="custom-control-input" id="cat-4" {% if 'broccoli' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-4">Broccoli</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">3</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="celery" name="ingredient" type="checkbox" class="custom-control-input" id="cat-5" {% if 'celery' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-5">Celery</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">3</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="lentils" name="ingredient" type="checkbox" class="custom-control-input" id="cat-6" {% if 'lentils' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-6">Lentils</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">3</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="apple" name="ingredient" type="checkbox" class="custom-control-input" id="cat-7" {% if 'apple' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-7">Apple</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">3</span>
+                                                </div><!-- End .filter-item -->
+
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input value="eggs" name="ingredient" type="checkbox" class="custom-control-input" id="cat-8" {% if 'eggs' in selected_options %}checked{% endif %}>
+                                                        <label class="custom-control-label" for="cat-8">Eggs</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count" style = "display:none">3</span>
+                                                </div><!-- End .filter-item -->
+                              
+                                            </div><!-- End .filter-items -->
+                                        </div><!-- End .widget-body -->
+                                    </div><!-- End .collapse -->
+                                </div><!-- End .widget -->
+
+
+
+                            </div><!-- End .sidebar-filter-wrapper -->
+                        </form>
+                    </aside><!-- End .sidebar-filter -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+
+{% endblock main_content %}
+
+{% block more_script %}
+<script>
+    $(document).ready(function () {
+        $('#sortby').change(function () {
+            $('#sortForm').submit();
+        });
+    });
+</script>
+{% endblock more_script %}
