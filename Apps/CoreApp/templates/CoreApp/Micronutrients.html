@@ -84,12 +84,16 @@
             <p id="micro_benefits" style="height: 100px;">Click the button on the left</p>
           <h3>Where can you help your children get this nutrition?</h3>
             <p id="micro_sources" style="height: 100px;">Click the button on the left</p>
-            <div class ="row col-9" id="food-icons" style = "display: none;  justify-content: space-between; ">
-              <img id="food-icon1" class ="food-icon" src="{% static 'assets/images/icons/carrot.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
-              <img id="food-icon2"  class ="food-icon"src="{% static 'assets/images/icons/eggs.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
-              <img id="food-icon3"  class ="food-icon" src="{% static 'assets/images/icons/cauliflower.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
-              <img id="food-icon4"  class ="food-icon" src="{% static 'assets/images/icons/cauliflower.png' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+
+            <div class="row col-9" id="food-icons" style="display: none; justify-content: space-between; ">
+              {% for i in "1234" %}
+              <a id ="link_recipes{{ i }}" style="box-shadow: none;" >
+                <img id="food-icon{{ i }}" class="food-icon" src="{% static 'assets/images/icons/' %}{% if i == 1 %}carrot.png{% elif i == 2 %}eggs.png{% else %}cauliflower.png{% endif %}" alt="vegetable icon" style="width: 50px; height: 50;">
+                <p id="food-name{{ i }}" style="border-bottom: none;"></p>
+              </a>
+              {% endfor %}
             </div>
+
         </div>
       </div><!-- End .col-lg-7 -->
 
@@ -105,7 +109,6 @@
                     <h3 class="cta-title"> Would you like to know more about Macronutrients? </h3><!-- End .cta-title -->
                     <p class="cta-desc"><p>Discover Macronutrients that are essential to children's daily activities
                     </p><!-- End .cta-desc -->
-            
                     <a href="{% url "CoreApp:macronutrients" %}" class="btn btn-primary btn-rounded"><span>Explore Macronutrients</span><i class="icon-long-arrow-right"></i></a>
                 </div><!-- End .cta-text -->
             </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
@@ -147,11 +150,19 @@
                 $('#micro_benefits').text(response.benefits);
                 $('#micro_sources').text(response.sources);
                 $('#food-icons').show();
-                $('#arrow-icon').hide();
-                $('#food-icon1').attr('src', response.image1).hide().fadeIn();
-                $('#food-icon2').attr('src', response.image2).hide().fadeIn();
-                $('#food-icon3').attr('src', response.image3).hide().fadeIn();
-                $('#food-icon4').attr('src', response.image4).hide().fadeIn();
+                $('#arrow-icon').hide();            
+                
+                for (var i = 1; i <= 4; i++) {
+                  var imageSource = response["image" + i];
+                  var imageName = imageSource.split('/').pop().split('.')[0];
+                  imageName_capital = imageName.charAt(0).toUpperCase() + imageName.slice(1);
+                  
+                  // Set image source and name
+                  $('#food-icon' + i).attr('src', imageSource).hide().fadeIn();
+                  $('#food-name' + i).text(imageName_capital).hide().fadeIn().css('text-align', 'center');
+                  //$('#link_recipes' + i).attr('href', "{% url "CoreApp:recipes" %}?ingredient="+ imageName)
+                }
+
                 }
             },
             error: function (request, status, error) {

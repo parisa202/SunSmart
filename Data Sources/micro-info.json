@@ -14,7 +14,7 @@
         "sources": "Foods rich in Vitamin B are meat, chicken, fish, nuts, eggs, milk, cheese, beans, and soybeans.",
         "image1" : "/static/assets/images/icons/eggs.png",
         "image2" : "/static/assets/images/icons/fish.png",
-        "image3" : "/static/assets/images/icons/green-beans.png",
+        "image3" : "/static/assets/images/icons/beans.png",
         "image4" : "/static/assets/images/icons/cheese.png"
     
     },
@@ -24,7 +24,7 @@
         "sources": "There are many colorful fruits rich in vitamin C that will appeal to children. For example, oranges, kiwis, grapefruit, strawberries, raspberries, and vegetables such as tomatoes, cabbage, cauliflower, and Brussels sprouts.",
         "image1" : "/static/assets/images/icons/strawberry.png",
         "image2" : "/static/assets/images/icons/orange.png",
-        "image3" : "/static/assets/images/icons/cabbage-.png",
+        "image3" : "/static/assets/images/icons/cabbage.png",
         "image4" : "/static/assets/images/icons/cauliflower.png"
     
     },
@@ -80,14 +80,14 @@
         "sources": "Foods that contain zinc are beans, nuts, whole wheat breads, meat, eggs and seafood.",
         "image1" : "/static/assets/images/icons/meat.png",
         "image2" : "/static/assets/images/icons/nuts.png",
-        "image3" : "/static/assets/images/icons/green-beans.png",
+        "image3" : "/static/assets/images/icons/beans.png",
         "image4" : "/static/assets/images/icons/eggs.png"
     },
     {
         "name": "Iron",
         "benefits": "Iron is a mineral that is necessary for cell metabolism and the manufacture of healthy red blood cells.",
         "sources": "Foods rich in iron include beef, chicken liver, spinach, beans, beetroot and plums.",
-        "image1" : "/static/assets/images/icons/green-beans.png",
+        "image1" : "/static/assets/images/icons/beans.png",
         "image2" : "/static/assets/images/icons/spinach.png",
         "image3" : "/static/assets/images/icons/beet.png",
         "image4" : "/static/assets/images/icons/meat.png"
