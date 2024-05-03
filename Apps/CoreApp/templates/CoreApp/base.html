@@ -220,14 +220,18 @@
 
                         <div class="col-sm-4 col-lg-2" style="display: none;">
                             <div class="widget">
-                                <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+                                <h4 class="widget-title">Know Nutrients</h4><!-- End .widget-title -->
 
                                 <ul class="widget-list">
-                                    <li><a href="{% url "CoreApp:coming" %}">Sign in</a></li>
-                                    <li><a href="{% url "CoreApp:coming" %}">My profile</a></li>
-                                    <!-- <li><a href="#">My Wishlist</a></li> -->
-                                    <li><a href="{% url "CoreApp:coming" %}">Track my children's diet</a></li>
-                                    <!-- <li><a href="#">Help</a></li> -->
+                                    <li>
+                                        <a href="{% url "CoreApp:US21" %}">Nutrition Guideline</a> 
+                                    </li>
+                                    <li>
+                                        <a href="{% url "CoreApp:macronutrients" %}">Macronutrients</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url "CoreApp:micronutrients" %}">Micronutrients</a>
+                                    </li>
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
                         </div><!-- End .col-sm-64 col-lg-3 -->
