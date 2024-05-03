@@ -93,7 +93,7 @@
                                 <li><a href="{% url "CoreApp:index" %}">Home</a></li>
 
                                 <li>
-                                    <a href="{% url "CoreApp:index" %}" class="sf-with-ul">Dietary Awareness</a>
+                                    <a class="sf-with-ul">Dietary Awareness</a>
                                     <ul>
                                         <li>
                                             <a href="{% url "CoreApp:US11" %}">Obesity Trend</a>
@@ -117,7 +117,7 @@
                                 </li>
                                 
                                 <li>
-                                    <a href="{% url "CoreApp:index" %}" class="sf-with-ul">Know Nutrients</a>
+                                    <a class="sf-with-ul">Know Nutrients</a>
                                     <ul>
                                         <li>
                                             <a href="{% url "CoreApp:macronutrients" %}">Macronutrients</a>
@@ -145,6 +145,8 @@
                                     <ul>
                                         <li>
                                             <a href="{% url "CoreApp:US23" %}">Set Reminder</a>
+                                        </li>
+                                        <li>
                                             <a href="{% url "CoreApp:about" %}">About us</a>
                                         </li>
                                     </ul>
@@ -223,17 +225,7 @@
                         </div><!-- End .col-sm-4 col-lg-3 -->
 
                         <div class="col-sm-4 col-lg-2" style="display: none;">
-                            <div class="widget">
-                                <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
-
-                                <ul class="widget-list">
-                                    <li><a href="{% url "CoreApp:coming" %}">Sign in</a></li>
-                                    <li><a href="{% url "CoreApp:coming" %}">My profile</a></li>
-                                    <!-- <li><a href="#">My Wishlist</a></li> -->
-                                    <li><a href="{% url "CoreApp:coming" %}">Track my children's diet</a></li>
-                                    <!-- <li><a href="#">Help</a></li> -->
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
+    
                         </div><!-- End .col-sm-64 col-lg-3 -->
                     </div><!-- End .row -->
                 </div><!-- End .container -->
@@ -279,42 +271,75 @@
                 <ul class="mobile-menu">
                     <li class="active">
                         <a href="{% url "CoreApp:index" %}" >Home</a>
-
-                        <ul>
-                            <!-- <li><a href="{% url "CoreApp:about" %}">About us</a></li>
-                            <li><a href="{% url "CoreApp:coming" %}">FAQs</a></li>
-                            <li><a href="{% url "CoreApp:coming" %}">Contact us</a></li> -->
-                            <li>
-                                <a href="{% url "CoreApp:US11" %}">Obesity Trend</a>
-                            </li>
-                            <li>
-                                <a href="{% url "CoreApp:US13" %}">Food Additives</a> 
-                            </li>
-                            <li>
-                                <a href="{% url "CoreApp:US21" %}">Nutrition Guideline</a> 
-                            </li>
-                            <li>
-                                <a href="{% url "CoreApp:guest_tracker" %}">Nutrition Analyzer</a>
-                            </li>  
-                        </ul><!-- End .widget-list -->
                     </li>
                     <li class="active">
-                        <a href="{% url "CoreApp:index" %}" >More</a>
+                        <a href="{% url "CoreApp:index" %}" >Nutrition Guidelines</a>
 
                         <ul>
                             <li>
-                                <a href="{% url "CoreApp:US11" %}">Trend of Overweight in Australia</a>                                    
+                                <a href="{% url "CoreApp:US21" %}">Australian Nutrition Guideline</a>                                    
                             </li>
                             <li>
                                 <a href="{% url "CoreApp:US13" %}">Understanding Food Additives</a> 
                             </li>
                             <li>
-                                <a href="{% url "CoreApp:US21" %}">Australian Nutrition Guideline</a> 
+                                <a href="{% url "CoreApp:macronutrients" %}">Macronutrients for Children's Health</a> 
                             </li>
                             <li>
-                                <a href="{% url "CoreApp:guest_tracker" %}">Recipe Nutrition Analyzer</a>
+                                <a href="{% url "CoreApp:micronutrients" %}">Micronutrients for Children's Health</a>
                             </li>   
                       </ul>
+                    </li>
+                    <li class="active">
+                        <a href="{% url "CoreApp:recipes" %}" >Healthy Recipe</a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url "CoreApp:index" %}" >Insights and Trends</a>
+                        <ul>
+                            <li>
+                                <a href="{% url "CoreApp:US11" %}">Trend of Overweight in Australia</a>                                    
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:Veggi" %}">Veggi Insights</a> 
+                            </li>  
+                      </ul>
+                    </li>
+                    <li class="active">
+                        <a href="{% url "CoreApp:index" %}" >Nutrition Guidelines</a>
+
+                        <ul>
+                            <li>
+                                <a href="{% url "CoreApp:US21" %}">Australian Nutrition Guideline</a>                                    
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:US13" %}">Understanding Food Additives</a> 
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:macronutrients" %}">Macronutrients for Children's Health</a> 
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:micronutrients" %}">Micronutrients for Children's Health</a>
+                            </li>   
+                      </ul>
+                    </li>
+                    <li class="active">
+                        <a href="{% url "CoreApp:index" %}" >Recipe Analysis</a>
+                        <ul>
+                            <li>
+                                <a href="{% url "CoreApp:outer_recipe_analysis" %}">Custom Recipe Nutrition Analyzer</a>                                    
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:guest_tracker" %}">Recipe Nutrition Analyzer</a> 
+                            </li>  
+                      </ul>
+                    </li>
+                    <li class="active">
+                        <a href="{% url "CoreApp:index" %}" >More</a>
+                        <ul>
+                            <li>
+                                <a href="{% url "CoreApp:about" %}">About us</a>
+                            </li>
+                        </ul><!-- End .widget-list -->
                     </li>
                     
                 </ul>

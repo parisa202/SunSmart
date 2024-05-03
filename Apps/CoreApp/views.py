@@ -566,6 +566,38 @@ class VeggiView(generic.TemplateView):
         
         return new_context
 
+#overweight info page    
+class SugarView(generic.TemplateView):
+    template_name = 'CoreApp/sugar.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)
+
+         # query from table
+        #all_data = PB_AU_VEGGIE.objects.all()
+        #serialized_data = serializers.serialize('json', all_data)
+       
+        # Convert the serialized data to a list of dictionaries
+        #data_list = json.loads(serialized_data)
+
+        # Replace NaN with None
+        # for data in data_list:
+        #     for key, value in data['fields'].items():
+        #         if isinstance(value, float) and value != value:  # Check if value is NaN
+        #             data['fields'][key] = 0
+
+        # Convert the data list back to JSON
+        # fixed_serialized_data = json.dumps(data_list)
+        
+        new_context = {'main_title': 'Sugar Insights',
+                    #    'sub_title': 'Obesity and Overweight among Children',
+                       'page_name': 'Sugar Insights',
+                    #    'json_data': fixed_serialized_data,
+                   
+                       }
+        
+        return new_context
+
 
 class LoadRecipesDataView(generic.View):
     def get(self, request, *args, **kwargs):

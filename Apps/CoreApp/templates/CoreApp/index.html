@@ -25,6 +25,30 @@
                             }
                         }
                     }'>
+
+                    <div class="intro-slide">
+                        <figure class="slide-image">
+                            <picture>
+                                <source media="(max-width: 480px)" srcset="{% static "assets/images/banners/banner_recipe_m.png" %}">
+                                <img src="{% static "assets/images/banners/banner_recipe.jpg" %}" alt="Image Desc">
+                            </picture>
+                        </figure><!-- End .slide-image -->
+
+                        <div class="intro-content">
+                            <h2 class="intro-title text-white">Analyze Your Recipe <br></h2><!-- End .intro-title -->
+                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                            <h3 class="intro-subtitle">Get Detailed Insights <br> into Your Recipe's Nutrition
+                            </h2><!-- End .h3 intro-subtitle -->
+                            <div class="intro-text text-white"> 
+                            </div><!-- End .intro-text -->
+                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+                            <a href="{% url "CoreApp:outer_recipe_analysis" %}" class="btn btn-primary">
+                                <span>Analyze Your Recipe</span>
+                            </a>
+                             
+                        </div><!-- End .intro-content -->
+                    </div><!-- End .intro-slide -->
+
                     <div class="intro-slide">
                         <figure class="slide-image">
                             <picture>
@@ -75,33 +99,7 @@
                         </div><!-- End .intro-content -->
                     </div><!-- End .intro-slide -->
 
-                    <div class="intro-slide">
-                        <figure class="slide-image">
-                            <picture>
-                                <source media="(max-width: 480px)" srcset="{% static "assets/images/banners/banner2-480w.jpg" %}">
-                                <img src="{% static "assets/images/banners/banner2.jpg" %}" alt="Image Desc">
-                            </picture>
-                        </figure><!-- End .slide-image -->
 
-                        <div class="intro-content">
-                            <h2 class="intro-title text-white">Beware Additives <br></h2><!-- End .intro-title -->
-                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
-                            <h3 class="intro-subtitle">Care more about<br><br>food additives<br>
-                            
-                            <!-- <h2 class="intro-title text-white">Explore our curated <br> collection of nutritious <br> meals for children</h2>End .intro-title -->
-                            <!-- <h2 class="intro-subtitle ">Every day as a parent is a chance to inspire, nurture, <br> and shape the incredible future of your child. -->
-                            </h2><!-- End .h3 intro-subtitle -->
-                            
-
-                            <div class="intro-text text-white"> 
-                            </div><!-- End .intro-text -->
-                            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
-                            <a href="{% url "CoreApp:US13" %}" class="btn btn-primary">
-                                <span>LEARN MORE</span>
-                            </a>
-                             
-                        </div><!-- End .intro-content -->
-                    </div><!-- End .intro-slide -->
                 </div><!-- End .intro-slider owl-carousel owl-simple -->
                         
                 <span class="slider-loader"></span><!-- End .slider-loader -->
@@ -121,7 +119,7 @@
     <div class="cta bg-image pt-3 pb-3 mb-3" style="background-color:#d2efd5;background-position: center right;">
         <div class="row justify-content-center">
             <div class="col-sm-10 col-md-8 col-lg-8">
-                <div class="cta-text text-center">
+                <div class="cta-text">
                     <h3 class="cta-title">Combatting Childhood Overweight Starts with You</h3><!-- End .cta-title -->
                     <p class="cta-desc"><p>In Australia, the prevalence of overweight and obesity among children is a growing concern. Explore the alarming trend and discover actionable tips from experts on how to address this issue.
                     </p><!-- End .cta-desc -->
@@ -162,7 +160,7 @@
                         <h4 class="banner-subtitle text-white">Nutrition Needs Based On Your <br>Child’s Age</a></h4><!-- End .banner-subtitle -->
                         <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
                         <h3 class="banner-title text-white">Are you meeting your child's<br> nutritional needs?</a></h3><!-- End .banner-title -->
-                        <!-- <div class="banner-text text-white">Ready to record daily routine to build your child’s dietary plan?</a></div><!-- End .banner-text -->
+                        <!-- End .banner-text -->
                         <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
                         <a href="{% url "CoreApp:US21" %}" class="btn btn-outline-white banner-link">Discover Now</a>
                     </div><!-- End .banner-content -->
