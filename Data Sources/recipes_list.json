@@ -2215,7 +2215,7 @@
             "href": "https://api.edamam.com/api/recipes/v2/f9d60a19067a5c1bc34050e51526e544?type=public&app_id=d3f20982&app_key=%206001e1c56d2f09b43d068d103e6bb1f5"
           }
         }
-      }
+      },
       {
         "recipe": {
           "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_5d1c9c9e5f8bd9c379853d342c63761d",
