@@ -35,9 +35,39 @@
       <div class="container col-10">
         <div>
             <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
-            <h3>Exploring the Vital Role of Vegetables in Children's Diets</h3>
-            Vegetable and fruit intake is vital for children as they provide essential vitamins, minerals, and fiber crucial for growth, development, and overall health. Regular consumption supports immune function, maintains a healthy weight, and reduces the risk of chronic diseases later in life, fostering lifelong healthy eating habits and promoting optimal physical and cognitive development.</p>
-            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+            <h3>Insight on Australian Children Sugary Drink Consumption</h3>
+             The sugar consumption among Australian Children has dropped in recent years, however, the sugar consumption</p>
+             <div class="container col-10 justify-content-center">
+              <div  class="form-group mb-4" style="text-align: center;">
+                <!-- Age group selection menu -->
+                <label for="Age Group">Age Group:</label>
+                <select  class=" col-sm-2" id="ageGroupSelect">
+                  <option value="2_3">2-3</option>
+                  <option value="4_8">4-8</option>
+                  <option value="9_11">9-11</option>
+                </select>
+          
+                <!-- Concern selection menu -->
+                <label for="Concern">Usual daily consumption of:</label>
+                <select id="concernSelect">
+                  <option value="Usual daily consumption of vegetables">Vegetables</option>
+                  <option value="Usual daily consumption of fruit">Fruit</option>
+                </select>
+          
+                <!-- <select id="colorSelect">
+                  <option value="normalColors">Normal</option>
+                  <option value="colorblindColors">Colorblind-Friendly</option>
+                </select> -->
+              </div>   
+              
+            </div> 
+             <div class="col-sm-6 col-lg-4">
+              <div class="banner">
+                  <img src="{% static "assets/images/banners/banner-serve-veg.jpg" %}"  alt="Banner">
+              </div><!-- End .banner -->
+            </div><!-- End .col-lg-4 -->
+
+
             <h3>What is a Serve of Vegetable or Fruit?</h3>
             <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
             <div class="row justify-content-center">
@@ -160,8 +190,66 @@
   </div>
   
 <script>
+
+
+   // Data
+   var data = {
+    boys: [B1, B2, B3], // Replace B1, B2, B3 with actual data for boys
+    girls: [G1, G2, G3] // Replace G1, G2, G3 with actual data for girls
+};
+B1 = 3
+G1 = 4
+// SVG container
+var svg = d3.select("#chart-container-female");
+
+// Constants
+var width = +svg.attr("width");
+var height = +svg.attr("height");
+var margin = { top: 50, right: 50, bottom: 50, left: 50 };
+var innerWidth = width - margin.left - margin.right;
+var innerHeight = height - margin.top - margin.bottom;
+
+// Scales
+var xScale = d3.scaleLinear()
+    .domain([0, Math.max(d3.max(data.boys), d3.max(data.girls))])
+    .range([0, innerWidth]);
+
+// Draw boys
+svg.selectAll(".boy")
+    .data(data.boys)
+    .enter().append("svg:image")
+    .attr("class", "boy")
+    .attr("xlink:href", "{% static 'assets/images/svg/boy-face.svg' %}")
+    .attr("width", 50)
+    .attr("height", 50)
+    .attr("x", function (d) { return innerWidth / 2 - xScale(d) - 60; })
+    .attr("y", height / 2)
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Draw girls
+svg.selectAll(".girl")
+    .data(data.girls)
+    .enter().append("svg:image")
+    .attr("class", "girl")
+    .attr("xlink:href", "{% static 'assets/images/svg/girl-face.svg' %}")
+    .attr("width", 50)
+    .attr("height", 50)
+    .attr("x", function (d) { return innerWidth / 2 + 10; })
+    .attr("y", height / 2)
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Draw center line
+svg.append("line")
+    .attr("x1", innerWidth / 2)
+    .attr("y1", 0)
+    .attr("x2", innerWidth / 2)
+    .attr("y2", height)
+    .attr("stroke", "black")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
   // Define your data
 
+/*
 
     const alljsonData = JSON.parse('{{json_data|escapejs}}');
   
@@ -200,7 +288,7 @@
 
 */
 
-
+/*
   // Create SVG containers for male and female charts
   var svgMale = d3.select("#chart-container-male").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -343,7 +431,7 @@ svgFemale.append("g")
       errorBars.exit().remove();
 
       //comment guideline to fix later
-/*
+
 
     //Guideline
         svg.selectAll(".bar")
@@ -393,7 +481,7 @@ svgFemale.append("g")
 
 
       //End of guideline
-      */
+      
       // Remove lines for errors
     svg.selectAll(".vertical-line")
     .data(data)
@@ -482,7 +570,7 @@ d3.select("#concernSelect").on("change", function() {
   updateChart(selectedAgeGroup, selectedConcern, "Female", svgFemale, colorblindColors);
 });
 
-/*
+
 d3.select("#colorSelect").on("change", function() {
   var selectedConcern = d3.select("#concernSelect").property("value");
   var selectedAgeGroup = d3.select("#ageGroupSelect").property("value");
@@ -524,6 +612,52 @@ legend.append("text")
   .style("text-anchor", "end")
   .text(function(d) { return d; });
 */
+
+function drawPersons(numPersons, colorIndex) {
+  // Clear previous content
+  d3.select("#chart-container-male").selectAll("*").remove();
+
+  // SVG container
+  var width = 800; // Adjust width as needed
+  var height = 600; // Adjust height as needed
+  var margin = { top: 20, right: 20, bottom: 20, left: 20 };
+  var svgMale = d3.select("#chart-container-male").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // Load person SVG
+  d3.xml("{% static 'assets/images/svg/boy-face.svg' %}").then(function(xml) {
+      var personSVG = xml.documentElement;
+
+      // Data for persons
+      var data = d3.range(numPersons);
+
+      // Draw persons
+      var persons = svgMale.selectAll(".person")
+          .data(data)
+          .enter()
+          .append("g")
+          .attr("class", "person")
+          .attr("transform", function(d, i) {
+              var x = 50 + (i % 4) * 40;
+              var y = 50 + Math.floor(i / 4) * 40;
+              return "translate(" + x + "," + y + ") scale(0.05)"
+          });
+
+      // Append loaded person SVG
+      persons.append(function() { return personSVG.cloneNode(true); })
+          
+          .attr("fill", function(d, i) {
+              return (i < colorIndex) ? "green" : "black";
+          });
+  });
+}
+
+// Example usage:
+drawPersons(10, 2); // Draw 10 persons, color 2 persons green
+
 
 
 const data_met_recommendation = [

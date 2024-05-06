@@ -7,6 +7,7 @@
 
 {% block extra_css %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 {% endblock extra_css %}
 
 {% block main_content %}
@@ -76,7 +77,7 @@
           </div>
         </div><!-- End .sidebar -->
       </aside><!-- End .col-lg-5 -->
-
+      <div class="tooltip" id="tooltip" style="opacity: 1;">dsd</div>
       <div class="col-lg-7">
         <div class="entry-content editor-content">
           <h3>How will this nutrition benefit your children?</h3>
@@ -123,7 +124,13 @@
 </div>
 
 <script>
+
+
+
   $(document).ready(function () {
+
+    
+
     //var tagcloud = 
     $('#tagcloud a').on('click', function (e) {
         var tagChoice = $(this).attr('name'); // Get selected value
@@ -155,12 +162,19 @@
                 for (var i = 1; i <= 4; i++) {
                   var imageSource = response["image" + i];
                   var imageName = imageSource.split('/').pop().split('.')[0];
+                  
+
                   imageName_capital = imageName.charAt(0).toUpperCase() + imageName.slice(1);
                   
                   // Set image source and name
                   $('#food-icon' + i).attr('src', imageSource).hide().fadeIn();
                   $('#food-name' + i).text(imageName_capital).hide().fadeIn().css('text-align', 'center');
+
                   //$('#link_recipes' + i).attr('href', "{% url "CoreApp:recipes" %}?ingredient="+ imageName)
+                  
+
+                
+                 
                 }
 
                 }

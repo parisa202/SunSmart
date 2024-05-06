@@ -102,6 +102,10 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_ADDRESS')
 
+
+OPENAI_TOKEN = os.getenv('OPENAI')
+
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

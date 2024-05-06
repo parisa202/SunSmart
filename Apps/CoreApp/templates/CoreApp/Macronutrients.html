@@ -147,7 +147,7 @@
                   // Set image source and name
                   $('#food-icon' + i).attr('src', imageSource).hide().fadeIn();
                   $('#food-name' + i).text(imageName_capital).hide().fadeIn().css('text-align', 'center');
-                  //$('#link_recipes' + i).attr('href', "{% url "CoreApp:recipes" %}?ingredient="+ imageName)
+                  $('#link_recipes' + i).attr('href', "{% url "CoreApp:recipes" %}?ingredient="+ imageName);
                 }
 
 

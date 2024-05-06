@@ -2,6 +2,7 @@ from typing import Any
 from django.http.request import HttpRequest as HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views import generic
@@ -16,6 +17,7 @@ import pandas as pd
 from django.core import serializers
 import json
 import requests
+from openai import OpenAI
 from django.db.models import Q
 from functools import reduce
 from operator import or_
@@ -436,11 +438,44 @@ class OuterRecipeAnalysisView(generic.TemplateView):
         custom_recipe = request.POST.get('custom_recipe')
         recipe_intake = 1
         serving = 1
+        
+        
+        # Open AI API 
+        # Set up OpenAI API
+        client = OpenAI(
+            api_key=settings.OPENAI_TOKEN
+            )
+
+        # Call the OpenAI API to extract ingredients and amounts
+        openai_response = client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[
+            {"role": "system", "content": "You are a helpful, pattern-following assistant that can extract all the ingredients and their amount from the given recipes. Complete the measurements if they are given as abbreviation."+
+             " Make the amounts into float number if they are fractional.If the measurement was missing, specify it yourself. Remove the percentages of ingredients purity. If you couldnt find any recipe details or ingredients response 'It seems your recipe does not have any ingredients.'"},
+            {"role": "user", "content": f"Extract all the ingredients and their amounts from the following recipe with this format 'Amount measure Ingredient name\n':\n{custom_recipe}"},
+            ],
+            max_tokens=3000,
+            temperature=0.2,
+        )
+
+        # Parse the response to extract ingredients and amounts
+        gpt_output = openai_response.choices[0].message.content
+        ingredients = {}
+        for line in gpt_output.split('\n'):
+            parts = line.split(',')
+            if len(parts) == 3:
+                ingredient = parts[0].strip()
+                amount = parts[1].strip()
+                measure = parts[2].strip()
+                ingredients[ingredient] = (amount, measure)
+
+        print({'ingredients': ingredients})
+        
             
-        # send sign-in data to authentication API
+        # send sign-in data to juniorjoy API
         api_url = 'https://juniorjoy.site/api/api/calcucalories'
         data = {
-            "query": custom_recipe,
+            "query": gpt_output,
             "intake": recipe_intake,
             "serving": serving
         }
@@ -469,8 +504,12 @@ class OuterRecipeAnalysisView(generic.TemplateView):
             # Handle API error
             recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
                 
+        
+
+        
         self.context = self.get_context_data(**kwargs)
         self.context['api_data'] = recipe
+        self.context['gpt_response'] = gpt_output
         
         return render(request, self.template_name, context=self.context)
                  
@@ -601,8 +640,7 @@ class SugarView(generic.TemplateView):
 
 class LoadRecipesDataView(generic.View):
     def get(self, request, *args, **kwargs):
-        
-        
+            
         # Files are stored in a folder named 'Data Sources' within your Django project directory
         file_address = os.path.join('Data Sources', 'recipes_list.json')
         
