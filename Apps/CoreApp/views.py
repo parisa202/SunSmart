@@ -350,6 +350,15 @@ class MicronutrientsView(generic.TemplateView):
 class BmiCalculatorView(generic.TemplateView):
     template_name = 'CoreApp/bmi_calculator.html'
 
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)
+        new_context = {'main_title': 'BMI Calculator',
+                       'sub_title': '',
+                       'page_name': 'BMI Calculator'
+                       }
+        
+        return new_context
+
 class RecipeDetailView(generic.DetailView):
     model = RECIPES
     template_name = 'CoreApp/recipe_detail.html'
