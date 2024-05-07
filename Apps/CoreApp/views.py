@@ -451,7 +451,7 @@ class OuterRecipeAnalysisView(generic.TemplateView):
             model="gpt-4-turbo",
             messages=[
             {"role": "system", "content": "You are a helpful, pattern-following assistant that can extract all the ingredients and their amount from the given recipes. Complete the measurements if they are given as abbreviation."+
-             " Make the amounts into float number if they are fractional.If the measurement was missing, specify it yourself. Remove the percentages of ingredients purity. If you couldnt find any recipe details or ingredients response 'It seems your recipe does not have any ingredients.'"},
+             " Make the amounts into float number if they are fractional.If the measurement was missing, specify it yourself. Remove the percentages of ingredients purity."},
             {"role": "user", "content": f"Extract all the ingredients and their amounts from the following recipe with this format 'Amount measure Ingredient name\n':\n{custom_recipe}"},
             ],
             max_tokens=3000,
@@ -487,7 +487,6 @@ class OuterRecipeAnalysisView(generic.TemplateView):
             # Append the calorie information to the recipe
             recipe['nutrient_info'] = {'success': 'calorie information received'}            
             response_data = response.json()
-
             recipe['calories_intake'] = response_data['calories_intake']
             recipe['serving_size_g_intake'] = response_data['serving_size_g_intake']
             recipe['fat_total_g_intake'] = response_data['fat_total_g_intake']

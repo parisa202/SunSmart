@@ -8,723 +8,184 @@
 {% block main_content %}
   
   <style>
-      /* Add your CSS styles here */
-      .tooltip {
-        position: absolute;
-        text-align: center;
-        width: auto;
-        height: auto;
-        padding: 3px;
-        font: 10px sans-serif;
-        background: #d2efd5;
-        border: 0px;
-        border-radius: 5px;
-        pointer-events: none;
-      }
-    
-
-    /* Add your CSS styles here */
   </style>
 </head>
 <body>
   {% include "CoreApp/components/breadcrumb.html" %}
   
-
   <div class="entry-content editor-content" style ='justify-content: center'>
     <div style="display: flex; justify-content: center; padding-bottom: 10px;">
       <div class="container col-10">
-        <div>
-            <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
-            <h3>Insight on Australian Children Sugary Drink Consumption</h3>
-             The sugar consumption among Australian Children has dropped in recent years, however, the sugar consumption</p>
-             <div class="container col-10 justify-content-center">
-              <div  class="form-group mb-4" style="text-align: center;">
-                <!-- Age group selection menu -->
-                <label for="Age Group">Age Group:</label>
-                <select  class=" col-sm-2" id="ageGroupSelect">
-                  <option value="2_3">2-3</option>
-                  <option value="4_8">4-8</option>
-                  <option value="9_11">9-11</option>
-                </select>
-          
-                <!-- Concern selection menu -->
-                <label for="Concern">Usual daily consumption of:</label>
-                <select id="concernSelect">
-                  <option value="Usual daily consumption of vegetables">Vegetables</option>
-                  <option value="Usual daily consumption of fruit">Fruit</option>
-                </select>
-          
-                <!-- <select id="colorSelect">
-                  <option value="normalColors">Normal</option>
-                  <option value="colorblindColors">Colorblind-Friendly</option>
-                </select> -->
-              </div>   
-              
-            </div> 
-             <div class="col-sm-6 col-lg-4">
-              <div class="banner">
-                  <img src="{% static "assets/images/banners/banner-serve-veg.jpg" %}"  alt="Banner">
-              </div><!-- End .banner -->
-            </div><!-- End .col-lg-4 -->
+        <h3>Insight on Australian Children Sugary Drink Consumption</h3>
+        The sugar consumption among Australian Children has dropped in recent years, however, the sugar consumption</p>
 
-
-            <h3>What is a Serve of Vegetable or Fruit?</h3>
-            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
-            <div class="row justify-content-center">
-              <div class="col-sm-6 col-lg-4">
-                <div class="banner">
-                    <img src="{% static "assets/images/banners/banner-serve-veg.jpg" %}"  alt="Banner">
-                </div><!-- End .banner -->
-              </div><!-- End .col-lg-4 -->
-
-              <div class="col-sm-6 col-lg-4 order-lg-last">
-                <div class="banner">
-                    <img src="{% static "assets/images/banners/banner-serve-fruit.jpg" %}"  alt="Banner">
-                </div><!-- End .banner -->
-              </div><!-- End .col-lg-4 -->
-
-              <div class="col-lg-4">
-                  <div class="row">
-                    <div class="col-sm-6 col-lg-12">
-                      <div class="banner">
-                          <img src="{% static "assets/images/banners/banner-serve-tip1.jpg" %}" alt="Banner">
-                      </div><!-- End .banner -->
-                    </div><!-- End .col-sm-6 col-lg-12 -->
-
-                    <div class="col-sm-6 col-lg-12">
-                      <div class="banner">
-                          <img src="{% static "assets/images/banners/banner-serve-tip2.jpg" %}" alt="Banner">
-                      </div><!-- End .banner -->
-                    </div><!-- End .col-sm-6 col-lg-12 -->
-                  </div><!-- End .row -->
-                </div><!-- End .col-lg-4 -->
-            </div>
-        </div>
-        <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
-        <div class="entry-content editor-content">
-          <h3>Vegetable Consumption Among Australian Children </h3>
-          <!-- <p>Explanation of visualisations about the vegetable. -->
-        </div>
-      </div>
-  </div>
-
-<!-- Chart -->
-
-  <div class="container col-10 justify-content-center">
-    <div  class="form-group mb-4" style="text-align: center;">
-      <!-- Age group selection menu -->
-      <label for="Age Group">Age Group:</label>
-      <select  class=" col-sm-2" id="ageGroupSelect">
-        <option value="2_3">2-3</option>
-        <option value="4_8">4-8</option>
-        <option value="9_11">9-11</option>
-      </select>
-
-      <!-- Concern selection menu -->
-      <label for="Concern">Usual daily consumption of:</label>
-      <select id="concernSelect">
-        <option value="Usual daily consumption of vegetables">Vegetables</option>
-        <option value="Usual daily consumption of fruit">Fruit</option>
-      </select>
-
-      <!-- <select id="colorSelect">
-        <option value="normalColors">Normal</option>
-        <option value="colorblindColors">Colorblind-Friendly</option>
-      </select> -->
-    </div>   
-    
-  </div> 
-  <div class="tooltip" id="tooltip" style="opacity: 0;"></div>
-
-
-
-  <div class="row justify-content-center">
-    <div class="col-sm-6 col-lg-4">
-      <div >
-        <div id="chart-container-male" class="col-6"></div>
-      </div><!-- End .banner -->
-    </div><!-- End .col-lg-4 -->
-
-    <div class="col-sm-6 col-lg-4 order-lg-last">
-      <div >
-        <div id="chart-container-female" class="col-6"></div>
-      </div><!-- End .banner -->
-    </div><!-- End .col-lg-4 -->
-  </div> <!-- End .row -->
-  
-  <div class="row justify-content-center">
-    <div class="col-sm-6 col-lg-4">
-      <div >
-        <div id="person-container-male" ></div>
-      </div><!-- End .banner -->
-    </div><!-- End .col-lg-4 -->
-
-    <div class="col-sm-6 col-lg-4 order-lg-last">
-      <div >
-        <div id="person-container-female" ></div>
-      </div><!-- End .banner -->
-    </div><!-- End .col-lg-4 -->
-  </div> <!-- End .row -->
-
-
-  <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
-  <div class="entry-content editor-content" style ='justify-content: center'>
-    <div style="display: flex; justify-content: center; padding-bottom: 10px;">
-      <div class="container col-10">
-        <div>
-            <h3>Tips to Inspire Kids to Love Their Greens</h3>
-            <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
-            <ul>
-              <li>Involve your child in choosing which fruit or vegetables they would like</li>
-              <li>Take your child fruit and vegetable shopping and let them see, smell and feel the fruit and vegetables with you</li>
-              <li>Encourage their skills by letting them make a simple salad to serve themselves</li>
-              <li>Keep a bowl of fresh fruit handy</li>
-              <li>Make vegetables and fruit look great on the plate</li>
-              <li>Include vegetables and fruit in snacks, as well as meals</li>
+        <div class="col-md-10">
+          <div class="tabs-vertical">
+            <ul class="nav nav-tabs nav-tabs-bg flex-column" id="tabs-7" role="tablist">
+                <li class="nav-item" >
+                    <a class="nav-link active" id="tab-25-tab" data-toggle="tab" href="#tab-25" role="tab" aria-controls="tab-25" aria-selected="true">Sugary drink among boys</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-26-tab" data-toggle="tab" href="#tab-26" role="tab" aria-controls="tab-26" aria-selected="false">Tab 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-27-tab" data-toggle="tab" role="tab" href="#tab-27"aria-controls="tab-27" aria-selected="false">Tab 3</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-28-tab" data-toggle="tab" role="tab"href="#tab-28" aria-controls="tab-28" aria-selected="false">Tab 4</a>
+                </li>
             </ul>
+            <div class="tab-content tab-content-border" id="tab-content-7" >
+                <div class="tab-pane fade active show" id="tab-25" role="tabpanel" aria-labelledby="tab-25-tab">
+                  <div class = "row">
+                    <div class="col-4">
+                      <div id="chart-container-male1" ></div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class = "row">
+                      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum int dolore earum rerum tempora aspernatur numquam velit. </p>
+                    </div>
+                    <div class = "row"></div>
+                    </div>  
+                  </div><!-- end row for tab1 -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="tab-26" role="tabpanel" aria-labelledby="tab-26-tab">
+                  <div class = "row">
+                    <div class="col-md-5">
+                      <div id="chart-container-female1" class="col-6"></div>
+                    </div>
+                    <div class="col-md-5">
+                      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum int dolore earum rerum tempora aspernatur numquam velit. </p>
+                    </div>  
+                  </div><!-- end row for tab1 -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="tab-27" role="tabpanel" aria-labelledby="tab-27-tab">
+                  <p>Perspiciatis quis nobis, adipisci quae aspernatur, nulla suscipit eum. Dolorum, earum. Consectetur pariatur repellat distinctio atque alias excepturi aspernatur nisi accusamus sed molestias ipsa numquam eius, iusto, aliquid, quis aut.</p>
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="tab-28" role="tabpanel" aria-labelledby="tab-28-tab">
+                  <p>Quis nobis, adipisci quae aspernatur, nulla suscipit eum. Dolorum, earum. Consectetur pariatur repellat distinctio atque alias excepturi aspernatur nisi accusamus sed molestias ipsa numquam eius, iusto, aliquid, quis aut.</p>
+                </div><!-- .End .tab-pane -->
+            </div><!-- End .tab-content -->
+          </div><!-- End .tabs-vertical -->
+
+
         </div>
-      </div>
+
+      </div> 
+    </div> 
 
 
-      
-  </div>
-  
+  <div class="container col-10">
+    <h3>Insight on Australian Children Sugary Drink Consumption</h3>
+    The sugar consumption among Australian Children has dropped in recent years, however, the sugar consumption</p>
+    </div>
+  </div>  
+
 <script>
+      // Sample data
+      const data_boys = [
+      { age: "2-3 years old", count: 1 },
+      { age: "4-8 years old", count: 1 },
+      { age: "9-11 years old", count: 2}
+  ];
 
+        // Sample data
+        const data_girls = [
+        { age: "2-3 years old", count: 0 },
+        { age: "4-8 years old", count: 1 },
+        { age: "9-11 years old", count: 1.5}
+    ];
 
-   // Data
-   var data = {
-    boys: [B1, B2, B3], // Replace B1, B2, B3 with actual data for boys
-    girls: [G1, G2, G3] // Replace G1, G2, G3 with actual data for girls
-};
-B1 = 3
-G1 = 4
-// SVG container
-var svg = d3.select("#chart-container-female");
+  function drawImagesTab1(data, svg_container, complete_svg, half_svg) {
+    // Create SVG container
+    const svg = d3.select(svg_container).append("svg")
+        .attr("width", 400)
+        .attr("height", 400);
 
-// Constants
-var width = +svg.attr("width");
-var height = +svg.attr("height");
-var margin = { top: 50, right: 50, bottom: 50, left: 50 };
-var innerWidth = width - margin.left - margin.right;
-var innerHeight = height - margin.top - margin.bottom;
-
-// Scales
-var xScale = d3.scaleLinear()
-    .domain([0, Math.max(d3.max(data.boys), d3.max(data.girls))])
-    .range([0, innerWidth]);
-
-// Draw boys
-svg.selectAll(".boy")
-    .data(data.boys)
-    .enter().append("svg:image")
-    .attr("class", "boy")
-    .attr("xlink:href", "{% static 'assets/images/svg/boy-face.svg' %}")
-    .attr("width", 50)
-    .attr("height", 50)
-    .attr("x", function (d) { return innerWidth / 2 - xScale(d) - 60; })
-    .attr("y", height / 2)
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// Draw girls
-svg.selectAll(".girl")
-    .data(data.girls)
-    .enter().append("svg:image")
-    .attr("class", "girl")
-    .attr("xlink:href", "{% static 'assets/images/svg/girl-face.svg' %}")
-    .attr("width", 50)
-    .attr("height", 50)
-    .attr("x", function (d) { return innerWidth / 2 + 10; })
-    .attr("y", height / 2)
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// Draw center line
-svg.append("line")
-    .attr("x1", innerWidth / 2)
-    .attr("y1", 0)
-    .attr("x2", innerWidth / 2)
-    .attr("y2", height)
-    .attr("stroke", "black")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  // Define your data
-
-/*
-
-    const alljsonData = JSON.parse('{{json_data|escapejs}}');
-  
-    const data = alljsonData.map(item => item.fields);
-    
-    //console.log(data)
-  // Separate data for male and female
-  var maleData = data.filter(d => d.gender === "Male");
-  var femaleData = data.filter(d => d.gender === "Female");
-
-  // Define SVG dimensions
-  var margin = { top: 20, right: 30, bottom: 40, left: 30 };
-  var width = 430 - margin.left - margin.right;
-  var height = 310 - margin.top - margin.bottom;
-
-//Define colorpalletes
-
-  //const normalColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd"];
-
-  var normalColors = d3.scaleOrdinal()
-  .domain(data.map(d => d.concern_label))
-  .range(["#ff2e2ed6", "#d65d0ee0", "#f6d54fd6", "#75c275d4", "#16a12ccc", "#308530c9", "#014401cf"]);
-
-
-
-  var colorblindColors = d3.scaleOrdinal()
-    .domain(data.map(d => d.concern_label))
-    .range(["#ede65a","#e5b039","#ea594e","#89c3ef", "#589acf", "#1473af", "#193cbc"]);
-    /*
-//old pallete
-  var normalColors = d3.scaleOrdinal()
-    .domain(data.map(d => d.concern_label))
-    .range(["#1f66b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#1473af", "#193cbc"]);  
-
- // const colorblindColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd"]; // Replace with colorblind-friendly colors
-
-*/
-
-/*
-  // Create SVG containers for male and female charts
-  var svgMale = d3.select("#chart-container-male").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  var svgFemale = d3.select("#chart-container-female").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-//Define x and Y scales 
-  var xScale = d3.scaleBand()
-    .domain(data.map(d => d.concern_label))
-    .range([0, width])
-    .padding(0.2);
-
-  var yScale = d3.scaleLinear()
-    .domain([0, 100])
-    .range([height, 0]);
-
-  // Create axes
-  var xAxis = d3.axisBottom().scale(xScale);
-  var yAxis = d3.axisLeft().scale(yScale);
-
-  // Append x-axis to male SVG and rotate labels
-var xAxisGroupMale = svgMale.append("g")
-.attr("class", "x-axis")
-.attr("transform", "translate(0," + height + ")")
-.call(xAxis)
-.selectAll("text") // Select all the text elements
-.style("text-anchor", "end") // Align text to the end of the label
-.attr("dx", "-.8em") // Adjust horizontal position
-.attr("dy", ".15em") // Adjust vertical position
-.attr("transform", "rotate(-15)"); // Rotate the labels by -45 degrees
-
-// Append y-axis to male SVG
-svgMale.append("g")
-.attr("class", "y-axis")
-.call(yAxis);
-
-// Append x-axis to female SVG and rotate labels
-var xAxisGroupFemale = svgFemale.append("g")
-.attr("class", "x-axis")
-.attr("transform", "translate(0," + height + ")")
-.call(xAxis)
-.selectAll("text") // Select all the text elements
-.style("text-anchor", "end") // Align text to the end of the label
-.attr("dx", "-.8em") // Adjust horizontal position
-.attr("dy", ".15em") // Adjust vertical position
-.attr("transform", "rotate(-15)"); // Rotate the labels by -45 degrees
-
-// Append y-axis to female SVG
-svgFemale.append("g")
-.attr("class", "y-axis")
-.call(yAxis);
-
-  // Define tooltip
-  var tooltip = d3.select("#tooltip");  
-
-
-
-
-  
-  // Function to update the chart based on selected age group
-  function updateChart(selectedAgeGroup, selectedConcern, gender, svg, colorScale) {
-
-    // Filter data based on age group, concern, and gender
-    var filteredData = data.filter(d => d.age_group === selectedAgeGroup && d.concern === selectedConcern && d.gender === gender);
-    
-    // Generate title based on gender and age group
-    var title = "";
-    if (gender === "Male") {
-      title += "Australian Boys ";
-    } else if (gender === "Female") {
-      title += "Australian Girls ";
-    };
-
-    // Generate subtitle based on selected concern
-    var subtitle = "Age group: " + selectedAgeGroup;
-
-    // Append title and subtitle to the chart
-    svg.selectAll(".chart-title").remove(); // Remove existing title if any
-    svg.selectAll(".chart-subtitle").remove(); // Remove existing subtitle if any
-    svg.append("text")
-        .attr("class", "chart-title")
-        .attr("x", (width / 2))
-        .attr("y", 20)
-        .attr("text-anchor", "middle")
-        .style("font-size", "16px")
-        .style("font-weight", "bold")
-        .text(title);
-    svg.append("text")
-        .attr("class", "chart-subtitle")
-        .attr("x", (width / 2))
-        .attr("y", 40)
-        .attr("text-anchor", "middle")
-        .style("font-size", "14px")
-        .text(subtitle);
-
-      console.log(selectedConcern,selectedAgeGroup)
-      // Update bars
-      var bars = svg.selectAll(".bar")
-        .data(filteredData);
-    
-      bars.enter().append("rect")
-        .attr("class", "bar")
-        .merge(bars)
-        .transition()
-        .duration(600)
-        .attr("x", d => xScale(d.concern_label))
-        .attr("y", d => yScale(d.percentage))
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => height - yScale(d.percentage))
-        .attr("fill", d => colorScale(d.concern_label))
-        .attr("opacity", 0.45);
-        
-      bars.exit().remove();
-
-    
-      // Update error bars
-      var errorBars = svg.selectAll(".error-bar")
-        .data(filteredData.filter(d => d.margin_error));
-    
-      errorBars.enter().append("line")
-        .attr("class", "error-bar")
-        .merge(errorBars)
-        .transition()
-        .duration(100)
-        .attr("x1", d => xScale(d.concern_label) + xScale.bandwidth() / 2)
-        .attr("y1", d => yScale(d.percentage + d.margin_error))
-        .attr("x2", d => xScale(d.concern_label) + xScale.bandwidth() / 2)
-        .attr("y2", d => yScale(d.percentage - d.margin_error))
-        .attr("stroke", "black")
-        .attr("opacity", 0.5)
-        .attr("stroke-width", 0.5);
-    
-      errorBars.exit().remove();
-
-      //comment guideline to fix later
-
-
-    //Guideline
-        svg.selectAll(".bar")
+    // Create groups for each age group
+    const groups = svg.selectAll(".age-group")
         .data(data)
-        .enter().append("line")
-        .attr("class", "vertical-line")
+        .enter()
+        .append("g")
+        .attr("class", "age-group")
+        .attr("transform", (d, i) => `translate(50, ${i * 100 + 40})`);
+
+    // Append age group labels
+    groups.append("text")
+        .text(d => d.age)
+        .attr("x", -40)
+        .attr("y", 10)
+        .attr("font-family", "Arial")
+        .attr("font-size", "14px")
+        .attr("font-weight", "bold");
+
+    // Append SVG images for each age group
+    groups.each(function(d) {
+        const count = d.count;
+        const integerCount = Math.floor(count);
+        const fractionalCount = count - integerCount;
+
+        // Append full images
+        d3.select(this).selectAll(".full-boy")
+            .data(d3.range(integerCount))
+            .enter()
+            .append("image")
+            .attr("class", "full-boy")
+            .attr("xlink:href", complete_svg)
+            .attr("x", (d, i) => i * 45)
+            .attr("y", 30)
+            .attr("width", 40)
+            .attr("height", 40)
+            .attr("filter", "url(#colorFilter)");
+
+        // Append fractional images
+        if (fractionalCount > 0) {
+            d3.select(this).append("image")
+                .attr("xlink:href", half_svg)
+                .attr("x", integerCount * 45)
+                .attr("y", 30)
+                .attr("width", 40)
+                .attr("height", 40)
+                .attr("filter", "url(#colorFilter)");
+        }
+    });
+
+    // Append filter element for color change
+    svg.append("defs")
+        .append("filter")
+        .attr("id", "colorFilter")
+        .append("feColorMatrix")
+        .attr("type", "matrix")
+        .attr("values", "1 0 0 0 0.5  0.5 0 0 0 0.08  0 0 0 0 0  0 0 0 0.9 0"); // Adjust color values here
+
+    // Add fade-in animation
+    svg.selectAll("image")
+        .style("opacity", 0) // Initially set opacity to 0
         .transition()
-        .duration(100)
-        .attr("x1", function(d) { 
-            if (d.age === "2_3") {
-                return xScale("1 serve") - xScale.bandwidth() / 2;
-            } else {
-                return (xScale("1 serve") + xScale("2 serves")+xScale.bandwidth())  * 1/2; 
-            }
-        })
-        .attr("y1", 0)
-        .attr("x2", function(d) { 
-          if (d.concern === "Usual daily consumption of fruit") {
-            if (d.age === "2_3") {
-              return xScale("1 serve"); 
-            }else{ 
-                  if (d.age === "4_8"){
-                  return xScale("1 serve") - xScale.bandwidth() / 2;
-            } else {} }
-
-              
-          } else {
-              return (xScale("1 serve") + xScale("2 serves")+xScale.bandwidth())  * 1/2; 
-          }
-      })
-      .attr("y2", height)
-      .attr("stroke", "red")
-      .attr("stroke-width", 2)
-      .attr("stroke-dasharray", "5,5");
-      
-      bars.exit().remove();
-
-
-      // Add text above the red line
-      svg.append("text")
-      .attr("x", (xScale("1 serve") + xScale("2 serves") + xScale.bandwidth()) * 1 / 2)
-      .attr("y", -10)
-      .attr("text-anchor", "middle")
-      .text("Australian Guideline")
-      .attr("fill", "red")
-      .attr("font-size", "12px");
-
-
-      //End of guideline
-      
-      // Remove lines for errors
-    svg.selectAll(".vertical-line")
-    .data(data)
-    .exit().remove();
-
-    // Remove existing guideline text
-    svg.selectAll(".guideline-text").remove();
-
-    // Add horizontal lines for the error bars
-    var errorBarHorizontalUpper = svg.selectAll(".error-bar-horizontal-upper")
-      .data(filteredData.filter(d => d.margin_error));
-  
-    errorBarHorizontalUpper.enter().append("line")
-      .attr("class", "error-bar-horizontal-upper")
-      .merge(errorBarHorizontalUpper)
-      .attr("x1", d => xScale(d.concern_label) + xScale.bandwidth() * 3 / 8)
-      .attr("y1", d => yScale(d.percentage + d.margin_error))
-      .attr("x2", d => xScale(d.concern_label) + xScale.bandwidth() * 5 / 8)
-      .attr("y2", d => yScale(d.percentage + d.margin_error))
-      .attr("stroke", "black")
-      .attr("opacity", 0.5)
-      .attr("stroke-width", 1);
-      
-  
-    errorBarHorizontalUpper.exit().remove();
-  
-    var errorBarHorizontalLower = svg.selectAll(".error-bar-horizontal-lower")
-      .data(filteredData.filter(d => d.margin_error));
-  
-    errorBarHorizontalLower.enter().append("line")
-      .attr("class", "error-bar-horizontal-lower")
-      .merge(errorBarHorizontalLower)
-      .attr("x1", d => xScale(d.concern_label) + xScale.bandwidth() * 3 / 8)
-      .attr("y1", d => yScale(d.percentage - d.margin_error))
-      .attr("x2", d => xScale(d.concern_label) + xScale.bandwidth() * 5 / 8)
-      .attr("y2", d => yScale(d.percentage - d.margin_error))
-      .attr("stroke", "black")
-      .attr("opacity", 0.5)
-      .attr("stroke-width", 1);
-  
-    errorBarHorizontalLower.exit().remove();
-  
-    // Update tooltips
-    svg.selectAll(".bar")
-      .on("mouseover", function(event, d) {
-        // Show tooltip
-        d3.select(this).attr("opacity", 1); // highlight selected bar
-        tooltip.html(`
-          <p><strong>Proportion:</strong> ${d.percentage}</p>
-          <p><strong>Margin of Error:</strong> ${d.margin_error || 'N/A'}</p>
-        `)
-          .style("left", (event.pageX) + "px")
-          .style("top", (event.pageY - 28) + "px")
-          .style("opacity", 1);
-      })
-      .on("mouseout", function() {
-        // Hide tooltip
-        d3.select(this).attr("opacity", 0.45);
-        tooltip.style("opacity", 0);
-      });
-  }
-
-  //END Update  chart
-
-  // Call updateChart initially with default age group
-// Call updateChart initially with default values
-updateChart("2_3", "Usual daily consumption of vegetables", "Male", svgMale, colorblindColors);
-updateChart("2_3", "Usual daily consumption of vegetables", "Female", svgFemale, colorblindColors);
-
-// Event listener for selection change
-
-// Event listeners for selection change
-d3.select("#ageGroupSelect").on("change", function() {
-  var selectedAgeGroup = d3.select("#ageGroupSelect").property("value");
-  var selectedConcern = d3.select("#concernSelect").property("value");
-  
-  updateChart(selectedAgeGroup, selectedConcern, "Male", svgMale, colorblindColors);
-  updateChart(selectedAgeGroup, selectedConcern, "Female", svgFemale, colorblindColors);
-});
-
-d3.select("#concernSelect").on("change", function() {
-  var selectedConcern = d3.select("#concernSelect").property("value");
-  var selectedAgeGroup = d3.select("#ageGroupSelect").property("value");
-  
-  updateChart(selectedAgeGroup, selectedConcern, "Male", svgMale, colorblindColors);
-  updateChart(selectedAgeGroup, selectedConcern, "Female", svgFemale, colorblindColors);
-});
-
-
-d3.select("#colorSelect").on("change", function() {
-  var selectedConcern = d3.select("#concernSelect").property("value");
-  var selectedAgeGroup = d3.select("#ageGroupSelect").property("value");
-  var selectedColor = d3.select("#colorSelect").property("value");
-  updateChart(selectedAgeGroup, selectedConcern, "Male", svgMale, colorblindColors);
-  updateChart(selectedAgeGroup, selectedConcern, "Female", svgFemale, colorblindColors);
-});
-*/
-
-
-  // Define color scale for labels
-//var colorScale_veg = d3.scaleOrdinal()
-//.domain(data.map(d => d.concern_label))
-//.range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]);
-
-// Define color scale for labels
-//var colorScale_fruit = d3.scaleOrdinal()
-//  .domain(data.map(d => d.concern_label))
-//  .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]);
-
-/*
-// Add legend
-var legend = svg.selectAll(".legend")
-  .data(colorScale.domain())
-  .enter().append("g")
-  .attr("class", "legend")
-  .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-legend.append("rect")
-  .attr("x", width - 18)
-  .attr("width", 18)
-  .attr("height", 18)
-  .style("fill", colorScale);
-
-legend.append("text")
-  .attr("x", width - 24)
-  .attr("y", 9)
-  .attr("dy", ".35em")
-  .style("text-anchor", "end")
-  .text(function(d) { return d; });
-*/
-
-function drawPersons(numPersons, colorIndex) {
-  // Clear previous content
-  d3.select("#chart-container-male").selectAll("*").remove();
-
-  // SVG container
-  var width = 800; // Adjust width as needed
-  var height = 600; // Adjust height as needed
-  var margin = { top: 20, right: 20, bottom: 20, left: 20 };
-  var svgMale = d3.select("#chart-container-male").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  // Load person SVG
-  d3.xml("{% static 'assets/images/svg/boy-face.svg' %}").then(function(xml) {
-      var personSVG = xml.documentElement;
-
-      // Data for persons
-      var data = d3.range(numPersons);
-
-      // Draw persons
-      var persons = svgMale.selectAll(".person")
-          .data(data)
-          .enter()
-          .append("g")
-          .attr("class", "person")
-          .attr("transform", function(d, i) {
-              var x = 50 + (i % 4) * 40;
-              var y = 50 + Math.floor(i / 4) * 40;
-              return "translate(" + x + "," + y + ") scale(0.05)"
-          });
-
-      // Append loaded person SVG
-      persons.append(function() { return personSVG.cloneNode(true); })
-          
-          .attr("fill", function(d, i) {
-              return (i < colorIndex) ? "green" : "black";
-          });
-  });
+        .delay((d, i) => i * 400) // Delay each image's animation
+        .duration(500) // Animation duration
+        .style("opacity", 1); // Fade in animation
 }
 
-// Example usage:
-drawPersons(10, 2); // Draw 10 persons, color 2 persons green
+// first draw
+drawImagesTab1(data_boys,
+svg_container= "#chart-container-male1",
+complete_svg = "{% static 'assets/images/svg/boy-face.svg' %}",
+half_svg = "{% static 'assets/images/svg/half-boy.svg' %}");
 
+// Call drawImages function when the user clicks on Tab 1
+document.getElementById("tab-25-tab").addEventListener("click", function() {
+  d3.select("#chart-container-male1").selectAll("svg").remove();
+  drawImagesTab1(data_boys, svg_container= "#chart-container-male1", complete_svg = "{% static 'assets/images/svg/boy-face.svg' %}",
+  half_svg = "{% static 'assets/images/svg/half-boy.svg' %}");
+});
 
-
-const data_met_recommendation = [
-  { concern: "Daily consumption of fruit", label: "Met recommendation", age_group: "2_3", gender: "Male", percentage: 95.8, quality_comment: "", Persons: 10 },
-  { concern: "Daily consumption of fruit", label: "Met recommendation", age_group: "4_8", gender: "Male", percentage: 70.5, quality_comment: "", Persons: 7 },
-  { concern: "Daily consumption of fruit", label: "Met recommendation", age_group: "9_11", gender: "Male", percentage: 59, quality_comment: "", Persons: 6 },
-  { concern: "Daily consumption of vegetables", label: "Met recommendation", age_group: "2_3", gender: "Male", percentage: 24, quality_comment: "", Persons: 2 },
-  { concern: "Daily consumption of vegetables", label: "Met recommendation", age_group: "4_8", gender: "Male", percentage: 1.5, quality_comment: "", Persons: 0 },
-  { concern: "Daily consumption of vegetables", label: "Met recommendation", age_group: "9_11", gender: "Male", percentage: 2.6, quality_comment: "", Persons: 0 },
-  { concern: "Daily consumption of fruit and vegetables", label: "Met recommendation", age_group: "2_3", gender: "Male", percentage: 24, quality_comment: "", Persons: 2 },
-  { concern: "Daily consumption of fruit and vegetables", label: "Met recommendation", age_group: "4_8", gender: "Male", percentage: 1.1, quality_comment: "Proportion has a high margin of error and should be used with caution", Persons: 0 },
-  { concern: "Daily consumption of fruit and vegetables", label: "Met recommendation", age_group: "9_11", gender: "Male", percentage: 1.4, quality_comment: "", Persons: 0 },
-  { concern: "Daily consumption of fruit", label: "Met recommendation", age_group: "2_3", gender: "Male", percentage: 96.3, quality_comment: "Proportion has a high margin of error and should be used with caution", Persons: 10 },
-  { concern: "Daily consumption of fruit", label: "Met recommendation", age_group: "4_8", gender: "Male", percentage: 71.4, quality_comment: "", Persons: 7 },
-  { concern: "Daily consumption of fruit", label: "Met recommendation", age_group: "9_11", gender: "Male", percentage: 51, quality_comment: "", Persons: 5 },
-  { concern: "Daily consumption of vegetables", label: "Met recommendation", age_group: "2_3", gender: "Male", percentage: 29.2, quality_comment: "", Persons: 3 },
-  { concern: "Daily consumption of vegetables", label: "Met recommendation", age_group: "4_8", gender: "Male", percentage: 9.2, quality_comment: "", Persons: 1 },
-  { concern: "Daily consumption of vegetables", label: "Met recommendation", age_group: "9_11", gender: "Male", percentage: 1.2, quality_comment: "Proportion has a high margin of error and should be used with caution", Persons: 0 }
-];
-
-/*
-// Function to generate persons for a given SVG container
-function generatePersons(containerId, numPersons, numGreenPersons) {
-  // Select the SVG container
-  var svgContainer = d3.select(containerId)
-    .append("svg")
-    .attr("height", 80); // Adjust height as needed
-
-  // Load the SVG file for the person
-  d3.xml("{% static 'assets/images/svg/boy-face.svg' %}").then(function(xml) {
-    var totalWidth = numPersons * 300; // Calculate total width occupied by persons
-    var totalHeight = 80; // Adjust total height as needed
-    var containerWidth = parseInt(d3.select(containerId).style("width")); // Get width of the container
-    var containerHeight = parseInt(d3.select(containerId).style("height")); // Get height of the container
-
-    // Adjust the starting position (x and y attributes) of the SVG container to center the persons
-    var startX = (containerWidth - totalWidth) / 2;
-    var startY = (containerHeight - totalHeight) / 2;
-    svgContainer.attr("width", totalWidth) // Set the width of the SVG container
-                .attr("height", totalHeight) // Set the height of the SVG container
-                .attr("x", startX) // Adjust horizontal position to center
-                .attr("y", startY); // Adjust vertical position to center
-
-    // Append the loaded SVG to the SVG container for each person
-    for (var i = 0; i < numPersons; i++) {
-      svgContainer.append(function() {
-        var clonedNode = xml.documentElement.cloneNode(true);
-        // Adjust the size of the person SVG
-        d3.select(clonedNode).selectAll("*")
-          .attr("transform", "scale(0.35)"); // Halve the size
-        return clonedNode;
-      })
-      .attr("x", i * 15) // Adjust horizontal position within the container
-      .attr("y", 5) // Adjust vertical position within the container
-      .attr("fill", i < numGreenPersons ? "green" : "grey"); // Color logic
-    }
-  });
-}
-
-// Call the function for male container with 2 green-colored persons out of 10
-generatePersons("#person-container-male", 10, 2);
-
-// Call the function for female container with 3 green-colored persons out of 10
-generatePersons("#person-container-female", 10, 3);
-
-
-*/
+// Call drawImages function when the user clicks on Tab 1
+document.getElementById("tab-26-tab").addEventListener("click", function() {
+  d3.select("#chart-container-female1").selectAll("svg").remove();
+  drawImagesTab1(data_girls, svg_container= "#chart-container-female1", complete_svg = "{% static 'assets/images/svg/girl-face.svg' %}",
+  half_svg = "{% static 'assets/images/svg/half-girl.svg' %}");
+});
 
 </script>
 
