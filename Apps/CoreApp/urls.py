@@ -19,6 +19,7 @@ urlpatterns = [
     path('coming-soon/', views.ComingView.as_view(), name='coming'),
     path('macronutrients-children/', views.MacronutrientsView.as_view(), name='macronutrients'),
     path('micronutrients-children/', views.MicronutrientsView.as_view(), name='micronutrients'),
+    path('bmi-calculator/', views.BmiCalculatorView.as_view(), name='bmi_calculator'),
     # path('recipe/', views.RecipeView.as_view(), name='recipe'),
     path('recipes/', views.RecipeListView.as_view(), name='recipes'),
     path("recipes/<slug:slug>/", RecipeDetailView.as_view(), name="recipe-detail"),

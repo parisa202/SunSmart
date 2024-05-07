@@ -347,6 +347,8 @@ class MicronutrientsView(generic.TemplateView):
         
         return new_context
     
+class BmiCalculatorView(generic.TemplateView):
+    template_name = 'CoreApp/bmi_calculator.html'
 
 class RecipeDetailView(generic.DetailView):
     model = RECIPES

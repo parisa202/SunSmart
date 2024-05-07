@@ -1,0 +1,164 @@
+{% extends "CoreApp/base.html" %}
+
+{% load static %}
+
+{% block title_block %}
+{% endblock title_block %}
+
+{% block extra_css %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock extra_css %}
+
+{% block main_content %}
+
+{% include "CoreApp/components/breadcrumb.html" %}
+<div class="entry-content editor-content" style ='justify-content: center'>
+  
+  <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+    <div class="container col-9.9">
+      <div>
+        <h3>What is Macronutrient</h3>
+        <p>Macronutrients in food, like carbohydrates, proteins, and fats, are crucial for kids' energy and growth. Carbs, found in bread and fruits, fuel their play. Proteins from meat and beans help build strong muscles. Fats, in avocados and nuts, support brain power. Balancing these nutrients keeps kids healthy and energized for all their activities, ensuring they have the strength and stamina to play, learn, and explore every day.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><!-- container macro -->
+    <div class="row">
+    
+      <aside class="col-lg-5">
+        <div class="sidebar">
+          <div class="widget">
+            <h3 class="widget-title">Macronutrients</h3><!-- End .widget-title -->
+            <div class="tagcloud" id="tagcloud" style="font-weight: bold;">
+              
+              <style>
+                .tagcloud a {
+                  padding: 10px 20px;
+                  border: 0px solid #ccc;
+                  border-radius: 10px; /* Adjust border radius for rounded corners */
+                  text-decoration: none;
+                  color: #000000;
+                  font-weight: bold;
+                  background-color:  #d2efd5;
+                  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+                }
+            
+                .tagcloud a:hover {
+                  background-color: #72dcdc;
+                  border-color: #000000;
+                  color: #000000; /* Change text color on hover */
+                }
+                .food-icon {
+                  width: 50px;
+                  height: 50px;
+                  transition: transform 0.3s ease;
+                }
+                
+                /* Define the hover effect */
+                .food-icon:hover {
+                  transform: scale(1.2); /* Scale up the image on hover */
+                }
+              </style>
+              <!-- style="background-color:rgb(107, 228, 170);color:#393232" -->
+              <a name="Carbohydrates">Carbs</a>
+              <a name="Fats">Fats</a>
+              <a name="Proteins">Proteins</a>
+            </div>
+          </div>
+        </div><!-- End .sidebar -->
+      </aside><!-- End .col-lg-5 -->
+
+      <div class="col-lg-7">
+        <div class="entry-content editor-content">
+          <h3>How will this nutrition benefit your children?</h3>
+          <img id="arrow-icon"  class ="food-icon"src="{% static 'assets/images/icons/fast-backward.gif' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+            <p id="macro_benefits" style="height: 100px;">Click the button on the left</p>
+          <h3>Where can you help your children get this nutrition?</h3>
+            <p id="macro_sources" style="height: 100px;">Click the button on the left</p>
+        </div>
+        <div class="row col-9" id="food-icons" style="display: none; justify-content: space-between; ">
+          {% for i in "1234" %}
+          <a id ="link_recipes{{ i }}" style="box-shadow: none;" >
+            <img id="food-icon{{ i }}" class="food-icon" src="{% static 'assets/images/icons/' %}{% if i == 1 %}carrot.png{% elif i == 2 %}eggs.png{% else %}cauliflower.png{% endif %}" alt="vegetable icon" style="width: 50px; height: 50;">
+            <p id="food-name{{ i }}" style="border-bottom: none;"></p>
+          </a>
+          {% endfor %}
+        </div>
+      </div><!-- End .col-lg-7 -->
+
+    </div><!-- End row information -->
+  </div><!-- End container macro -->
+
+  <div class="container">
+    <hr class="mb-2">
+      <div class="cta bg-image pt-3 pb-3 mb-3" style="background-color:#d2efd5;background-position: center right;">
+        <div class="row justify-content-center">
+            <div class="col-sm-10 col-md-8 col-lg-8">
+                <div class="cta-text text-center">
+                    <h3 class="cta-title"> Would you like to know more about Micronutrients? </h3><!-- End .cta-title -->
+                    <p class="cta-desc">Discover Micronutrients that are essential to children's physical and cognitive development<p> 
+                    </p><!-- End .cta-desc -->
+                    <a href="{% url "CoreApp:micronutrients" %}" class="btn btn-primary btn-rounded"><span>Explore Micronutrients</span><i class="icon-long-arrow-right"></i></a>
+                </div><!-- End .cta-text -->
+            </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
+        </div><!-- End .row -->
+      </div><!-- End .cta -->
+    </hr>
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    //var tagcloud = 
+    $('#tagcloud a').on('click', function (e) {
+        var tagChoice = $(this).attr('name'); // Get selected value
+
+        if (tagChoice === 'nan') {
+            return; // Do nothing and exit the function
+        };
+        // console.log(tagChoice)
+        // AJAX call
+        $.ajax({
+            type: "POST",
+            url: "{% url 'CoreApp:macronutrients' %}", 
+            data: {'selected_tag': tagChoice,
+                    'csrfmiddlewaretoken': '{{csrf_token}}'
+                  },
+            dataType: 'json',
+            success: function (response) {
+                // Update with the received JSON data
+                console.log(response);
+                if(response.status == 'not found'){
+                    $('#macro_benefits').empty();
+                    $('#macro_sources').empty();
+                } else {
+                $('#macro_benefits').text(response.benefits);
+                $('#macro_sources').text(response.sources);
+                $('#food-icons').show();
+                $('#arrow-icon').hide();
+
+                for (var i = 1; i <= 4; i++) {
+                  var imageSource = response["image" + i];
+                  var imageName = imageSource.split('/').pop().split('.')[0];
+                  imageName_capital = imageName.charAt(0).toUpperCase() + imageName.slice(1);
+                  
+                  // Set image source and name
+                  $('#food-icon' + i).attr('src', imageSource).hide().fadeIn();
+                  $('#food-name' + i).text(imageName_capital).hide().fadeIn().css('text-align', 'center');
+                  
+                }
+
+
+                }
+            },
+            error: function (request, status, error) {
+                console.log(request.status + ": " + request.responseText);
+            }
+            
+        });
+    });
+  });
+</script>
+{% endblock main_content %}
