@@ -25,6 +25,8 @@
     </div>
   </div>
 
+  <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+
   <div class="container">
     <div class="row">
       <aside class="col-lg-5">
@@ -33,23 +35,35 @@
             <h3 class="widget-title">BMI Calculator</h3><!-- End .widget-title -->
 
             <style>
-              /* Basic styling for demonstration purposes */
-              #tagcloud {
-                font-family: Arial, sans-serif;
-                padding: 0px;
+              /* Style for the label */
+              label {
+                  display: block; /* Make labels appear on a new line */
+                  margin-bottom: 15px; /* Add some space between label and input */
+                  font-weight: bold; /* Make labels bold */
+                  margin-left: -8px
               }
-              input[type="number"] {
-                padding: 0px;
-                width: 10px;
-                font-size: 16px;
+          
+              /* Style for the input */
+              input[type="form"] {
+                  width: calc(100% - 10px); /* Make input take up the remaining width */
+                  padding: 5px; /* Add padding for better visual appearance */
+                  border: 1px solid #ccc; /* Add a border */
+                  border-radius: 5px; /* Add rounded corners */
+                  box-sizing: border-box; /* Include padding and border in the width */
+                  margin-left: 2px
               }
             </style>
 
             <div class="tagcloud" id="tagcloud" style="font-weight: bold;">
-              <label for="numberInput">Height (CM):</label>
-              <input type="number" id="numberInput" min="1" max="200">
-              <label for="numberInput">Weight (KG):</label>
-              <input type="number" id="numberInput" min="1" max="100">
+              <div>
+                <label class="col-lg-12" for="heightInput">Height (CM):</label>
+                <input class="col-lg-12" id="height" type="form">
+                
+                <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+                
+                <label class="col-lg-12" for="weightInput">Weight (KG):</label>
+                <input class="col-lg-12" id="weight" type="form">
+              </div>
             </div>
           </div>
         </div><!-- End .sidebar -->
@@ -58,12 +72,25 @@
       <div class="col-lg-7">
         <div class="entry-content editor-content">
           <h3>What does this BMI value mean to your children?</h3>
-          <p id="macro_benefits" style="height: 100px;">Placeholder</p>
+          <p id="underweight" style="height: 20px;">
+            Under 18.5 - Your children are underweight and possibly malnourished.
+          </p>
+          <p id="normal" style="height: 20px;">
+            18.5 to 24.9 - Your children have a healthy weight range.
+          </p>
+          <p id="overweight" style="height: 20px;">
+            25.0 to 29.9 - Your children are overweight.
+          </p>
+          <p id="obese" style="height: 20px;">
+            Over 30 - Your children are obese.
+          </p>
         </div>
       </div><!-- End .col-lg-7 -->
 
     </div><!-- End row information -->
-  </div><!-- End container macro -->
+  </div>
+
+  <div class="w3-content" style="max-width:2000px;margin-top:100px"></div>
 
   <div class="container">
     <hr class="mb-2">
