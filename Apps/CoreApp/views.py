@@ -520,6 +520,7 @@ class OuterRecipeAnalysisView(generic.TemplateView):
         self.context = self.get_context_data(**kwargs)
         self.context['api_data'] = recipe
         self.context['gpt_response'] = gpt_output
+        self.context['custom_recipe'] = custom_recipe
         
         return render(request, self.template_name, context=self.context)
                  

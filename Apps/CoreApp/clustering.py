@@ -3,7 +3,6 @@ import pandas as pd
 
 
 def clean_data():
-    
     # Query data from Django models
     recipes = RECIPES.objects.all()
     ingredients = INGREDIENT.objects.all()

@@ -34,8 +34,10 @@
         <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <p>Enter a list of ingredients for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br></p>
-                <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+                <p class="mb-2">Enter a list of ingredients for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br></p>
+
+                <p class="mb-2"style = "-webkit-text-fill-color: #009376;">{{custom_recipe}}</p>
+
                 <form id="demoAnalysisForm" method ="post">{% csrf_token %}
                     <p>
                       <textarea name="custom_recipe" id="demoAnalysis" cols="30" rows="10" class="form-control"></textarea>
@@ -54,7 +56,12 @@
                         </p>
                     </div>
                     <div class="err-result pt-2 mb-2">
-                        <p> {{gpt_response|linebreaksbr }}</p>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-11">
+                                <p>The ingredients that we analyze from your recipe:</p>
+                                <p class="cta-border mb-2 pt-1"style = "-webkit-text-fill-color: #009376; padding:2rem ;" >{{gpt_response|linebreaksbr }}</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="demo-result">
                         <div class="col-md-12">
