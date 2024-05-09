@@ -19,58 +19,163 @@
       <div>
         <h3>What is BMI?</h3>
         <p>BMI stands for Body Mass Index. It's a measure used to assess an individual's body weight in relation to their height. It's calculated by dividing a person's weight in kilograms by the square of their height in meters. <strong>The formula is: BMI = weight (kg) / (height (m) * height (m))</strong></p>
-        <p>BMI is commonly used as a screening tool to categorize individuals into different weight status categories, such as <strong>underweight, normal weight, overweight, and obese</strong>. However, it's important to note that BMI is a rough estimate and doesn't directly measure body fat or overall health. It's just one of many factors to consider when evaluating an individual's health status.</p>
+        <p>BMI is commonly used as a screening tool to categorize individuals into different weight status categories, such as <strong>underweight, healthy weight, overweight, and obese</strong>. However, it's important to note that BMI is a rough estimate and doesn't directly measure body fat or overall health. It's just one of many factors to consider when evaluating an individual's health status.</p>
       </div>
     </div>
   </div>
 
-  <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+  <!-- <div class="w3-content" style="max-width:2000px;margin-top:15px"></div> -->
 
   <div class="container">
-    <div class="row">
-      <aside class="col-lg-5">
+    <h3>BMI Calculator</h3>
+    <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
+    
+    <div class="row col-lg-12">
+      
+      <!-- <aside class="col-lg-5">
         <div class="sidebar">
           <div class="widget">
-            <h3 class="widget-title">BMI Calculator</h3><!-- End .widget-title -->
+            <h3 class="widget-title">BMI Calculator</h3>
 
             <style>
-              /* Style for the label */
               label {
-                  display: block; /* Make labels appear on a new line */
-                  margin-bottom: 15px; /* Add some space between label and input */
-                  font-weight: bold; /* Make labels bold */
+                  display: block;
+                  margin-bottom: 15px;
+                  font-weight: bold;
                   margin-left: -8px
               }
-          
-              /* Style for the input */
               input[type="form"] {
-                  width: calc(100% - 10px); /* Make input take up the remaining width */
-                  padding: 5px; /* Add padding for better visual appearance */
-                  border: 1px solid #ccc; /* Add a border */
-                  border-radius: 5px; /* Add rounded corners */
-                  box-sizing: border-box; /* Include padding and border in the width */
+                  width: calc(100% - 10px);
+                  padding: 5px;
+                  border: 1px solid #ccc;
+                  border-radius: 5px;
+                  box-sizing: border-box;
                   margin-left: 2px
+              }
+
+              .form-control {
+                border-radius: 5px;
+                color: #000000;
+              }
+
+              .cal-button {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 8px;
+                transition-duration: 0.4s;
+              }
+              .cal-button:hover {
+                background-color: #28862d;
+              }
+              .clear-button {
+                background-color: #c14c56;
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 8px;
+                transition-duration: 0.4s;
+              }
+              .clear-button:hover {
+                background-color: #942121;
               }
             </style>
 
             <div class="tagcloud" id="tagcloud" style="font-weight: bold;">
               <div>
-                <label class="col-lg-12" for="heightInput">Height (CM):</label>
-                <input class="col-lg-12" id="height" type="form">
-                
-                <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
-                
-                <label class="col-lg-12" for="weightInput">Weight (KG):</label>
-                <input class="col-lg-12" id="weight" type="form">
+                <div style="display: flex;">
+                  <div style="margin-right: 100px;">
+                    <label class="col-lg-12" for="genderInput">Gender:</label>
+                    <div class="select-custom">
+                      <select name="selected_gender" id="gender" class="form-control">
+                        <option value="">-------</option>
+                        <option value="boy">Boy</option>
+                        <option value="girl">Girl</option>
+                      </select>
+                    </div>
+                  </div>
 
-                <button onclick="calculateBMI()">Calculate</button>
+                  <div>
+                    <label class="col-lg-12" for="ageInput">Age (3-9):</label>
+                    <div class="select-custom">
+                      <select name="selected_age" id="age" class="form-control">
+                        <option value="">-------</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
+
+                <div style="display: flex;">
+                  <div style="margin-right: 55px;">
+                    <label class="col-lg-12" for="heightInput">Height (CM):</label>
+                    <input class="col-lg-12" id="height" type="form">
+                  </div>
+                  
+                  <div>
+                    <label class="col-lg-12" for="weightInput">Weight (KG):</label>
+                    <input class="col-lg-12" id="weight" type="form">
+                  </div>
+                </div>
+
+                <div class="w3-content" style="max-width:2000px;margin-top:35px"></div>
+                
+                <div style="display: flex;">
+                  <div style="margin-right: 30px;">
+                    <button id="calButton" class="cal-button">Calculate</button>
+                  </div>
+                  <div>
+                    <button id="clearButton" class="clear-button">Clear</button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
-        </div><!-- End .sidebar -->
-      </aside><!-- End .col-lg-5 -->
+        </div>
+      </aside> -->
+      
+      <div cols="full" colsbp="[object Object]" data-v-0df80dcd="" class="col-lg-12" style="margin-left: -10px;">
+        <div id="btcnt" pagetitle="Body mass index calculator for children and teenagers" nodetype="node--campaign_page" backgroundcolour="#FFFFFF" class="basictextmarkup-container" style="background-color:#FFFFFF;" data-v-72188569="" data-v-0df80dcd="">
+          <div class="rpl-row rpl-site-constrain--on-all" data-v-72188569="">
+            <div class="rpl-col rpl-col--full rpl-col--12-l" data-v-72188569="">
+              <div class="rpl-markup tide-wysiwyg app-wysiwyg" data-v-72188569="">
+                <div class="rpl-markup__inner">
+                <!-- <p></p> -->
+                  <div class="rpl-markup__iframe-container">
+                    <iframe frameborder="0" height="750" scrolling="no" src="https://prevention.health.vic.gov.au/bmicalcsc/bmi-children.html" width="100%">
+                    </iframe>
+                  </div>
+                <!-- <p></p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div class="col-lg-7">
+      <!-- <div class="col-lg-5">
         <div class="entry-content editor-content">
           <h3>What does this BMI value mean to your children?</h3>
           <p id="underweight" style="height: 20px; margin-left: 5px;">
@@ -86,12 +191,13 @@
             &#x2022; Over 30 - Your children are obese.
           </p>
         </div>
-      </div><!-- End .col-lg-7 -->
+      </div> -->
 
     </div><!-- End row information -->
   </div>
 
-  <div class="w3-content" style="max-width:2000px;margin-top:100px"></div>
+
+  <!-- <div class="w3-content" style="max-width:2000px;margin-top:100px"></div> -->
 
   <div class="container">
     <hr class="mb-2">
@@ -112,9 +218,27 @@
 
 </div>
 
-<script>
+
+<!-- <script>
   $(document).ready(function () {
-  
+    
+    document.getElementById('clearButton').addEventListener('click', function() {
+      document.getElementById('gender').selectedIndex = 0;
+      document.getElementById('age').selectedIndex = 0;
+      document.getElementById('height').value = '';
+      document.getElementById('weight').value = '';
+    });
+    
+    document.getElementById('calButton').addEventListener('click', function() {
+      var bmi = null;
+      var gender = document.getElementById('gender').value;
+      var age = document.getElementById('age').value;
+      var height = document.getElementById('height').value;
+      var weight = document.getElementById('weight').value;
+
+      bmi = weight / ((height/100)*(height/100))
+      document.getElementById('test').textContent = bmi; 
+    });
   });
-</script>
+</script> -->
 {% endblock main_content %}
