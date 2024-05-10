@@ -11,7 +11,7 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path('signup/', views.SignUpView.as_view(), name='signup'),
+    #path('signup/', views.SignUpView.as_view(), name='signup'),
     # path('login/', views.login, name='login'),
 
 ]

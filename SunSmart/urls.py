@@ -18,9 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    #path("admin/", admin.site.urls),
     path("", include('Apps.CoreApp.urls')),
-    path("user/", include('Apps.UserAuthentication.urls')),git
+    #path("user/", include('Apps.UserAuthentication.urls')),
     path("iteration1/", include('Apps.V1CoreApp.urls')),
-    path("iteration2/", include('Apps.V2CoreApp.urls')),
+    path("iteration2/", include('Apps.V2CoreApp.urls'))
 ]
