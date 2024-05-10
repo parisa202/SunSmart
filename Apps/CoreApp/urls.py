@@ -28,7 +28,7 @@ urlpatterns = [
     path('sugar-insights/',  views.SugarView.as_view(), name='sugar_insights'),
     
     # import data views
-    path('data/', views.ImportDataView.as_view(), name='import_data'),
+    #path('data/', views.ImportDataView.as_view(), name='import_data'),
     path('rr/', views.LoadRecipesDataView.as_view()),
     # /data/?file_name=pb_who_bmi.csv&model_name=PB_WHO_BMI
     
