@@ -16,6 +16,7 @@ from .utils import api_request, login_required
 import pandas as pd
 from django.core import serializers
 import json
+from . import clustering
 import requests
 from openai import OpenAI
 from django.db.models import Q
@@ -369,7 +370,20 @@ class RecipeDetailView(generic.DetailView):
     # ingredients_for_recipe = RECIPES.ingredients.all()
     # for ingredient in ingredients_for_recipe:
     #     print(f"{ingredient.name}: {RECIPE_INGREDIENT.objects.get(recipe=RECIPES, ingredient=ingredient).quantity}")
-
+    
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+            context = super().get_context_data(**kwargs)
+            
+            # find similar recipes
+            
+            similar_recipes = clustering.recommended_recipes(recipe_id=self.get_object().pk)
+            recommendations = RECIPES.objects.filter(pk__in=similar_recipes)
+                       
+            context.update({'recommendations': recommendations})
+            
+            return context
+            
     
 
 
@@ -406,7 +420,7 @@ class RecipeListView(generic.ListView):
             queryset = queryset.filter(tempQuery)
             
         if not (ingredient=='' or ingredient==[] or ingredient==None):
-            tempQuery = reduce(or_, (Q(ingredients__name__exact=t) for t in ingredient))
+            tempQuery = reduce(or_, (Q(ingredients__name__icontains=t) for t in ingredient))
             queryset = queryset.filter(tempQuery)
         
         # order by must be the last if clause
@@ -480,7 +494,10 @@ class OuterRecipeAnalysisView(generic.TemplateView):
                 measure = parts[2].strip()
                 ingredients[ingredient] = (amount, measure)
 
-        print({'ingredients': ingredients})
+        # cleanded_ingredients = 
+        database_ingredients = INGREDIENT.objects.values_list('name', flat=True).distinct()
+        print(database_ingredients)
+
         
             
         # send sign-in data to juniorjoy API
@@ -720,3 +737,25 @@ class LoadRecipesDataView(generic.View):
                 
         except FileNotFoundError:
             return HttpResponse(f"File recipes_list.json not found.")
+        
+        
+class ExtractDataView(generic.View):
+    def get(self, request, *args, **kwargs):
+        cleaned_data = clustering.clean_data()
+        features = clustering.feature_engineering(cleaned_data)
+        clustered_data = clustering.k_means_cluster(features)
+        
+        
+        # Example usage
+        similar_recipes = clustering.get_similar_recipes(clustered_data,recipe_id=43, top_n=4)
+        print(similar_recipes)
+
+        similar_recipes.append(43)
+        # Filtering DataFrame based on recipe_ids
+        filtered_df = cleaned_data[cleaned_data['recipe_id'].isin(similar_recipes)]
+
+        # Extracting recipe names from the filtered DataFrame
+        recipe_names = filtered_df['recipe_name'].unique()
+        print(recipe_names)
+        
+        return HttpResponse("Information has been extracted")

@@ -30,6 +30,7 @@ urlpatterns = [
     # import data views
     #path('data/', views.ImportDataView.as_view(), name='import_data'),
     path('rr/', views.LoadRecipesDataView.as_view()),
+    path('ee/', views.ExtractDataView.as_view()),
     # /data/?file_name=pb_who_bmi.csv&model_name=PB_WHO_BMI
     
     

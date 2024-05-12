@@ -81,7 +81,7 @@
 
                                         <div class="product-body">
                                             <div class="product-cat">
-                                                <p>{% for meal in recipe.meal.all %} {{meal.type}} {% endfor %}</p>
+                                                <p>{% for meal in recipe.meal.all %} {{meal.type|title}} {% endfor %}</p>
                                             </div><!-- End .product-cat -->
                                             
                                             <h3 class="product-title"><a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">{{recipe.name}}</a></h3><!-- End .product-title -->
