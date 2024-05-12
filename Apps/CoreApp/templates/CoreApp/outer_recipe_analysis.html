@@ -31,11 +31,60 @@
 
 <div class="row">
     <div class="col-lg-8">
-        <h2 class="checkout-title">Recipe Nutrition Analysis</h2><!-- End .checkout-title -->
+        <h3>Recipe Nutrition Analysis</h3><br>
+        <!-- End .checkout-title -->
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <p class="mb-2">Enter a list of ingredients for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br></p>
 
+
+                <div class="col-lg-11 col-sm-6">
+                    <div class="icon-box icon-box-left">
+                        <span class="icon-box-icon">
+                            <i class="icon-info-circle"></i>
+                        </span>
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">Instructions:</h3><!-- End .icon-box-title -->
+                            <p>Please enter a list of ingredients for what you are cooking, like "1 cup rice, 10 oz chickpeas"</span>, etc.</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+                </div><!-- End .col-lg-4 col-sm-6 -->
+                <!-- <p class="mb-2">Please enter a list of ingredients for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br></p> -->
+
+                    <div class="col-lg-11 col-sm-6">
+                        <div class="icon-box icon-box-left">
+                            <span class="icon-box-icon">
+                                <i class="icon-info-circle"></i>
+                            </span>
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Notes:</h3><!-- End .icon-box-title -->
+                                <p>We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling and the quantity.</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-lg-4 col-sm-6 -->
+
+                    <div class="col-lg-11 col-sm-6">
+                        <div class="icon-box icon-box-left">
+                            <span class="icon-box-icon">
+                                <i class="icon-info-circle"></i>
+                            </span>
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Tips:</h3><!-- End .icon-box-title -->
+                                <p>We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling and the quantity.</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-lg-4 col-sm-6 -->
+                
+
+
+
+
+                
+
+                <!-- <div class="err-result">
+                    <p class="addition-e"><strong>Note: We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling and the quantity.</strong></p>
+                    <p class="addition-e"><strong>If no portion is entered, then by default the table will show 100g of each ingredients.</strong></p>
+                </div> -->
+                
                 <p class="mb-2"style = "-webkit-text-fill-color: #009376;">{{custom_recipe}}</p>
 
                 <form id="demoAnalysisForm" method ="post">{% csrf_token %}
@@ -48,13 +97,7 @@
                     </div>
                     <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
                     
-                    
-                    <div class="err-result">
-                        <p class="addition-e">Note: We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling and the quantity.
-                        </p>
-                        <p class="addition-e">If no portion is entered, then by default the table will show 100g of each ingredients.
-                        </p>
-                    </div>
+                
                     <div class="err-result pt-2 mb-2">
                         <div class="row justify-content-center">
                             <div class="col-xl-11">
