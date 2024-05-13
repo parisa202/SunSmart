@@ -676,30 +676,33 @@ class VeggiView(generic.TemplateView):
 class SugarView(generic.TemplateView):
     template_name = 'CoreApp/sugar.html'
 
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        super().get_context_data(**kwargs)
-
-         # query from table
-        #all_data = PB_AU_VEGGIE.objects.all()
-        #serialized_data = serializers.serialize('json', all_data)
-       
-        # Convert the serialized data to a list of dictionaries
-        #data_list = json.loads(serialized_data)
-
-        # Replace NaN with None
-        # for data in data_list:
-        #     for key, value in data['fields'].items():
-        #         if isinstance(value, float) and value != value:  # Check if value is NaN
-        #             data['fields'][key] = 0
-
-        # Convert the data list back to JSON
-        # fixed_serialized_data = json.dumps(data_list)
+    sugar_info = None
         
+    def setup(self, request, *args, **kwargs):
+        file_address = os.path.join('Data Sources', 'sugar_info.json')
+        with open(file_address, 'r') as f:
+            # JSON to dictionary
+            self.sugar_info = json.load(f)
+        return super().setup(request, *args, **kwargs)
+    
+    
+    def post(self, request):
+        selected_snack = request.POST.get('selected_snack')
+        
+        # find 
+        for r in self.sugar_info['snacks']:
+            if r.get('id') == selected_snack:
+                info = r
+                break
+            else:
+                info = {'status': 'not found'}
+        return JsonResponse(info)
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        super().get_context_data(**kwargs)    
         new_context = {'main_title': 'Sugar Insights',
                     #    'sub_title': 'Obesity and Overweight among Children',
                        'page_name': 'Sugar Insights',
-                    #    'json_data': fixed_serialized_data,
-                   
                        }
         
         return new_context

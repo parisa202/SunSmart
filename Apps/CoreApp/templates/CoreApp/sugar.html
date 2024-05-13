@@ -6,7 +6,7 @@
 
   
   <link rel="stylesheet" href="{% static "assets/css/Profile.css" %}">
-  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock extra_css %}
 
 
@@ -20,9 +20,30 @@
   
   <div class="entry-content editor-content" style ='justify-content: center'>
     <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+
+      
+
       <div class="container col-10">
         <h3>Insight on Australian Children Sugary Drink Consumption</h3>
-        The sugar consumption among Australian Children has dropped in recent years, however, the sugar consumption</p>
+        <div class="row">
+          <div class="col-6">
+            <div class="banner">
+                <img src="{% static "assets/images/banners/sugar1.png" %}"  alt="Banner">
+            </div><!-- End .banner -->
+          </div><!-- End .col-6 -->
+          <div class="col-sm-5">
+            <img src="{% static "assets/images/banners/sugar4.png" %}"  alt="Banner">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-10">
+            <p>The sugar consumption among Australian Children has dropped in recent years, however, the daily sugar consumption is still higher than recommended by health experts. Despite the decline, it remains a concern due to its association with various health issues such as obesity, tooth decay, and diabetes. Efforts to further reduce sugar intake among Australian children are crucial for promoting healthier lifestyles and preventing long-term health complications.</p>
+          </div>
+
+        </div>
+
+        
 
         <div class="col-md-10">
           <div class="tabs-vertical">
@@ -31,35 +52,29 @@
                     <a class="nav-link active" id="tab-25-tab" data-toggle="tab" href="#tab-25" role="tab" aria-controls="tab-25" aria-selected="true">Sugary drink among boys</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="tab-26-tab" data-toggle="tab" href="#tab-26" role="tab" aria-controls="tab-26" aria-selected="false">Tab 2</a>
+                    <a class="nav-link" id="tab-26-tab" data-toggle="tab" href="#tab-26" role="tab" aria-controls="tab-26" aria-selected="false">Sugary drink among Girls</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="tab-27-tab" data-toggle="tab" role="tab" href="#tab-27"aria-controls="tab-27" aria-selected="false">Tab 3</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="tab-28-tab" data-toggle="tab" role="tab"href="#tab-28" aria-controls="tab-28" aria-selected="false">Tab 4</a>
+                    <a class="nav-link" id="tab-27-tab" data-toggle="tab" role="tab" href="#tab-27"aria-controls="tab-27" aria-selected="false">Sugar in snacks and drinks</a>
                 </li>
             </ul>
             <div class="tab-content tab-content-border" id="tab-content-7" >
                 <div class="tab-pane fade active show" id="tab-25" role="tabpanel" aria-labelledby="tab-25-tab">
                   <div class = "row">
-                    <div class="col-4">
+                    <p class="mb-1">The charts display the number of Australian boys, out of every 20, drinking the daily sugary drink of one metric cup or less, based on a recent national survey</p>
+                    <div class="col-4 mt-0">
                       <!-- Pictogram for male -->
                       <div id="chart-container-male1" ></div>
                     </div>
                     <div class="col-md-8">
                       <div class = "row">
-                      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Nullam malesuada erat ut turpis.  </p>
+                      <p></p>
                       </div>
-                      <div class = "row">
-                        <!-- Piechart for male -->
-                        <div id="chart-container-male3" ></div>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Nullam malesuada erat ut turpis.</p>
-                        
-                      </div>
+
                     </div><!--  col2 -->
 
                   </div><!-- end row for tab1 -->
+
                   <div class = "row"  style="justify-content: center; opacity: 0; animation: fadeIn 1s ease-in-out forwards; animation-delay: 1s;">
                     <p style = "font-size: 1rem;"">Source: National Health Survey, 2020–21 — Australia</p>
                     </div>
@@ -67,11 +82,12 @@
 
                 <div class="tab-pane fade" id="tab-26" role="tabpanel" aria-labelledby="tab-26-tab">
                   <div class = "row">
+                    <p class="mb-1">The charts display the number of Australian girls, out of every 20, drinking the daily sugary drink of one metric cup or less, based on a recent national survey</p>
                     <div class="col-md-4">
                       <div id="chart-container-female1" class="col-6"></div>
                     </div>
                     <div class="col-md-8">
-                      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum int dolore earum rerum tempora aspernatur numquam velit. </p>
+                      <p></p>
                     </div>  
                   </div><!-- end row for tab2 -->
                   <div class = "row"  style="justify-content: center; opacity: 0; animation: fadeIn 1s ease-in-out forwards; animation-delay: 1s;">
@@ -84,45 +100,33 @@
                     <p>To promote informed choices about your nutrition, we've included a unique feature that displays the sugar content of each item. Simply select any snack or drink from the list below to view its image and discover the amount of sugar it contains. Understanding the real sugar content empowers you to make healthier choices and manage  sugar intake of your child effectively.</p>
                     <div class = "col-5">
                       <select name="selected_snack" id="snack" class="form-control">  
-                        <option value="">-----</option>
-                        <option value="snack_1">snack_1</option>
-                        <option value="snack_2">snack_2</option>
-                        <option value="snack_3">snack_3</option>
+                        <option value="nan">-----</option>
+                        <option value="snack_1">Tim Tam Chocolate Biscuits</option>
+                        <option value="snack_2">Dairy Milk</option>
+                        <option value="snack_3">Snickers</option>
+                        <option value="snack_4">Kellogg’s Kaleidos Bars</option>
+                        <option value="drink_1">Coca Cola </option>
+                        <option value="drink_2">Fanta Orange</option>
+                        <option value="drink_3">Mango Juice</option>
+                        <option value="drink_4">Orange Juice</option>
                       </select>
                     </div>
                     <div class = "col-5" id="sugar_info_snack"></div>
                     <div class = "row">
-                      <div class = "col-5">
-                        <img id="snack_img" src="{% static 'assets/images/US1.3_3.jpeg' %}" alt="" style="width: 260px; height: auto;">
+                      <div class = "col-3">
+                        <img id="snack_img" src=""{% static 'assets/images/icons/fast-backward.gif' %}" alt="" style="width: 260px; height: auto;">
                       </div>
-                      <div class = "col-5">
-                        <div id="chart-container-drink" >gbdfbh</div>
+                      <div class = "col-8">
+                        <div id="snack_description" >Select a snack from the menue.</div>
+                        <div id="snack_description2" class ="mb-2 mt-2"></div>
+                        <div id="sugar_cube_snack" ></div>
                       </div>
                     </div>
 
                   
                 </div><!-- .End .tab-pane -->
 
-                <div class="tab-pane fade" id="tab-28" role="tabpanel" aria-labelledby="tab-28-tab">
-                  <p>To promote informed choices about your nutrition, we've included a unique feature that displays the sugar content of each item. Simply select any snack or drink from the list below to view its image and discover the amount of sugar it contains. Understanding the real sugar content empowers you to make healthier choices and manage sugar intake of your child effectively.</p>
-                  <div class = "col-5">
-                    <select name="selected_drink" id="drink" class="form-control">                     
-                      <option value="">-----</option>
-                      <option value="drink_1">drink_1</option>
-                      <option value="drink_2">drink_2</option>
-                      <option value="drink_3">drink_3</option>
-                    </select>
-                  </div>
-                  <div class = "col-5" id="sugar_info_drink"></div>
-                  <div class = "row">
-                    <div class = "col-5">
-                      <img id="drink_img" src="{% static 'assets/images/US1.3_3.jpeg' %}" alt="" style="width: 260px; height: auto;">
-                    </div>
-                    <div class = "col-5">
-                      <div id="chart-container-drink" >gbdfbh</div>
-                    </div>
-                  </div>
-                </div><!-- .End .tab-pane -->
+
             </div><!-- End .tab-content -->
           </div><!-- End .tabs-vertical -->
         </div>
@@ -130,12 +134,6 @@
       </div> 
     </div> 
 
-
-  <div class="container col-10">
-    <h3>Insight on Australian Children Sugary Drink Consumption</h3>
-    The sugar consumption among Australian Children has dropped in recent years, however, the sugar consumption</p>
-    </div>
-  </div>  
 
 
   <div class="container">
@@ -155,11 +153,70 @@
 <script>
 
 //Tab 3 and 4 javascript
+  // Select the SVG container and create an SVG element inside it
+  const svg_sugar = d3.select("#sugar_cube_snack").append("svg")
+    .attr("width", 400)
+    .attr("height", 120);
+
+function drawSugarCubes(numCubes) {
+  const cubeSize = 30;
+
+  // Remove any existing content inside the SVG
+  svg_sugar.selectAll("*").remove();
+
+  // Draw sugar cubes
+  for (let i = 0; i < numCubes; i++) {
+    svg_sugar.append("image")
+      .attr("x", i * cubeSize * 1.5)
+      .attr("y", 0)
+      .attr("width", cubeSize)
+      .attr("height", cubeSize)
+      .attr("xlink:href", "{% static 'assets/images/svg/sugar-cube.svg' %}")
+      .style("opacity", 0) // Initially set opacity to 0
+        .transition()
+        .delay((d, i) => i * 400) // Delay each image's animation
+        .duration(800) // Animation duration
+        .style("opacity", 1)
+  }
+}
 
 
-
-
-
+$(document).ready(function () {
+  $('#snack').on('input', function (e) {
+      var snack = $('#snack').val(); // Get selected value
+      if (snack === 'nan') {
+          return; 
+      };
+      // AJAX call
+      $.ajax({
+          type: "POST",
+          url: "{% url 'CoreApp:sugar_insights' %}", 
+          data: {'selected_snack': snack,
+                  'csrfmiddlewaretoken': '{{csrf_token}}'
+                  },
+          dataType: 'json',
+          success: function (response) {
+              // Update with the received JSON data
+              //console.log(response);
+              if(response.status == 'not found'){
+                  $('#snack').empty();
+              } else {
+                //console.log(respnse.name)
+                $('#snack_description').text("Each serving of "+ response.name + " (" + response.serving_size + ") "+"contains " + response.sugar_per_serve + " of sugar." )
+                $('#snack_description2').text(" Equals to :").hide().fadeIn();
+                $('#snack_img').attr('src', response.image).hide().fadeIn();
+                
+                drawSugarCubes(response.sugar_cubes)
+              }
+          },
+          error: function (request, status, error) {
+              console.log(request.status + ": " + request.responseText);
+          }
+      });
+  
+  });
+  
+});
 
 
 
@@ -168,16 +225,16 @@
   // Tab 1 and 2 javascripts
       // Sample data
       const data_boys = [
-      { age: "2-3 years old", count: 0.5 },
-      { age: "4-8 years old", count: 1 },
-      { age: "9-11 years old", count: 2}
+      { age: "2-3 years old", count: 1},
+      { age: "4-8 years old", count: 2 },
+      { age: "9-11 years old", count: 4}
   ];
 
         // Sample data
         const data_girls = [
         { age: "2-3 years old", count: 0 },
-        { age: "4-8 years old", count: 1 },
-        { age: "9-11 years old", count: 1.5}
+        { age: "4-8 years old", count: 2 },
+        { age: "9-11 years old", count: 3}
     ];
 
   function drawImagesTab1(data, svg_container, complete_svg, half_svg) {
@@ -191,7 +248,7 @@
         .data(data)
         .enter()
         .append("g")
-        .attr("class", "age-group")
+        .attr("class", "age-group mt-0 mb-0")
         .attr("transform", (d, i) => `translate(50, ${i * 100 + 40})`);
 
     // Append age group labels
@@ -271,73 +328,6 @@ document.getElementById("tab-26-tab").addEventListener("click", function() {
   half_svg = "{% static 'assets/images/svg/half-girl.svg' %}");
 });
 
-
-
-
-//Pie charts
-const data = [
-{ category: "Category 1", value: 30 },
-{ category: "Category 2", value: 70 }
-];
-
-const width = 900;
-const height = 900;
-
-const radius = Math.min(width, height) / 2;
-
-// Define colors for the pie chart
-const colors = d3.scaleOrdinal()
-.domain(data.map(d => d.category))
-.range(d3.schemeCategory10);
-
-// Create a pie chart layout
-const pie = d3.pie()
-.value(d => d.value);
-
-// Define arc for each segment of the pie chart
-const arc = d3.arc()
-.innerRadius(0)
-.outerRadius(radius);
-
-// Create SVG element
-const svg_pie = d3.select("#chart-container-male3")
-.attr("width", width)
-.attr("height", height)
-
-
-// Draw slices of the pie chart
-const slices = svg_pie.selectAll("path")
-.data(pie(data))
-.enter()
-.append("path")
-.attr("d", arc)
-.attr("fill", d => colors(d.data.category));
-
-// Add percentage labels
-slices.append("text")
-.attr("transform", d => `translate(${arc.centroid(d)})`)
-.attr("text-anchor", "middle")
-.text(d => `${(d.endAngle - d.startAngle) / (2 * Math.PI) * 100}%`);
-
-// Add legend
-const legend = svg_pie.selectAll(".legend")
-.data(data.map(d => d.category))
-.enter().append("g")
-.attr("class", "legend")
-.attr("transform", (d, i) => `translate(-50,${i * 20})`);
-
-legend.append("rect")
-.attr("x", width - 20)
-.attr("width", 18)
-.attr("height", 18)
-.style("fill", (d, i) => colors(i));
-
-legend.append("text")
-.attr("x", width - 26)
-.attr("y", 9)
-.attr("dy", ".35em")
-.style("text-anchor", "end")
-.text(d => d);
 
 </script>
 

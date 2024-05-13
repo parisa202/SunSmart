@@ -1,0 +1,68 @@
+{
+    "snacks": [
+      {
+        "id":"snack_1",
+        "name": "Tim Tam Chocolate Biscuits",
+        "image": "/static/assets/images/sugar/tim-tam.png",
+        "serving_size": "18.30 g",
+        "sugar_per_serve": "8.4 gr",
+        "sugar_cubes": 2
+      },
+      {
+        "id":"snack_2",
+        "name": "Dairy Milk",
+        "image": "/static/assets/images/sugar/Dairy-Milk.png",
+        "serving_size": "25 g",
+        "sugar_per_serve": "14.7 g",
+        "sugar_cubes": 4
+      },
+      {
+        "id":"snack_3",
+        "name": "Snickers",
+        "image": "/static/assets/images/sugar/Snickers.png",
+        "serving_size": "44 g",
+        "sugar_per_serve": "22.9 gr",
+        "sugar_cubes": 6
+      },
+      {
+        "id":"snack_4",
+        "name": "Kellogg’s Kaleidos Bars",
+        "image": "/static/assets/images/sugar/Kellogg-Bars.png",
+        "serving_size": "20 g",
+        "sugar_per_serve": "8.10 g",
+        "sugar_cubes": 2
+      },
+      {
+        "id":"drink_1",
+        "name": "Coca Cola",
+        "image": "/static/assets/images/sugar/Coca-Cola.png",
+        "serving_size": "250ml",
+        "sugar_per_serve": "26.50 g",
+        "sugar_cubes": 7
+      },
+      {
+        "id":"drink_2",
+        "name": "Fanta Orange",
+        "image": "/static/assets/images/sugar/Fanta-Orange.png",
+        "serving_size": "250ml",
+        "sugar_per_serve": "11.2 g",
+        "sugar_cubes": 3
+      },
+      {
+        "id":"drink_3",
+        "name": "Mango Juice",
+        "image": "/static/assets/images/sugar/Mango-Juice.png",
+        "serving_size": "200ml",
+        "sugar_per_serve": "26 g",
+        "sugar_cubes": 7
+      },
+      {
+        "id":"drink_4",
+        "name": "Orange Juice",
+        "image": "/static/assets/images/sugar/Orange-Juice.png",
+        "serving_size": "200ml",
+        "sugar_per_serve": "14.40 g",
+        "sugar_cubes": 4
+      }
+    ]
+  }
