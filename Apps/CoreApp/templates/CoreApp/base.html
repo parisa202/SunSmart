@@ -99,6 +99,9 @@
                                 <li>
                                     <a href="{% url "CoreApp:recipes" %}">Healthy Recipes</a>
                                 </li>
+                                <li>
+                                    <a href="{% url "CoreApp:bmi_calculator" %}">BMI Calculator</a>
+                                </li>
 
                                 <li>
                                     <a class="sf-with-ul">Dietary Awareness</a>
@@ -111,6 +114,9 @@
                                         </li>
                                         <li>
                                             <a href="{% url "CoreApp:Veggi" %}">Veggie Insights</a> 
+                                        </li>
+                                        <li>
+                                            <a href="{% url "CoreApp:sugar_insights" %}">Sugar Insights</a> 
                                         </li>
                                     </ul>
                                 </li>
@@ -213,6 +219,9 @@
                                     <li>
                                         <a href="{% url "CoreApp:Veggi" %}">Veggie Insights</a> 
                                     </li>
+                                    <li>
+                                        <a href="{% url "CoreApp:sugar_insights" %}">Sugar Insights</a> 
+                                    </li>
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
                         </div><!-- End .col-sm-4 col-lg-3 -->
@@ -280,25 +289,32 @@
                         <a href="{% url "CoreApp:index" %}" >Home</a>
 
                         <ul>
-                            <!-- <li><a href="{% url "CoreApp:about" %}">About us</a></li>
-                            <li><a href="{% url "CoreApp:coming" %}">FAQs</a></li>
-                            <li><a href="{% url "CoreApp:coming" %}">Contact us</a></li> -->
-                            <li>
-                                <a href="{% url "CoreApp:US11" %}">Obesity Trend</a>
+                            <li><
+                            <a href="{% url "CoreApp:outer_recipe_analysis" %}">Recipe Analyzer</a>
                             </li>
+
                             <li>
-                                <a href="{% url "CoreApp:US13" %}">Food Additives</a> 
+                                <a href="{% url "CoreApp:recipes" %}">Healthy Recipes</a>
                             </li>
+                        </ul><!-- End .widget-list -->
+                    </li>
+                    <li class="active">
+                        <a href="{% url "CoreApp:index" %}" >Know Nutrients</a>
+
+                        <ul>
                             <li>
                                 <a href="{% url "CoreApp:US21" %}">Nutrition Guideline</a> 
                             </li>
                             <li>
-                                <a href="{% url "CoreApp:guest_tracker" %}">Nutrition Analyzer</a>
-                            </li>  
+                                <a href="{% url "CoreApp:macronutrients" %}">Macronutrients</a>
+                            </li>
+                            <li>
+                                <a href="{% url "CoreApp:micronutrients" %}">Micronutrients</a>
+                            </li>
                         </ul><!-- End .widget-list -->
                     </li>
                     <li class="active">
-                        <a href="{% url "CoreApp:index" %}" >More</a>
+                        <a href="{% url "CoreApp:index" %}" >Dietary Awareness</a>
 
                         <ul>
                             <li>
@@ -308,11 +324,11 @@
                                 <a href="{% url "CoreApp:US13" %}">Understanding Food Additives</a> 
                             </li>
                             <li>
-                                <a href="{% url "CoreApp:US21" %}">Australian Nutrition Guideline</a> 
+                                <a href="{% url "CoreApp:Veggi" %}">Veggie Insights</a> 
                             </li>
                             <li>
-                                <a href="{% url "CoreApp:guest_tracker" %}">Recipe Nutrition Analyzer</a>
-                            </li>   
+                                <a href="{% url "CoreApp:sugar_insights" %}">Sugar Insights</a> 
+                            </li>
                       </ul>
                     </li>
                     <li class="active">
