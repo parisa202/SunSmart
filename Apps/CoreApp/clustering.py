@@ -174,8 +174,10 @@ def clean_data():
     df_filtered = df[df['food_category'] != 'condiments and sauces']
     
     # Print the unique cleaned ingredient names to verify
-    #print(df['cleaned_ingredient'].unique())
+    # print(df_filtered.head(2))
     return df_filtered
+
+
 def feature_engineering(df):
     
     # Create dummy variables for cleaned ingredients
@@ -267,4 +269,54 @@ def recommended_recipes(recipe_id):
     clustered_data['cluster'] = 0
     similar_recipes = get_similar_recipes(clustered_data,recipe_id, top_n=4)
     
+    return similar_recipes
+
+
+def feature_engineering_custom_recipe(df, custome_recipe_columns):
+    
+    
+    
+    # Create dummy variables for cleaned ingredients
+    ingredient_dummies = pd.get_dummies(df['cleaned_ingredient'])
+
+    # Create dummy variables for food category
+    food_category_dummies = pd.get_dummies(df['food_category'])
+
+    # Concatenate the dummy variables with the original DataFrame
+    df_transformed = pd.concat([df['recipe_id'], ingredient_dummies,food_category_dummies], axis=1)
+
+    # Group by 'id' and sum the binary values across the rows
+    df_transformed = df_transformed.groupby('recipe_id').sum()
+    
+    # Apply a transformation: if sum > 0 then 1, else 0
+    df_transformed = df_transformed.map(lambda x: 1 if x > 0 else 0)
+    
+    # Reset the index to make 'id' a column again
+    df_transformed.reset_index(inplace=True)
+    
+    # Create a new row with 0s
+    new_row = pd.DataFrame(0, index=range(1), columns=df_transformed.columns)
+
+    # Set values to 1 for the columns specified in columns_to_set_to_1
+    for col in custome_recipe_columns:
+        if col in new_row.columns:
+            new_row[col] = 1
+
+    # Append the new row to the DataFrame
+    df_transformed = pd.concat([df_transformed, new_row], ignore_index=True)
+    #df_transformed = df_transformed.append(new_row, ignore_index=True)
+    
+    return(df_transformed)
+
+
+def recommended_custom_recipes(ingredient_list):
+    cleaned_data = clean_data()
+    #clustered_data = k_means_cluster(features)
+    clustered_data = feature_engineering_custom_recipe(cleaned_data, ingredient_list)
+    #clustered_data.reset_index(inplace=True)
+    #clustered_data.rename(columns={'index': 'recipe_id'}, inplace=True)
+    clustered_data['cluster'] = 0
+    print(clustered_data)
+    similar_recipes = get_similar_recipes(clustered_data,0, top_n=3)
+    print(similar_recipes)
     return similar_recipes

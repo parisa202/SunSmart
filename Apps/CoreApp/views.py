@@ -22,6 +22,7 @@ from openai import OpenAI
 from django.db.models import Q
 from functools import reduce
 from operator import or_
+import re
 
 
 class CustomLoginRequiredMixin:
@@ -384,8 +385,6 @@ class RecipeDetailView(generic.DetailView):
             
             return context
             
-    
-
 
 class RecipeListView(generic.ListView):
     template_name = 'CoreApp/recipe_list.html'
@@ -470,14 +469,30 @@ class OuterRecipeAnalysisView(generic.TemplateView):
         client = OpenAI(
             api_key=settings.OPENAI_TOKEN
             )
-
-        # Call the OpenAI API to extract ingredients and amounts
+        
+        # #Call the OpenAI API to extract ingredients and amounts
+        # openai_response = client.chat.completions.create(
+        #     model="gpt-4-turbo",
+        #     messages=[
+        #     {"role": "system", "content": "You are a helpful, pattern-following assistant that can extract all the ingredients and their amount from the given recipes. Complete the measurements if they are given as abbreviation."+
+        #      " Make the amounts into float number if they are fractional.If the measurement was missing, specify it yourself. Remove the percentages of ingredients purity.\n {custom_recipe}"},
+        #     {"role": "user", "content": f"Extract all the ingredients and their amounts from the following recipe with this format 'Amount measure Ingredient name\n'"+
+        #      "Then, also give me a comma separate list of only the Ingredient names put it between these symbols # list #\n Don't type anything esle after the end symbol :\n {custom_recipe}"},
+        #     ],
+        #     max_tokens=3000,
+        #     temperature=0.2,
+        # )
+        
+        print("This is the user's recipe:"+custom_recipe)
+        
         openai_response = client.chat.completions.create(
             model="gpt-4-turbo",
             messages=[
-            {"role": "system", "content": "You are a helpful, pattern-following assistant that can extract all the ingredients and their amount from the given recipes. Complete the measurements if they are given as abbreviation."+
-             " Make the amounts into float number if they are fractional.If the measurement was missing, specify it yourself. Remove the percentages of ingredients purity."},
-            {"role": "user", "content": f"Extract all the ingredients and their amounts from the following recipe with this format 'Amount measure Ingredient name\n':\n{custom_recipe}"},
+            {"role": "system", "content": "You are a helpful, pattern-following assistant that can extract all the ingredients and their amount from the given recipes from the user input. Complete the measurements if they are given as abbreviation."+
+            "\n Make the amounts into float number if they are fractional.If the measurement was missing, specify it yourself. Remove the percentages of ingredients purity."+
+            "\n First Extract all the ingredients and their amounts from user's recipe with this format 'Amount measure Ingredient name\n'" +
+            "\n Then, also give me a comma separate list of only the Ingredient names put it between # symbols it will be # list #. \n Don't type anything esle after the end symbol"},
+            {"role": "user", "content": f"This is the user's recipe:"+custom_recipe},
             ],
             max_tokens=3000,
             temperature=0.2,
@@ -485,25 +500,49 @@ class OuterRecipeAnalysisView(generic.TemplateView):
 
         # Parse the response to extract ingredients and amounts
         gpt_output = openai_response.choices[0].message.content
-        ingredients = {}
-        for line in gpt_output.split('\n'):
-            parts = line.split(',')
-            if len(parts) == 3:
-                ingredient = parts[0].strip()
-                amount = parts[1].strip()
-                measure = parts[2].strip()
-                ingredients[ingredient] = (amount, measure)
+        # Remove text between # #
+        cleaned_text = re.sub(r'#(.*?)#', '', gpt_output)
+        print("\gpt:",gpt_output)
+        # Extract text between # #
+        ingredients_text = re.findall(r'#(.*?)#', gpt_output)[0]
+        # Split the text into individual ingredients
+        ingredients_list = [ingredient.strip() for ingredient in ingredients_text.split(',')]
 
-        # cleanded_ingredients = 
-        database_ingredients = INGREDIENT.objects.values_list('name', flat=True).distinct()
-        print(database_ingredients)
 
+        ######## Anotehr AI request 
+        # Find the list of used ingredients from our database
+        temp_data = clustering.clean_data()
+        database_ingredients = list(set(pd.concat([temp_data['food_category'], temp_data['cleaned_ingredient']]))) # combine of food category and ingredients
+        # print("\nDATABASE:",database_ingredients)
+        # print("\nCustome:",ingredients_list)
         
-            
+        # Ask AI to assign each cleanded_ingredients to one of the database_ingredients
+        openai_response = client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[
+            {"role": "system", "content": "You are a helpful, pattern-following assistant that can match the two list of ingredients."},
+            {"role": "user", "content": f"Based on the closeness of each ingredient, match the ingredients from the first list with the second list and give me a result as follows '[(item1_list1, matched_item_list2), ...]\n':"+
+             "Just give the final list output, without any extra comment or text. And give it in a way that I can use eval python function on it."
+             f"\n list 1 = {ingredients_list}"+ 
+             f"\n list 2 = {database_ingredients}"},
+            ],
+            max_tokens=3000,
+            temperature=0.1,
+        )
+        
+        gpt_output_matching = openai_response.choices[0].message.content
+        
+        print(gpt_output_matching)
+        lookup_ingredients = [i[1] for i in eval(gpt_output_matching)]
+        print(lookup_ingredients)
+        #cleaned_data = clustering.clean_data()
+        similar_recipes=clustering.recommended_custom_recipes(lookup_ingredients)
+        recommendations = RECIPES.objects.filter(pk__in=similar_recipes)
+        
         # send sign-in data to juniorjoy API
         api_url = 'https://juniorjoy.site/api/api/calcucalories'
         data = {
-            "query": gpt_output,
+            "query": cleaned_text,
             "intake": recipe_intake,
             "serving": serving
         }
@@ -536,12 +575,12 @@ class OuterRecipeAnalysisView(generic.TemplateView):
         
         self.context = self.get_context_data(**kwargs)
         self.context['api_data'] = recipe
-        self.context['gpt_response'] = gpt_output
+        self.context['gpt_response'] = cleaned_text
         self.context['custom_recipe'] = custom_recipe
+        self.context['recommendations'] = recommendations
         
         return render(request, self.template_name, context=self.context)
                  
-
 
 class ComingView(generic.TemplateView):
     template_name = 'CoreApp/coming_soon.html'
