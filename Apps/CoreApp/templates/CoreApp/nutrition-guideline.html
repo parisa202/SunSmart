@@ -38,10 +38,11 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <h2 class="checkout-title">Australian Nutrition Guideline for Children</h2><!-- End .checkout-title -->
-                                <p>Choose your child's age from menue and view the Australian Nutrition Guideline.</p><!-- End .checkout-title -->
+                                <p>Select your child's age group and view the Nutrition Guideline</p><!-- End .checkout-title -->
+                                <div class="w3-content" style="max-width:2000px;margin-top:20px"></div>
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label>Age Group</label>
+                                        <label><strong>Age Group</strong></label>
                                         <div class="w3-content" style="max-width:2000px;margin-top:15px"></div>
                                         <div class="select-custom">
                                             <select name="selected_age_range" id="age_range" class="form-control">
@@ -119,13 +120,13 @@
             <div class="col-md-11 col-xl-10">
                 <div class="cta-content">
                     <div class="cta-heading">
-                        <h3 class="cta-title text-center">Wondering if your child's meal hits the mark?</h3><!-- End .cta-title -->
+                        <h3 class="cta-title text-center">Want to know more about nutrients?</h3><!-- End .cta-title -->
                     </div><!-- End .cta-heading -->
                     
                     <div class="cta-text">
-                        <p>Let our <strong>Nutrition Analysis tool</strong> be your guide! Enter your recipe and the portion size your child enjoyed, and get a personalized breakdown of its nutritional value. Compare against age-based guidelines for tailored insights. Click now to ensure your child gets the nutrients they need! </p>
+                        <p>Let's start our journey of exploring the nutrients' family from the <strong>macronutrients</strong> and then the <strong>micronutrients</strong>. Click the button on the right to start!</p>
                     </div><!-- End .cta-text -->
-                    <a href="{% url "CoreApp:guest_tracker" %}" class="btn btn-primary btn-rounded"><span>Nutrition Analyzer</span><i class="icon-long-arrow-right"></i></a>
+                    <a href="{% url "CoreApp:macronutrients" %}" class="btn btn-primary btn-rounded"><span>Know Macronutrients</span><i class="icon-long-arrow-right"></i></a>
                 </div><!-- End .cta-content -->
             </div><!-- End .col-xl-7 -->
         </div><!-- End .row -->
