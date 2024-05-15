@@ -4,6 +4,7 @@ from .views import RecipeDetailView, RecipeListView
 from . import views
 
 
+
 app_name = 'CoreApp'
 
 

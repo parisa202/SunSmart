@@ -18,31 +18,31 @@
     <meta name="author" content="Tech Ninjas">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/images/icons/logo_180.ico" %}">
-    <link rel="icon" type="image/svg" sizes="32x32" href="{% static "assets/images/icons/fav_32.ico" %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/images/icons/fav_16.ico" %}">
-    <link rel="manifest" href="{% static "assets/images/icons/site.html" %}">
-    <link rel="mask-icon" href="{% static "assets/images/icons/safari-pinned-tab.svg" %}" color="#666666">
-    <link rel="shortcut icon" href="{% static "assets/images/fav_32.ico" %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "CoreApp/assets/images/icons/logo_180.ico" %}">
+    <link rel="icon" type="image/svg" sizes="32x32" href="{% static "CoreApp/assets/images/icons/fav_32.ico" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "CoreApp/assets/images/icons/fav_16.ico" %}">
+    <link rel="manifest" href="{% static "CoreApp/assets/images/icons/site.html" %}">
+    <link rel="mask-icon" href="{% static "CoreApp/assets/images/icons/safari-pinned-tab.svg" %}" color="#666666">
+    <link rel="shortcut icon" href="{% static "CoreApp/assets/images/fav_32.ico" %}">
     <meta name="apple-mobile-web-app-title" content="JuniorJoy">
     <meta name="application-name" content="JuniorJoy">
     <meta name="msapplication-TileColor" content="#cc9966">
-    <meta name="msapplication-config" content="{% static "assets/images/icons/browserconfig.xml" %}">
+    <meta name="msapplication-config" content="{% static "CoreApp/assets/images/icons/browserconfig.xml" %}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{% static "assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css" %}">
     <!-- Plugins CSS File -->
-    <link rel="stylesheet" href="{% static "assets/css/bootstrap.min.css" %}">
-    <link rel="stylesheet" href="{% static "assets/css/plugins/owl-carousel/owl.carousel.css" %}">
-    <link rel="stylesheet" href="{% static "assets/css/plugins/magnific-popup/magnific-popup.css" %}">
-    <link rel="stylesheet" href="{% static "assets/css/plugins/jquery.countdown.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/css/plugins/owl-carousel/owl.carousel.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/css/plugins/magnific-popup/magnific-popup.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/css/plugins/jquery.countdown.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>   
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
-    <link rel="stylesheet" href="{% static "assets/css/skins/skin-demo-9.css" %}">
-    <link rel="stylesheet" href="{% static "assets/css/demos/demo-9.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/css/style.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/css/skins/skin-demo-9.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/css/demos/demo-9.css" %}">
 
     {% block extra_css %}
-    <link rel="stylesheet" href="{% static "assets/css/Profile.css" %}">
+    <link rel="stylesheet" href="{% static "CoreApp/assets/css/Profile.css" %}">
     {% endblock extra_css %}
 </head>
 
@@ -87,9 +87,9 @@
                     <div class="header-center">
                         <!-- change Logo c -->
                         <a href="{% url "CoreApp:index" %}" class="logo">
-                            <img src="{% static 'assets/images/JuiorJoyLogo.png' %}" alt="Molla Logo" width="92" height="30">
-                            <!-- <img src="{% static 'assets/images/JuiorJoyLogo.png' %}" alt="Molla Logo" width="82" height="20">
-                            <img src="{% static 'assets/images/jj-11.svg' %}" alt="Molla Logo" width="82" height="20"> -->
+                            <img src="{% static 'CoreApp/assets/images/JuiorJoyLogo.png' %}" alt="Molla Logo" width="92" height="30">
+                            <!-- <img src="{% static 'CoreApp/assets/images/JuiorJoyLogo.png' %}" alt="Molla Logo" width="82" height="20">
+                            <img src="{% static 'CoreApp/assets/images/jj-11.svg' %}" alt="Molla Logo" width="82" height="20"> -->
                         </a>
                     </div><!-- End .header-left -->
 
@@ -189,7 +189,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-lg-6">
                             <div class="widget widget-about">
-                                <img src="{% static 'assets/images/JuiorJoyLogo.png' %}"  class="footer-logo" alt="Footer Logo" width="150" height="150">
+                                <img src="{% static 'CoreApp/assets/images/JuiorJoyLogo.png' %}"  class="footer-logo" alt="Footer Logo" width="150" height="150">
                                 <div class="widget-about-info">
                                     <div class="row">
                                         <div class="col-sm-6 col-md-4">
@@ -484,20 +484,20 @@
 
 
     <!-- Plugins JS File -->
-    <script src="{% static "assets/js/jquery.min.js" %}"></script>
-    <script src="{% static "assets/js/bootstrap.bundle.min.js" %}"></script>
-    <script src="{% static "assets/js/jquery.hoverIntent.min.js" %}"></script>
-    <script src="{% static "assets/js/jquery.waypoints.min.js" %}"></script>
-    <script src="{% static "assets/js/superfish.min.js" %}"></script>
-    <script src="{% static "assets/js/owl.carousel.min.js" %}"></script>
-    <script src="{% static "assets/js/bootstrap-input-spinner.js" %}"></script>
-    <script src="{% static "assets/js/jquery.plugin.min.js" %}"></script>
-    <script src="{% static "assets/js/jquery.magnific-popup.min.js" %}"></script>
-    <script src="{% static "assets/js/jquery.countdown.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/jquery.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/jquery.hoverIntent.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/superfish.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/owl.carousel.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/bootstrap-input-spinner.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/jquery.plugin.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/jquery.magnific-popup.min.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/jquery.countdown.min.js" %}"></script>
 
     <!-- Main JS File -->
-    <script src="{% static "assets/js/main.js" %}"></script>
-    <script src="{% static "assets/js/demos/demo-9.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/main.js" %}"></script>
+    <script src="{% static "CoreApp/assets/js/demos/demo-9.js" %}"></script>
 
     {% block more_script %}{% endblock more_script %}
 </body>

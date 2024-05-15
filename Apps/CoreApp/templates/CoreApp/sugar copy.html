@@ -63,7 +63,7 @@
             </div> 
              <div class="col-sm-6 col-lg-4">
               <div class="banner">
-                  <img src="{% static "assets/images/banners/banner-serve-veg.jpg" %}"  alt="Banner">
+                  <img src="{% static "CoreApp/assets/images/banners/banner-serve-veg.jpg" %}"  alt="Banner">
               </div><!-- End .banner -->
             </div><!-- End .col-lg-4 -->
 
@@ -74,13 +74,13 @@
             <div class="row justify-content-center">
               <div class="col-sm-6 col-lg-4">
                 <div class="banner">
-                    <img src="{% static "assets/images/banners/banner-serve-veg.jpg" %}"  alt="Banner">
+                    <img src="{% static "CoreApp/assets/images/banners/banner-serve-veg.jpg" %}"  alt="Banner">
                 </div><!-- End .banner -->
               </div><!-- End .col-lg-4 -->
 
               <div class="col-sm-6 col-lg-4 order-lg-last">
                 <div class="banner">
-                    <img src="{% static "assets/images/banners/banner-serve-fruit.jpg" %}"  alt="Banner">
+                    <img src="{% static "CoreApp/assets/images/banners/banner-serve-fruit.jpg" %}"  alt="Banner">
                 </div><!-- End .banner -->
               </div><!-- End .col-lg-4 -->
 
@@ -88,13 +88,13 @@
                   <div class="row">
                     <div class="col-sm-6 col-lg-12">
                       <div class="banner">
-                          <img src="{% static "assets/images/banners/banner-serve-tip1.jpg" %}" alt="Banner">
+                          <img src="{% static "CoreApp/assets/images/banners/banner-serve-tip1.jpg" %}" alt="Banner">
                       </div><!-- End .banner -->
                     </div><!-- End .col-sm-6 col-lg-12 -->
 
                     <div class="col-sm-6 col-lg-12">
                       <div class="banner">
-                          <img src="{% static "assets/images/banners/banner-serve-tip2.jpg" %}" alt="Banner">
+                          <img src="{% static "CoreApp/assets/images/banners/banner-serve-tip2.jpg" %}" alt="Banner">
                       </div><!-- End .banner -->
                     </div><!-- End .col-sm-6 col-lg-12 -->
                   </div><!-- End .row -->
@@ -223,7 +223,7 @@ svg.selectAll(".boy")
     .data(data.boys)
     .enter().append("svg:image")
     .attr("class", "boy")
-    .attr("xlink:href", "{% static 'assets/images/svg/boy-face.svg' %}")
+    .attr("xlink:href", "{% static 'CoreApp/assets/images/svg/boy-face.svg' %}")
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", function (d) { return innerWidth / 2 - xScale(d) - 60; })
@@ -235,7 +235,7 @@ svg.selectAll(".girl")
     .data(data.girls)
     .enter().append("svg:image")
     .attr("class", "girl")
-    .attr("xlink:href", "{% static 'assets/images/svg/girl-face.svg' %}")
+    .attr("xlink:href", "{% static 'CoreApp/assets/images/svg/girl-face.svg' %}")
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", function (d) { return innerWidth / 2 + 10; })
@@ -271,7 +271,7 @@ function drawPersons(numPersons, colorIndex) {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Load person SVG
-  d3.xml("{% static 'assets/images/svg/boy-face.svg' %}").then(function(xml) {
+  d3.xml("{% static 'CoreApp/assets/images/svg/boy-face.svg' %}").then(function(xml) {
       var personSVG = xml.documentElement;
 
       // Data for persons
@@ -330,7 +330,7 @@ function generatePersons(containerId, numPersons, numGreenPersons) {
     .attr("height", 80); // Adjust height as needed
 
   // Load the SVG file for the person
-  d3.xml("{% static 'assets/images/svg/boy-face.svg' %}").then(function(xml) {
+  d3.xml("{% static 'CoreApp/assets/images/svg/boy-face.svg' %}").then(function(xml) {
     var totalWidth = numPersons * 300; // Calculate total width occupied by persons
     var totalHeight = 80; // Adjust total height as needed
     var containerWidth = parseInt(d3.select(containerId).style("width")); // Get width of the container

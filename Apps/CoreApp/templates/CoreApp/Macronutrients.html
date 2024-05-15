@@ -72,7 +72,7 @@
       <div class="col-lg-7">
         <div class="entry-content editor-content">
           <h3>How will this nutrition benefit your children?</h3>
-          <img id="arrow-icon"  class ="food-icon"src="{% static 'assets/images/icons/fast-backward.gif' %}" alt="vegetable icon" style="width: 50px; height: 50;">
+          <img id="arrow-icon"  class ="food-icon"src="{% static 'CoreApp/assets/images/icons/fast-backward.gif' %}" alt="vegetable icon" style="width: 50px; height: 50;">
             <p id="macro_benefits" style="height: 100px;">Click the button on the left</p>
           <h3>Where can you help your children get this nutrition?</h3>
             <p id="macro_sources" style="height: 100px;">Click the button on the left</p>
@@ -80,7 +80,7 @@
         <div class="row col-9" id="food-icons" style="display: none; justify-content: space-between; ">
           {% for i in "1234" %}
           <a id ="link_recipes{{ i }}" style="box-shadow: none;" >
-            <img id="food-icon{{ i }}" class="food-icon" src="{% static 'assets/images/icons/' %}{% if i == 1 %}carrot.png{% elif i == 2 %}eggs.png{% else %}cauliflower.png{% endif %}" alt="vegetable icon" style="width: 50px; height: 50;">
+            <img id="food-icon{{ i }}" class="food-icon" src="{% static 'CoreApp/assets/images/icons/' %}{% if i == 1 %}carrot.png{% elif i == 2 %}eggs.png{% else %}cauliflower.png{% endif %}" alt="vegetable icon" style="width: 50px; height: 50;">
             <p id="food-name{{ i }}" style="border-bottom: none;"></p>
           </a>
           {% endfor %}
