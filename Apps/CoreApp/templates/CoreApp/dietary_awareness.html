@@ -1,0 +1,150 @@
+{% extends "CoreApp/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "assets/css/skins/skin-demo-9.css" %}">
+{% endblock extra_css %}
+
+
+{% block main_content %}
+  
+  <style>
+  </style>
+</head>
+<body>
+  {% include "CoreApp/components/breadcrumb.html" %}
+  
+  <div class="entry-content editor-content" style ='justify-content: center'>
+    <div style=" padding-bottom: 10px;">
+        <div class ="container">
+            <div class ="row justify-content-md-center">
+                <div class="col-lg-9">
+                    <article class="entry entry-list">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <figure class="entry-media">
+                                    
+                                    <img  src="{% static 'assets/images/Obesity.jpg' %}" alt="image desc">
+                                    
+                                </figure><!-- End .entry-media -->
+                            </div><!-- End .col-md-5 -->
+
+                            <div class="col-md-7">
+                                <div class="entry-body">
+                                    <h2 class="entry-title" style = "box-shadow: 0px">
+                                        <a href="{% url "CoreApp:US11" %}" >Overweight and Obesity among Australian Children is on the Rise</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-content">
+                                        <p>This is particularly alarming given that approximately one-fourth of children in Australia are overweight, and similarly, one-fourth of children obtain energy from discretionary foods.</p>
+                                        <a href="{% url "CoreApp:US11" %}" class="read-more">Continue Reading</a>
+                                    </div><!-- End .entry-content -->
+                                </div><!-- End .entry-body -->
+                            </div><!-- End .col-md-7 -->
+                        </div><!-- End .row -->
+                    </article><!-- End .entry -->
+
+                    <!-- additives -->
+                    <article class="entry entry-list">
+                        <div class="row align-items-center">
+
+                            <div class="col-md-7">
+                                <div class="entry-body">
+                                    <h2 class="entry-title">
+                                        <a href="{% url "CoreApp:US13" %}" >Delve into the world of food additives</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-content">
+                                        <p>Discover the hidden dangers lurking in everyday foods! Our guide on common food additives reveals the truth behind artificial sweeteners, preservatives, and more. Arm yourself with knowledge to safeguard your family's well-being.</p>
+                                        <a href="{% url "CoreApp:US13" %}" class="read-more">Learn More about Additives</a>
+                                    </div><!-- End .entry-content -->
+                                </div><!-- End .entry-body -->
+                            </div><!-- End .col-md-7 -->
+
+                            <div class="col-md-4">
+                                <figure class="entry-media"> 
+                                    <img  src="{% static 'assets/images/additive.png' %}" alt="image desc">                          
+                                </figure><!-- End .entry-media -->
+                            </div><!-- End .col-md-5 -->
+                        </div><!-- End .row -->
+                    </article><!-- End .entry -->
+
+                    <article class="entry entry-list">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <figure class="entry-media">
+                                        <img  src="{% static 'assets/images/Vegetable.png' %}" alt="image desc">
+                                </figure><!-- End .entry-media -->
+                            </div><!-- End .col-md-5 -->
+
+                            <div class="col-md-7">
+                                <div class="entry-body">
+                                    <h2 class="entry-title">
+                                        <a  href="{% url "CoreApp:Veggi" %}" >Unlock the nutritional potential of vegetables and fruits for your child's health journey!</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-content">
+                                        <p>Vegetables and fruits play a crucial role in your child's diet, offering essential vitamins, minerals, and fiber vital for their growth, development, and overall well-being. According to National Health of Australia, Australian children consume fewer serves of vegetables and fruits than recommended. </p>
+                                        <a  href="{% url "CoreApp:Veggi" %}" class="read-more">Continue Reading</a>
+                                    </div><!-- End .entry-content -->
+                                </div><!-- End .entry-body -->
+                            </div><!-- End .col-md-7 -->
+                        </div><!-- End .row -->
+                    </article><!-- End .entry -->
+
+                    <article class="entry entry-list">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <div class="entry-body">
+                                    <h2 class="entry-title">
+                                        <a href="{% url "CoreApp:sugar_insights" %}" > Solving the Sweet Dilemma: Tackling Sugar Consumption Among Australian Children </a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-content">
+                                        <p>In the face of concerning sugar consumption trends among Australian children, it's time for action. Despite recent improvements, daily intake still exceeds recommended levels, posing risks to children's health. Utilizing our interactive tool to understand sugar content in snacks and drinks, we can take proactive steps in managing our children's diets.</p>
+                                        <a href="{% url "CoreApp:sugar_insights" %}" class="read-more">Continue Reading</a>
+                                    </div><!-- End .entry-content -->
+                                </div><!-- End .entry-body -->
+                            </div><!-- End .col-md-7 -->
+
+                            <div class="col-md-4">
+                                <figure class="entry-media">
+                                        <img  src="{% static 'assets/images/Sugary.jpg' %}" alt="image desc">
+                                </figure><!-- End .entry-media -->
+                            </div><!-- End .col-md-5 -->
+
+                        </div><!-- End .row -->
+                    </article><!-- End .entry -->
+
+                </div> <!-- End container-->
+            </div>
+        </div>
+      
+
+     
+    </div> 
+
+
+
+  <div class="container">
+    <div class="cta bg-image pt-3 pb-3 mb-3" style="background-color:#d2efd5;background-position: center right;">
+      <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-8">
+            <div class="cta-text text-center">
+                <h3 class="cta-title"> Concerned about your child's health? </h3><!-- End .cta-title -->
+                <p class="cta-desc"><p>Swap out sugary options for nourishing alternatives. Discover a healthier approach for your kids with our collection of healthy recipes to make snacks and smoothies. 
+                </p><!-- End .cta-desc -->
+                  <a href="{% url "CoreApp:recipes" %}?meal=breakfast" class="btn btn-primary btn-rounded"><span>Explore Recipes</span><i class="icon-long-arrow-right"></i></a>
+              </div><!-- End .cta-text -->
+          </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
+      </div><!-- End .row -->
+    </div>
+  </div><!-- action banner .row -->
+<script>
+
+
+</script>
+
+</body>
+
+{% endblock main_content %}

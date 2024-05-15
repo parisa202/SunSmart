@@ -61,6 +61,22 @@
     </div>
     {% endif %}
 
+    <!-- ajax loader -->
+    <div id="loader-hidding" class="hide_this">
+        <div id='ajax_container'>
+        <div class='ajax_loader'>
+            <div class='ajax_loader--dot'></div>
+            <div class='ajax_loader--dot'></div>
+            <div class='ajax_loader--dot'></div>
+            <div class='ajax_loader--dot'></div>
+            <div class='ajax_loader--dot'></div>
+            <div class='ajax_loader--dot'></div>
+            <div class='ajax_loader--text'></div>
+        </div>
+        </div>
+    </div>
+
+    
     <div class="page-wrapper" >
          <header class="header header-6">
             
@@ -104,7 +120,7 @@
                                 </li>
 
                                 <li>
-                                    <a class="sf-with-ul">Dietary Awareness</a>
+                                    <a  href="{% url "CoreApp:dietary_awareness" %}" class="sf-with-ul">Dietary Awareness</a>
                                     <ul>
                                         <li>
                                             <a href="{% url "CoreApp:US11" %}">Obesity Trend</a>

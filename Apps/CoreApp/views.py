@@ -23,6 +23,7 @@ from django.db.models import Q
 from functools import reduce
 from operator import or_
 import re
+from django.utils.safestring import mark_safe
 
 
 class CustomLoginRequiredMixin:
@@ -459,7 +460,11 @@ class OuterRecipeAnalysisView(generic.TemplateView):
     }
 
     def post(self, request, **kwargs):
-        custom_recipe = request.POST.get('custom_recipe')
+        custom_recipe = request.POST.get('custom_recipe', '')
+        # Sanitize the input and mark it as safe for HTML output
+        custom_recipe = mark_safe(custom_recipe)
+        self.context = self.get_context_data(**kwargs)
+        
         recipe_intake = 1
         serving = 1
         
@@ -483,26 +488,35 @@ class OuterRecipeAnalysisView(generic.TemplateView):
         #     temperature=0.2,
         # )
         
-        print("This is the user's recipe:"+custom_recipe)
+        # print("This is the user's recipe:"+custom_recipe)
         
         openai_response = client.chat.completions.create(
             model="gpt-4-turbo",
             messages=[
-            {"role": "system", "content": "You are a helpful, pattern-following assistant that can extract all the ingredients and their amount from the given recipes from the user input. Complete the measurements if they are given as abbreviation."+
-            "\n Make the amounts into float number if they are fractional.If the measurement was missing, specify it yourself. Remove the percentages of ingredients purity."+
-            "\n First Extract all the ingredients and their amounts from user's recipe with this format 'Amount measure Ingredient name\n'" +
-            "\n Then, also give me a comma separate list of only the Ingredient names put it between # symbols it will be # list #. \n Don't type anything esle after the end symbol"},
-            {"role": "user", "content": f"This is the user's recipe:"+custom_recipe},
+            {"role": "system", "content": "If the given text doesn't contain any word related to food and ingredients do Action 2. However, even if the given text has one ingredient word, do Action 1."+
+            "\n Action 1) You are a helpful, pattern-following assistant that can extract all the ingredients and their amount from the given recipes from the user input. Complete the measurements if they are given as abbreviation."+
+            " Make the amounts into float number if they are fractional. If the measurement was missing, specify it yourself. Remove the percentages of ingredients purity."+
+            " First Extract all the ingredients and their amounts from user's recipe with this format 'Amount measure Ingredient name\n' " +
+            " Then, also give me a comma separate list of only the Ingredient names put it between # symbols it will be # list #. \n Don't type anything esle after the end symbol"+
+             "\n Action 2) Just output # Invalid Text # without any other text."},
+            {"role": "user", "content": f"This is the user's text:" + custom_recipe},
             ],
             max_tokens=3000,
-            temperature=0.2,
+            temperature=0.1,
         )
 
         # Parse the response to extract ingredients and amounts
         gpt_output = openai_response.choices[0].message.content
+        
+        # if the output is not valid
+        if gpt_output == '# Invalid Text #' or 'Action' in gpt_output:
+            self.context['custom_recipe'] = 'Please input a valid food or recipe for further analysis.'
+            return render(request, self.template_name, context=self.context)
+        
+        
         # Remove text between # #
         cleaned_text = re.sub(r'#(.*?)#', '', gpt_output)
-        print("\gpt:",gpt_output)
+        # print("\gpt:",gpt_output)
         # Extract text between # #
         ingredients_text = re.findall(r'#(.*?)#', gpt_output)[0]
         # Split the text into individual ingredients
@@ -532,17 +546,20 @@ class OuterRecipeAnalysisView(generic.TemplateView):
         
         gpt_output_matching = openai_response.choices[0].message.content
         
-        print(gpt_output_matching)
+        # print(gpt_output_matching)
         lookup_ingredients = [i[1] for i in eval(gpt_output_matching)]
-        print(lookup_ingredients)
-        #cleaned_data = clustering.clean_data()
+        # print(lookup_ingredients)
+        
+        modified_string = cleaned_text.replace("\n", ";")
+       
+
         similar_recipes=clustering.recommended_custom_recipes(lookup_ingredients)
         recommendations = RECIPES.objects.filter(pk__in=similar_recipes)
         
         # send sign-in data to juniorjoy API
         api_url = 'https://juniorjoy.site/api/api/calcucalories'
         data = {
-            "query": cleaned_text,
+            "query": modified_string,
             "intake": recipe_intake,
             "serving": serving
         }
@@ -570,10 +587,6 @@ class OuterRecipeAnalysisView(generic.TemplateView):
             # Handle API error
             recipe['nutrient_info'] = {'error': 'Failed to retrieve calorie information'}
                 
-        
-
-        
-        self.context = self.get_context_data(**kwargs)
         self.context['api_data'] = recipe
         self.context['gpt_response'] = cleaned_text
         self.context['custom_recipe'] = custom_recipe
@@ -706,6 +719,11 @@ class SugarView(generic.TemplateView):
                        }
         
         return new_context
+
+
+#overweight info page    
+class DietAwarenessView(generic.TemplateView):
+    template_name = 'CoreApp/dietary_awareness.html'
 
 
 class LoadRecipesDataView(generic.View):

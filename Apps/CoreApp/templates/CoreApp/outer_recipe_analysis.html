@@ -8,8 +8,6 @@
 
 
 
-
-
 {% block main_content %}
 
 <div class="container">
@@ -31,36 +29,15 @@
 
 <div class="row">
     <div class="col-lg-8">
-        <h3>Recipe Nutrition Analysis</h3><br>
+        <h3>Recipe Nutrition Analysis</h3>
         <!-- End .checkout-title -->
         <div class="row">
             <div class="col-sm-12 mx-auto">
 
-
-                <div class="col-lg-11 col-sm-6">
-                    <div class="icon-box icon-box-left">
-                        <span class="icon-box-icon">
-                            <i class="icon-info-circle"></i>
-                        </span>
-                        <div class="icon-box-content">
-                            <h3 class="icon-box-title">Instructions:</h3><!-- End .icon-box-title -->
-                            <p>Please enter a list of ingredients for what you are cooking, like "1 cup rice, 10 oz chickpeas"</span>, etc.</p>
-                        </div><!-- End .icon-box-content -->
-                    </div><!-- End .icon-box -->
-                </div><!-- End .col-lg-4 col-sm-6 -->
-                <!-- <p class="mb-2">Please enter a list of ingredients for what you are cooking, like <span class="example">"1 cup rice, 10 oz chickpeas"</span>, etc.<br></p> -->
-
-                    <div class="col-lg-11 col-sm-6">
-                        <div class="icon-box icon-box-left">
-                            <span class="icon-box-icon">
-                                <i class="icon-info-circle"></i>
-                            </span>
-                            <div class="icon-box-content">
-                                <h3 class="icon-box-title">Notes:</h3><!-- End .icon-box-title -->
-                                <p>We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling and the quantity.</p>
-                            </div><!-- End .icon-box-content -->
-                        </div><!-- End .icon-box -->
-                    </div><!-- End .col-lg-4 col-sm-6 -->
+                <div >
+                    <p>Our Recipe Analyzer offers insights into the nutritional content of the meals you regularly prepare for your child, fostering a deeper understanding of their dietary habits. Easily analyze your go-to recipes to ensure they meet your child's nutritional needs with precision and ease.</p>
+                </div><!-- End .icon-box -->
+                <br>
 
                 
 
@@ -73,28 +50,32 @@
                     <p class="addition-e"><strong>Note: We cannot calculate the nutrition for some ingredients. Please check the ingredient spelling and the quantity.</strong></p>
                     <p class="addition-e"><strong>If no portion is entered, then by default the table will show 100g of each ingredients.</strong></p>
                 </div> -->
-                
-                <p class="mb-2"style = "-webkit-text-fill-color: #009376;">{{custom_recipe}}</p>
-
+                {% if custom_recipe %}
+                <hr>
+                <p class="mb-2"style = "-webkit-text-fill-color: #009376;">{{custom_recipe | safe}}</p>
+                {% endif %}
                 <form id="demoAnalysisForm" method ="post">{% csrf_token %}
                     <p>
-                      <textarea name="custom_recipe" id="demoAnalysis" cols="30" rows="10" class="form-control"></textarea>
+                      <textarea placeholder="e.g. Mix 100 gram smashed avocado with 200 gram of potato." name="custom_recipe" id="demoAnalysis" cols="30" rows="10" class="form-control"></textarea>
                     </p>
                     <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
                     <div style="text-align: center;">
-                            <button  type="submit" class="btn btn-primary btn-rounded">Analyze</button>
+                            <button  id = "newRecipeBtn" type="submit" class="btn btn-primary btn-rounded">Analyze</button>
+                           
                     </div>
                     <div class="w3-content" style="max-width:2000px;margin-top:30px"></div>
                     
-                
-                    <div class="err-result pt-2 mb-2">
-                        <div class="row justify-content-center">
-                            <div class="col-xl-11">
-                                <p>The ingredients that we analyze from your recipe:</p>
-                                <p class="cta-border mb-2 pt-1"style = "-webkit-text-fill-color: #009376; padding:2rem ;" >{{gpt_response|linebreaksbr }}</p>
+                    {% if gpt_response %}
+                        <div class="err-result pt-2 mb-2">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-11">
+                                    <p>The ingredients that we analyze from your recipe:</p>
+                                    <p class="cta-border mb-2 pt-1"style = "-webkit-text-fill-color: #009376; padding:2rem ;" >{{gpt_response|linebreaksbr }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
+
                     <div class="demo-result">
                         <div class="col-md-12">
 
@@ -148,9 +129,12 @@
 
         </div><!-- End .summary -->
     </aside><!-- End .col-lg-3 -->
-    <div class="row col-lg-11 col-sm-6">
-        <h2 class="title text-center mb-4">You May Also Like</h2>
-    </div>
+
+    {% if gpt_response %}
+        <div class="row col-lg-11 col-sm-6">
+            <h2 class="title text-center mb-4">You May Also Like</h2>
+        </div>
+    {% endif %}
     <div class="row col-lg-11 col-sm-6">
             {% for rr in recommendations %}
             <div class="col-6 col-md-3 col-lg-3">
@@ -215,12 +199,15 @@
 
 {% endblock main_content %}
 
-
-
 {% block more_script %}
 <script>
-    document.getElementById('newRecipeBtn').addEventListener('click', function() {
-        document.getElementById('demoAnalysis').value = ''; // Clear the textarea
-      });
+    $(document).ready(function() {
+        $('#demoAnalysisForm').submit(function(event) {
+   
+            // Toggle the class of the element with id 'loader-hidding'
+            $('#loader-hidding').toggleClass('hide_this');
+        });
+    });
+    
 </script>
 {% endblock more_script %}

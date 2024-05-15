@@ -316,7 +316,7 @@ def recommended_custom_recipes(ingredient_list):
     #clustered_data.reset_index(inplace=True)
     #clustered_data.rename(columns={'index': 'recipe_id'}, inplace=True)
     clustered_data['cluster'] = 0
-    print(clustered_data)
+    # print(clustered_data)
     similar_recipes = get_similar_recipes(clustered_data,0, top_n=3)
-    print(similar_recipes)
+    # print(similar_recipes)
     return similar_recipes

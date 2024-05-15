@@ -27,6 +27,8 @@ urlpatterns = [
     path('custom-recipe-analysis/', views.OuterRecipeAnalysisView.as_view(), name='outer_recipe_analysis'),
     path('sugar-insights/',  views.SugarView.as_view(), name='sugar_insights'),
     
+    path('dietary-awareness/',  views.DietAwarenessView.as_view(), name='dietary_awareness'),
+    
     # import data views
     #path('data/', views.ImportDataView.as_view(), name='import_data'),
     path('rr/', views.LoadRecipesDataView.as_view()),
