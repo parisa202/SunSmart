@@ -3,94 +3,94 @@
         "name": "Vitamin_A",
         "benefits": "Vitamin A is very important for preventing poor vision and dry eyes, and promotes hair and skin growth of children. Most importantly, it is essential for a good immune response to infectious diseases such as diarrhea, respiratory diseases and measles.",
         "sources": "Dietary sources of Vitamin A include milk, cheese, eggs and yellow to orange vegetables such as carrots, yams and squash.",
-        "image1" : "/static/assets/images/icons/carrot.png",
-        "image2" : "/static/assets/images/icons/eggs.png",
-        "image3" : "/static/assets/images/icons/cheese.png",
-        "image4" : "/static/assets/images/icons/milk.png"
+        "image1" : "/static/CoreApp/assets/images/icons/carrot.png",
+        "image2" : "/static/CoreApp/assets/images/icons/eggs.png",
+        "image3" : "/static/CoreApp/assets/images/icons/cheese.png",
+        "image4" : "/static/CoreApp/assets/images/icons/milk.png"
     },
     {
         "name": "Vitamin_B",
         "benefits": "Vitamin B is important for helping children's metabolism, energy production, healthy circulation and nervous system.",
         "sources": "Foods rich in Vitamin B are meat, chicken, fish, nuts, eggs, milk, cheese, beans, and soybeans.",
-        "image1" : "/static/assets/images/icons/eggs.png",
-        "image2" : "/static/assets/images/icons/fish.png",
-        "image3" : "/static/assets/images/icons/beans.png",
-        "image4" : "/static/assets/images/icons/cheese.png"
+        "image1" : "/static/CoreApp/assets/images/icons/eggs.png",
+        "image2" : "/static/CoreApp/assets/images/icons/fish.png",
+        "image3" : "/static/CoreApp/assets/images/icons/beans.png",
+        "image4" : "/static/CoreApp/assets/images/icons/cheese.png"
     
     },
     {
         "name": "Vitamin_C",
         "benefits": "Vitamin C plays an important role in children's growth, development and good immunity. It is an important antioxidant that helps fight disease and toxins. This vitamin also helps promote iron absorption in the gut.",
         "sources": "There are many colorful fruits rich in vitamin C that will appeal to children. For example, oranges, kiwis, grapefruit, strawberries, raspberries, and vegetables such as tomatoes, cabbage, cauliflower, and Brussels sprouts.",
-        "image1" : "/static/assets/images/icons/strawberry.png",
-        "image2" : "/static/assets/images/icons/orange.png",
-        "image3" : "/static/assets/images/icons/cabbage.png",
-        "image4" : "/static/assets/images/icons/cauliflower.png"
+        "image1" : "/static/CoreApp/assets/images/icons/strawberry.png",
+        "image2" : "/static/CoreApp/assets/images/icons/orange.png",
+        "image3" : "/static/CoreApp/assets/images/icons/cabbage.png",
+        "image4" : "/static/CoreApp/assets/images/icons/cauliflower.png"
     
     },
     {
         "name": "Vitamin_D",
         "benefits": "Vitamin D is a fat-soluble vitamin that promotes the formation of children's bones and teeth.",
         "sources": "Good food sources of vitamin D are milk and fatty fish such as salmon and mackerel. The best source of vitamin D is sunlight, especially in the morning.",
-        "image1" : "/static/assets/images/icons/milk.png",
-        "image2" : "/static/assets/images/icons/fish.png",
-        "image3" : "/static/assets/images/icons/vitamin-d.png",
-        "image4" : "/static/assets/images/icons/tuna.png"
+        "image1" : "/static/CoreApp/assets/images/icons/milk.png",
+        "image2" : "/static/CoreApp/assets/images/icons/fish.png",
+        "image3" : "/static/CoreApp/assets/images/icons/vitamin-d.png",
+        "image4" : "/static/CoreApp/assets/images/icons/tuna.png"
     },
     {
         "name": "Vitamin_E",
         "benefits": "Vitamin E is an important antioxidant that helps to boost immunity and promote skin growth of children.",
         "sources": "Foods rich in vitamin E are almonds, peanuts, spinach, and avocados.",
-        "image1" : "/static/assets/images/icons/almonds.png",
-        "image2" : "/static/assets/images/icons/spinach.png",
-        "image3" : "/static/assets/images/icons/avocado.png",
-        "image4" : "/static/assets/images/icons/nuts.png"
+        "image1" : "/static/CoreApp/assets/images/icons/almonds.png",
+        "image2" : "/static/CoreApp/assets/images/icons/spinach.png",
+        "image3" : "/static/CoreApp/assets/images/icons/avocado.png",
+        "image4" : "/static/CoreApp/assets/images/icons/nuts.png"
     },
     {
         "name": "Vitamin_K",
         "benefits": "Vitamin K is a very important vitamin that can prevent bleeding disorders of children.",
         "sources": "Foods rich in vitamin K include vegetables like spinach, kale, lettuce, brussels sprouts, broccoli, and fruits like plums, kiwi, avocado, berries, and pomegranates.",
-        "image1" : "/static/assets/images/icons/spinach.png",
-        "image2" : "/static/assets/images/icons/lettuce.png",
-        "image3" : "/static/assets/images/icons/avocado.png",
-        "image4" : "/static/assets/images/icons/broccoli.png"
+        "image1" : "/static/CoreApp/assets/images/icons/spinach.png",
+        "image2" : "/static/CoreApp/assets/images/icons/lettuce.png",
+        "image3" : "/static/CoreApp/assets/images/icons/avocado.png",
+        "image4" : "/static/CoreApp/assets/images/icons/broccoli.png"
     },
     {
         "name": "Calcium",
         "benefits": "Calcium is a mineral that complements vitamin D. Vitamin D helps with calcium absorption. 99% of calcium in the body is found in the bones and teeth.",
         "sources": "Good food sources of calcium are milk, cheese, yogurt, and calcium-fortified orange juice.",
-        "image1" : "/static/assets/images/icons/milk.png",
-        "image2" : "/static/assets/images/icons/cheese.png",
-        "image3" : "/static/assets/images/icons/yogurt.png",
-        "image4" : "/static/assets/images/icons/soybean.png"
+        "image1" : "/static/CoreApp/assets/images/icons/milk.png",
+        "image2" : "/static/CoreApp/assets/images/icons/cheese.png",
+        "image3" : "/static/CoreApp/assets/images/icons/yogurt.png",
+        "image4" : "/static/CoreApp/assets/images/icons/soybean.png"
     },
     {
         "name": "Magnesium",
         "benefits": "Magnesium is essential for every cell in the growing body, supporting children during their growth and development, helping to soothe muscle tension, and helping to soothe and relax busy bodies and minds for a restful night's sleep.",
         "sources": "Magnesium-rich foods are soy products, milk, legumes, nuts, whole wheat breads and cereals.",
-        "image1" : "/static/assets/images/icons/milk.png",
-        "image2" : "/static/assets/images/icons/nuts.png",
-        "image3" : "/static/assets/images/icons/legumes.png",
-        "image4" : "/static/assets/images/icons/bread.png"
+        "image1" : "/static/CoreApp/assets/images/icons/milk.png",
+        "image2" : "/static/CoreApp/assets/images/icons/nuts.png",
+        "image3" : "/static/CoreApp/assets/images/icons/legumes.png",
+        "image4" : "/static/CoreApp/assets/images/icons/bread.png"
 
     },
     {
         "name": "Zinc",
         "benefits": "Zinc is an important mineral that works with vitamin C to promote brain development and maintain good immunity. Studies have shown that adequate zinc and adequate vitamin C can reduce the incidence of diarrhea and respiratory infections in children under five.",
         "sources": "Foods that contain zinc are beans, nuts, whole wheat breads, meat, eggs and seafood.",
-        "image1" : "/static/assets/images/icons/meat.png",
-        "image2" : "/static/assets/images/icons/nuts.png",
-        "image3" : "/static/assets/images/icons/beans.png",
-        "image4" : "/static/assets/images/icons/eggs.png"
+        "image1" : "/static/CoreApp/assets/images/icons/meat.png",
+        "image2" : "/static/CoreApp/assets/images/icons/nuts.png",
+        "image3" : "/static/CoreApp/assets/images/icons/beans.png",
+        "image4" : "/static/CoreApp/assets/images/icons/eggs.png"
     },
     {
         "name": "Iron",
         "benefits": "Iron is a mineral that is necessary for cell metabolism and the manufacture of healthy red blood cells.",
         "sources": "Foods rich in iron include beef, chicken liver, spinach, beans, beetroot and plums.",
-        "image1" : "/static/assets/images/icons/beans.png",
-        "image2" : "/static/assets/images/icons/spinach.png",
-        "image3" : "/static/assets/images/icons/beet.png",
-        "image4" : "/static/assets/images/icons/meat.png"
+        "image1" : "/static/CoreApp/assets/images/icons/beans.png",
+        "image2" : "/static/CoreApp/assets/images/icons/spinach.png",
+        "image3" : "/static/CoreApp/assets/images/icons/beet.png",
+        "image4" : "/static/CoreApp/assets/images/icons/meat.png"
         
     }
 ]

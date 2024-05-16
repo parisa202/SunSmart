@@ -3,28 +3,28 @@
         "name": "Carbohydrates",
         "benefits": "Carbs are the body's primary source of energy which is essential for children's cognitive performance and physical movement.",
         "sources": "Healthy sources of carbohydrates include whole grains like oats and quinoa, legumes such as beans and lentils, fruits like apples and berries, and vegetables such as broccoli and spinach.",
-        "image1" : "/static/assets/images/icons/spinach.png",
-        "image2" : "/static/assets/images/icons/legumes.png",
-        "image3" : "/static/assets/images/icons/green-beans.png",
-        "image4" : "/static/assets/images/icons/broccoli.png"
+        "image1" : "/static/CoreApp/assets/images/icons/spinach.png",
+        "image2" : "/static/CoreApp/assets/images/icons/legumes.png",
+        "image3" : "/static/CoreApp/assets/images/icons/green-beans.png",
+        "image4" : "/static/CoreApp/assets/images/icons/broccoli.png"
     },
     {
         "name": "Proteins",
         "benefits": "Protein benefits children by supporting growth, muscle development, immune function, and overall health.",
         "sources": "Healthy sources of proteins for children include lean meats such as chicken and turkey, fish, eggs, dairy products like yogurt and cheese, legumes such as beans and lentils, nuts, and seeds.",
-        "image1" : "/static/assets/images/icons/chicken.png",
-        "image2" : "/static/assets/images/icons/eggs.png",
-        "image3" : "/static/assets/images/icons/cheese.png",
-        "image4" : "/static/assets/images/icons/fish.png"
+        "image1" : "/static/CoreApp/assets/images/icons/chicken.png",
+        "image2" : "/static/CoreApp/assets/images/icons/eggs.png",
+        "image3" : "/static/CoreApp/assets/images/icons/cheese.png",
+        "image4" : "/static/CoreApp/assets/images/icons/fish.png"
     },
     {
         "name": "Fats",
         "benefits": "Healthy fats support brain development, aid in nutrient absorption, help maintain cell structure, regulate hormone production, and promote satiety and healthy weight management.",
         "sources": "Healthy sources of fats for children include avocados, nuts, seeds, fatty fish such as salmon, and olive oil.",
-        "image1" : "/static/assets/images/icons/avocado.png",
-        "image2" : "/static/assets/images/icons/sesame.png",
-        "image3" : "/static/assets/images/icons/fish.png",
-        "image4" : "/static/assets/images/icons/olive-oil.png"
+        "image1" : "/static/CoreApp/assets/images/icons/avocado.png",
+        "image2" : "/static/CoreApp/assets/images/icons/sesame.png",
+        "image3" : "/static/CoreApp/assets/images/icons/fish.png",
+        "image4" : "/static/CoreApp/assets/images/icons/olive-oil.png"
     }
 ]
 }
