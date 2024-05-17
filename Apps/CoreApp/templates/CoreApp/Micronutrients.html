@@ -7,7 +7,35 @@
 
 {% block extra_css %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .tagcloud a {
+      padding: 10px 20px;
+      border: 0px solid #ccc;
+      border-radius: 10px; /* Adjust border radius for rounded corners */
+      text-decoration: none;
+      color: #000000;
+      font-weight: bold;
+      background-color: #d2efd5;
+      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    }
 
+    .tagcloud a:hover {
+      background-color: #72dcdc;
+      border-color: #000000;
+      color: #000000; /* Change text color on hover */
+    }
+    /* Define the initial state of the images */
+    .food-icon {
+      width: 50px;
+      height: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    /* Define the hover effect */
+    .food-icon:hover {
+      transform: scale(1.2); /* Scale up the image on hover */
+    }
+</style>
 {% endblock extra_css %}
 
 {% block main_content %}
@@ -16,53 +44,20 @@
 <div class="entry-content editor-content" style ='justify-content: center'>
   
   <div style="display: flex; justify-content: center; padding-bottom: 10px;">
-    <div class="container col-9.9">
-      <div>
-        <h3>What is Micronutrient</h3>
-        <p>Micronutrients, like vitamins and minerals, are essential for kids' growth and health. They help with things like strong bones, a good immune system, and keeping their brains working well. Found in foods like fruits, veggies, and milk, these nutrients are crucial for kids to grow and stay energized. Even though they're needed in smaller amounts, they're super important for kids' overall health. Eating different kinds of foods helps kids get all the micronutrients they need to grow up strong and happy.</p>
+    <div class="container col-8">
+      <div class="row">
+        <div>
+          <h3>What is Micronutrient</h3>
+          <p>Micronutrients, like vitamins and minerals, are essential for kids' growth and health. They help with things like strong bones, a good immune system, and keeping their brains working well. Found in foods like fruits, veggies, and milk, these nutrients are crucial for kids to grow and stay energized. Even though they're needed in smaller amounts, they're super important for kids' overall health. Eating different kinds of foods helps kids get all the micronutrients they need to grow up strong and happy.</p>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="container"><!-- container macro -->
     <div class="row">
-    
-      <aside class="col-lg-5">
-        <div class="sidebar">
+      
+        <div class="entry-content editor-content">
+          <h3>How will Micronutrients benefit your children?</h3>
+          <p id="micro_benefits">Select the Micronutrient to get more information.</p>
           <div class="widget">
-            <h3 class="widget-title">Micronutrients</h3><!-- End .widget-title -->
-            <div class="tagcloud" id="tagcloud" style="font-weight: bold;">
-              
-              <style>
-                .tagcloud a {
-                  padding: 10px 20px;
-                  border: 0px solid #ccc;
-                  border-radius: 10px; /* Adjust border radius for rounded corners */
-                  text-decoration: none;
-                  color: #000000;
-                  font-weight: bold;
-                  background-color: #d2efd5;
-                  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-                }
-            
-                .tagcloud a:hover {
-                  background-color: #72dcdc;
-                  border-color: #000000;
-                  color: #000000; /* Change text color on hover */
-                }
-                /* Define the initial state of the images */
-                .food-icon {
-                  width: 50px;
-                  height: 50px;
-                  transition: transform 0.3s ease;
-                }
-
-                /* Define the hover effect */
-                .food-icon:hover {
-                  transform: scale(1.2); /* Scale up the image on hover */
-                }
-              </style>
-              
+            <div class="tagcloud" id="tagcloud" style="font-weight: bold;">     
               <a name="Vitamin_A">Vitamin A</a>
               <a name="Vitamin_B">Vitamin B</a>
               <a name="Vitamin_C">Vitamin C</a>
@@ -73,18 +68,14 @@
               <a name="Calcium">Calcium</a>
               <a name="Zinc">Zinc</a>
               <a name="Iron">Iron</a>
+            </div>
+          </div><!-- End widget-->
 
+          <div class = "pt-2 ">
+          
           </div>
-        </div><!-- End .sidebar -->
-      </aside><!-- End .col-lg-5 -->
-      <div class="tooltip" id="tooltip" style="opacity: 1;"></div>
-      <div class="col-lg-7">
-        <div class="entry-content editor-content">
-          <h3>How will this nutrition benefit your children?</h3>
-          <img id="arrow-icon"  class ="food-icon"src="{% static 'CoreApp/assets/images/icons/fast-backward.gif' %}" alt="vegetable icon" style="width: 50px; height: 50;">
-            <p id="micro_benefits" style="height: 100px;">Click the button on the left</p>
-          <h3>Where can you help your children get this nutrition?</h3>
-            <p id="micro_sources" style="height: 100px;">Click the button on the left</p>
+          <h3 id="title2" style="display:none">Where can you help your children get this nutrition?</h3>
+            <p id="micro_sources" Click the button on the left</p>
 
             <div class="row col-9" id="food-icons" style="display: none; justify-content: space-between; ">
               {% for i in "1234" %}
@@ -94,12 +85,11 @@
               </a>
               {% endfor %}
             </div>
-
         </div>
-      </div><!-- End .col-lg-7 -->
-
+      
     </div><!-- End row information -->
-  </div><!-- End container macro -->
+  </div>
+</div>
 
   <div class="container">
     <hr class="mb-2">
@@ -158,7 +148,7 @@
                 $('#micro_sources').text(response.sources);
                 $('#food-icons').show();
                 $('#arrow-icon').hide();            
-                
+                $('#title2').show();
                 for (var i = 1; i <= 4; i++) {
                   var imageSource = response["image" + i];
                   var imageName = imageSource.split('/').pop().split('.')[0];
@@ -167,10 +157,10 @@
                   imageName_capital = imageName.charAt(0).toUpperCase() + imageName.slice(1);
                   
                   // Set image source and name
+
                   $('#food-icon' + i).attr('src', imageSource).hide().fadeIn();
                   $('#food-name' + i).text(imageName_capital).hide().fadeIn().css('text-align', 'center');
-
-                  //$('#link_recipes' + i).attr('href', "{% url "CoreApp:recipes" %}?ingredient="+ imageName)
+                  $('#link_recipes' + i).attr('href', "{% url "CoreApp:recipes" %}?ingredient="+ imageName)
                   
 
                 

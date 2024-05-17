@@ -7,6 +7,34 @@
 
 {% block extra_css %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .tagcloud a {
+      padding: 10px 20px;
+      border: 0px solid #ccc;
+      border-radius: 10px; /* Adjust border radius for rounded corners */
+      text-decoration: none;
+      color: #000000;
+      font-weight: bold;
+      background-color:  #d2efd5;
+      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    }
+
+    .tagcloud a:hover {
+      background-color: #72dcdc;
+      border-color: #000000;
+      color: #000000; /* Change text color on hover */
+    }
+    .food-icon {
+      width: 50px;
+      height: 50px;
+      transition: transform 0.3s ease;
+    }
+    
+    /* Define the hover effect */
+    .food-icon:hover {
+      transform: scale(1.2); /* Scale up the image on hover */
+    }
+</style>
 {% endblock extra_css %}
 
 {% block main_content %}
@@ -15,80 +43,44 @@
 <div class="entry-content editor-content" style ='justify-content: center'>
   
   <div style="display: flex; justify-content: center; padding-bottom: 10px;">
-    <div class="container col-9.9">
+    <div class="container col-8">
       <div>
         <h3>What is Macronutrient</h3>
         <p>Macronutrients in food, like carbohydrates, proteins, and fats, are crucial for kids' energy and growth. Carbs, found in bread and fruits, fuel their play. Proteins from meat and beans help build strong muscles. Fats, in avocados and nuts, support brain power. Balancing these nutrients keeps kids healthy and energized for all their activities, ensuring they have the strength and stamina to play, learn, and explore every day.</p>
       </div>
-    </div>
-  </div>
 
-  <div class="container"><!-- container macro -->
-    <div class="row">
-    
-      <aside class="col-lg-5">
-        <div class="sidebar">
-          <div class="widget">
-            <h3 class="widget-title">Macronutrients</h3><!-- End .widget-title -->
-            <div class="tagcloud" id="tagcloud" style="font-weight: bold;">
-              
-              <style>
-                .tagcloud a {
-                  padding: 10px 20px;
-                  border: 0px solid #ccc;
-                  border-radius: 10px; /* Adjust border radius for rounded corners */
-                  text-decoration: none;
-                  color: #000000;
-                  font-weight: bold;
-                  background-color:  #d2efd5;
-                  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-                }
-            
-                .tagcloud a:hover {
-                  background-color: #72dcdc;
-                  border-color: #000000;
-                  color: #000000; /* Change text color on hover */
-                }
-                .food-icon {
-                  width: 50px;
-                  height: 50px;
-                  transition: transform 0.3s ease;
-                }
-                
-                /* Define the hover effect */
-                .food-icon:hover {
-                  transform: scale(1.2); /* Scale up the image on hover */
-                }
-              </style>
-              <!-- style="background-color:rgb(107, 228, 170);color:#393232" -->
+      <div class="row">
+        
+          <div class="widget pt-2">
+            <h3 class="widget-title">How will Macronutrients benefit your children?</h3><!-- End .widget-title -->
+            <p >Select the Macronutrients to get more information.</p>
+            <div class="tagcloud mb-0" id="tagcloud" style="font-weight: bold;">
               <a name="Carbohydrates">Carbs</a>
               <a name="Fats">Fats</a>
               <a name="Proteins">Proteins</a>
             </div>
           </div>
-        </div><!-- End .sidebar -->
-      </aside><!-- End .col-lg-5 -->
+          
+          <p id="macro_benefits" class="pt-0"></p>
+      <div id="title2" style ="display:none">
+          <div class="entry-content editor-content">
+            <h3>Where can you help your children get this nutrition?</h3>
+              <p id="macro_sources" style="height: 100px;">Click the button on the left</p>
+          </div>
+          <div class="row col-9" id="food-icons" style="display: none; justify-content: space-between; ">
+            {% for i in "1234" %}
+            <a id ="link_recipes{{ i }}" style="box-shadow: none;" >
+              <img id="food-icon{{ i }}" class="food-icon" src="{% static 'CoreApp/assets/images/icons/' %}{% if i == 1 %}carrot.png{% elif i == 2 %}eggs.png{% else %}cauliflower.png{% endif %}" alt="vegetable icon" style="width: 50px; height: 50;">
+              <p id="food-name{{ i }}" style="border-bottom: none;"></p>
+            </a>
+            {% endfor %}
+          </div>
+      </div>
+      </div><!-- End row information -->
 
-      <div class="col-lg-7">
-        <div class="entry-content editor-content">
-          <h3>How will this nutrition benefit your children?</h3>
-          <img id="arrow-icon"  class ="food-icon"src="{% static 'CoreApp/assets/images/icons/fast-backward.gif' %}" alt="vegetable icon" style="width: 50px; height: 50;">
-            <p id="macro_benefits" style="height: 100px;">Click the button on the left</p>
-          <h3>Where can you help your children get this nutrition?</h3>
-            <p id="macro_sources" style="height: 100px;">Click the button on the left</p>
-        </div>
-        <div class="row col-9" id="food-icons" style="display: none; justify-content: space-between; ">
-          {% for i in "1234" %}
-          <a id ="link_recipes{{ i }}" style="box-shadow: none;" >
-            <img id="food-icon{{ i }}" class="food-icon" src="{% static 'CoreApp/assets/images/icons/' %}{% if i == 1 %}carrot.png{% elif i == 2 %}eggs.png{% else %}cauliflower.png{% endif %}" alt="vegetable icon" style="width: 50px; height: 50;">
-            <p id="food-name{{ i }}" style="border-bottom: none;"></p>
-          </a>
-          {% endfor %}
-        </div>
-      </div><!-- End .col-lg-7 -->
+  </div>
+</div>
 
-    </div><!-- End row information -->
-  </div><!-- End container macro -->
 
   <div class="container">
     <hr class="mb-2">
@@ -138,6 +130,7 @@
                 $('#macro_sources').text(response.sources);
                 $('#food-icons').show();
                 $('#arrow-icon').hide();
+                $('#title2').show();
 
                 for (var i = 1; i <= 4; i++) {
                   var imageSource = response["image" + i];

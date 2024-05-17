@@ -61,38 +61,26 @@
                         <div class="row">
                             {% for recipe in all_recipes %}
                                 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                            
                                     <div class="product">
-                                        <figure class="product-media">
-                                            <!-- <span class="product-label label-new">New</span> -->
-                                            
-                                            <a  href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">
+                                        <a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">
+                                            <figure class="product-media">
                                                 <img src="{% static 'CoreApp/assets/images/recipes/'|add:recipe.name|add:'300_300.jpeg' %}" alt="Product image" class="product-image">
-                                            </a>
-
-                                            <div class="product-action-vertical">
-                                                <!-- <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a> -->
-                                            </div><!-- End .product-action -->
-
-                                            <div class="product-action">
-                                              <!--  <a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}" class="btn-product btn-quickview"><span>View Recipe</span></a>-->
-                                            </div><!-- End .product-action -->
-
-                                        </figure><!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <p>{% for meal in recipe.meal.all %} {{meal.type|title}} {% endfor %}</p>
-                                            </div><!-- End .product-cat -->
-                                            
-                                            <h3 class="product-title"><a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">{{recipe.name}}</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                <!-- $50.00 -->
-                                            </div><!-- End .product-price -->
-                                            
-                                        </div><!-- End .product-body -->
+                                   
+                                                <div class="product-action">
+                                                    <a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}" class="btn-product btn-quickview"><span>View Recipe</span></a>
+                                                </div><!-- End .product-action -->
+                                            </figure><!-- End .product-media -->
+                                    
+                                            <div class="product-body">
+                                                <a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">
+                                                    <div class="product-cat">
+                                                        <p>{% for meal in recipe.meal.all %} {{meal.type|title}} {% endfor %}</p>
+                                                    </div><!-- End .product-cat -->
+                                                    <h3 class="product-title"><a href="{% url 'CoreApp:recipe-detail' slug=recipe.slug %}">{{recipe.name}}</a></h3><!-- End .product-title -->
+                                                </a>
+                                            </div><!-- End .product-body -->
+                                        </a>
                                     </div><!-- End .product -->
-                            
                                 </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
                             {% endfor %}
 
@@ -123,7 +111,7 @@
                                         </a>
                                     </h3><!-- End .widget-title -->
 
-                                    <div class="collapse show" id="widget-1">
+                                    <div class="collapse show" id="widget-5">
                                         <div class="widget-body">
                                             <div class="filter-items filter-items-count">
                                                 <div class="filter-item">
